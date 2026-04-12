@@ -11,54 +11,60 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			.hero {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				min-height: 70vh;
+				max-width: 800px;
+				margin: 0 auto;
 				padding: 2rem 1rem;
 			}
-			.ascii-flow {
-				font-family: 'Courier New', Courier, monospace;
-				font-size: 0.78rem;
-				line-height: 1.45;
-				white-space: pre;
-				color: var(--text-color, #333);
-				user-select: none;
+			.hero h1 {
+				font-size: 1.2rem;
+				margin-bottom: 0.25rem;
 			}
-			.ascii-flow a {
-				color: inherit;
-				text-decoration: none;
-				transition: color 150ms ease;
-			}
-			.ascii-flow a:hover {
-				color: var(--accent-color, #2563eb);
-			}
-			.ascii-flow .node {
-				font-weight: 700;
-			}
-			.ascii-flow .link-node {
-				font-weight: 700;
-				border-bottom: 1px dashed currentColor;
-			}
-			.tagline {
-				margin-top: 2rem;
+			.hero .intro {
+				color: #666;
 				font-size: 0.9rem;
-				color: var(--muted-color, #666);
-				text-align: center;
-				max-width: 560px;
-				line-height: 1.7;
+				line-height: 1.6;
+				margin-bottom: 2.5rem;
 			}
-			.tagline a {
-				color: inherit;
-				text-decoration: underline;
-				text-underline-offset: 2px;
+			.layer {
+				margin-bottom: 3rem;
 			}
+			.layer-label {
+				font-size: 0.65rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				color: #999;
+				margin-bottom: 1rem;
+			}
+			.diagram-wrap {
+				overflow-x: auto;
+				margin-bottom: 0.75rem;
+			}
+			.diagram-wrap svg {
+				display: block;
+			}
+			.diagram-wrap svg text {
+				font-family: system-ui, -apple-system, sans-serif;
+			}
+			.diagram-wrap svg a text { fill: #333; }
+			.diagram-wrap svg a:hover text { fill: #2563eb; }
+			.diagram-wrap svg a rect { transition: stroke 150ms; }
+			.diagram-wrap svg a:hover rect { stroke: #2563eb; }
 
-			@media (max-width: 700px) {
-				.ascii-flow {
-					font-size: 0.52rem;
-				}
+			.layer-desc {
+				font-size: 0.88rem;
+				color: #555;
+				line-height: 1.6;
+				max-width: 640px;
+			}
+			.layer-desc a {
+				color: #2563eb;
+				text-decoration: none;
+			}
+			.layer-desc a:hover { text-decoration: underline; }
+
+			@media (max-width: 600px) {
+				.diagram-wrap svg { width: 100%; height: auto; }
 			}
 		</style>
 	</head>
@@ -66,32 +72,228 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<Header />
 		<main>
 			<section class="hero">
-				<div class="ascii-flow" role="img" aria-label="how the system works: sessions produce captures, review sessions produce lessons and rules, everything is measured">
-{`  most sessions                   some sessions are review sessions
- ┌──────────┐                    ┌──────────────────────────────────┐
- │          │                    │                                  │
- │  `}<a href="/work" class="link-node">work</a>{`    │                    │  look back at recent `}<a href="/capture" class="link-node">captures</a>{`     │
- │    │     │                    │         │                        │
- │    ▼     │                    │         ▼                        │
- │ `}<a href="/capture" class="link-node">capture</a>{`  │─ ─ ─ ─ ─ ─ ─ ─ ─ ─▶│  spot a pattern (`}<a href="/review" class="link-node">review</a>{`)         │
- │          │  learning          │         │                        │
- └──────────┘  carries           │         ▼                        │
-      │        forward           │  change the process (`}<a href="/improve" class="link-node">improve</a>{`)  │
-      ▼                          │         │                        │
- ┌──────────┐                    │         ▼                        │
- │ next     │◀───────────────────│  new lesson or rule              │
- │ session  │  inherits the      │         │                        │
- └──────────┘  improvement       │         ▼                        │
-                                 │  `}<a href="/history" class="link-node">measure</a>{` whether it worked       │
-                                 │                                  │
-                                 └──────────────────────────────────┘`}
-				</div>
-				<p class="tagline">
-					most sessions just work and capture.<br>
-					some sessions step back and review the pattern across many.<br>
-					those produce the lessons and rules that make future sessions better.<br>
-					<a href="/history">how the system evolved</a>
+				<h1>how I work with AI</h1>
+				<p class="intro">
+					I build software with Claude every day. over time I built a system around the work —
+					three parts that talk to each other. this site documents how that system works and evolves.
 				</p>
+
+				<!-- THE ARCHITECTURE -->
+				<div class="layer">
+					<div class="layer-label">the architecture</div>
+					<div class="diagram-wrap">
+						<svg width="700" height="160" viewBox="0 0 700 160">
+							<!-- the brain -->
+							<rect x="10" y="30" width="180" height="100" rx="8" fill="none" stroke="#2563eb" stroke-width="1.4"/>
+							<text x="100" y="54" text-anchor="middle" font-size="13" font-weight="600" fill="#2563eb">the brain</text>
+							<text x="100" y="72" text-anchor="middle" font-size="9" fill="#888">all knowledge lives here</text>
+							<!-- types inside -->
+							<text x="32" y="92" font-size="8" fill="#aaa">sessions</text>
+							<text x="32" y="104" font-size="8" fill="#aaa">fixes</text>
+							<text x="32" y="116" font-size="8" fill="#aaa">decisions</text>
+							<text x="110" y="92" font-size="8" fill="#aaa">lessons</text>
+							<text x="110" y="104" font-size="8" fill="#aaa">rules</text>
+							<text x="110" y="116" font-size="8" fill="#aaa">skills</text>
+
+							<!-- the bridge -->
+							<rect x="260" y="30" width="180" height="100" rx="8" fill="none" stroke="#333" stroke-width="1.2"/>
+							<text x="350" y="54" text-anchor="middle" font-size="13" font-weight="600" fill="#333">the bridge</text>
+							<text x="350" y="72" text-anchor="middle" font-size="9" fill="#888">reads, writes, enforces</text>
+							<text x="282" y="92" font-size="8" fill="#aaa">search</text>
+							<text x="282" y="104" font-size="8" fill="#aaa">capture</text>
+							<text x="282" y="116" font-size="8" fill="#aaa">brief</text>
+							<text x="362" y="92" font-size="8" fill="#aaa">measure</text>
+							<text x="362" y="104" font-size="8" fill="#aaa">compact</text>
+							<text x="362" y="116" font-size="8" fill="#aaa">archive</text>
+
+							<!-- the worker -->
+							<rect x="510" y="30" width="180" height="100" rx="8" fill="none" stroke="#333" stroke-width="1.2"/>
+							<text x="600" y="54" text-anchor="middle" font-size="13" font-weight="600" fill="#333">the worker</text>
+							<text x="600" y="72" text-anchor="middle" font-size="9" fill="#888">builds, fixes, ships</text>
+							<text x="532" y="92" font-size="8" fill="#aaa">brainstorm</text>
+							<text x="532" y="104" font-size="8" fill="#aaa">debug</text>
+							<text x="532" y="116" font-size="8" fill="#aaa">review</text>
+							<text x="622" y="92" font-size="8" fill="#aaa">implement</text>
+							<text x="622" y="104" font-size="8" fill="#aaa">test</text>
+							<text x="622" y="116" font-size="8" fill="#aaa">deploy</text>
+
+							<!-- arrows between -->
+							<line x1="194" y1="70" x2="256" y2="70" stroke="#bbb" stroke-width="1"/>
+							<polygon points="254,67 260,70 254,73" fill="#bbb"/>
+							<line x1="256" y1="90" x2="194" y2="90" stroke="#bbb" stroke-width="1"/>
+							<polygon points="196,87 190,90 196,93" fill="#bbb"/>
+
+							<line x1="444" y1="70" x2="506" y2="70" stroke="#bbb" stroke-width="1"/>
+							<polygon points="504,67 510,70 504,73" fill="#bbb"/>
+							<line x1="506" y1="90" x2="444" y2="90" stroke="#bbb" stroke-width="1"/>
+							<polygon points="446,87 440,90 446,93" fill="#bbb"/>
+
+							<!-- labels on arrows -->
+							<text x="225" y="64" text-anchor="middle" font-size="7" fill="#aaa">recall</text>
+							<text x="225" y="100" text-anchor="middle" font-size="7" fill="#aaa">store</text>
+							<text x="475" y="64" text-anchor="middle" font-size="7" fill="#aaa">context</text>
+							<text x="475" y="100" text-anchor="middle" font-size="7" fill="#aaa">results</text>
+
+							<!-- bottom labels -->
+							<text x="100" y="148" text-anchor="middle" font-size="8" fill="#999">1400+ notes · structured .md</text>
+							<text x="350" y="148" text-anchor="middle" font-size="8" fill="#999">reads, writes, enforces rules</text>
+							<text x="600" y="148" text-anchor="middle" font-size="8" fill="#999">Claude · skills · sessions</text>
+						</svg>
+					</div>
+					<p class="layer-desc">
+						the brain stores everything as structured notes. the bridge connects the brain to the worker — loading context before work starts, capturing results after. the worker builds, using skills that define how to approach each type of task.
+					</p>
+				</div>
+
+				<!-- EACH SESSION -->
+				<div class="layer">
+					<div class="layer-label">each session</div>
+					<div class="diagram-wrap">
+						<svg width="600" height="64" viewBox="0 0 600 64">
+							<a href="/work">
+								<rect x="0" y="18" width="90" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+								<text x="45" y="35" text-anchor="middle" font-size="11">load memory</text>
+							</a>
+							<line x1="94" y1="32" x2="122" y2="32" stroke="#bbb" stroke-width="1"/>
+							<polygon points="120,29 126,32 120,35" fill="#bbb"/>
+
+							<a href="/work">
+								<rect x="128" y="18" width="80" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+								<text x="168" y="35" text-anchor="middle" font-size="11">pick skill</text>
+							</a>
+							<line x1="212" y1="32" x2="240" y2="32" stroke="#bbb" stroke-width="1"/>
+							<polygon points="238,29 244,32 238,35" fill="#bbb"/>
+
+							<a href="/work">
+								<rect x="246" y="18" width="70" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+								<text x="281" y="35" text-anchor="middle" font-size="11">work</text>
+							</a>
+							<line x1="320" y1="32" x2="348" y2="32" stroke="#bbb" stroke-width="1"/>
+							<polygon points="346,29 352,32 346,35" fill="#bbb"/>
+
+							<a href="/capture">
+								<rect x="354" y="18" width="80" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+								<text x="394" y="35" text-anchor="middle" font-size="11">capture</text>
+							</a>
+							<line x1="438" y1="32" x2="466" y2="32" stroke="#bbb" stroke-width="1"/>
+							<polygon points="464,29 470,32 464,35" fill="#bbb"/>
+
+							<rect x="472" y="18" width="90" height="28" rx="6" fill="none" stroke="#2563eb" stroke-width="1.2"/>
+							<text x="517" y="35" text-anchor="middle" font-size="11" fill="#2563eb">→ brain</text>
+
+							<text x="45" y="10" text-anchor="middle" font-size="8" fill="#999">what did we learn?</text>
+							<text x="168" y="10" text-anchor="middle" font-size="8" fill="#999">how to approach it</text>
+							<text x="281" y="10" text-anchor="middle" font-size="8" fill="#999">build, fix, ship</text>
+							<text x="394" y="10" text-anchor="middle" font-size="8" fill="#999">write it down</text>
+							<text x="517" y="10" text-anchor="middle" font-size="8" fill="#999">stored</text>
+						</svg>
+					</div>
+					<p class="layer-desc">
+						the worker starts each session by asking the bridge for context. the bridge loads relevant notes from the brain. a skill defines the approach. work happens. results get captured back to the brain. <a href="/blog">sessions →</a>
+					</p>
+				</div>
+
+				<!-- IMPROVING THE WORK -->
+				<div class="layer">
+					<div class="layer-label">improving how we work</div>
+					<div class="diagram-wrap">
+						<svg width="560" height="64" viewBox="0 0 560 64">
+							<a href="/capture">
+								<rect x="0" y="18" width="80" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+								<text x="40" y="35" text-anchor="middle" font-size="11">captures</text>
+							</a>
+							<line x1="84" y1="32" x2="112" y2="32" stroke="#bbb" stroke-width="1"/>
+							<polygon points="110,29 116,32 110,35" fill="#bbb"/>
+
+							<a href="/review">
+								<rect x="118" y="18" width="70" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+								<text x="153" y="35" text-anchor="middle" font-size="11">distill</text>
+							</a>
+							<line x1="192" y1="32" x2="220" y2="32" stroke="#bbb" stroke-width="1"/>
+							<polygon points="218,29 224,32 218,35" fill="#bbb"/>
+
+							<a href="/improve">
+								<rect x="226" y="18" width="70" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+								<text x="261" y="35" text-anchor="middle" font-size="11">lessons</text>
+							</a>
+							<line x1="300" y1="32" x2="328" y2="32" stroke="#bbb" stroke-width="1"/>
+							<polygon points="326,29 332,32 326,35" fill="#bbb"/>
+
+							<a href="/improve">
+								<rect x="334" y="18" width="60" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+								<text x="364" y="35" text-anchor="middle" font-size="11">rules</text>
+							</a>
+							<line x1="398" y1="32" x2="426" y2="32" stroke="#bbb" stroke-width="1"/>
+							<polygon points="424,29 430,32 424,35" fill="#bbb"/>
+
+							<a href="/history">
+								<rect x="432" y="18" width="80" height="28" rx="6" fill="none" stroke="#2563eb" stroke-width="1.2"/>
+								<text x="472" y="35" text-anchor="middle" font-size="11" fill="#2563eb">measure</text>
+							</a>
+
+							<text x="40" y="10" text-anchor="middle" font-size="8" fill="#999">raw</text>
+							<text x="153" y="10" text-anchor="middle" font-size="8" fill="#999">compress</text>
+							<text x="261" y="10" text-anchor="middle" font-size="8" fill="#999">reusable</text>
+							<text x="364" y="10" text-anchor="middle" font-size="8" fill="#999">permanent</text>
+							<text x="472" y="10" text-anchor="middle" font-size="8" fill="#999">validated</text>
+						</svg>
+					</div>
+					<p class="layer-desc">
+						sessions produce captures. captures get distilled into lessons. lessons that keep being useful become permanent rules. rules are measured. this is how the <em>work</em> gets better — fewer repeated mistakes, faster decisions, better defaults. <a href="/blog">sessions →</a>
+					</p>
+				</div>
+
+				<!-- IMPROVING THE SYSTEM -->
+				<div class="layer">
+					<div class="layer-label">improving the system itself</div>
+					<div class="diagram-wrap">
+						<svg width="660" height="100" viewBox="0 0 660 100">
+							<!-- same captures feed into system improvements -->
+							<rect x="0" y="8" width="80" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+							<text x="40" y="25" text-anchor="middle" font-size="11" fill="#333">captures</text>
+
+							<line x1="84" y1="22" x2="112" y2="22" stroke="#bbb" stroke-width="1"/>
+							<polygon points="110,19 116,22 110,25" fill="#bbb"/>
+
+							<rect x="118" y="8" width="70" height="28" rx="6" fill="none" stroke="#333" stroke-width="1.2"/>
+							<text x="153" y="25" text-anchor="middle" font-size="11" fill="#333">review</text>
+
+							<!-- branch down to brain improvements -->
+							<line x1="153" y1="40" x2="153" y2="56" stroke="#bbb" stroke-width="1"/>
+							<polygon points="150,54 153,60 156,54" fill="#bbb"/>
+
+							<!-- three improvement targets -->
+							<a href="/history">
+								<rect x="40" y="64" width="110" height="28" rx="6" fill="none" stroke="#2563eb" stroke-width="1.2"/>
+								<text x="95" y="81" text-anchor="middle" font-size="10" fill="#2563eb">reshape the brain</text>
+							</a>
+
+							<a href="/history">
+								<rect x="170" y="64" width="120" height="28" rx="6" fill="none" stroke="#2563eb" stroke-width="1.2"/>
+								<text x="230" y="81" text-anchor="middle" font-size="10" fill="#2563eb">upgrade the bridge</text>
+							</a>
+
+							<a href="/history">
+								<rect x="310" y="64" width="110" height="28" rx="6" fill="none" stroke="#2563eb" stroke-width="1.2"/>
+								<text x="365" y="81" text-anchor="middle" font-size="10" fill="#2563eb">refine the skills</text>
+							</a>
+
+							<!-- lines from review to each -->
+							<line x1="118" y1="56" x2="95" y2="64" stroke="#ddd" stroke-width="0.8"/>
+							<line x1="153" y1="56" x2="230" y2="64" stroke="#ddd" stroke-width="0.8"/>
+							<line x1="188" y1="56" x2="365" y2="64" stroke="#ddd" stroke-width="0.8"/>
+
+							<!-- examples under each -->
+							<text x="95" y="104" text-anchor="middle" font-size="7.5" fill="#aaa">new note types · better structure</text>
+							<text x="230" y="104" text-anchor="middle" font-size="7.5" fill="#aaa">new tools · better surfacing</text>
+							<text x="365" y="104" text-anchor="middle" font-size="7.5" fill="#aaa">new skills · sharper rules</text>
+						</svg>
+					</div>
+					<p class="layer-desc">
+						the same review process also improves the system itself — not just how we work, but how the brain stores knowledge, how the bridge surfaces it, and how the worker approaches tasks. the system improves the system. <a href="/history">evolution →</a>
+					</p>
+				</div>
+
 			</section>
 		</main>
 		<Footer />
