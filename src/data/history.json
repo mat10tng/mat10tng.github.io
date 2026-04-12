@@ -3,14 +3,14 @@
     "total_notes": 1429,
     "compounding": 88,
     "success_30d": 88,
-    "top_cited": ["Knowledge-First Architecture", "Controlling AI Agent Behavior", "Multi-Session Bug Fixing"]
+    "top_cited": ["knowledge-first architecture", "controlling agent behavior", "multi-session isolation"]
   },
   "timeline": [
     {
       "id": "2026-03-18-started-capturing",
       "date": "2026-03-18",
       "title": "stop throwing work away",
-      "body_md": "kept solving the same problems twice. the fix was always somewhere in a chat log I'd never find again. so I started capturing — every fix, every decision, every lesson. just markdown files. no structure yet, just the habit.",
+      "body_md": "kept solving the same problems twice. the fix was always somewhere in a conversation I'd never find again. so I started writing everything down — every fix, every decision, every lesson. just notes at first. no structure, no automation. just the habit.",
       "snapshot": {
         "total_notes": 5,
         "compounding": 0,
@@ -22,36 +22,36 @@
       "id": "2026-03-25-system-takes-shape",
       "date": "2026-03-25",
       "title": "notes became infrastructure",
-      "body_md": "the knowledge base stopped being a pile of markdown and started being a system. structured types — sessions, fixes, decisions, lessons. obsidian integration. search that actually works. the shift was: this isn't a notebook, it's the memory the system runs on.",
+      "body_md": "the notes stopped being a pile of text and started being a system. structured types — sessions, fixes, decisions, lessons. search that actually works. the shift was realizing this isn't a notebook, it's the memory the whole process runs on.",
       "snapshot": {
         "total_notes": 168,
         "compounding": 25,
         "success_30d": 0,
-        "top_cited": ["Knowledge-First Architecture"]
+        "top_cited": ["knowledge-first architecture"]
       }
     },
     {
       "id": "2026-04-02-state-before-coding",
       "date": "2026-04-02",
       "title": "stop jumping to code",
-      "body_md": "same pattern kept showing up — diving into implementation before thinking through the approach. added a rule: state your files, state your approach, state your assumptions, then write. the pattern dropped from 47 sessions to 3 the next month.",
+      "body_md": "reviewed a month of conversations and saw the same shape — diving into implementation before thinking through the approach. added a rule: state your files, state your approach, state your assumptions, then write. the pattern dropped from 47 conversations to 3 the next month.",
       "snapshot": {
         "total_notes": 392,
         "compounding": 45,
         "success_30d": 0,
-        "top_cited": ["Knowledge-First Architecture", "Controlling AI Agent Behavior"]
+        "top_cited": ["knowledge-first architecture", "controlling agent behavior"]
       }
     },
     {
       "id": "2026-04-08-kb-source-of-truth",
       "date": "2026-04-08",
       "title": "one place, not twelve",
-      "body_md": "rules were scattered across CLAUDE.md, memory files, random docs. hard to know which version was current. decided everything lives in the knowledge base. CLAUDE.md became a thin pointer that just says \"load from KB first.\" simpler. no more conflicting sources.",
+      "body_md": "rules were scattered across config files, memory files, random docs. reviewed a week of conversations and found the system following different versions of the same rule. consolidated everything into one searchable place. config files became thin pointers. no more drift.",
       "snapshot": {
         "total_notes": 578,
         "compounding": 72,
         "success_30d": 82,
-        "top_cited": ["Knowledge-First Architecture", "Controlling AI Agent Behavior", "Multi-Session Bug Fixing"]
+        "top_cited": ["knowledge-first architecture", "controlling agent behavior", "multi-session isolation"]
       }
     }
   ]

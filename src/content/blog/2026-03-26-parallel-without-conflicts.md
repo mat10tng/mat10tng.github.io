@@ -1,15 +1,16 @@
 ---
 title: "parallel without stepping on yourself"
-description: "multiple sessions, one codebase. worktrees made it work."
+description: "multiple sessions, one codebase. isolation made it work."
 pubDate: 2026-03-26
+loop: "improve"
 ---
 
-I was running 3 Claude sessions at once, all on main. fixing different bugs. it went badly — merge conflicts, overwritten files, sessions undoing each other's work.
+I was running 3 conversations at once, all working on the same codebase. fixing different bugs. it went badly — merge conflicts, overwritten files, one session undoing another's work.
 
-the fix was git worktrees. each session gets its own branch, its own copy of the repo. they can't step on each other. when a session finishes, merge its branch into main. one at a time.
+the fix was giving each conversation its own isolated copy of the code. they can't step on each other. when one finishes, merge its changes back. one at a time.
 
-the key insight was grouping by conflict risk before spinning up sessions. backend-only changes can run in parallel. frontend-only too. but anything touching shared types, database migrations, or routing — those go sequential. always.
+the key insight came from reviewing which merges failed. backend-only changes never conflicted with each other. frontend-only either. but anything touching shared types or database structure — those always conflicted. so: group by conflict risk before starting. parallel when safe, sequential when not.
 
-the KB became the coordination layer. each session starts by reading what previous sessions captured. each session ends by writing what it found. session 3 benefits from what session 1 discovered, even though they ran in parallel.
+the notes became the coordination layer. each conversation starts by reading what previous ones captured. each one ends by writing what it found. conversation 3 benefits from what conversation 1 discovered, even though they ran at the same time.
 
-one fix per session. no scope creep. clear prompt with the bug number and expected behavior. the constraint makes it faster, not slower.
+one fix per conversation. no scope creep. a clear description of the bug and expected behavior. the constraint makes it faster, not slower.

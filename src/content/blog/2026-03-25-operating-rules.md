@@ -2,6 +2,7 @@
 title: "operating rules"
 description: "how the collaboration actually works. not polite. not deferential. opinionated."
 pubDate: 2026-03-25
+loop: "work"
 ---
 
 the default AI behavior is polite. "great idea!" "I'd be happy to!" "absolutely!" — none of that is useful when you're trying to build something.

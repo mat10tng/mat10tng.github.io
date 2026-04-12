@@ -2,6 +2,7 @@
 title: "fewer tools, not more"
 description: "7 overlapping tools confused the agent. 4 clean ones fixed it."
 pubDate: 2026-03-24
+loop: "work"
 ---
 
 the agent kept calling the wrong tool. mutate_graph vs update_graph_document — both sounded like they did the same thing. because they almost did.

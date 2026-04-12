@@ -2,6 +2,7 @@
 title: "three levers"
 description: "when the AI misbehaves, it's always one of three things. never the code."
 pubDate: 2026-03-20
+loop: "work"
 ---
 
 early on the agent kept doing the wrong thing. creating duplicate pages. using the wrong tool. extracting too much or too little. my first instinct was always to look at the code.

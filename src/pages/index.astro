@@ -15,12 +15,32 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				min-height: 60vh;
+				min-height: 70vh;
 				padding: 2rem 1rem;
+			}
+			.two-loops {
+				display: flex;
+				gap: 3rem;
+				align-items: flex-start;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+			.loop-column {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			.loop-label {
+				font-size: 0.75rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--muted-color, #666);
+				margin-bottom: 1rem;
 			}
 			.ascii-flow {
 				font-family: 'Courier New', Courier, monospace;
-				font-size: 0.85rem;
+				font-size: 0.8rem;
 				line-height: 1.4;
 				white-space: pre;
 				color: var(--text-color, #333);
@@ -41,18 +61,32 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				font-weight: 700;
 				border-bottom: 1px dashed currentColor;
 			}
+			.bridge {
+				font-family: 'Courier New', Courier, monospace;
+				font-size: 0.8rem;
+				color: var(--muted-color, #999);
+				align-self: center;
+				margin-top: 2rem;
+				white-space: pre;
+			}
 			.tagline {
 				margin-top: 2rem;
 				font-size: 0.9rem;
 				color: var(--muted-color, #666);
 				text-align: center;
-				max-width: 420px;
+				max-width: 520px;
 				line-height: 1.6;
 			}
 
-			@media (max-width: 600px) {
+			@media (max-width: 700px) {
 				.ascii-flow {
-					font-size: 0.65rem;
+					font-size: 0.6rem;
+				}
+				.two-loops {
+					gap: 1.5rem;
+				}
+				.bridge {
+					font-size: 0.6rem;
 				}
 			}
 		</style>
@@ -61,28 +95,47 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<Header />
 		<main>
 			<section class="hero">
-				<div class="ascii-flow" role="img" aria-label="workflow loop: work, capture, review, improve, measure">
-{`                 ┌──────────────────────────┐
-                 │                          │
-                 ▼                          │
-            ┌─────────┐              ┌─────┴─────┐
-            │  `}<span class="node">work</span>{`   │─────────────▶│  `}<a href="/blog" class="link-node">capture</a>{`  │
-            └─────────┘              └─────┬─────┘
-                 ▲                         │
-                 │                         ▼
-            ┌────┴────┐              ┌───────────┐
-            │ `}<a href="/history" class="link-node">measure</a>{` │◀─────────────│  `}<span class="node">review</span>{`   │
-            └─────────┘              └─────┬─────┘
-                 ▲                         │
-                 │                         ▼
-                 │                    ┌─────────┐
-                 └────────────────────│  `}<span class="node">improve</span>{` │
-                                     └─────────┘`}
+				<div class="two-loops">
+					<div class="loop-column">
+						<div class="loop-label">each session</div>
+						<div class="ascii-flow" role="img" aria-label="session loop: work, capture, review, improve">
+{`     ┌────────────────┐
+     │                │
+     ▼                │
+ ┌────────┐     ┌─────┴───┐
+ │  `}<span class="node">work</span>{`  │────▶│ `}<a href="/blog" class="link-node">capture</a>{` │
+ └────────┘     └────┬────┘
+     ▲               │
+     │               ▼
+ ┌───┴────┐    ┌──────────┐
+ │`}<span class="node">improve</span>{` │◀───│  `}<span class="node">review</span>{`  │
+ └────────┘    └──────────┘`}
+						</div>
+					</div>
+					<div class="loop-column">
+						<div class="loop-label">across sessions</div>
+						<div class="ascii-flow" role="img" aria-label="system loop: lessons become rules, measured over time">
+{`  ┌──────────────────┐
+  │                  │
+  ▼                  │
+ ┌─────────┐   ┌────┴─────┐
+ │ lessons │──▶│   rules  │
+ └─────────┘   └────┬─────┘
+                    │
+                    ▼
+              ┌──────────┐
+              │ `}<a href="/history" class="link-node">measure</a>{`  │
+              └──────────┘`}
+						</div>
+					</div>
+				</div>
+				<div class="bridge">
+{`         capture ──────▶ lessons`}
 				</div>
 				<p class="tagline">
-					work. capture everything. review what happened.<br>
-					improve the system. measure whether it worked.<br>
-					repeat.
+					each session: work, capture, review, improve.<br>
+					across sessions: lessons become rules. rules get measured.<br>
+					the system gets better. <a href="/system">here's how</a>.
 				</p>
 			</section>
 		</main>
