@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const sessions = (await getCollection('sessions')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const phase = 'review';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`review — ${SITE_TITLE}`} description="the patterns found by looking across many sessions. where process problems become visible." />
+		<style>
+			main { max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+			h1 { margin-bottom: 0.25rem; }
+			.phase-intro { color: rgb(var(--gray)); margin-bottom: 2rem; line-height: 1.6; }
+			.session-item { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(var(--gray), 0.15); }
+			.session-item:last-child { border-bottom: none; }
+			.session-item a { text-decoration: none; }
+			.session-title { font-size: 1rem; font-weight: 600; color: rgb(var(--black)); margin: 0 0 0.25rem; transition: color 0.2s; }
+			.session-item a:hover .session-title { color: rgb(var(--accent)); }
+			.session-phase-text { font-size: 0.9rem; color: rgb(var(--gray-dark, #444)); line-height: 1.5; margin: 0; }
+			.session-date { font-size: 0.8rem; color: rgb(var(--gray)); }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>review</h1>
+			<p class="phase-intro">the patterns found by looking across many sessions. where process problems become visible.</p>
+			{sessions.map(s => (
+				<div class="session-item">
+					<a href={`/session/${s.id}`}>
+						<p class="session-title">{s.data.title}</p>
+						<p class="session-phase-text">{s.data[phase]}</p>
+						<span class="session-date">{s.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+					</a>
+				</div>
+			))}
+		</main>
+		<Footer />
+	</body>
+</html>

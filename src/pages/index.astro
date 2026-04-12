@@ -18,30 +18,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				min-height: 70vh;
 				padding: 2rem 1rem;
 			}
-			.two-loops {
-				display: flex;
-				gap: 3rem;
-				align-items: flex-start;
-				flex-wrap: wrap;
-				justify-content: center;
-			}
-			.loop-column {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-			.loop-label {
-				font-size: 0.75rem;
-				font-weight: 600;
-				text-transform: uppercase;
-				letter-spacing: 0.08em;
-				color: var(--muted-color, #666);
-				margin-bottom: 1rem;
-			}
 			.ascii-flow {
 				font-family: 'Courier New', Courier, monospace;
-				font-size: 0.8rem;
-				line-height: 1.4;
+				font-size: 0.78rem;
+				line-height: 1.45;
 				white-space: pre;
 				color: var(--text-color, #333);
 				user-select: none;
@@ -61,32 +41,23 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				font-weight: 700;
 				border-bottom: 1px dashed currentColor;
 			}
-			.bridge {
-				font-family: 'Courier New', Courier, monospace;
-				font-size: 0.8rem;
-				color: var(--muted-color, #999);
-				align-self: center;
-				margin-top: 2rem;
-				white-space: pre;
-			}
 			.tagline {
 				margin-top: 2rem;
 				font-size: 0.9rem;
 				color: var(--muted-color, #666);
 				text-align: center;
-				max-width: 520px;
-				line-height: 1.6;
+				max-width: 560px;
+				line-height: 1.7;
+			}
+			.tagline a {
+				color: inherit;
+				text-decoration: underline;
+				text-underline-offset: 2px;
 			}
 
 			@media (max-width: 700px) {
 				.ascii-flow {
-					font-size: 0.6rem;
-				}
-				.two-loops {
-					gap: 1.5rem;
-				}
-				.bridge {
-					font-size: 0.6rem;
+					font-size: 0.52rem;
 				}
 			}
 		</style>
@@ -95,47 +66,31 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<Header />
 		<main>
 			<section class="hero">
-				<div class="two-loops">
-					<div class="loop-column">
-						<div class="loop-label">each session</div>
-						<div class="ascii-flow" role="img" aria-label="session loop: work, capture, review, improve">
-{`     ┌────────────────┐
-     │                │
-     ▼                │
- ┌────────┐     ┌─────┴───┐
- │  `}<span class="node">work</span>{`  │────▶│ `}<a href="/blog" class="link-node">capture</a>{` │
- └────────┘     └────┬────┘
-     ▲               │
-     │               ▼
- ┌───┴────┐    ┌──────────┐
- │`}<span class="node">improve</span>{` │◀───│  `}<span class="node">review</span>{`  │
- └────────┘    └──────────┘`}
-						</div>
-					</div>
-					<div class="loop-column">
-						<div class="loop-label">across sessions</div>
-						<div class="ascii-flow" role="img" aria-label="system loop: lessons become rules, measured over time">
-{`  ┌──────────────────┐
-  │                  │
-  ▼                  │
- ┌─────────┐   ┌────┴─────┐
- │ lessons │──▶│   rules  │
- └─────────┘   └────┬─────┘
-                    │
-                    ▼
-              ┌──────────┐
-              │ `}<a href="/history" class="link-node">measure</a>{`  │
-              └──────────┘`}
-						</div>
-					</div>
-				</div>
-				<div class="bridge">
-{`         capture ──────▶ lessons`}
+				<div class="ascii-flow" role="img" aria-label="how the system works: sessions produce captures, review sessions produce lessons and rules, everything is measured">
+{`  most sessions                   some sessions are review sessions
+ ┌──────────┐                    ┌──────────────────────────────────┐
+ │          │                    │                                  │
+ │  `}<a href="/work" class="link-node">work</a>{`    │                    │  look back at recent `}<a href="/capture" class="link-node">captures</a>{`     │
+ │    │     │                    │         │                        │
+ │    ▼     │                    │         ▼                        │
+ │ `}<a href="/capture" class="link-node">capture</a>{`  │─ ─ ─ ─ ─ ─ ─ ─ ─ ─▶│  spot a pattern (`}<a href="/review" class="link-node">review</a>{`)         │
+ │          │  learning          │         │                        │
+ └──────────┘  carries           │         ▼                        │
+      │        forward           │  change the process (`}<a href="/improve" class="link-node">improve</a>{`)  │
+      ▼                          │         │                        │
+ ┌──────────┐                    │         ▼                        │
+ │ next     │◀───────────────────│  new lesson or rule              │
+ │ session  │  inherits the      │         │                        │
+ └──────────┘  improvement       │         ▼                        │
+                                 │  `}<a href="/history" class="link-node">measure</a>{` whether it worked       │
+                                 │                                  │
+                                 └──────────────────────────────────┘`}
 				</div>
 				<p class="tagline">
-					each session: work, capture, review, improve.<br>
-					across sessions: lessons become rules. rules get measured.<br>
-					the system gets better. <a href="/system">here's how</a>.
+					most sessions just work and capture.<br>
+					some sessions step back and review the pattern across many.<br>
+					those produce the lessons and rules that make future sessions better.<br>
+					<a href="/system">how the system works</a>
 				</p>
 			</section>
 		</main>

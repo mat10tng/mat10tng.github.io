@@ -1,0 +1,114 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+	const sessions = await getCollection('sessions');
+	return sessions.map((session) => ({
+		params: { slug: session.id },
+		props: session,
+	}));
+}
+
+const session = Astro.props;
+const { Content } = await render(session);
+const { title, description, date, work, capture, review, improve, measure } = session.data;
+
+const phases = [
+	{ name: 'work', text: work, href: '/work' },
+	{ name: 'capture', text: capture, href: '/capture' },
+	{ name: 'review', text: review, href: '/review' },
+	{ name: 'improve', text: improve, href: '/improve' },
+];
+if (measure) {
+	phases.push({ name: 'measure', text: measure, href: '/measure' });
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} — ${SITE_TITLE}`} description={description} />
+		<style>
+			article {
+				max-width: 720px;
+				margin: 2rem auto;
+				padding: 0 1rem;
+			}
+			.session-date {
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+			}
+			h1 {
+				margin: 0.25rem 0 1.5rem;
+			}
+			.phase-cards {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+			.phase-card {
+				padding: 1rem;
+				border: 1px solid rgba(var(--gray), 0.2);
+				border-radius: 6px;
+			}
+			.phase-card a {
+				text-decoration: none;
+			}
+			.phase-label {
+				font-size: 0.7rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: rgb(var(--accent));
+				margin-bottom: 0.5rem;
+			}
+			.phase-label:hover {
+				text-decoration: underline;
+			}
+			.phase-text {
+				font-size: 0.9rem;
+				line-height: 1.5;
+				color: rgb(var(--black));
+			}
+			.session-body {
+				line-height: 1.7;
+			}
+			.session-body h3 {
+				margin-top: 2rem;
+			}
+			@media (max-width: 600px) {
+				.phase-cards {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<article>
+				<p class="session-date">{date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+				<h1>{title}</h1>
+
+				<div class="phase-cards">
+					{phases.map(phase => (
+						<div class="phase-card">
+							<a href={phase.href}><div class="phase-label">{phase.name}</div></a>
+							<div class="phase-text">{phase.text}</div>
+						</div>
+					))}
+				</div>
+
+				<div class="session-body">
+					<Content />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
