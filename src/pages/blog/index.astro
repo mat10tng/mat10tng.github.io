@@ -2,41 +2,35 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+const sessions = (await getCollection('sessions')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-
-const sessionPhases = ['work', 'capture', 'review'] as const;
-const systemPhases = ['improve', 'measure'] as const;
-
-const byLoop = (phase: string) => posts.filter(p => p.data.loop === phase);
-const untagged = posts.filter(p => !p.data.loop);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Posts — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			main {
 				max-width: 720px;
 				margin: 0 auto;
 				padding: 1rem;
 			}
-			.blog-intro {
+			.intro {
 				color: rgb(var(--gray));
 				font-size: 0.95rem;
 				margin-bottom: 2rem;
 				line-height: 1.6;
 			}
-			.loop-section {
-				margin-bottom: 2.5rem;
-			}
-			.loop-section-title {
+			.section-title {
 				font-size: 0.75rem;
 				font-weight: 600;
 				text-transform: uppercase;
@@ -46,36 +40,68 @@ const untagged = posts.filter(p => !p.data.loop);
 				padding-bottom: 0.5rem;
 				border-bottom: 1px solid rgba(var(--gray), 0.2);
 			}
-			.phase-group {
-				margin-bottom: 1.5rem;
-			}
-			.phase-label {
-				font-size: 0.8rem;
-				font-weight: 600;
-				color: rgb(var(--gray));
-				margin-bottom: 0.5rem;
-			}
-			.post-list {
+			.session-list, .post-list {
 				list-style: none;
-				margin: 0;
+				margin: 0 0 2.5rem;
 				padding: 0;
 			}
-			.post-list li {
-				margin-bottom: 0.75rem;
+			.session-item {
+				margin-bottom: 1.25rem;
+				padding-bottom: 1.25rem;
+				border-bottom: 1px solid rgba(var(--gray), 0.1);
 			}
-			.post-list a {
+			.session-item:last-child {
+				border-bottom: none;
+			}
+			.session-item a, .post-item a {
 				text-decoration: none;
 				display: block;
 			}
-			.post-list a:hover .post-title {
+			.session-title {
+				font-size: 1rem;
+				font-weight: 600;
+				color: rgb(var(--black));
+				margin: 0 0 0.25rem;
+				transition: color 0.2s;
+			}
+			.session-item a:hover .session-title,
+			.post-item a:hover .post-title {
 				color: rgb(var(--accent));
+			}
+			.session-desc {
+				font-size: 0.9rem;
+				color: rgb(var(--gray-dark, #444));
+				line-height: 1.5;
+				margin: 0 0 0.35rem;
+			}
+			.session-phases {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+			}
+			.phase-tag {
+				font-size: 0.7rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				color: rgb(var(--gray));
+				padding: 0.15rem 0.4rem;
+				border: 1px solid rgba(var(--gray), 0.2);
+				border-radius: 3px;
+			}
+			.session-date {
+				font-size: 0.8rem;
+				color: rgb(var(--gray));
+			}
+			.post-item {
+				margin-bottom: 0.75rem;
 			}
 			.post-title {
 				font-size: 1rem;
 				font-weight: 500;
 				color: rgb(var(--black));
 				margin: 0;
-				transition: color 0.2s ease;
+				transition: color 0.2s;
 			}
 			.post-meta {
 				font-size: 0.8rem;
@@ -87,68 +113,41 @@ const untagged = posts.filter(p => !p.data.loop);
 	<body>
 		<Header />
 		<main>
-			<p class="blog-intro">
-				each post is a pass through the loop — something I worked on, what I captured, what improved.
+			<p class="intro">
+				sessions are complete passes through the loop. standalone posts cover everything else.
 			</p>
 
-			<div class="loop-section">
-				<div class="loop-section-title">each session</div>
-				{sessionPhases.map(phase => {
-					const phasePosts = byLoop(phase);
-					return phasePosts.length > 0 && (
-						<div class="phase-group">
-							<div class="phase-label">{phase}</div>
-							<ul class="post-list">
-								{phasePosts.map(post => (
-									<li>
-										<a href={`/blog/${post.id}/`}>
-											<p class="post-title">{post.data.title}</p>
-											<p class="post-meta">{post.data.description}</p>
-										</a>
-									</li>
-								))}
-							</ul>
-						</div>
-					);
-				})}
-			</div>
+			<div class="section-title">sessions</div>
+			<ul class="session-list">
+				{sessions.map(s => (
+					<li class="session-item">
+						<a href={`/session/${s.id}/`}>
+							<p class="session-title">{s.data.title}</p>
+							<p class="session-desc">{s.data.description}</p>
+							<div class="session-phases">
+								<span class="phase-tag">work</span>
+								<span class="phase-tag">capture</span>
+								<span class="phase-tag">review</span>
+								<span class="phase-tag">improve</span>
+								{s.data.measure && <span class="phase-tag">measure</span>}
+							</div>
+							<span class="session-date">{s.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+						</a>
+					</li>
+				))}
+			</ul>
 
-			<div class="loop-section">
-				<div class="loop-section-title">across sessions</div>
-				{systemPhases.map(phase => {
-					const phasePosts = byLoop(phase);
-					return phasePosts.length > 0 && (
-						<div class="phase-group">
-							<div class="phase-label">{phase}</div>
-							<ul class="post-list">
-								{phasePosts.map(post => (
-									<li>
-										<a href={`/blog/${post.id}/`}>
-											<p class="post-title">{post.data.title}</p>
-											<p class="post-meta">{post.data.description}</p>
-										</a>
-									</li>
-								))}
-							</ul>
-						</div>
-					);
-				})}
-			</div>
-
-			{untagged.length > 0 && (
-				<div class="loop-section">
-					<ul class="post-list">
-						{untagged.map(post => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<p class="post-title">{post.data.title}</p>
-									<p class="post-meta">{post.data.description}</p>
-								</a>
-							</li>
-						))}
-					</ul>
-				</div>
-			)}
+			<div class="section-title">standalone posts</div>
+			<ul class="post-list">
+				{posts.map(post => (
+					<li class="post-item">
+						<a href={`/blog/${post.id}/`}>
+							<p class="post-title">{post.data.title}</p>
+							<p class="post-meta">{post.data.description}</p>
+						</a>
+					</li>
+				))}
+			</ul>
 		</main>
 		<Footer />
 	</body>

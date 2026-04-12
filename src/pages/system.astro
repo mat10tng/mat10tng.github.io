@@ -1,14 +1,19 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../consts';
+
+const sessions = (await getCollection('sessions')).sort(
+	(a, b) => a.data.date.valueOf() - b.data.date.valueOf()
+);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`System — ${SITE_TITLE}`} description="how the whole thing works — the loop, the memory, the rules." />
+		<BaseHead title={`System — ${SITE_TITLE}`} description="how the system evolved from nothing to what it is now." />
 		<style>
 			.system-content {
 				max-width: 720px;
@@ -17,30 +22,56 @@ import { SITE_TITLE } from '../consts';
 				line-height: 1.7;
 			}
 			.system-content h1 {
-				margin-bottom: 0.5rem;
-			}
-			.system-content h2 {
-				margin-top: 2.5rem;
-				margin-bottom: 0.5rem;
-				font-size: 1.1rem;
-			}
-			.system-content p {
-				margin-bottom: 1rem;
+				margin-bottom: 0.25rem;
 			}
 			.system-content .intro {
 				color: var(--muted-color, #666);
-				margin-bottom: 2rem;
+				margin-bottom: 2.5rem;
 			}
-			.system-content .ascii-diagram {
-				font-family: 'Courier New', Courier, monospace;
-				font-size: 0.8rem;
-				line-height: 1.3;
-				white-space: pre;
-				margin: 1.5rem 0;
-				padding: 1rem;
-				background: var(--bg-muted, #f8f8f8);
-				border-radius: 4px;
-				overflow-x: auto;
+			.evolution-stage {
+				margin-bottom: 2.5rem;
+				padding-bottom: 2rem;
+				border-bottom: 1px solid rgba(var(--gray), 0.15);
+			}
+			.evolution-stage:last-of-type {
+				border-bottom: none;
+			}
+			.stage-label {
+				font-size: 0.7rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: rgb(var(--gray));
+				margin-bottom: 0.25rem;
+			}
+			.stage-title {
+				font-size: 1.15rem;
+				font-weight: 600;
+				margin: 0 0 0.75rem;
+			}
+			.stage-body {
+				margin-bottom: 0.75rem;
+			}
+			.stage-sessions {
+				margin-top: 0.75rem;
+			}
+			.stage-sessions a {
+				font-size: 0.85rem;
+				color: rgb(var(--accent));
+				text-decoration: none;
+			}
+			.stage-sessions a:hover {
+				text-decoration: underline;
+			}
+			.now-section {
+				background: rgba(var(--gray), 0.05);
+				padding: 1.5rem;
+				border-radius: 6px;
+				margin-top: 2rem;
+			}
+			.now-section h2 {
+				margin-top: 0;
+				font-size: 1.1rem;
 			}
 		</style>
 	</head>
@@ -50,66 +81,112 @@ import { SITE_TITLE } from '../consts';
 			<article class="system-content">
 				<h1>system</h1>
 				<p class="intro">
-					this page describes how the whole thing works. the <a href="/blog">blog posts</a> are individual passes through the loop. this is the loop itself.
+					the system wasn't designed — it was built iteratively, one problem at a time. this page shows how it evolved.
 				</p>
 
-				<h2>work</h2>
-				<p>
-					I build a product with Claude. every day, multiple conversations. each one starts by reading what previous conversations learned — the rules, the fixes, the decisions. then we work.
-				</p>
-				<p>
-					before any real work starts, there's a process. brainstorm the approach. state the files, the assumptions, the plan. get alignment before writing code. this didn't exist at first — it's a rule that came from the loop.
-				</p>
+				<div class="evolution-stage">
+					<div class="stage-label">week 1 — march 18</div>
+					<h2 class="stage-title">just writing things down</h2>
+					<p class="stage-body">
+						no system. no structure. just the realization that I kept solving the same problem twice because the solution was buried in a conversation I'd never find again. started writing markdown notes after each work session. 5 notes on day one.
+					</p>
+					<p class="stage-body">
+						the "system" at this point was: work, then write down what happened. nothing read the notes back. nothing was organized. but the habit of capture was the seed everything else grew from.
+					</p>
+					<p class="stage-body"><strong>if you're starting from zero:</strong> after each work session, write a short note — what you did, what worked, what didn't, what you decided. a markdown file is fine. don't overthink the format. the habit matters more than the structure.</p>
+				</div>
 
-				<h2>capture</h2>
-				<p>
-					every conversation writes down what happened. automatically. what worked, what failed, what was decided. these notes accumulate — 1400+ now. fixes, decisions, lessons, session summaries.
-				</p>
-				<p>
-					the notes aren't a journal. they're the system's memory. the next conversation reads them before starting. without capture, every conversation starts from zero.
-				</p>
+				<div class="evolution-stage">
+					<div class="stage-label">week 2 — march 25</div>
+					<h2 class="stage-title">notes became infrastructure</h2>
+					<p class="stage-body">
+						168 notes. the pile of markdown wasn't working as a pile anymore — couldn't find anything. added structure: typed notes (sessions, fixes, decisions, lessons), search, obsidian integration. the notes stopped being a journal and started being the memory the process runs on.
+					</p>
+					<p class="stage-body">
+						the key shift: new conversations started loading previous notes before doing anything. for the first time, a conversation could benefit from what a previous conversation learned. but it was manual — you had to know what to search for.
+					</p>
+					<p class="stage-body"><strong>if your notes are piling up:</strong> add types. a "fix" note is different from a "decision" note — they serve different purposes and you search for them differently. at minimum, separate session summaries from lessons. and make sure the next conversation reads previous notes before starting — even if it's just "here's what I worked on yesterday."</p>
+					<div class="stage-sessions">
+						related sessions:
+						{sessions.filter(s => s.data.sessionId <= 3).map(s => (
+							<span> <a href={`/session/${s.id}`}>{s.data.title}</a> ·</span>
+						))}
+					</div>
+				</div>
 
-				<h2>review</h2>
-				<p>
-					this is the part that makes it work. periodically I look at the data. not the code, not the features — the process itself. how many conversations went sideways? which rules are being followed? which notes keep getting referenced vs which ones sit untouched?
-				</p>
-				<p>
-					review is where patterns become visible. 47 conversations with the same shape — jumping to code before thinking. that's not one bug. that's a process problem. you only see it by looking across conversations, not inside one.
-				</p>
+				<div class="evolution-stage">
+					<div class="stage-label">week 3 — april 2</div>
+					<h2 class="stage-title">rules from patterns</h2>
+					<p class="stage-body">
+						392 notes. started reviewing work sessions in bulk — not individual bugs, but the shape of how conversations went. found the first big pattern: 47 conversations jumping to code without confirming the approach. wrote the first rule. it dropped to 3 the next month.
+					</p>
+					<p class="stage-body">
+						this was when the system crossed from "remembering things" to "changing behavior." capture was happening automatically. now rules were being written from captured patterns. and the rules were being loaded into future conversations, which changed how those conversations went.
+					</p>
+					<p class="stage-body">
+						also consolidated all rules into one place. config files became thin pointers. one source of truth instead of twelve conflicting ones.
+					</p>
+					<p class="stage-body"><strong>if you have enough data to see patterns:</strong> periodically read through your last 20-30 session notes. don't look at individual bugs — look at the shape of how conversations went. when the same kind of problem shows up 3+ times, that's not a bug — it's a process issue. write a rule. keep it to one sentence. make sure it gets loaded into future conversations automatically.</p>
+					<div class="stage-sessions">
+						related sessions:
+						{sessions.filter(s => s.data.sessionId >= 4 && s.data.sessionId <= 6).map(s => (
+							<span> <a href={`/session/${s.id}`}>{s.data.title}</a> ·</span>
+						))}
+					</div>
+				</div>
 
-				<h2>improve</h2>
-				<p>
-					once a pattern is visible, the fix is usually a rule. "state your assumptions before writing code." "brainstorm before building." "one fix per conversation, no scope creep." each rule exists because a specific pattern showed up during review.
-				</p>
-				<p>
-					rules start small — one project, one problem. the ones that keep mattering across different projects get promoted to permanent rules. right now there are about 80 of those. most started as one project's fix.
-				</p>
-<div class="ascii-diagram">{`  raw notes → compressed into lessons → promoted to rules
+				<div class="evolution-stage">
+					<div class="stage-label">week 4 — april 8</div>
+					<h2 class="stage-title">measurement and self-curation</h2>
+					<p class="stage-body">
+						578 notes. added the question that made everything real: what percentage of conversations actually reuse something from a previous one? first answer: near zero. the notes existed but weren't being surfaced.
+					</p>
+					<p class="stage-body">
+						added auto-surfacing: before each conversation starts, the system loads relevant notes automatically. added auto-pruning: notes that never get referenced get archived. notes that keep getting referenced float up. the reuse rate climbed from near zero to 88%.
+					</p>
+					<p class="stage-body">
+						rules started graduating — fixes that worked in one project got referenced in others and became permanent global rules. about 80 rules have graduated so far.
+					</p>
+					<p class="stage-body"><strong>if your rules are working but you can't tell how well:</strong> measure reuse. what percentage of conversations actually pull something useful from a previous one? if it's low, the problem is surfacing — notes exist but aren't being found. if it's high, the system is compounding. also track which notes get referenced vs which sit untouched. that's your signal-to-noise ratio.</p>
+					<div class="stage-sessions">
+						related sessions:
+						{sessions.filter(s => s.data.sessionId >= 6).map(s => (
+							<span> <a href={`/session/${s.id}`}>{s.data.title}</a> ·</span>
+						))}
+					</div>
+				</div>
 
-  most notes don't become lessons.
-  most lessons don't become rules.
-  the ones that do are load-bearing.`}</div>
+				<div class="now-section">
+					<h2>where it is now</h2>
+					<p>
+						1400+ notes. 88% reuse rate. 80 global rules, most of which started as one project's fix for one project's problem. every conversation starts with context from previous conversations. every conversation ends by capturing what it learned. rules evolve from the pattern of reuse.
+					</p>
+					<p>
+						the system wasn't planned. each piece was a response to a real problem: couldn't find old fixes → started capturing. couldn't find captures → added search and types. kept making the same mistake → added rules from patterns. rules drifted → consolidated to one source. couldn't tell if it worked → added measurement.
+					</p>
+					<p>
+						the <a href="/history">history page</a> tracks the numbers. the sessions below show the individual moments where the system changed.
+					</p>
+				</div>
 
-				<h2>measure</h2>
-				<p>
-					how do I know the rules actually work? I measure. the main number: what percentage of conversations reuse something from a previous one? started near zero. now it's 88%. the system remembers what I forget.
-				</p>
-				<p>
-					other signals: which notes actually get read vs just sitting there. how many conversations succeed vs struggle. whether a new rule reduces the pattern it was meant to fix.
-				</p>
-				<p>
-					the <a href="/history">history page</a> tracks how these numbers change over time. the <a href="/blog">blog posts</a> tell the story behind them.
-				</p>
+				<div style="margin-top: 2rem;">
+					<div class="stage-label" style="margin-bottom: 1rem;">all sessions</div>
+					{sessions.map(s => (
+						<div style="margin-bottom: 0.75rem;">
+							<a href={`/session/${s.id}`} style="text-decoration: none; color: rgb(var(--black));">
+								<strong>{s.data.title}</strong>
+								<span style="color: rgb(var(--gray)); font-size: 0.85rem;"> — {s.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+							</a>
+						</div>
+					))}
+				</div>
 
-				<h2>the loop</h2>
-				<p>
-					that's it. work, capture, review, improve, measure. then the next conversation inherits whatever changed. it's not a methodology — it's just what happens when you write everything down, read it back, and ask "what could be better?"
-				</p>
-
-				<h2>authoring</h2>
-				<p>
-					every word on this site is written by Claude, prompted by me. I describe what I want to say, we go back and forth, I approve. the voice and judgment are mine. the typing isn't.
-				</p>
+				<div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(var(--gray), 0.15);">
+					<h2 style="font-size: 1rem;">authoring</h2>
+					<p>
+						every word on this site is written by Claude, prompted by me. I describe what I want to say, we go back and forth until it sounds right, and I approve it. the voice and judgment are mine. the typing isn't.
+					</p>
+				</div>
 			</article>
 		</main>
 		<Footer />
