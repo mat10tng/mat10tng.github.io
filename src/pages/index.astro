@@ -9,40 +9,82 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.hero {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				min-height: 60vh;
+				padding: 2rem 1rem;
+			}
+			.ascii-flow {
+				font-family: 'Courier New', Courier, monospace;
+				font-size: 0.85rem;
+				line-height: 1.4;
+				white-space: pre;
+				color: var(--text-color, #333);
+				user-select: none;
+			}
+			.ascii-flow a {
+				color: inherit;
+				text-decoration: none;
+				transition: color 150ms ease;
+			}
+			.ascii-flow a:hover {
+				color: var(--accent-color, #2563eb);
+			}
+			.ascii-flow .node {
+				font-weight: 700;
+			}
+			.ascii-flow .link-node {
+				font-weight: 700;
+				border-bottom: 1px dashed currentColor;
+			}
+			.tagline {
+				margin-top: 2rem;
+				font-size: 0.9rem;
+				color: var(--muted-color, #666);
+				text-align: center;
+				max-width: 420px;
+				line-height: 1.6;
+			}
+
+			@media (max-width: 600px) {
+				.ascii-flow {
+					font-size: 0.65rem;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="hero">
+				<div class="ascii-flow" role="img" aria-label="workflow loop: work, capture, review, improve, measure">
+{`                 ┌──────────────────────────┐
+                 │                          │
+                 ▼                          │
+            ┌─────────┐              ┌─────┴─────┐
+            │  `}<span class="node">work</span>{`   │─────────────▶│  `}<a href="/blog" class="link-node">capture</a>{`  │
+            └─────────┘              └─────┬─────┘
+                 ▲                         │
+                 │                         ▼
+            ┌────┴────┐              ┌───────────┐
+            │ `}<a href="/history" class="link-node">measure</a>{` │◀─────────────│  `}<span class="node">review</span>{`   │
+            └─────────┘              └─────┬─────┘
+                 ▲                         │
+                 │                         ▼
+                 │                    ┌─────────┐
+                 └────────────────────│  `}<span class="node">improve</span>{` │
+                                     └─────────┘`}
+				</div>
+				<p class="tagline">
+					work. capture everything. review what happened.<br>
+					improve the system. measure whether it worked.<br>
+					repeat.
+				</p>
+			</section>
 		</main>
 		<Footer />
 	</body>
