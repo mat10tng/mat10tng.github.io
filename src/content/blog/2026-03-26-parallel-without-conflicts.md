@@ -1,16 +1,37 @@
 ---
 title: "parallel without stepping on yourself"
-description: "multiple sessions, one codebase. isolation made it work."
+description: "running multiple AI sessions at once without merge conflicts. here's the grouping strategy."
 pubDate: 2026-03-26
 loop: "improve"
 ---
 
-I was running 3 conversations at once, all working on the same codebase. fixing different bugs. it went badly — merge conflicts, overwritten files, one session undoing another's work.
+I was running 3 AI conversations at once, all working on the same codebase, fixing different bugs. it went badly. merge conflicts, overwritten files, one conversation undoing what another just did.
 
-the fix was giving each conversation its own isolated copy of the code. they can't step on each other. when one finishes, merge its changes back. one at a time.
+the obvious fix was isolation — give each conversation its own copy of the code (using git worktrees). they can't step on each other. when one finishes, merge its changes back. one at a time.
 
-the key insight came from reviewing which merges failed. backend-only changes never conflicted with each other. frontend-only either. but anything touching shared types or database structure — those always conflicted. so: group by conflict risk before starting. parallel when safe, sequential when not.
+but isolation alone wasn't enough. even with separate copies, merging conflicted when two conversations touched the same files. the real insight came from reviewing which merges failed and grouping the work accordingly.
 
-the notes became the coordination layer. each conversation starts by reading what previous ones captured. each one ends by writing what it found. conversation 3 benefits from what conversation 1 discovered, even though they ran at the same time.
+## the conflict risk table
 
-one fix per conversation. no scope creep. a clear description of the bug and expected behavior. the constraint makes it faster, not slower.
+before spinning up parallel conversations, I classify the work:
+
+| type of change | conflict risk | can run in parallel? |
+|---|---|---|
+| backend-only (isolated API, single service) | low | yes |
+| frontend-only (one component, scoped CSS) | low | yes |
+| full-stack (model + API + UI for same feature) | high | no — same conversation |
+| shared types or models | high | no — same conversation |
+| database migrations | critical | **always sequential** |
+| frontend routing or layout | medium-high | be careful |
+
+the rule: if two tasks touch the same files or the same shared types, they go in the same conversation or run one after the other. never in parallel.
+
+## the coordination layer
+
+each conversation starts by reading notes from previous conversations — what was changed, what was discovered, what's still broken. each conversation ends by writing its own notes. so conversation 3 benefits from what conversation 1 found, even though they ran at the same time.
+
+this turned the notes system into a coordination mechanism, not just a memory system.
+
+## the discipline
+
+one fix per conversation. no scope creep — "while I'm here, I might as well..." is how you introduce the conflicts you were trying to avoid. a clear description of the bug and the expected behavior, and nothing else. the constraint makes it faster, not slower.
