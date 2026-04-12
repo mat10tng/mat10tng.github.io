@@ -1,21 +1,57 @@
 {
   "current": {
-    "total_notes": 0,
-    "compounding": 0,
-    "success_30d": 0,
-    "top_cited": []
+    "total_notes": 1429,
+    "compounding": 88,
+    "success_30d": 88,
+    "top_cited": ["Knowledge-First Architecture", "Controlling AI Agent Behavior", "Multi-Session Bug Fixing"]
   },
   "timeline": [
     {
-      "id": "2026-04-12-seed",
-      "date": "2026-04-12",
-      "title": "Placeholder entry",
-      "body_md": "This is a seed entry. Real data will replace this after the first history refresh.",
+      "id": "2026-03-18-started-capturing",
+      "date": "2026-03-18",
+      "title": "started writing things down",
+      "body_md": "5 documents on day one. kept solving the same problems twice. started capturing every fix, every decision, every lesson. just markdown files at first. no structure, no automation — just the habit of not throwing work away.",
       "snapshot": {
-        "total_notes": 0,
+        "total_notes": 5,
         "compounding": 0,
         "success_30d": 0,
         "top_cited": []
+      }
+    },
+    {
+      "id": "2026-03-25-system-takes-shape",
+      "date": "2026-03-25",
+      "title": "168 docs in a week",
+      "body_md": "65 new documents in a single day. the knowledge base went from a habit to a system — vault restructure, obsidian integration, structured types for sessions, fixes, decisions, lessons. 428 KB events that day. it stopped being notes and started being infrastructure.",
+      "snapshot": {
+        "total_notes": 168,
+        "compounding": 25,
+        "success_30d": 0,
+        "top_cited": ["Knowledge-First Architecture"]
+      }
+    },
+    {
+      "id": "2026-04-02-state-before-coding",
+      "date": "2026-04-02",
+      "title": "state your assumptions first",
+      "body_md": "47 sessions in march had the same shape — jumping to code before thinking through the approach. added a rule: state your files, state your approach, state your assumptions, then write. april: 3. the rule stayed.",
+      "snapshot": {
+        "total_notes": 392,
+        "compounding": 45,
+        "success_30d": 0,
+        "top_cited": ["Knowledge-First Architecture", "Controlling AI Agent Behavior"]
+      }
+    },
+    {
+      "id": "2026-04-08-kb-source-of-truth",
+      "date": "2026-04-08",
+      "title": "one place for everything",
+      "body_md": "rules were scattered — CLAUDE.md, memory files, random docs. decided KB is the single source of truth. CLAUDE.md became a 15-line bootloader that just points to KB. everything else lives in one searchable place. 578 documents by now.",
+      "snapshot": {
+        "total_notes": 578,
+        "compounding": 72,
+        "success_30d": 82,
+        "top_cited": ["Knowledge-First Architecture", "Controlling AI Agent Behavior", "Multi-Session Bug Fixing"]
       }
     }
   ]
