@@ -81,34 +81,39 @@ const sessions = (await getCollection('sessions')).sort(
 			<article class="system-content">
 				<h1>system</h1>
 				<p class="intro">
-					the system wasn't designed — it was built iteratively, one problem at a time. this page shows how it evolved.
+					the system wasn't designed — it was built iteratively, one problem at a time.
 				</p>
 
-				<div class="evolution-stage">
-					<div class="stage-label">week 1 — march 18</div>
-					<h2 class="stage-title">just writing things down</h2>
-					<p class="stage-body">
-						no system. no structure. just the realization that I kept solving the same problem twice because the solution was buried in a conversation I'd never find again. started writing markdown notes after each work session. 5 notes on day one.
+				<div class="now-section">
+					<h2>where it is now</h2>
+					<p>
+						1400+ notes. 88% reuse rate. 80 global rules, most of which started as one project's fix for one project's problem. every conversation starts with context from previous conversations. every conversation ends by capturing what it learned. rules evolve from the pattern of reuse.
 					</p>
-					<p class="stage-body">
-						the "system" at this point was: work, then write down what happened. nothing read the notes back. nothing was organized. but the habit of capture was the seed everything else grew from.
+					<p>
+						the <a href="/history">history page</a> tracks the numbers. the sessions below show the individual moments where the system changed.
 					</p>
-					<p class="stage-body"><strong>if you're starting from zero:</strong> after each work session, write a short note — what you did, what worked, what didn't, what you decided. a markdown file is fine. don't overthink the format. the habit matters more than the structure.</p>
+				</div>
+
+				<div style="margin-top: 2.5rem;">
+					<div class="stage-label" style="margin-bottom: 1.5rem;">how it got here</div>
 				</div>
 
 				<div class="evolution-stage">
-					<div class="stage-label">week 2 — march 25</div>
-					<h2 class="stage-title">notes became infrastructure</h2>
+					<div class="stage-label">week 4 — april 8</div>
+					<h2 class="stage-title">measurement and self-curation</h2>
 					<p class="stage-body">
-						168 notes. the pile of markdown wasn't working as a pile anymore — couldn't find anything. added structure: typed notes (sessions, fixes, decisions, lessons), search, obsidian integration. the notes stopped being a journal and started being the memory the process runs on.
+						578 notes. added the question that made everything real: what percentage of conversations actually reuse something from a previous one? first answer: near zero. the notes existed but weren't being surfaced.
 					</p>
 					<p class="stage-body">
-						the key shift: new conversations started loading previous notes before doing anything. for the first time, a conversation could benefit from what a previous conversation learned. but it was manual — you had to know what to search for.
+						added auto-surfacing: before each conversation starts, the system loads relevant notes automatically. added auto-pruning: notes that never get referenced get archived. notes that keep getting referenced float up. the reuse rate climbed from near zero to 88%.
 					</p>
-					<p class="stage-body"><strong>if your notes are piling up:</strong> add types. a "fix" note is different from a "decision" note — they serve different purposes and you search for them differently. at minimum, separate session summaries from lessons. and make sure the next conversation reads previous notes before starting — even if it's just "here's what I worked on yesterday."</p>
+					<p class="stage-body">
+						rules started graduating — fixes that worked in one project got referenced in others and became permanent global rules. about 80 rules have graduated so far.
+					</p>
+					<p class="stage-body"><strong>if your rules are working but you can't tell how well:</strong> measure reuse. what percentage of conversations actually pull something useful from a previous one? if it's low, the problem is surfacing — notes exist but aren't being found. if it's high, the system is compounding. also track which notes get referenced vs which sit untouched. that's your signal-to-noise ratio.</p>
 					<div class="stage-sessions">
 						related sessions:
-						{sessions.filter(s => s.data.sessionId <= 3).map(s => (
+						{sessions.filter(s => s.data.sessionId >= 6).map(s => (
 							<span> <a href={`/session/${s.id}`}>{s.data.title}</a> ·</span>
 						))}
 					</div>
@@ -136,49 +141,33 @@ const sessions = (await getCollection('sessions')).sort(
 				</div>
 
 				<div class="evolution-stage">
-					<div class="stage-label">week 4 — april 8</div>
-					<h2 class="stage-title">measurement and self-curation</h2>
+					<div class="stage-label">week 2 — march 25</div>
+					<h2 class="stage-title">notes became infrastructure</h2>
 					<p class="stage-body">
-						578 notes. added the question that made everything real: what percentage of conversations actually reuse something from a previous one? first answer: near zero. the notes existed but weren't being surfaced.
+						168 notes. the pile of markdown wasn't working as a pile anymore — couldn't find anything. added structure: typed notes (sessions, fixes, decisions, lessons), search, obsidian integration. the notes stopped being a journal and started being the memory the process runs on.
 					</p>
 					<p class="stage-body">
-						added auto-surfacing: before each conversation starts, the system loads relevant notes automatically. added auto-pruning: notes that never get referenced get archived. notes that keep getting referenced float up. the reuse rate climbed from near zero to 88%.
+						the key shift: new conversations started loading previous notes before doing anything. for the first time, a conversation could benefit from what a previous conversation learned. but it was manual — you had to know what to search for.
 					</p>
-					<p class="stage-body">
-						rules started graduating — fixes that worked in one project got referenced in others and became permanent global rules. about 80 rules have graduated so far.
-					</p>
-					<p class="stage-body"><strong>if your rules are working but you can't tell how well:</strong> measure reuse. what percentage of conversations actually pull something useful from a previous one? if it's low, the problem is surfacing — notes exist but aren't being found. if it's high, the system is compounding. also track which notes get referenced vs which sit untouched. that's your signal-to-noise ratio.</p>
+					<p class="stage-body"><strong>if your notes are piling up:</strong> add types. a "fix" note is different from a "decision" note — they serve different purposes and you search for them differently. at minimum, separate session summaries from lessons. and make sure the next conversation reads previous notes before starting — even if it's just "here's what I worked on yesterday."</p>
 					<div class="stage-sessions">
 						related sessions:
-						{sessions.filter(s => s.data.sessionId >= 6).map(s => (
+						{sessions.filter(s => s.data.sessionId <= 3).map(s => (
 							<span> <a href={`/session/${s.id}`}>{s.data.title}</a> ·</span>
 						))}
 					</div>
 				</div>
 
-				<div class="now-section">
-					<h2>where it is now</h2>
-					<p>
-						1400+ notes. 88% reuse rate. 80 global rules, most of which started as one project's fix for one project's problem. every conversation starts with context from previous conversations. every conversation ends by capturing what it learned. rules evolve from the pattern of reuse.
+				<div class="evolution-stage">
+					<div class="stage-label">week 1 — march 18</div>
+					<h2 class="stage-title">just writing things down</h2>
+					<p class="stage-body">
+						no system. no structure. just the realization that I kept solving the same problem twice because the solution was buried in a conversation I'd never find again. started writing markdown notes after each work session. 5 notes on day one.
 					</p>
-					<p>
-						the system wasn't planned. each piece was a response to a real problem: couldn't find old fixes → started capturing. couldn't find captures → added search and types. kept making the same mistake → added rules from patterns. rules drifted → consolidated to one source. couldn't tell if it worked → added measurement.
+					<p class="stage-body">
+						the "system" at this point was: work, then write down what happened. nothing read the notes back. nothing was organized. but the habit of capture was the seed everything else grew from.
 					</p>
-					<p>
-						the <a href="/history">history page</a> tracks the numbers. the sessions below show the individual moments where the system changed.
-					</p>
-				</div>
-
-				<div style="margin-top: 2rem;">
-					<div class="stage-label" style="margin-bottom: 1rem;">all sessions</div>
-					{sessions.map(s => (
-						<div style="margin-bottom: 0.75rem;">
-							<a href={`/session/${s.id}`} style="text-decoration: none; color: rgb(var(--black));">
-								<strong>{s.data.title}</strong>
-								<span style="color: rgb(var(--gray)); font-size: 0.85rem;"> — {s.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
-							</a>
-						</div>
-					))}
+					<p class="stage-body"><strong>if you're starting from zero:</strong> after each work session, write a short note — what you did, what worked, what didn't, what you decided. a markdown file is fine. don't overthink the format. the habit matters more than the structure.</p>
 				</div>
 
 				<div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(var(--gray), 0.15);">
