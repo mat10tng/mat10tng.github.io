@@ -12,40 +12,40 @@
       "id": "now",
       "date": "2026-04-12",
       "label": "now",
-      "loop": "work → capture → review → improve → measure",
       "notes": 1429,
       "rules": 80,
       "reuse": 88,
       "success": 88,
+      "steps": ["work", "capture", "review", "improve"],
+      "branch": { "from": 3, "label": "measure" },
       "rules_added": ["voice-analysis", "insight-first", "single-commit-push"],
-      "insight": "the system curates itself. notes that matter float up, noise gets pruned, rules graduate from projects to global.",
-      "ascii": "work ──▶ capture ──▶ review ──▶ improve\n                                    │\n                              lesson → rule\n                                    │\n                                 measure"
+      "insight": "the system curates itself. notes that matter float up, noise gets pruned, rules graduate from projects to global."
     },
     {
       "id": "2026-04-02",
       "date": "2026-04-02",
       "label": "week 3",
-      "loop": "work → capture → review → improve",
       "notes": 392,
       "rules": 12,
       "reuse": 45,
       "success": 70,
+      "steps": ["work", "capture", "review", "improve"],
+      "branch": null,
       "rules_added": ["state-assumptions", "one-source-of-truth", "brainstorm-first", "worktree-isolation"],
-      "insight": "crossed from remembering things to changing behavior. first rules written from patterns. first time the process itself changed.",
-      "ascii": "work ──▶ capture ──▶ review\n                       │\n                    improve\n                    (first rules)"
+      "insight": "crossed from remembering things to changing behavior. first rules written from patterns. first time the process itself changed."
     },
     {
       "id": "2026-03-18",
       "date": "2026-03-18",
       "label": "week 1",
-      "loop": "work → capture",
       "notes": 5,
       "rules": 0,
       "reuse": 0,
       "success": 0,
+      "steps": ["work", "capture"],
+      "branch": null,
       "rules_added": [],
-      "insight": "just writing things down. no structure, no rules, no measurement. the habit of capture was the only thing.",
-      "ascii": "work ──▶ capture\n\n(that's it)"
+      "insight": "just writing things down. no structure, no rules, no measurement. the habit of capture was the only thing."
     }
   ]
 }

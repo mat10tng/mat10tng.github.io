@@ -1,0 +1,96 @@
+---
+interface Props {
+	steps: string[];
+	branch?: { from: number; label: string };
+}
+
+const { steps, branch } = Astro.props;
+
+const boxW = 80;
+const boxH = 28;
+const gap = 32;
+const arrowLen = gap - 4;
+const pad = 8;
+const branchOffsetY = 50;
+
+const totalW = steps.length * boxW + (steps.length - 1) * gap + pad * 2;
+const totalH = branch ? boxH + branchOffsetY + boxH + pad * 2 : boxH + pad * 2;
+---
+
+<svg
+	width={totalW}
+	height={totalH}
+	viewBox={`0 0 ${totalW} ${totalH}`}
+	class="loop-diagram"
+	aria-label={`loop: ${steps.join(' → ')}${branch ? ` → ${branch.label}` : ''}`}
+>
+	{steps.map((step, i) => {
+		const x = pad + i * (boxW + gap);
+		const y = pad;
+		return (
+			<g>
+				<rect
+					x={x} y={y} width={boxW} height={boxH}
+					rx="6" ry="6"
+					fill="none" stroke="#333" stroke-width="1.2"
+				/>
+				<text
+					x={x + boxW / 2} y={y + boxH / 2 + 1}
+					text-anchor="middle" dominant-baseline="middle"
+					font-size="11" font-family="system-ui, sans-serif" fill="#333"
+				>{step}</text>
+				{i < steps.length - 1 && (
+					<g>
+						<line
+							x1={x + boxW + 2} y1={y + boxH / 2}
+							x2={x + boxW + arrowLen - 4} y2={y + boxH / 2}
+							stroke="#999" stroke-width="1"
+						/>
+						<polygon
+							points={`${x + boxW + arrowLen - 4},${y + boxH / 2 - 3} ${x + boxW + arrowLen},${y + boxH / 2} ${x + boxW + arrowLen - 4},${y + boxH / 2 + 3}`}
+							fill="#999"
+						/>
+					</g>
+				)}
+			</g>
+		);
+	})}
+	{branch && (
+		<g>
+			{/* vertical line down from the branch source */}
+			<line
+				x1={pad + branch.from * (boxW + gap) + boxW / 2}
+				y1={pad + boxH + 2}
+				x2={pad + branch.from * (boxW + gap) + boxW / 2}
+				y2={pad + boxH + branchOffsetY - boxH / 2 - 2}
+				stroke="#999" stroke-width="1"
+			/>
+			<polygon
+				points={`${pad + branch.from * (boxW + gap) + boxW / 2 - 3},${pad + boxH + branchOffsetY - boxH / 2 - 4} ${pad + branch.from * (boxW + gap) + boxW / 2},${pad + boxH + branchOffsetY - boxH / 2} ${pad + branch.from * (boxW + gap) + boxW / 2 + 3},${pad + boxH + branchOffsetY - boxH / 2 - 4}`}
+				fill="#999"
+			/>
+			<rect
+				x={pad + branch.from * (boxW + gap) + boxW / 2 - boxW / 2}
+				y={pad + branchOffsetY}
+				width={boxW} height={boxH}
+				rx="6" ry="6"
+				fill="none" stroke="#2563eb" stroke-width="1.2"
+			/>
+			<text
+				x={pad + branch.from * (boxW + gap) + boxW / 2}
+				y={pad + branchOffsetY + boxH / 2 + 1}
+				text-anchor="middle" dominant-baseline="middle"
+				font-size="11" font-family="system-ui, sans-serif" fill="#2563eb"
+			>{branch.label}</text>
+		</g>
+	)}
+</svg>
+
+<style>
+	.loop-diagram {
+		display: block;
+		margin-bottom: 1rem;
+		max-width: 100%;
+		height: auto;
+	}
+</style>
