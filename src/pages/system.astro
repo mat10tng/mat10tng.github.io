@@ -1,0 +1,130 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`System — ${SITE_TITLE}`} description="how the whole thing works — KB, skills, rules, the loop." />
+		<style>
+			.system-content {
+				max-width: 720px;
+				margin: 2rem auto;
+				padding: 0 1rem;
+				line-height: 1.7;
+			}
+			.system-content h1 {
+				margin-bottom: 0.5rem;
+			}
+			.system-content h2 {
+				margin-top: 2.5rem;
+				margin-bottom: 0.5rem;
+				font-size: 1.1rem;
+			}
+			.system-content p {
+				margin-bottom: 1rem;
+			}
+			.system-content .intro {
+				color: var(--muted-color, #666);
+				margin-bottom: 2rem;
+			}
+			.system-content .ascii-diagram {
+				font-family: 'Courier New', Courier, monospace;
+				font-size: 0.8rem;
+				line-height: 1.3;
+				white-space: pre;
+				margin: 1.5rem 0;
+				padding: 1rem;
+				background: var(--bg-muted, #f8f8f8);
+				border-radius: 4px;
+				overflow-x: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<article class="system-content">
+				<h1>system</h1>
+				<p class="intro">
+					this page describes how the whole thing works. the blog posts are individual passes through the loop. this is the loop itself.
+				</p>
+
+				<h2>the loop</h2>
+				<p>
+					every session follows the same shape: work on something, capture what happened, review the patterns, improve the process, measure whether it helped. then the next session inherits whatever changed.
+				</p>
+				<p>
+					it's not a methodology. it's just what happens when you write everything down and read it back before starting.
+				</p>
+
+				<h2>knowledge base</h2>
+				<p>
+					the center of everything. 1400+ documents — sessions, fixes, decisions, lessons, workflows. every session starts by loading context from KB. every session ends by capturing what it learned.
+				</p>
+				<p>
+					the KB isn't a notebook. it's the memory the system runs on. documents have types (session, fix, lesson, decision, workflow). they get cited, compacted, archived. useful stuff floats up. noise gets pruned.
+				</p>
+				<p>
+					right now 88% of sessions reuse something a previous session wrote. that's the compounding score — the metric that tells me the system is actually learning, not just storing.
+				</p>
+
+				<h2>skills</h2>
+				<p>
+					skills are reusable process definitions. brainstorming, debugging, code review, plan writing, blog writing — each one encodes a way of working that would otherwise need to be explained every session.
+				</p>
+				<p>
+					a skill gets invoked before the work starts. brainstorming before features. systematic debugging before fixes. the skill tells the session how to approach the problem — what questions to ask, what order to work in, what to check.
+				</p>
+				<p>
+					they're not templates. they evolve. when a skill produces bad results, the skill gets updated. the feedback goes into the skill, not into a one-off correction that gets forgotten.
+				</p>
+
+				<h2>rules</h2>
+				<p>
+					rules are behavioral constraints that apply to every session. "state your files, approach, and assumptions before writing code." "always brainstorm before implementation." "never run dev.sh down."
+				</p>
+				<p>
+					most rules started as one project's fix for one project's problem. the ones that keep getting cited across projects graduate to global rules. there are about 80 global documents now. each one exists because something went wrong enough times to justify a permanent constraint.
+				</p>
+
+				<h2>capture → distill → promote</h2>
+				<p>
+					every session gets captured automatically. raw sessions pile up. periodically they get distilled — clustered by theme, compressed into lessons. lessons that get cited enough get promoted to global rules.
+				</p>
+<div class="ascii-diagram">{`  session → session → session → session
+                    ↓
+              [ distillation ]
+                    ↓
+         lesson (project-specific)
+                    ↓
+       cited across projects enough?
+                    ↓
+          global behavioral rule`}</div>
+				<p>
+					the path is: raw capture → distilled lesson → global rule. each step is a filter. most sessions don't become lessons. most lessons don't become rules. the ones that do are load-bearing.
+				</p>
+
+				<h2>measurement</h2>
+				<p>
+					the system tracks its own health. compounding score (are sessions reusing knowledge?), cite counts (which documents are actually useful?), session outcomes (success, struggled, failed), zero-result searches (what's the KB missing?).
+				</p>
+				<p>
+					the <a href="/history">history page</a> shows how these numbers change over time. the <a href="/blog">blog posts</a> tell the story behind the numbers.
+				</p>
+
+				<h2>authoring</h2>
+				<p>
+					every word on this site is written by Claude, prompted by me. I describe what I want to say, we iterate, I approve. the voice and judgment are mine. the typing isn't.
+				</p>
+				<p>
+					the blog-writing skill encodes the voice rules — analyzed from my actual chat transcripts, not from some generic style guide. short sentences. fragments. mid-thought. no hedging. no summary paragraphs.
+				</p>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

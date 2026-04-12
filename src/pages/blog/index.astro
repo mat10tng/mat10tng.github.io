@@ -69,6 +69,12 @@ const posts = (await getCollection('blog')).sort(
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
 			}
+			.blog-intro {
+				color: rgb(var(--gray));
+				font-size: 0.95rem;
+				margin-bottom: 2rem;
+				line-height: 1.6;
+			}
 			@media (max-width: 720px) {
 				ul {
 					gap: 0.5em;
@@ -90,6 +96,7 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<section>
+				<p class="blog-intro">each post is a pass through the loop — something I worked on, what I captured, what improved.</p>
 				<ul>
 					{
 						posts.map((post) => (

@@ -9,8 +9,8 @@
     {
       "id": "2026-03-18-started-capturing",
       "date": "2026-03-18",
-      "title": "started writing things down",
-      "body_md": "5 documents on day one. kept solving the same problems twice. started capturing every fix, every decision, every lesson. just markdown files at first. no structure, no automation — just the habit of not throwing work away.",
+      "title": "stop throwing work away",
+      "body_md": "kept solving the same problems twice. the fix was always somewhere in a chat log I'd never find again. so I started capturing — every fix, every decision, every lesson. just markdown files. no structure yet, just the habit.",
       "snapshot": {
         "total_notes": 5,
         "compounding": 0,
@@ -21,8 +21,8 @@
     {
       "id": "2026-03-25-system-takes-shape",
       "date": "2026-03-25",
-      "title": "168 docs in a week",
-      "body_md": "65 new documents in a single day. the knowledge base went from a habit to a system — vault restructure, obsidian integration, structured types for sessions, fixes, decisions, lessons. 428 KB events that day. it stopped being notes and started being infrastructure.",
+      "title": "notes became infrastructure",
+      "body_md": "the knowledge base stopped being a pile of markdown and started being a system. structured types — sessions, fixes, decisions, lessons. obsidian integration. search that actually works. the shift was: this isn't a notebook, it's the memory the system runs on.",
       "snapshot": {
         "total_notes": 168,
         "compounding": 25,
@@ -33,8 +33,8 @@
     {
       "id": "2026-04-02-state-before-coding",
       "date": "2026-04-02",
-      "title": "state your assumptions first",
-      "body_md": "47 sessions in march had the same shape — jumping to code before thinking through the approach. added a rule: state your files, state your approach, state your assumptions, then write. april: 3. the rule stayed.",
+      "title": "stop jumping to code",
+      "body_md": "same pattern kept showing up — diving into implementation before thinking through the approach. added a rule: state your files, state your approach, state your assumptions, then write. the pattern dropped from 47 sessions to 3 the next month.",
       "snapshot": {
         "total_notes": 392,
         "compounding": 45,
@@ -45,8 +45,8 @@
     {
       "id": "2026-04-08-kb-source-of-truth",
       "date": "2026-04-08",
-      "title": "one place for everything",
-      "body_md": "rules were scattered — CLAUDE.md, memory files, random docs. decided KB is the single source of truth. CLAUDE.md became a 15-line bootloader that just points to KB. everything else lives in one searchable place. 578 documents by now.",
+      "title": "one place, not twelve",
+      "body_md": "rules were scattered across CLAUDE.md, memory files, random docs. hard to know which version was current. decided everything lives in the knowledge base. CLAUDE.md became a thin pointer that just says \"load from KB first.\" simpler. no more conflicting sources.",
       "snapshot": {
         "total_notes": 578,
         "compounding": 72,
