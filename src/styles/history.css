@@ -1,0 +1,35 @@
+.history-preamble {
+	max-width: 900px;
+	margin: 2rem auto;
+	padding: 0 1rem;
+}
+.history-preamble h1 {
+	margin-bottom: 0.5rem;
+}
+.history-preamble p {
+	color: rgb(var(--gray, 96, 115, 159));
+	line-height: 1.6;
+}
+
+.history-grid {
+	display: grid;
+	grid-template-columns: minmax(200px, 300px) 1fr;
+	gap: 3rem;
+	max-width: 1000px;
+	margin: 2rem auto;
+	padding: 0 1rem;
+}
+
+.snapshot-pane {
+	transition: opacity 200ms ease;
+}
+
+@media (max-width: 900px) {
+	.history-grid {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+	.history-sidebar {
+		position: static !important;
+	}
+}

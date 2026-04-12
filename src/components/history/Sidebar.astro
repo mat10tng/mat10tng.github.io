@@ -1,0 +1,153 @@
+---
+import historyData from '../../data/history.json';
+
+const { current, timeline } = historyData;
+---
+
+<aside id="history-sidebar" class="history-sidebar">
+	<!-- Current / NOW pane -->
+	<div class="snapshot-pane active" data-snapshot="current">
+		<span class="snapshot-label">NOW</span>
+		<dl class="snapshot-stats">
+			<div class="stat-row">
+				<dt>Notes</dt>
+				<dd>{current.total_notes}</dd>
+			</div>
+			<div class="stat-row">
+				<dt>Compounding</dt>
+				<dd>{current.compounding}%</dd>
+			</div>
+			<div class="stat-row">
+				<dt>Success (30d)</dt>
+				<dd>{current.success_30d}%</dd>
+			</div>
+		</dl>
+		{current.top_cited.length > 0 && (
+			<div class="top-cited">
+				<span class="cited-label">Top cited</span>
+				<ul>
+					{current.top_cited.map((item: string) => (
+						<li>{item}</li>
+					))}
+				</ul>
+			</div>
+		)}
+	</div>
+
+	<!-- Historical panes -->
+	{timeline.map((entry) => {
+		const deltaNotes = current.total_notes - entry.snapshot.total_notes;
+		const deltaCompounding = current.compounding - entry.snapshot.compounding;
+		const deltaSuccess = current.success_30d - entry.snapshot.success_30d;
+
+		return (
+			<div class="snapshot-pane" data-snapshot={entry.id}>
+				<span class="snapshot-label">AS OF {entry.date}</span>
+				<dl class="snapshot-stats">
+					<div class="stat-row">
+						<dt>Notes</dt>
+						<dd>
+							<span class="then">{entry.snapshot.total_notes}</span>
+							<span class="now">{current.total_notes}</span>
+							<span class="delta">+{deltaNotes}</span>
+						</dd>
+					</div>
+					<div class="stat-row">
+						<dt>Compounding</dt>
+						<dd>
+							<span class="then">{entry.snapshot.compounding}%</span>
+							<span class="now">{current.compounding}%</span>
+							<span class="delta">+{deltaCompounding}%</span>
+						</dd>
+					</div>
+					<div class="stat-row">
+						<dt>Success (30d)</dt>
+						<dd>
+							<span class="then">{entry.snapshot.success_30d}%</span>
+							<span class="now">{current.success_30d}%</span>
+							<span class="delta">+{deltaSuccess}%</span>
+						</dd>
+					</div>
+				</dl>
+			</div>
+		);
+	})}
+</aside>
+
+<style>
+	.history-sidebar {
+		position: sticky;
+		top: 2rem;
+		align-self: start;
+	}
+	.snapshot-pane {
+		display: none;
+		transition: opacity 200ms ease;
+	}
+	.snapshot-pane.active {
+		display: block;
+	}
+	.snapshot-label {
+		display: block;
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray, 96, 115, 159));
+		margin-bottom: 0.75rem;
+	}
+	.snapshot-stats {
+		margin: 0;
+		padding: 0;
+	}
+	.stat-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		padding: 0.3rem 0;
+		font-size: 0.85rem;
+		border-bottom: 1px solid rgba(var(--gray-light, 229, 233, 240), 0.5);
+	}
+	.stat-row:last-child {
+		border-bottom: none;
+	}
+	.stat-row dt {
+		color: rgb(var(--gray, 96, 115, 159));
+		font-size: 0.8rem;
+	}
+	.stat-row dd {
+		margin: 0;
+		display: flex;
+		gap: 0.5rem;
+		font-variant-numeric: tabular-nums;
+	}
+	.then {
+		color: rgb(var(--gray, 96, 115, 159));
+	}
+	.now {
+		font-weight: 600;
+	}
+	.delta {
+		color: var(--accent, #2337ff);
+		font-size: 0.8rem;
+	}
+	.top-cited {
+		margin-top: 0.75rem;
+	}
+	.cited-label {
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray, 96, 115, 159));
+	}
+	.top-cited ul {
+		margin: 0.25rem 0 0 0;
+		padding-left: 1rem;
+		font-size: 0.8rem;
+		color: rgb(var(--gray-dark, 34, 41, 57));
+	}
+	.top-cited li {
+		margin-bottom: 0.15rem;
+	}
+</style>

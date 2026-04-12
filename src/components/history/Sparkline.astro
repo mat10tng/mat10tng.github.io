@@ -1,0 +1,63 @@
+---
+interface Props {
+	values: number[];
+	width?: number;
+	height?: number;
+	highlightIndex?: number;
+}
+
+const { values, width = 120, height = 30, highlightIndex } = Astro.props;
+
+const padding = 4;
+
+const max = Math.max(...values);
+const min = Math.min(...values);
+const range = max - min || 1;
+
+const points = values.map((v, i) => {
+	const x = (i / (values.length - 1)) * (width - padding * 2) + padding;
+	const y = height - padding - ((v - min) / range) * (height - padding * 2);
+	return { x, y };
+});
+
+const polylinePoints = points.map(p => `${p.x},${p.y}`).join(' ');
+
+const highlightPoint = highlightIndex !== undefined && highlightIndex >= 0 && highlightIndex < points.length
+	? points[highlightIndex]
+	: null;
+---
+
+{values.length >= 2 && (
+	<svg
+		class="sparkline"
+		width={width}
+		height={height}
+		viewBox={`0 0 ${width} ${height}`}
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<polyline
+			points={polylinePoints}
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.5"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		/>
+		{highlightPoint && (
+			<circle
+				cx={highlightPoint.x}
+				cy={highlightPoint.y}
+				r="2.5"
+				fill="currentColor"
+			/>
+		)}
+	</svg>
+)}
+
+<style>
+	.sparkline {
+		display: inline-block;
+		color: var(--accent-color, #2563eb);
+		vertical-align: middle;
+	}
+</style>

@@ -1,0 +1,42 @@
+---
+interface Props {
+	id: string;
+	date: string;
+	title: string;
+	body: string;
+}
+
+const { id, date, title, body } = Astro.props;
+---
+
+<article class="timeline-entry" id={id} data-entry-id={id}>
+	<time class="entry-date">{date}</time>
+	<h3 class="entry-title">{title}</h3>
+	<div class="entry-body" set:html={body} />
+</article>
+
+<style>
+	.timeline-entry {
+		padding: 1.5rem 0;
+		border-bottom: 1px solid rgb(var(--gray-light, 229, 233, 240));
+	}
+	.timeline-entry:last-child {
+		border-bottom: none;
+	}
+	.entry-date {
+		display: block;
+		font-size: 0.85rem;
+		color: rgb(var(--gray, 96, 115, 159));
+		margin-bottom: 0.25rem;
+	}
+	.entry-title {
+		font-size: 1.1rem;
+		margin: 0 0 0.5rem 0;
+		line-height: 1.3;
+	}
+	.entry-body {
+		line-height: 1.6;
+		font-size: 0.95rem;
+		color: rgb(var(--gray-dark, 34, 41, 57));
+	}
+</style>

@@ -1,0 +1,22 @@
+{
+  "current": {
+    "total_notes": 0,
+    "compounding": 0,
+    "success_30d": 0,
+    "top_cited": []
+  },
+  "timeline": [
+    {
+      "id": "2026-04-12-seed",
+      "date": "2026-04-12",
+      "title": "Placeholder entry",
+      "body_md": "This is a seed entry. Real data will replace this after the first history refresh.",
+      "snapshot": {
+        "total_notes": 0,
+        "compounding": 0,
+        "success_30d": 0,
+        "top_cited": []
+      }
+    }
+  ]
+}

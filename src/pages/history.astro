@@ -1,0 +1,79 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Sidebar from '../components/history/Sidebar.astro';
+import TimelineEntry from '../components/history/TimelineEntry.astro';
+import { SITE_TITLE } from '../consts';
+import historyData from '../data/history.json';
+import '../styles/history.css';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`History - ${SITE_TITLE}`} description="A timeline of how the knowledge system has evolved over time." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="history-preamble">
+				<h1>History</h1>
+				<p>
+					A timeline of how the knowledge system evolves. Scroll through entries
+					and watch the sidebar compare then vs now.
+				</p>
+			</section>
+			<section class="history-grid">
+				<Sidebar />
+				<div class="timeline">
+					{historyData.timeline.map((entry) => (
+						<TimelineEntry
+							id={entry.id}
+							date={entry.date}
+							title={entry.title}
+							body={entry.body_md}
+						/>
+					))}
+				</div>
+			</section>
+		</main>
+		<Footer />
+		<script>
+			const sidebar = document.getElementById('history-sidebar');
+			if (sidebar) {
+				const panes = sidebar.querySelectorAll('.snapshot-pane');
+				const entries = document.querySelectorAll('.timeline-entry');
+
+				const observer = new IntersectionObserver((observed) => {
+					const visible = observed.find(e => e.isIntersecting);
+					if (visible) {
+						const entryId = visible.target.getAttribute('data-entry-id');
+						panes.forEach(p => {
+							p.classList.toggle('active', p.getAttribute('data-snapshot') === entryId);
+						});
+					}
+				}, {
+					rootMargin: '-35% 0px -35% 0px',
+					threshold: 0
+				});
+
+				entries.forEach(el => observer.observe(el));
+
+				const checkTop = () => {
+					const anyInZone = [...entries].some(e => {
+						const rect = e.getBoundingClientRect();
+						return rect.top < window.innerHeight * 0.65 && rect.bottom > window.innerHeight * 0.35;
+					});
+					if (!anyInZone) {
+						panes.forEach(p => {
+							p.classList.toggle('active', p.getAttribute('data-snapshot') === 'current');
+						});
+					}
+				};
+
+				window.addEventListener('scroll', checkTop, { passive: true });
+			}
+		</script>
+	</body>
+</html>
