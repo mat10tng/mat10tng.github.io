@@ -2,78 +2,174 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Sidebar from '../components/history/Sidebar.astro';
-import TimelineEntry from '../components/history/TimelineEntry.astro';
 import { SITE_TITLE } from '../consts';
 import historyData from '../data/history.json';
-import '../styles/history.css';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`History - ${SITE_TITLE}`} description="How the process improves — what changed, why, and whether it worked." />
+		<BaseHead title={`History — ${SITE_TITLE}`} description="How the system evolved — data on the left, the system on the right." />
+		<style>
+			.history-preamble {
+				max-width: 1000px;
+				margin: 2rem auto;
+				padding: 0 1rem;
+			}
+			.history-preamble h1 { margin-bottom: 0.25rem; }
+			.history-preamble p { color: var(--muted-color, #666); line-height: 1.6; }
+
+			.evolution {
+				max-width: 1000px;
+				margin: 0 auto 3rem;
+				padding: 0 1rem;
+			}
+			.evo-entry {
+				display: grid;
+				grid-template-columns: 280px 1fr;
+				gap: 2.5rem;
+				margin-bottom: 3rem;
+				padding-bottom: 2.5rem;
+				border-bottom: 1px solid rgba(0,0,0,0.08);
+			}
+			.evo-entry:last-child { border-bottom: none; }
+
+			/* left: data */
+			.evo-data {
+				font-size: 0.85rem;
+			}
+			.evo-label {
+				font-size: 0.7rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: #999;
+				margin-bottom: 0.75rem;
+			}
+			.evo-date {
+				font-size: 0.8rem;
+				color: #999;
+				margin-bottom: 1rem;
+			}
+			.stat-row {
+				display: flex;
+				justify-content: space-between;
+				padding: 0.3rem 0;
+				border-bottom: 1px solid rgba(0,0,0,0.05);
+			}
+			.stat-name { color: #666; }
+			.stat-value { font-weight: 600; }
+			.stat-delta {
+				font-size: 0.75rem;
+				color: #2563eb;
+				margin-left: 0.3rem;
+			}
+			.rules-added {
+				margin-top: 0.75rem;
+			}
+			.rules-added-label {
+				font-size: 0.75rem;
+				color: #999;
+				margin-bottom: 0.35rem;
+			}
+			.rule-tag {
+				display: inline-block;
+				font-size: 0.7rem;
+				padding: 0.1rem 0.4rem;
+				margin: 0.15rem 0.15rem 0.15rem 0;
+				border: 1px solid rgba(0,0,0,0.12);
+				border-radius: 3px;
+				color: #444;
+			}
+
+			/* right: system */
+			.evo-system {}
+			.evo-ascii {
+				font-family: 'Courier New', Courier, monospace;
+				font-size: 0.78rem;
+				line-height: 1.4;
+				white-space: pre;
+				background: #f8f8f8;
+				padding: 1rem;
+				border-radius: 4px;
+				margin-bottom: 1rem;
+				overflow-x: auto;
+				color: #333;
+			}
+			.evo-insight {
+				font-size: 0.9rem;
+				line-height: 1.6;
+				color: #333;
+			}
+			.evo-loop {
+				font-size: 0.8rem;
+				color: #999;
+				margin-bottom: 0.5rem;
+				font-family: 'Courier New', Courier, monospace;
+			}
+
+			@media (max-width: 750px) {
+				.evo-entry {
+					grid-template-columns: 1fr;
+					gap: 1rem;
+				}
+				.evo-ascii { font-size: 0.65rem; }
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<section class="history-preamble">
-				<h1>History</h1>
-				<p>
-					how the process improves over time. each entry is something
-					that changed about how I work — and whether it actually helped.
-				</p>
+				<h1>history</h1>
+				<p>how the system evolved. data on the left, the system on the right.</p>
 			</section>
-			<section class="history-grid">
-				<Sidebar />
-				<div class="timeline">
-					{historyData.timeline.map((entry) => (
-						<TimelineEntry
-							id={entry.id}
-							date={entry.date}
-							title={entry.title}
-							body={entry.body_md}
-						/>
-					))}
-				</div>
+
+			<section class="evolution">
+				{historyData.evolutions.map((evo, i) => {
+					const prev = historyData.evolutions[i + 1];
+					const deltaNote = prev ? evo.notes - prev.notes : evo.notes;
+					const deltaRules = prev ? evo.rules - prev.rules : evo.rules;
+					const deltaReuse = prev ? evo.reuse - prev.reuse : evo.reuse;
+
+					return (
+						<div class="evo-entry" id={evo.id}>
+							<div class="evo-data">
+								<div class="evo-label">{evo.label}</div>
+								<div class="evo-date">{evo.date}</div>
+								<div class="stat-row">
+									<span class="stat-name">notes</span>
+									<span><span class="stat-value">{evo.notes}</span>{prev && <span class="stat-delta">+{deltaNote}</span>}</span>
+								</div>
+								<div class="stat-row">
+									<span class="stat-name">rules</span>
+									<span><span class="stat-value">{evo.rules}</span>{prev && deltaRules > 0 && <span class="stat-delta">+{deltaRules}</span>}</span>
+								</div>
+								<div class="stat-row">
+									<span class="stat-name">reuse</span>
+									<span><span class="stat-value">{evo.reuse}%</span>{prev && deltaReuse > 0 && <span class="stat-delta">+{deltaReuse}</span>}</span>
+								</div>
+								<div class="stat-row">
+									<span class="stat-name">success</span>
+									<span><span class="stat-value">{evo.success || '—'}%</span></span>
+								</div>
+								{evo.rules_added.length > 0 && (
+									<div class="rules-added">
+										<div class="rules-added-label">rules added</div>
+										{evo.rules_added.map(r => <span class="rule-tag">{r}</span>)}
+									</div>
+								)}
+							</div>
+							<div class="evo-system">
+								<div class="evo-loop">{evo.loop}</div>
+								<pre class="evo-ascii">{evo.ascii}</pre>
+								<p class="evo-insight">{evo.insight}</p>
+							</div>
+						</div>
+					);
+				})}
 			</section>
 		</main>
 		<Footer />
-		<script>
-			const sidebar = document.getElementById('history-sidebar');
-			if (sidebar) {
-				const panes = sidebar.querySelectorAll('.snapshot-pane');
-				const entries = document.querySelectorAll('.timeline-entry');
-
-				const observer = new IntersectionObserver((observed) => {
-					const visible = observed.find(e => e.isIntersecting);
-					if (visible) {
-						const entryId = visible.target.getAttribute('data-entry-id');
-						panes.forEach(p => {
-							p.classList.toggle('active', p.getAttribute('data-snapshot') === entryId);
-						});
-					}
-				}, {
-					rootMargin: '-35% 0px -35% 0px',
-					threshold: 0
-				});
-
-				entries.forEach(el => observer.observe(el));
-
-				const checkTop = () => {
-					const anyInZone = [...entries].some(e => {
-						const rect = e.getBoundingClientRect();
-						return rect.top < window.innerHeight * 0.65 && rect.bottom > window.innerHeight * 0.35;
-					});
-					if (!anyInZone) {
-						panes.forEach(p => {
-							p.classList.toggle('active', p.getAttribute('data-snapshot') === 'current');
-						});
-					}
-				};
-
-				window.addEventListener('scroll', checkTop, { passive: true });
-			}
-		</script>
 	</body>
 </html>

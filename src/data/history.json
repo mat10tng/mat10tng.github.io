@@ -3,56 +3,49 @@
     "total_notes": 1429,
     "compounding": 88,
     "success_30d": 88,
-    "top_cited": ["knowledge-first architecture", "controlling agent behavior", "multi-session isolation"]
+    "top_cited": ["knowledge-first architecture", "controlling agent behavior", "multi-session isolation"],
+    "total_rules": 80,
+    "sessions_tracked": 48
   },
-  "timeline": [
+  "evolutions": [
     {
-      "id": "2026-03-18-started-capturing",
-      "date": "2026-03-18",
-      "title": "stop throwing work away",
-      "body_md": "kept solving the same problems twice. the fix was always somewhere in a conversation I'd never find again. so I started writing everything down — every fix, every decision, every lesson. just notes at first. no structure, no automation. just the habit.",
-      "snapshot": {
-        "total_notes": 5,
-        "compounding": 0,
-        "success_30d": 0,
-        "top_cited": []
-      }
+      "id": "now",
+      "date": "2026-04-12",
+      "label": "now",
+      "loop": "work → capture → review → improve → measure",
+      "notes": 1429,
+      "rules": 80,
+      "reuse": 88,
+      "success": 88,
+      "rules_added": ["voice-analysis", "insight-first", "single-commit-push"],
+      "insight": "the system curates itself. notes that matter float up, noise gets pruned, rules graduate from projects to global.",
+      "ascii": "work ──▶ capture ──▶ review ──▶ improve\n                                    │\n                              lesson → rule\n                                    │\n                                 measure"
     },
     {
-      "id": "2026-03-25-system-takes-shape",
-      "date": "2026-03-25",
-      "title": "notes became infrastructure",
-      "body_md": "the notes stopped being a pile of text and started being a system. structured types — sessions, fixes, decisions, lessons. search that actually works. the shift was realizing this isn't a notebook, it's the memory the whole process runs on.",
-      "snapshot": {
-        "total_notes": 168,
-        "compounding": 25,
-        "success_30d": 0,
-        "top_cited": ["knowledge-first architecture"]
-      }
-    },
-    {
-      "id": "2026-04-02-state-before-coding",
+      "id": "2026-04-02",
       "date": "2026-04-02",
-      "title": "stop jumping to code",
-      "body_md": "reviewed a month of conversations and saw the same shape — diving into implementation before thinking through the approach. added a rule: state your files, state your approach, state your assumptions, then write. the pattern dropped from 47 conversations to 3 the next month.",
-      "snapshot": {
-        "total_notes": 392,
-        "compounding": 45,
-        "success_30d": 0,
-        "top_cited": ["knowledge-first architecture", "controlling agent behavior"]
-      }
+      "label": "week 3",
+      "loop": "work → capture → review → improve",
+      "notes": 392,
+      "rules": 12,
+      "reuse": 45,
+      "success": 70,
+      "rules_added": ["state-assumptions", "one-source-of-truth", "brainstorm-first", "worktree-isolation"],
+      "insight": "crossed from remembering things to changing behavior. first rules written from patterns. first time the process itself changed.",
+      "ascii": "work ──▶ capture ──▶ review\n                       │\n                    improve\n                    (first rules)"
     },
     {
-      "id": "2026-04-08-kb-source-of-truth",
-      "date": "2026-04-08",
-      "title": "one place, not twelve",
-      "body_md": "rules were scattered across config files, memory files, random docs. reviewed a week of conversations and found the system following different versions of the same rule. consolidated everything into one searchable place. config files became thin pointers. no more drift.",
-      "snapshot": {
-        "total_notes": 578,
-        "compounding": 72,
-        "success_30d": 82,
-        "top_cited": ["knowledge-first architecture", "controlling agent behavior", "multi-session isolation"]
-      }
+      "id": "2026-03-18",
+      "date": "2026-03-18",
+      "label": "week 1",
+      "loop": "work → capture",
+      "notes": 5,
+      "rules": 0,
+      "reuse": 0,
+      "success": 0,
+      "rules_added": [],
+      "insight": "just writing things down. no structure, no rules, no measurement. the habit of capture was the only thing.",
+      "ascii": "work ──▶ capture\n\n(that's it)"
     }
   ]
 }
