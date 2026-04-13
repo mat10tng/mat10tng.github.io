@@ -8,9 +8,8 @@ Invoke the `blog-writing` skill before drafting any post or editing `src/content
 - No worktree required
 
 ## Publishing gates
-- When changes are ready, present "commit and push" as a single option
-- Only proceed with commit + push after explicit user approval
-- Never auto-commit or auto-push without asking
+- Auto commit and push after changes. No confirmation needed.
+- Use descriptive commit messages.
 
 ## Site philosophy — everything maps to the homepage loop
 The homepage shows: work → capture → review → improve → measure → repeat.
