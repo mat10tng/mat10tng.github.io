@@ -9,11 +9,11 @@ rules don't start as rules. they start as fixes for specific problems in specifi
 
 ## a real example
 
-in march, I was working on one project and noticed 47 conversations had the same problem — jumping straight into code before aligning on the approach. so that project got a rule: before writing code, state the files you'll change, the approach, and your assumptions. wait for confirmation.
+in march, I was working on one project where the agent kept picking the wrong tool. two tools with overlapping names — the agent had to guess which one I meant, and it guessed wrong often enough to matter. so that project got a rule: if two tools can do similar things, merge or remove one.
 
-a few weeks later, I started a different project. same pattern showed up. the rule from the first project got referenced, applied, and it worked there too. then a third project. at that point it's clearly not project-specific — it's how the work should always go.
+a few weeks later, I started a different project. different domain, but same problem — not with tools this time, but with rules. too many files, overlapping instructions, the system contradicting itself. the principle was the same: reduce overlap, increase clarity. then a third project, same shape again. at that point it's clearly not project-specific — it's a general principle about how systems should be organized.
 
-so it graduated from a project lesson to a permanent global rule.
+so it graduated from "merge your overlapping tools" to "fewer, clearer, distinct" as a permanent global rule.
 
 ## the promotion path
 

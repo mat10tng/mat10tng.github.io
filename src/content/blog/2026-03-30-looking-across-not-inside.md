@@ -15,7 +15,7 @@ every few weeks — or when something feels off — I pull up the notes from rec
 
 ## the signals that matter
 
-**repeated structure.** a lot of conversations that start the same way — diving into code, realizing the approach was wrong, backing up, starting over. one time that's a misstep. when it shows up in 47 out of 80 conversations, that's a process problem.
+**repeated structure.** a lot of conversations re-discovering the same configuration, searching for the same file, asking the same clarifying question. once is forgetting. when a dozen conversations all spend their first 10 minutes finding the same thing, that's not a memory problem — it's a surfacing problem.
 
 **the same type of struggle.** multiple conversations reporting "struggled" or "took longer than expected" for similar reasons. if three different conversations all had trouble because they targeted the wrong file, that's not three bugs — it's a missing rule about confirming the target first.
 
@@ -25,9 +25,9 @@ every few weeks — or when something feels off — I pull up the notes from rec
 
 ## the first time I did this seriously
 
-I pulled up a month of session summaries and read through the outcomes. success, struggled, success, struggled, struggled, success. the "struggled" ones had something in common — no upfront discussion of the approach. just straight to implementation. that's not something you notice in the moment. in the moment you're focused on the bug.
+I pulled up a week of conversations and compared the rules each one was following. the same rule existed in three places — a config file, a memory file, and the notes system — and none of the versions matched. one conversation loaded version A, another loaded version B. same starting conditions, different behavior, no obvious reason why.
 
-that review led directly to the "state your assumptions first" rule, which cut the pattern from 47 occurrences to 3.
+from inside any single conversation, everything looked fine. the rules were being followed. it was only by lining up five conversations side by side that the contradictions became visible. that review led directly to the single-source-of-truth restructure — one canonical location for every rule, everything else just points to it.
 
 ## if you want to try this
 

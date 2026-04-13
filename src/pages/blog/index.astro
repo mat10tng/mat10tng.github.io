@@ -9,9 +9,12 @@ const sessions = (await getCollection('sessions')).sort(
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
-const posts = (await getCollection('blog')).sort(
+const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const introPost = allPosts.find(p => p.id === '2026-04-12-who-writes-this');
+const posts = allPosts.filter(p => p.id !== '2026-04-12-who-writes-this');
 ---
 
 <!doctype html>
@@ -23,6 +26,32 @@ const posts = (await getCollection('blog')).sort(
 				max-width: 720px;
 				margin: 0 auto;
 				padding: 1rem;
+			}
+			.intro-post {
+				margin-bottom: 2rem;
+				padding: 1.25rem;
+				border: 1px solid rgba(var(--gray), 0.15);
+				border-radius: 8px;
+			}
+			.intro-post a {
+				text-decoration: none;
+				display: block;
+			}
+			.intro-title {
+				font-size: 1.1rem;
+				font-weight: 600;
+				color: rgb(var(--black));
+				margin: 0 0 0.25rem;
+				transition: color 0.2s;
+			}
+			.intro-post a:hover .intro-title {
+				color: rgb(var(--accent));
+			}
+			.intro-desc {
+				font-size: 0.9rem;
+				color: rgb(var(--gray-dark, #444));
+				margin: 0;
+				line-height: 1.5;
 			}
 			.intro {
 				color: rgb(var(--gray));
@@ -113,8 +142,17 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
+			{introPost && (
+				<div class="intro-post">
+					<a href={`/blog/${introPost.id}/`}>
+						<p class="intro-title">{introPost.data.title}</p>
+						<p class="intro-desc">{introPost.data.description}</p>
+					</a>
+				</div>
+			)}
+
 			<p class="intro">
-				sessions are complete passes through the loop. standalone posts cover everything else.
+				sessions walk through a complete work cycle — what happened, what was captured, what improved. standalone posts pull out a single idea.
 			</p>
 
 			<div class="section-title">sessions</div>

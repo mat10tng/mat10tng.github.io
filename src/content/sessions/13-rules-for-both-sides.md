@@ -45,7 +45,7 @@ but look closer and many of them are actually about me.
 
 **"state your files, approach, and assumptions before coding"** — this exists because I jump to code. not the AI — me. I see a problem and I want to start building immediately. the rule forces a 10-second pause that I wouldn't take on my own. it's formatted as an instruction to the AI, but it's a constraint on my impulse to skip straight to implementation.
 
-**"always brainstorm before building"** — same pattern. I tend to skip the exploration phase because I feel like I already know the answer. this rule caught 47 wrong-approach conversations in a single month. the brainstorming step exists because I need it, not because the AI does.
+**"always brainstorm before building"** — same pattern. I tend to skip the exploration phase because I feel like I already know the answer. the brainstorming step exists because I need it, not because the AI does. without it, conversations jump straight to implementation and hit walls that 5 minutes of upfront thinking would have avoided.
 
 **"default to MVP, block gold-plating"** — I overbuild. I want the full solution, the elegant design, the complete coverage. these rules push back on that. "that's a v2 feature. what's the minimum for production?" is something I need to hear regularly.
 
