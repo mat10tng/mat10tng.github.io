@@ -1,0 +1,106 @@
+{
+  "current": {
+    "notes": 1429,
+    "rules": 80,
+    "compounding": 88,
+    "captureCompleteness": 20
+  },
+  "phases": {
+    "instrumentation": "tracking every interaction — which docs surface, which get read, which sessions succeed",
+    "lifecycle": "automated maintenance — daily triage, weekly health, monthly deep clean",
+    "activation": "pushing knowledge to sessions — smarter search, brief tool, session hooks",
+    "self-improvement": "the brain proposes changes to itself, tests them, keeps or reverts"
+  },
+  "proposals": [
+    {
+      "id": "P001",
+      "date": "2026-03-20",
+      "phase": "instrumentation",
+      "title": "track every KB interaction",
+      "change": "added hit_count and cite_count to every document. every search, every read, every session outcome — tracked.",
+      "verdict": "keep",
+      "impact": "made noise visible — high-hit zero-cite docs became obvious candidates for cleanup"
+    },
+    {
+      "id": "P002",
+      "date": "2026-03-25",
+      "phase": "lifecycle",
+      "title": "vault restructure — Obsidian canonical",
+      "change": "moved from flat files to Obsidian vault as single source of truth. three tiers: _system, projects, archive.",
+      "verdict": "keep",
+      "impact": "everything searchable, versionable, one place. CLAUDE.md became a thin bootloader"
+    },
+    {
+      "id": "P003",
+      "date": "2026-03-28",
+      "phase": "lifecycle",
+      "title": "automated lifecycle engine",
+      "change": "daily triage compacts 10+ sessions. weekly health audits reuse rate and gaps. monthly deep clean archives stale notes.",
+      "verdict": "keep",
+      "impact": "488 notes became 410 after first clean — same knowledge, less noise"
+    },
+    {
+      "id": "P004",
+      "date": "2026-04-02",
+      "phase": "activation",
+      "title": "kb_brief — proactive context loading",
+      "change": "new tool assembles must-know lessons, recent fixes, active workflows, and warnings before every session.",
+      "verdict": "keep",
+      "impact": "sessions stopped rediscovering known fixes. reuse rate jumped"
+    },
+    {
+      "id": "P005",
+      "date": "2026-04-02",
+      "phase": "activation",
+      "title": "document test-wiring patterns",
+      "change": "captured recurring test setup patterns so sessions stop asking how to run tests.",
+      "verdict": "keep",
+      "impact": "zero-result rate dropped from 3% to 0%"
+    },
+    {
+      "id": "P006",
+      "date": "2026-04-05",
+      "phase": "self-improvement",
+      "title": "recover compounding score regression",
+      "change": "score dropped from 89% to 52%. root cause: metric plumbing bug — sessions weren't being tagged with outcomes.",
+      "verdict": "keep",
+      "impact": "recovered to 88% after fixing the pipeline"
+    },
+    {
+      "id": "P007",
+      "date": "2026-04-05",
+      "phase": "activation",
+      "title": "reduce kb_read token cost",
+      "change": "kb_read was consuming 52% of tool token budget. added truncation and summary modes.",
+      "verdict": "keep",
+      "impact": "share dropped from 52% to 36.6%"
+    },
+    {
+      "id": "P008",
+      "date": "2026-04-11",
+      "phase": "self-improvement",
+      "title": "fix kb_audit ID-ambiguity bug",
+      "change": "audit tool confused vault_file_id with document_id. silently archived wrong notes.",
+      "verdict": "keep",
+      "impact": "3 mis-archived notes recovered. added ID validation to prevent recurrence"
+    },
+    {
+      "id": "P009",
+      "date": "2026-04-12",
+      "phase": "self-improvement",
+      "title": "fix kb_compact mega-clustering",
+      "change": "similarity threshold on 197 notes collapsed into 1 giant cluster instead of meaningful groups.",
+      "verdict": "iterate",
+      "impact": "needs sub-grouping logic — too aggressive at scale"
+    },
+    {
+      "id": "P010",
+      "date": "2026-04-12",
+      "phase": "self-improvement",
+      "title": "escalate capture completeness",
+      "change": "capture_completeness was 0% — sessions weren't saving outcomes. added hooks and reminders.",
+      "verdict": "iterate",
+      "impact": "improved to 20% but still below target. needs structural fix"
+    }
+  ]
+}
