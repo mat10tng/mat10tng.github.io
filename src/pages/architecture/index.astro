@@ -23,6 +23,7 @@ import archData from '../../data/architecture-evolution.json';
 			.diagram-wrap { overflow-x: auto; margin-bottom: 0.75rem; }
 			.diagram-wrap svg { display: block; max-width: 100%; height: auto; }
 			.diagram-wrap svg text { font-family: system-ui, -apple-system, sans-serif; }
+			.diagram-wrap svg a { cursor: pointer; }
 			.diagram-wrap svg a text { fill: #333; }
 			.diagram-wrap svg a:hover text { fill: #2563eb; }
 			.diagram-wrap svg a rect { transition: stroke 150ms; }
@@ -33,6 +34,16 @@ import archData from '../../data/architecture-evolution.json';
 			}
 			.layer-desc a { color: #2563eb; text-decoration: none; }
 			.layer-desc a:hover { text-decoration: underline; }
+
+			/* component sections */
+			.component-section {
+				margin-bottom: 2.5rem;
+				padding-top: 1rem;
+			}
+			.component-section h2 {
+				font-size: 1rem;
+				margin-bottom: 0.35rem;
+			}
 
 			/* evolution timeline */
 			.evo-heading {
@@ -99,7 +110,7 @@ import archData from '../../data/architecture-evolution.json';
 				<div class="diagram-wrap">
 					<svg viewBox="0 0 560 230" width="560">
 						<!-- human -->
-						<a href="#coming-soon">
+						<a href="#me">
 						<rect x="420" y="2" width="130" height="36" rx="18" fill="none" stroke="#333" stroke-width="1.2" stroke-dasharray="4 2"/>
 						<text x="485" y="24" text-anchor="middle" font-size="11" fill="#333">me — I direct</text>
 						</a>
@@ -124,7 +135,7 @@ import archData from '../../data/architecture-evolution.json';
 						</a>
 
 						<!-- the bridge -->
-						<a href="#coming-soon">
+						<a href="#bridge">
 						<rect x="207" y="68" width="146" height="96" rx="8" fill="none" stroke="#333" stroke-width="1.2"/>
 						<text x="280" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#333">the bridge</text>
 						<text x="280" y="101" text-anchor="middle" font-size="8" fill="#888">reads, writes, enforces</text>
@@ -139,7 +150,7 @@ import archData from '../../data/architecture-evolution.json';
 						</a>
 
 						<!-- the worker -->
-						<a href="#coming-soon">
+						<a href="#worker">
 						<rect x="410" y="68" width="146" height="96" rx="8" fill="none" stroke="#333" stroke-width="1.2"/>
 						<text x="483" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#333">the worker</text>
 						<text x="483" y="101" text-anchor="middle" font-size="8" fill="#888">builds, fixes, ships</text>
@@ -186,6 +197,28 @@ import archData from '../../data/architecture-evolution.json';
 					results flow back. between sessions, the bridge runs scheduled tasks — compaction, cleanup, health checks.
 					knowledge graduates from projects to global rules.
 				</p>
+				<p class="layer-desc" style="margin-top: 0.25rem;">
+					dive in: <a href="/architecture/brain">the brain</a> · <a href="#bridge">the bridge</a> · <a href="#worker">the worker</a> · <a href="#me">me</a>
+				</p>
+
+				<!-- COMPONENT DEEP DIVES -->
+				<div id="bridge" class="component-section">
+					<h2>the bridge</h2>
+					<p class="layer-desc">the KB server — reads from the brain, writes back to it, enforces rules. tools like search, capture, brief, measure, compact, archive. runs scheduled tasks between sessions: daily triage, weekly health, monthly deep clean.</p>
+					<p class="layer-desc" style="color: #999; font-style: italic;">deep dive coming soon</p>
+				</div>
+
+				<div id="worker" class="component-section">
+					<h2>the worker</h2>
+					<p class="layer-desc">Claude — builds, fixes, ships. uses skills (brainstorm, debug, review, implement, test, deploy) and follows rules loaded from the brain. fresh context each session, guided by whatever the bridge surfaces.</p>
+					<p class="layer-desc" style="color: #999; font-style: italic;">deep dive coming soon</p>
+				</div>
+
+				<div id="me" class="component-section">
+					<h2>me</h2>
+					<p class="layer-desc">I direct the system. decide what to work on, review what comes back, course-correct when something drifts. the rules exist because I noticed something going wrong and wrote it down. the system compensates for my weaknesses — jumping to code, overbuilding, losing track.</p>
+					<p class="layer-desc" style="color: #999; font-style: italic;">deep dive coming soon</p>
+				</div>
 
 				<!-- EVOLUTION TIMELINE -->
 				<div class="evo-heading">how it evolved</div>
