@@ -45,3 +45,36 @@ you don't need a complex system. the core loop is:
 3. **measure reuse** — are previous notes actually being used?
 
 the tooling can be as simple as a markdown file. what matters is the habit of capture, the discipline of recall, and the feedback of measurement.
+
+### skill — copy this
+
+```markdown
+## Session capture template
+
+After each work session, record:
+
+### what happened
+[1-2 sentences — what was the goal, what did you do]
+
+### what worked
+[commands, approaches, or decisions that succeeded]
+
+### what didn't
+[what failed, what took too long, what surprised you]
+
+### lesson (if any)
+[one sentence — what would you tell your future self?]
+
+### outcome
+success | struggled | failed | abandoned
+```
+
+```markdown
+## Session start checklist
+
+Before starting work:
+1. Load notes from the last 3-5 relevant sessions
+2. Check if any rules apply to this type of work
+3. Pick an approach/skill before writing code
+4. State your plan, get alignment, then execute
+```

@@ -30,3 +30,17 @@ before any non-trivial implementation, write down:
 3. **what you're assuming** about the current state (which branch, which database, which component)
 
 then pause. read it back. does it still make sense? if any assumption is ambiguous, ask rather than guess. the cost of asking is 10 seconds. the cost of guessing wrong is 20+ minutes.
+
+### rule — copy this
+
+```markdown
+## Before coding
+
+Before implementing anything, state:
+1. What files will change and why
+2. What approach will be taken
+3. Any assumptions about the current state
+
+Wait for confirmation before writing code.
+If any assumption is ambiguous, ask — don't guess.
+```

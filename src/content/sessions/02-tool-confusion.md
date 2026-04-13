@@ -35,3 +35,15 @@ the same principle showed up later with rules. a long document of rules got mayb
 ### the principle
 
 when an AI agent keeps making the wrong choice between options, the problem usually isn't the descriptions — it's that there are too many options. before you add clarity, ask if you can remove ambiguity. fewer tools with distinct purposes beats many tools with careful descriptions.
+
+### rule — copy this
+
+```markdown
+## Tool design checklist
+
+- [ ] Each tool does exactly one thing
+- [ ] No two tools overlap in purpose
+- [ ] Names describe what the tool does, not how
+- [ ] If agent picks the wrong tool often → remove one, don't add descriptions
+- [ ] If a rule isn't followed often → make it shorter, not longer
+```

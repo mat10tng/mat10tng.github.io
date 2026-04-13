@@ -41,3 +41,22 @@ some rules that seemed universal turned out to be project-specific. they got ref
 ### the principle
 
 don't try to predict which lessons will be universal. write them down where they happened. if they're universal, the pattern of reuse will tell you. if they're not, no wasted effort.
+
+### rule — copy this
+
+```markdown
+## Knowledge promotion path
+
+1. Something goes wrong → write a lesson in that project
+2. Same lesson referenced in another project → note the cross-reference
+3. Referenced across 3+ projects → promote to global rule
+4. Global rules apply to all future sessions automatically
+
+Don't predict universality upfront. Let reuse decide.
+
+Note types by lifecycle:
+  session (raw) → lesson (distilled) → rule (permanent)
+  
+Notes that never get referenced → archive after 30 days
+Notes that keep getting referenced → promote
+```

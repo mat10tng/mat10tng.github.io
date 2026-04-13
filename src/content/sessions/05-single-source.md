@@ -44,3 +44,24 @@ everything else — communication preferences, planning workflows, debugging app
 ### the principle
 
 duplication feels organized. "I'll put it here AND there, just to be safe." but duplication creates drift, and drift creates contradictions, and contradictions create unpredictable behavior. one source of truth, everything else points to it.
+
+### structure — copy this
+
+```markdown
+## Knowledge architecture
+
+Config file (loaded every session):
+  - "Search the notes before starting any work"
+  - 5-6 hard-stop rules only (things that cause damage before notes load)
+  - Nothing else
+
+Notes system (the source of truth):
+  - All rules, decisions, lessons, workflows
+  - Searchable, versioned, archivable
+  - Types: session, fix, decision, lesson, workflow, rule, skill
+
+Hard-stop rule criteria (all must be true):
+  1. Applies to every session regardless of task
+  2. Violating it before notes load would cause real damage
+  3. Can't be found fast enough through search
+```
