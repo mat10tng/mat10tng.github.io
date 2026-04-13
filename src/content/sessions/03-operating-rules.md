@@ -8,6 +8,7 @@ capture: "noticed conversations taking 2-3x longer than necessary. a lot of back
 review: "the pattern: AI would present multiple options when it had a clear recommendation, ask for permission when it could just proceed, summarize things I'd just seen, and agree with ideas it should have challenged."
 improve: "wrote explicit operating rules: talk like a co-founder, have opinions, challenge assumptions, don't summarize, don't ask permission for obvious things."
 measure: "conversations got noticeably shorter and more productive. fewer round-trips to reach the same decisions."
+why: "the default AI interaction style wastes time. these are the actual rules I use — communication, planning, execution. copy what fits."
 ---
 
 ### take with you

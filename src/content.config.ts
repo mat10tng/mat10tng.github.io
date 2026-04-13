@@ -27,6 +27,7 @@ const sessions = defineCollection({
 		review: z.string(),
 		improve: z.string(),
 		measure: z.string().optional(),
+		why: z.string().optional(),
 	}),
 });
 

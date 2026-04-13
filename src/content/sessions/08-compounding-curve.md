@@ -8,6 +8,7 @@ capture: "the full trajectory: 0% → 38% → 47% → 54% → 57% → 60% → 62
 review: "the curve isn't smooth. it has plateaus. each plateau lasted until a specific mechanism was built — not until more notes were added."
 improve: "each jump came from a structural change: auto-surfacing broke the first plateau, compaction broke the second, cite-boosted search broke the third."
 measure: "0% to 88% over 4 weeks. the last jump (64% → 88%) came from adding proactive briefings — loading must-know notes before every session automatically."
+why: "the reuse rate has plateaus. each one broke because of a specific mechanism — not more notes. includes a checklist for diagnosing which plateau you're stuck at."
 ---
 
 ### take with you

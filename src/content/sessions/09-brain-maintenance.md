@@ -8,6 +8,7 @@ capture: "after 2 weeks, the note count hit 488. most were raw session logs. sea
 review: "the problem wasn't capture — we were capturing plenty. the problem was that raw captures have a shelf life. a session log from last week is useful for 2-3 days, then it's noise."
 improve: "built three scheduled tasks: daily triage (compact when sessions pile up), weekly health (check metrics, detect gaps), monthly deep clean (archive stale notes, detect duplicates, score quality)."
 measure: "after one monthly clean: 78 raw notes compressed into 2 distilled lessons. 55 notes archived. search noise dropped significantly."
+why: "without scheduled cleanup, your notes become noise within weeks. this is the maintenance schedule — daily, weekly, monthly — that keeps the system useful."
 ---
 
 ### take with you

@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const session = Astro.props;
 const { Content } = await render(session);
-const { title, description, date, work, capture, review, improve, measure } = session.data;
+const { title, description, date, work, capture, review, improve, measure, why } = session.data;
 
 const phases = [
 	{ name: 'work', hint: 'what was happening', text: work, href: '/work' },
@@ -44,7 +44,17 @@ if (measure) {
 				color: rgb(var(--gray));
 			}
 			h1 {
-				margin: 0.25rem 0 1.5rem;
+				margin: 0.25rem 0 0.75rem;
+			}
+			.why-read {
+				font-size: 0.95rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.6;
+				padding: 0.75rem 1rem;
+				background: rgba(var(--accent), 0.04);
+				border-left: 3px solid rgb(var(--accent));
+				border-radius: 0 4px 4px 0;
+				margin-bottom: 1.5rem;
 			}
 			.phase-timeline {
 				display: flex;
@@ -179,6 +189,8 @@ if (measure) {
 			<article>
 				<p class="session-date">{date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 				<h1>{title}</h1>
+
+				{why && <p class="why-read">{why}</p>}
 
 				<div class="phase-timeline">
 					{phases.map(phase => (

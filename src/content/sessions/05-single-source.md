@@ -8,6 +8,7 @@ capture: "reviewed a week of conversations and found contradictory behavior — 
 review: "rules existed in config files, memory files, and the notes system. same rule, three versions, none matching. which version won depended on load order."
 improve: "decided one system is the source of truth. config files became thin pointers. memory files became indexes. all actual rules live in one searchable, versioned place."
 measure: "contradictory behavior disappeared. rule updates now happen in one place and propagate everywhere."
+why: "if your rules or notes live in multiple places, they will drift and contradict each other. this is the architecture that prevents it."
 ---
 
 ### take with you

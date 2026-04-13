@@ -8,6 +8,7 @@ capture: "the agent kept calling mutate_graph when it should have called update_
 review: "two tools with overlapping purposes. no matter how good the descriptions were, the ambiguity was structural — they sounded like they did the same thing."
 improve: "removed 3 tools. went from 7 to 4. each surviving tool does one distinct thing with a name that says what it does. confusion dropped immediately."
 measure: "wrong-tool calls went from ~30% of interactions to near zero after the reduction."
+why: "if your AI keeps picking the wrong action, the fix is probably removing options — not adding descriptions. includes a design checklist."
 ---
 
 ### take with you

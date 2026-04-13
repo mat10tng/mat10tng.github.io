@@ -8,6 +8,7 @@ capture: "merge conflicts on almost every merge. files overwritten. one conversa
 review: "the conflicts weren't random — they correlated perfectly with whether two conversations touched the same files or shared types."
 improve: "isolated each conversation with its own code copy (git worktrees). classified work by conflict risk before parallelizing. sequential for shared types, parallel for isolated changes."
 measure: "merge conflicts dropped to near zero. parallel throughput roughly tripled for bug-fixing sprints."
+why: "if you run multiple AI sessions at once, they will conflict. this is the grouping strategy that prevents it — includes the conflict risk table."
 ---
 
 ### take with you

@@ -8,6 +8,7 @@ capture: "measured how often new conversations actually used anything from previ
 review: "the notes existed but the system had no mechanism to surface them. writing things down is only half the problem — the other half is reading them back at the right moment."
 improve: "added three mechanisms: auto-capture after each session, auto-surface relevant notes before each new session, and auto-archival of notes that never get referenced."
 measure: "reuse rate went from near zero to 88%. 9 out of 10 conversations now build on something a previous one captured."
+why: "most notes systems are write-only — notes go in, nothing comes back. this is the mechanism that gets reuse to 88%. includes capture and start templates."
 ---
 
 ### take with you

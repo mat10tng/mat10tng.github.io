@@ -8,6 +8,7 @@ capture: "reviewed a month of session notes. 47 out of ~80 conversations had the
 review: "the common thread was obvious once I looked: no upfront alignment. nobody confirmed which files, which approach, which assumptions before writing the first line."
 improve: "added one rule — before writing code, state the files you'll change, the approach you'll take, and your assumptions. wait for confirmation. next month: 3 conversations went sideways instead of 47."
 measure: "47 → 3. the rule stuck and now every future conversation inherits it automatically."
+why: "if your AI conversations keep going sideways, this one rule cuts misdirection by 90%. you'll get the exact rule to copy."
 ---
 
 ### take with you

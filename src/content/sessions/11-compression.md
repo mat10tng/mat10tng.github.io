@@ -8,6 +8,7 @@ capture: "78 raw notes across two projects. 65 from the main project (sessions, 
 review: "most of the 78 notes overlapped. 5 different sessions all described the same SSE streaming bug from different angles. 8 sessions covered the same feature sprint."
 improve: "clustered by theme, extracted the lesson from each cluster, archived the raw notes. 65 notes became 5 lessons. 13 notes became 1 lesson. then condensed further: the 5 lessons covered 2 main themes."
 measure: "78 → 2 final lessons. the lessons get cited in future sessions. the raw notes would not have been — they were too noisy and specific to find."
+why: "78 raw notes became 2 lessons. raw captures are perishable — this is the compression process that makes knowledge sustainable long-term."
 ---
 
 ### take with you

@@ -8,6 +8,7 @@ capture: "tracked which lessons from one project got referenced in other project
 review: "certain fixes weren't project-specific — they applied everywhere. the 'state assumptions first' rule started in one project but solved the same problem in three others."
 improve: "created a promotion path: project lesson → referenced across projects → promoted to permanent global rule. about 80 rules have graduated so far."
 measure: "global rules are referenced in 88% of sessions. most started as one project's fix."
+why: "not every lesson is universal. this is how to let the pattern of reuse decide what becomes a permanent rule — without predicting upfront."
 ---
 
 ### take with you

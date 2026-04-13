@@ -8,6 +8,7 @@ capture: "every single self-assessment flagged the same issue: capture_completen
 review: "the metric existed. the flag existed. the issue was logged every time. nobody fixed it. the system was nagging correctly — but nagging isn't fixing."
 improve: "eventually added outcome tracking to session captures. the metric climbed from 0% to 17%. still below the 50% threshold, but moving."
 measure: "0% for 3 weeks → 17% after the fix. still flagged as below threshold. the nag continues."
+why: "a metric nagged for 3 weeks and nothing happened. measurement alone doesn't fix things — this is the escalation framework that makes metrics actionable."
 ---
 
 ### take with you

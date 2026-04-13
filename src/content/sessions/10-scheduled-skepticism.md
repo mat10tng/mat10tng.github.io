@@ -8,6 +8,7 @@ capture: "noticed that all feedback on the system was positive. every metric was
 review: "if the system only checks its own health metrics, it only finds the problems it already knows to look for. blind spots stay blind."
 improve: "built a weekly red team task that generates adversarial challenges from 4 perspectives: skeptic, minimalist, outsider, futurist. the system attacks its own assumptions on a schedule."
 measure: "first run produced 6 challenges, 2 rated high-fragility. one of them was a known bug that had been ignored for 2 days — the red team surfaced it as urgent."
+why: "if your system only measures success, it develops blind spots. this is how to schedule adversarial thinking — from 4 perspectives — so nothing goes unchallenged."
 ---
 
 ### take with you

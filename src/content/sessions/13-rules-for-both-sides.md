@@ -8,6 +8,7 @@ capture: "noticed that every rule was about the AI's behavior. but many of them 
 review: "the 'state your assumptions' rule isn't really about the AI. it's about me. I'm the one who dives into implementation without confirming the plan. the rule forces a pause that I wouldn't take on my own."
 improve: "started encoding preferences and weaknesses explicitly — visual learner, direct communication, needs evidence not feelings, tends to overbuild. now every session adapts to how I actually work, not a generic default."
 measure: "sessions feel more productive. less time spent on misalignment, less friction from wrong communication style, fewer dead-end implementations."
+why: "most AI rules shape the AI. the interesting ones actually shape the human — compensating for your own weaknesses. includes rules you can adapt for yourself."
 ---
 
 ### take with you
