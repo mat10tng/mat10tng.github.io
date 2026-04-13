@@ -10,6 +10,26 @@ improve: "each jump came from a structural change: auto-surfacing broke the firs
 measure: "0% to 88% over 4 weeks. the last jump (64% → 88%) came from adding proactive briefings — loading must-know notes before every session automatically."
 ---
 
+### take with you
+
+```markdown
+## Compounding checklist
+
+If your reuse rate is stuck, check in this order:
+
+1. Are notes available at all? (0% → 30%)
+   → make previous notes loadable before each session
+
+2. Are notes findable? (30% → 50%)
+   → add types/categories, improve search
+
+3. Is noise drowning signal? (50% → 65%)
+   → compress raw notes into lessons, archive what's unused
+
+4. Does the session have to know what to search for? (65% → 85%+)
+   → proactively load relevant notes before the session starts
+```
+
 the system tracks its own reuse rate — what percentage of work sessions actually use something from a previous one. here's the real data, taken from the system's own self-assessments:
 
 | date | reuse rate | what changed |
@@ -38,22 +58,3 @@ the interesting part isn't the numbers — it's the plateaus. the system would h
 
 measurement without mechanism is just observation. each jump on the curve came from building something — a structural change to how knowledge flows. "keep writing notes" doesn't compound. "make the system surface the right notes at the right time" does.
 
-### rule — copy this
-
-```markdown
-## Compounding checklist
-
-If your reuse rate is stuck, check in this order:
-
-1. Are notes available at all? (0% → 30%)
-   → make previous notes loadable before each session
-
-2. Are notes findable? (30% → 50%)
-   → add types/categories, improve search
-
-3. Is noise drowning signal? (50% → 65%)
-   → compress raw notes into lessons, archive what's unused
-
-4. Does the session have to know what to search for? (65% → 85%+)
-   → proactively load relevant notes before the session starts
-```

@@ -10,6 +10,27 @@ improve: "built a weekly red team task that generates adversarial challenges fro
 measure: "first run produced 6 challenges, 2 rated high-fragility. one of them was a known bug that had been ignored for 2 days — the red team surfaced it as urgent."
 ---
 
+### take with you
+
+```markdown
+## Scheduled red team (weekly)
+
+Generate challenges from 4 perspectives:
+1. Skeptic — "what assumptions might be wrong?"
+2. Minimalist — "what are we overbuilding?"
+3. Outsider — "what would a newcomer question?"
+4. Futurist — "what breaks when this scales?"
+
+For each challenge:
+- Rate fragility: high / medium / low
+- Check if it's a known issue being ignored
+- Flag the most urgent for immediate action
+
+Review previous week's challenges:
+- Were any acted on?
+- Track hit rate (challenges that led to real changes)
+```
+
 the system was getting good at confirming it was working. every self-assessment came back positive. compounding score: up. search quality: improving. distillation quality: good. the metrics were all green.
 
 that should have been suspicious.
@@ -40,23 +61,3 @@ that's the value. not finding new problems (though it does). but finding known p
 
 if your system only measures its own success, it develops blind spots. scheduled adversarial thinking — asking "what could be wrong?" on a regular cadence — catches the things that metrics miss. you don't need a human to do it every time. you need the question to be asked reliably.
 
-### rule — copy this
-
-```markdown
-## Scheduled red team (weekly)
-
-Generate challenges from 4 perspectives:
-1. Skeptic — "what assumptions might be wrong?"
-2. Minimalist — "what are we overbuilding?"
-3. Outsider — "what would a newcomer question?"
-4. Futurist — "what breaks when this scales?"
-
-For each challenge:
-- Rate fragility: high / medium / low
-- Check if it's a known issue being ignored
-- Flag the most urgent for immediate action
-
-Review previous week's challenges:
-- Were any acted on?
-- Track hit rate (challenges that led to real changes)
-```

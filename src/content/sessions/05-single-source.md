@@ -10,6 +10,27 @@ improve: "decided one system is the source of truth. config files became thin po
 measure: "contradictory behavior disappeared. rule updates now happen in one place and propagate everywhere."
 ---
 
+### take with you
+
+```markdown
+## Knowledge architecture
+
+Config file (loaded every session):
+  - "Search the notes before starting any work"
+  - 5-6 hard-stop rules only (things that cause damage before notes load)
+  - Nothing else
+
+Notes system (the source of truth):
+  - All rules, decisions, lessons, workflows
+  - Searchable, versioned, archivable
+  - Types: session, fix, decision, lesson, workflow, rule, skill
+
+Hard-stop rule criteria (all must be true):
+  1. Applies to every session regardless of task
+  2. Violating it before notes load would cause real damage
+  3. Can't be found fast enough through search
+```
+
 at some point I had the same rule in three places: a config file, a memory file, and the notes system. each one was slightly different because they'd been updated at different times.
 
 I only caught it because I pulled up a week of conversations and compared the rules each one was following. same starting conditions, different behavior, no obvious reason why. turns out it depended on which file got loaded first.
@@ -45,23 +66,3 @@ everything else — communication preferences, planning workflows, debugging app
 
 duplication feels organized. "I'll put it here AND there, just to be safe." but duplication creates drift, and drift creates contradictions, and contradictions create unpredictable behavior. one source of truth, everything else points to it.
 
-### structure — copy this
-
-```markdown
-## Knowledge architecture
-
-Config file (loaded every session):
-  - "Search the notes before starting any work"
-  - 5-6 hard-stop rules only (things that cause damage before notes load)
-  - Nothing else
-
-Notes system (the source of truth):
-  - All rules, decisions, lessons, workflows
-  - Searchable, versioned, archivable
-  - Types: session, fix, decision, lesson, workflow, rule, skill
-
-Hard-stop rule criteria (all must be true):
-  1. Applies to every session regardless of task
-  2. Violating it before notes load would cause real damage
-  3. Can't be found fast enough through search
-```

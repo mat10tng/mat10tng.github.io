@@ -10,6 +10,18 @@ improve: "removed 3 tools. went from 7 to 4. each surviving tool does one distin
 measure: "wrong-tool calls went from ~30% of interactions to near zero after the reduction."
 ---
 
+### take with you
+
+```markdown
+## Tool design checklist
+
+- [ ] Each tool does exactly one thing
+- [ ] No two tools overlap in purpose
+- [ ] Names describe what the tool does, not how
+- [ ] If agent picks the wrong tool often → remove one, don't add descriptions
+- [ ] If a rule isn't followed often → make it shorter, not longer
+```
+
 the agent had 7 tools: `mutate_graph`, `update_graph_document`, `save_page`, `connect_pages`, `query_knowledge`, `ask_clarifying_question`, and `validate_structure`. it kept picking the wrong one.
 
 my first fix was better tool descriptions. I rewrote each description to be clearer about when to use it. that helped a little — maybe a 10% improvement. but the agent still confused `mutate_graph` and `update_graph_document` because fundamentally, they did almost the same thing with slightly different interfaces.
@@ -36,14 +48,3 @@ the same principle showed up later with rules. a long document of rules got mayb
 
 when an AI agent keeps making the wrong choice between options, the problem usually isn't the descriptions — it's that there are too many options. before you add clarity, ask if you can remove ambiguity. fewer tools with distinct purposes beats many tools with careful descriptions.
 
-### rule — copy this
-
-```markdown
-## Tool design checklist
-
-- [ ] Each tool does exactly one thing
-- [ ] No two tools overlap in purpose
-- [ ] Names describe what the tool does, not how
-- [ ] If agent picks the wrong tool often → remove one, don't add descriptions
-- [ ] If a rule isn't followed often → make it shorter, not longer
-```

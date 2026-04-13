@@ -10,6 +10,20 @@ improve: "eventually added outcome tracking to session captures. the metric clim
 measure: "0% for 3 weeks → 17% after the fix. still flagged as below threshold. the nag continues."
 ---
 
+### take with you
+
+```markdown
+## Metric escalation
+
+If a health metric has been flagged for:
+- 1 assessment → note it
+- 3 assessments → surface it in session briefings
+- 5+ assessments → make it the first thing the next session sees
+- 10+ assessments → block new work until addressed (or consciously deprioritize with a reason)
+
+Measurement without escalation is just record-keeping.
+```
+
 here's every self-assessment that flagged capture_completeness:
 
 | date | assessment | value | status |
@@ -52,16 +66,3 @@ measurement is necessary but not sufficient. a metric that nags you for 3 weeks 
 
 the insight isn't "automate the fix." some fixes require judgment about when and how. the insight is: if a metric has been red for 3+ assessments, escalate it. make it louder. put it at the top of the next session's briefing. the nag should get more insistent over time, not stay the same volume.
 
-### rule — copy this
-
-```markdown
-## Metric escalation
-
-If a health metric has been flagged for:
-- 1 assessment → note it
-- 3 assessments → surface it in session briefings
-- 5+ assessments → make it the first thing the next session sees
-- 10+ assessments → block new work until addressed (or consciously deprioritize with a reason)
-
-Measurement without escalation is just record-keeping.
-```

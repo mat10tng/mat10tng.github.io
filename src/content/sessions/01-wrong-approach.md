@@ -10,6 +10,20 @@ improve: "added one rule — before writing code, state the files you'll change,
 measure: "47 → 3. the rule stuck and now every future conversation inherits it automatically."
 ---
 
+### take with you
+
+```markdown
+## Before coding
+
+Before implementing anything, state:
+1. What files will change and why
+2. What approach will be taken
+3. Any assumptions about the current state
+
+Wait for confirmation before writing code.
+If any assumption is ambiguous, ask — don't guess.
+```
+
 this was the session that convinced me the process itself matters more than any individual fix.
 
 I was shipping features every day, moving fast. conversations would start with "fix this bug" or "add this feature" and immediately dive into code. most of the time it worked. but when it didn't work, it really didn't work — 20-30 minutes down the wrong path before realizing the approach was wrong, the target file was wrong, or the assumptions about the current state were off.
@@ -31,16 +45,3 @@ before any non-trivial implementation, write down:
 
 then pause. read it back. does it still make sense? if any assumption is ambiguous, ask rather than guess. the cost of asking is 10 seconds. the cost of guessing wrong is 20+ minutes.
 
-### rule — copy this
-
-```markdown
-## Before coding
-
-Before implementing anything, state:
-1. What files will change and why
-2. What approach will be taken
-3. Any assumptions about the current state
-
-Wait for confirmation before writing code.
-If any assumption is ambiguous, ask — don't guess.
-```

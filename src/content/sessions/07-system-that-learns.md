@@ -10,6 +10,39 @@ improve: "added three mechanisms: auto-capture after each session, auto-surface 
 measure: "reuse rate went from near zero to 88%. 9 out of 10 conversations now build on something a previous one captured."
 ---
 
+### take with you
+
+```markdown
+## Session capture template
+
+After each work session, record:
+
+### what happened
+[1-2 sentences — what was the goal, what did you do]
+
+### what worked
+[commands, approaches, or decisions that succeeded]
+
+### what didn't
+[what failed, what took too long, what surprised you]
+
+### lesson (if any)
+[one sentence — what would you tell your future self?]
+
+### outcome
+success | struggled | failed | abandoned
+```
+
+```markdown
+## Session start checklist
+
+Before starting work:
+1. Load notes from the last 3-5 relevant sessions
+2. Check if any rules apply to this type of work
+3. Pick an approach/skill before writing code
+4. State your plan, get alignment, then execute
+```
+
 the notes started as storage. write things down after a work session, search when you need something. in theory it works. in practice, most notes were never found again.
 
 I decided to measure it. simple question: what percentage of new conversations actually use something from a previous one? the first answer was close to zero. hundreds of notes existed, but every conversation was starting from scratch.
@@ -46,35 +79,3 @@ you don't need a complex system. the core loop is:
 
 the tooling can be as simple as a markdown file. what matters is the habit of capture, the discipline of recall, and the feedback of measurement.
 
-### skill — copy this
-
-```markdown
-## Session capture template
-
-After each work session, record:
-
-### what happened
-[1-2 sentences — what was the goal, what did you do]
-
-### what worked
-[commands, approaches, or decisions that succeeded]
-
-### what didn't
-[what failed, what took too long, what surprised you]
-
-### lesson (if any)
-[one sentence — what would you tell your future self?]
-
-### outcome
-success | struggled | failed | abandoned
-```
-
-```markdown
-## Session start checklist
-
-Before starting work:
-1. Load notes from the last 3-5 relevant sessions
-2. Check if any rules apply to this type of work
-3. Pick an approach/skill before writing code
-4. State your plan, get alignment, then execute
-```

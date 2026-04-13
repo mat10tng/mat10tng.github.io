@@ -10,6 +10,26 @@ improve: "clustered by theme, extracted the lesson from each cluster, archived t
 measure: "78 → 2 final lessons. the lessons get cited in future sessions. the raw notes would not have been — they were too noisy and specific to find."
 ---
 
+### take with you
+
+```markdown
+## Knowledge compression
+
+When raw notes exceed 10 per project:
+1. Cluster by theme (what topics overlap?)
+2. For each cluster: what's the lesson? (1-2 paragraphs)
+3. Write the lesson as a standalone note
+4. Archive the raw notes
+
+A good lesson answers:
+- What was the problem?
+- What was tried?
+- What worked and why?
+- What would you tell someone hitting this next?
+
+The raw notes are the evidence. The lesson is the knowledge.
+```
+
 here's what a monthly clean actually looks like.
 
 the vault had 488 active notes. two projects had accumulated significant raw material: 65 session notes from a 3-day feature sprint on the main project, and 13 notes from the knowledge base project.
@@ -47,22 +67,3 @@ the lesson is searchable, reusable, and relevant to anyone hitting the same prob
 
 raw captures are compost. lessons are what grows from them. without compression, the brain fills with context that was useful for one day and noise for every day after. the compression step — clustering, extracting the lesson, archiving the rest — is what makes the system sustainable long-term.
 
-### rule — copy this
-
-```markdown
-## Knowledge compression
-
-When raw notes exceed 10 per project:
-1. Cluster by theme (what topics overlap?)
-2. For each cluster: what's the lesson? (1-2 paragraphs)
-3. Write the lesson as a standalone note
-4. Archive the raw notes
-
-A good lesson answers:
-- What was the problem?
-- What was tried?
-- What worked and why?
-- What would you tell someone hitting this next?
-
-The raw notes are the evidence. The lesson is the knowledge.
-```

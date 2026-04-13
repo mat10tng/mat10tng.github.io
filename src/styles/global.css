@@ -83,9 +83,6 @@ textarea {
 input {
 	font-size: 16px;
 }
-table {
-	width: 100%;
-}
 img {
 	max-width: 100%;
 	height: auto;
@@ -99,9 +96,25 @@ code {
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	overflow-x: hidden;
+	max-width: 100%;
 }
 pre > code {
 	all: unset;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+table {
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+th, td {
+	padding: 0.4em 0.6em;
+	border-bottom: 1px solid rgb(var(--gray-light));
+	text-align: left;
+	word-wrap: break-word;
 }
 blockquote {
 	border-left: 4px solid var(--accent);

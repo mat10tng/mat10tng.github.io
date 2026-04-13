@@ -10,6 +10,27 @@ improve: "built three scheduled tasks: daily triage (compact when sessions pile 
 measure: "after one monthly clean: 78 raw notes compressed into 2 distilled lessons. 55 notes archived. search noise dropped significantly."
 ---
 
+### take with you
+
+```markdown
+## Brain maintenance schedule
+
+Daily:
+- If 10+ raw sessions accumulated → compress into lessons
+- Archive the raw sessions after compression
+
+Weekly:
+- Check reuse rate, search gaps, noise signals
+- Flag repeat failure patterns
+- Log the health check
+
+Monthly:
+- Archive notes older than 60 days with 0 references
+- Detect near-duplicates (merge or archive)
+- Score all notes: bottom 10% are archival candidates
+- Run full self-assessment
+```
+
 the brain was drowning in its own output.
 
 every session captured what happened. every fix was recorded. every decision was written down. which sounds great — until you have 488 notes and most of them are raw session logs from two weeks ago. search for anything and you get 30 results, 25 of which are old session noise.
@@ -38,23 +59,3 @@ after the clean: 410 active notes. same knowledge, less noise. search results go
 
 knowledge rots if you don't maintain it. the solution isn't "write less" — it's "compress regularly." raw captures are the compost; lessons are what grows from it. the maintenance has to be automated because nobody remembers to do it manually.
 
-### rule — copy this
-
-```markdown
-## Brain maintenance schedule
-
-Daily:
-- If 10+ raw sessions accumulated → compress into lessons
-- Archive the raw sessions after compression
-
-Weekly:
-- Check reuse rate, search gaps, noise signals
-- Flag repeat failure patterns
-- Log the health check
-
-Monthly:
-- Archive notes older than 60 days with 0 references
-- Detect near-duplicates (merge or archive)
-- Score all notes: bottom 10% are archival candidates
-- Run full self-assessment
-```

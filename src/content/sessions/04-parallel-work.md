@@ -10,6 +10,28 @@ improve: "isolated each conversation with its own code copy (git worktrees). cla
 measure: "merge conflicts dropped to near zero. parallel throughput roughly tripled for bug-fixing sprints."
 ---
 
+### take with you
+
+```markdown
+## Parallel work
+
+Before parallelizing, classify by conflict risk:
+
+| Change type              | Risk     | Parallel? |
+|--------------------------|----------|-----------|
+| Backend-only, isolated   | Low      | ✅ yes    |
+| Frontend-only, scoped    | Low      | ✅ yes    |
+| Full-stack, same feature | High     | ❌ same session |
+| Shared types / models    | High     | ❌ same session |
+| Database migrations      | Critical | ❌ always sequential |
+
+Rules:
+- One task per session, no scope creep
+- Each session reads previous sessions' notes before starting
+- Each session writes its own notes when done
+- Merge one branch at a time
+```
+
 I was running 3 AI conversations at once, all working on the same codebase, each fixing a different bug. it seemed efficient. it was chaos.
 
 merge conflicts on almost every merge. one conversation would change a file, another would change the same file differently, and merging became a puzzle. sometimes one conversation's fix would silently undo another's.
@@ -38,24 +60,3 @@ each conversation starts by reading notes from previous conversations. each one 
 
 one fix per conversation. no "while I'm here, I might as well..." — that's exactly how you introduce the conflicts you were trying to avoid. clear scope, clear target, nothing else.
 
-### rule — copy this
-
-```markdown
-## Parallel work
-
-Before parallelizing, classify by conflict risk:
-
-| Change type              | Risk     | Parallel? |
-|--------------------------|----------|-----------|
-| Backend-only, isolated   | Low      | ✅ yes    |
-| Frontend-only, scoped    | Low      | ✅ yes    |
-| Full-stack, same feature | High     | ❌ same session |
-| Shared types / models    | High     | ❌ same session |
-| Database migrations      | Critical | ❌ always sequential |
-
-Rules:
-- One task per session, no scope creep
-- Each session reads previous sessions' notes before starting
-- Each session writes its own notes when done
-- Merge one branch at a time
-```

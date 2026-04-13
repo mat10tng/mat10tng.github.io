@@ -10,6 +10,32 @@ improve: "started encoding preferences and weaknesses explicitly — visual lear
 measure: "sessions feel more productive. less time spent on misalignment, less friction from wrong communication style, fewer dead-end implementations."
 ---
 
+### take with you
+
+```markdown
+## Rules for the human (encoded as AI instructions)
+
+Weakness: jumping to code
+→ Rule: state files, approach, assumptions before writing any code
+
+Weakness: skipping exploration
+→ Rule: always brainstorm before building. no exceptions.
+
+Weakness: overbuilding
+→ Rule: default to MVP. "that's v2" is a valid response.
+
+Weakness: ignoring constraints
+→ Rule: check the spec before editing any governed file
+
+## Communication preferences (also encoded as AI instructions)
+
+- I'm a visual learner → show diagrams, not text walls
+- I process insight first → lead with the story, data in support
+- I don't like hedging → be direct, no qualifiers
+- I don't need summaries → I was there, skip the recap
+- I want to be challenged → "why are we building this?" is welcome
+```
+
 most of the rules in the system are written as instructions for the AI: "be direct," "challenge assumptions," "don't summarize what just happened." they read like they're shaping the AI's behavior.
 
 but look closer and many of them are actually about me.
@@ -40,28 +66,3 @@ the system shapes both sides. some rules constrain the AI. some rules constrain 
 
 this is what makes it a collaboration, not a tool. a tool does what you say. a collaborator pushes back when you're about to make a mistake you've made before. the rules are the encoded form of that pushback — for both directions.
 
-### rules — copy these
-
-```markdown
-## Rules for the human (encoded as AI instructions)
-
-Weakness: jumping to code
-→ Rule: state files, approach, assumptions before writing any code
-
-Weakness: skipping exploration
-→ Rule: always brainstorm before building. no exceptions.
-
-Weakness: overbuilding
-→ Rule: default to MVP. "that's v2" is a valid response.
-
-Weakness: ignoring constraints
-→ Rule: check the spec before editing any governed file
-
-## Communication preferences (also encoded as AI instructions)
-
-- I'm a visual learner → show diagrams, not text walls
-- I process insight first → lead with the story, data in support
-- I don't like hedging → be direct, no qualifiers
-- I don't need summaries → I was there, skip the recap
-- I want to be challenged → "why are we building this?" is welcome
-```

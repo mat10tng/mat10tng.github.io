@@ -10,6 +10,25 @@ improve: "created a promotion path: project lesson → referenced across project
 measure: "global rules are referenced in 88% of sessions. most started as one project's fix."
 ---
 
+### take with you
+
+```markdown
+## Knowledge promotion path
+
+1. Something goes wrong → write a lesson in that project
+2. Same lesson referenced in another project → note the cross-reference
+3. Referenced across 3+ projects → promote to global rule
+4. Global rules apply to all future sessions automatically
+
+Don't predict universality upfront. Let reuse decide.
+
+Note types by lifecycle:
+  session (raw) → lesson (distilled) → rule (permanent)
+  
+Notes that never get referenced → archive after 30 days
+Notes that keep getting referenced → promote
+```
+
 rules don't start as rules. they start as fixes for specific problems in specific projects. the interesting part is watching which ones grow.
 
 ### a real example, end to end
@@ -42,21 +61,3 @@ some rules that seemed universal turned out to be project-specific. they got ref
 
 don't try to predict which lessons will be universal. write them down where they happened. if they're universal, the pattern of reuse will tell you. if they're not, no wasted effort.
 
-### rule — copy this
-
-```markdown
-## Knowledge promotion path
-
-1. Something goes wrong → write a lesson in that project
-2. Same lesson referenced in another project → note the cross-reference
-3. Referenced across 3+ projects → promote to global rule
-4. Global rules apply to all future sessions automatically
-
-Don't predict universality upfront. Let reuse decide.
-
-Note types by lifecycle:
-  session (raw) → lesson (distilled) → rule (permanent)
-  
-Notes that never get referenced → archive after 30 days
-Notes that keep getting referenced → promote
-```
