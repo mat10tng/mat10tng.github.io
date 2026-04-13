@@ -18,13 +18,13 @@ const { Content } = await render(session);
 const { title, description, date, work, capture, review, improve, measure } = session.data;
 
 const phases = [
-	{ name: 'work', text: work, href: '/work' },
-	{ name: 'capture', text: capture, href: '/capture' },
-	{ name: 'review', text: review, href: '/review' },
-	{ name: 'improve', text: improve, href: '/improve' },
+	{ name: 'work', hint: 'what was happening', text: work, href: '/work' },
+	{ name: 'capture', hint: 'what the data showed', text: capture, href: '/capture' },
+	{ name: 'review', hint: 'what pattern emerged', text: review, href: '/review' },
+	{ name: 'improve', hint: 'what changed', text: improve, href: '/improve' },
 ];
 if (measure) {
-	phases.push({ name: 'measure', text: measure, href: '/measure' });
+	phases.push({ name: 'measure', hint: 'did it work', text: measure, href: '/measure' });
 }
 ---
 
@@ -46,35 +46,58 @@ if (measure) {
 			h1 {
 				margin: 0.25rem 0 1.5rem;
 			}
-			.phase-cards {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 1rem;
-				margin-bottom: 2rem;
+			.phase-timeline {
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+				margin-bottom: 2.5rem;
+				border-left: 2px solid #e8e8e8;
+				padding-left: 1.25rem;
 			}
-			.phase-card {
-				padding: 1rem;
-				border: 1px solid rgba(var(--gray), 0.2);
-				border-radius: 6px;
+			.phase-item {
+				position: relative;
+				padding: 0.6rem 0;
 			}
-			.phase-card a {
-				text-decoration: none;
+			.phase-item::before {
+				content: '';
+				position: absolute;
+				left: -1.45rem;
+				top: 1rem;
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: #ccc;
+				border: 2px solid #fff;
+			}
+			.phase-item:last-child {
+				border-bottom: none;
+			}
+			.phase-header {
+				display: flex;
+				align-items: baseline;
+				gap: 0.5rem;
+				margin-bottom: 0.2rem;
 			}
 			.phase-label {
 				font-size: 0.7rem;
-				font-weight: 600;
+				font-weight: 700;
 				text-transform: uppercase;
-				letter-spacing: 0.08em;
+				letter-spacing: 0.06em;
 				color: rgb(var(--accent));
-				margin-bottom: 0.5rem;
+				text-decoration: none;
+				min-width: 52px;
 			}
 			.phase-label:hover {
 				text-decoration: underline;
 			}
+			.phase-hint {
+				font-size: 0.7rem;
+				color: #aaa;
+			}
 			.phase-text {
-				font-size: 0.9rem;
-				line-height: 1.5;
-				color: rgb(var(--black));
+				font-size: 0.88rem;
+				line-height: 1.55;
+				color: rgb(var(--gray-dark));
 			}
 			.session-body {
 				line-height: 1.7;
@@ -144,8 +167,8 @@ if (measure) {
 			}
 
 			@media (max-width: 600px) {
-				.phase-cards {
-					grid-template-columns: 1fr;
+				.phase-timeline {
+					padding-left: 1rem;
 				}
 			}
 		</style>
@@ -157,10 +180,13 @@ if (measure) {
 				<p class="session-date">{date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 				<h1>{title}</h1>
 
-				<div class="phase-cards">
+				<div class="phase-timeline">
 					{phases.map(phase => (
-						<div class="phase-card">
-							<a href={phase.href}><div class="phase-label">{phase.name}</div></a>
+						<div class="phase-item">
+							<div class="phase-header">
+								<a href={phase.href} class="phase-label">{phase.name}</a>
+								<span class="phase-hint">{phase.hint}</span>
+							</div>
 							<div class="phase-text">{phase.text}</div>
 						</div>
 					))}
