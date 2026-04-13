@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const sessions = (await getCollection('sessions')).sort(
+	(a, b) => a.data.sessionId - b.data.sessionId
+);
+
+// Group sessions by category
+const categories = [
+	{
+		label: 'how the work improves',
+		description: 'rules and practices that changed how we build software',
+		ids: [1, 2, 3, 4, 5, 6]
+	},
+	{
+		label: 'how the system improves itself',
+		description: 'measurement, maintenance, and self-correction',
+		ids: [7, 8, 9, 11, 12]
+	},
+	{
+		label: 'how the system catches blind spots',
+		description: 'adversarial thinking and pattern discovery',
+		ids: [10]
+	}
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Patterns — ${SITE_TITLE}`} description="how we do things — the patterns behind the system." />
+		<style>
+			main {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 2rem 1rem;
+			}
+			h1 { margin-bottom: 0.25rem; }
+			.intro { color: #666; font-size: 0.9rem; line-height: 1.6; margin-bottom: 2.5rem; }
+			.category { margin-bottom: 2.5rem; }
+			.cat-label {
+				font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+				letter-spacing: 0.08em; color: #999; margin-bottom: 0.25rem;
+			}
+			.cat-desc {
+				font-size: 0.85rem; color: #666; margin-bottom: 1rem;
+			}
+			.session-list { list-style: none; margin: 0; padding: 0; }
+			.session-item {
+				margin-bottom: 1rem; padding-bottom: 1rem;
+				border-bottom: 1px solid rgba(0,0,0,0.06);
+			}
+			.session-item:last-child { border-bottom: none; }
+			.session-item a { text-decoration: none; display: block; }
+			.session-title {
+				font-size: 1rem; font-weight: 600; color: #333;
+				margin: 0 0 0.2rem; transition: color 0.15s;
+			}
+			.session-item a:hover .session-title { color: #2563eb; }
+			.session-desc { font-size: 0.88rem; color: #555; line-height: 1.5; margin: 0; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>patterns</h1>
+			<p class="intro">how we do things — each pattern is a session that changed how the system works. click into any to see the full story and a copyable rule.</p>
+
+			{categories.map(cat => {
+				const catSessions = sessions.filter(s => cat.ids.includes(s.data.sessionId));
+				return catSessions.length > 0 && (
+					<div class="category">
+						<div class="cat-label">{cat.label}</div>
+						<p class="cat-desc">{cat.description}</p>
+						<ul class="session-list">
+							{catSessions.map(s => (
+								<li class="session-item">
+									<a href={`/session/${s.id}`}>
+										<p class="session-title">{s.data.title}</p>
+										<p class="session-desc">{s.data.description}</p>
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				);
+			})}
+		</main>
+		<Footer />
+	</body>
+</html>

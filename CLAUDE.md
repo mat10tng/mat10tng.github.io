@@ -31,6 +31,12 @@ Every page delivers on that promise:
 - The history page is both a public timeline AND a personal changelog.
 - When significant changes happen to the system (new rules, new skills, architecture changes, process changes), they should be reflected on the site — not just in KB.
 
+## Visual-first content
+- The reader is a visual learner. Use SVG diagrams wherever possible.
+- Every session should ideally have a visual: a flow, a table, a before/after, a timeline.
+- Prefer inline SVG over ASCII art — cleaner, responsive, clickable.
+- Diagrams tell the story. Text explains the nuance. Not the other way around.
+
 ## Operational habit
 - After significant work sessions (new rules, system changes, process improvements), check if the blog should be updated.
 - Ask: "does the history page need a new evolution entry?" and "is there a session worth writing up?"
