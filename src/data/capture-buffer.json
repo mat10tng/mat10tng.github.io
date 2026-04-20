@@ -1,16 +1,5 @@
 {
-  "pending": [
-    {
-      "type": "fix",
-      "kbId": 9119,
-      "sessionId": "049",
-      "date": "2026-04-19",
-      "title": "Agent eval non-determinism — thinking+temp=0 incompatible; mitigated via N=3 strict-all-pass",
-      "summary": "Anthropic API silently overrides temp=0 back to 1 when thinking mode is enabled. Production agent uses thinking — so eval framework fought an API constraint instead of working with it. Resolution: mirror production, run each case N=3 with strict-all-pass. Framework immediately proved value by catching that a single-run pass was stochastic.",
-      "quality": "medium",
-      "tags": ["eval", "determinism", "anthropic-api", "agent"]
-    }
-  ],
-  "lastPosted": "2026-04-18",
-  "lastSessionId": 90
+  "pending": [],
+  "lastPosted": "2026-04-20",
+  "lastSessionId": 104
 }
