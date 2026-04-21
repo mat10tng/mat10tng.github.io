@@ -1,5 +1,15 @@
 {
-  "pending": [],
-  "lastPosted": "2026-04-20",
-  "lastSessionId": 104
+  "pending": [
+    {
+      "sessionId": 106,
+      "kbId": 9284,
+      "date": "2026-04-21",
+      "title": "Agent eval suite gets CLI model override flags",
+      "summary": "Added --model/--effort/--thinking-budget/--no-history flags to eval CLI. Interesting: subagent-driven TDD with prescriptive plans, worktree venv symlink strategy, smoke-test banner placement matters.",
+      "quality": 6,
+      "tags": ["agent-evals", "tooling", "tdd", "subagent-driven"]
+    }
+  ],
+  "lastPosted": "2026-04-21",
+  "lastSessionId": 111
 }
