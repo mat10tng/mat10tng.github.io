@@ -107,7 +107,7 @@ the user needs something human-readable and editable. the agent needs something 
 
 the fix is the same in each case: name the boundary, build both representations, translate at the edge.
 
-## take with you
+## Technical Insight
 
 before shipping any interface — copy button, prefill action, prompt rule, API response — ask: who are the actual audiences for this output? if the answer is "a human and an AI," they probably need different formats.
 

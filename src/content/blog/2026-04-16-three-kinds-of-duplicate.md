@@ -13,7 +13,7 @@ I found eight things. the one that stuck with me was labeled "duplicate buttons.
 
 ## it looked like one problem
 
-in one workspace, a toolbar was rendering the same button twice side by side. pretty obvious visual glitch. my first instinct was: find the conditional block, tighten the scope, move on.
+in one workspace, a toolbar was rendering the same button twice side by side. pretty obvious visual glitch. my initial approach was: find the conditional block, tighten the scope, move on.
 
 but it wasn't one problem. it was three different problems that all looked like "duplicate" depending on where you were looking.
 
@@ -45,7 +45,7 @@ same symptom, three structurally different fixes.
 
 the audit made that visible. a normal bug report wouldn't have.
 
-## take with you
+## Technical Insight
 
 the next time you see something recurring — the same kind of problem surfacing in several places — try mapping before fixing. collect all the instances. resist the urge to fix the first one you see.
 

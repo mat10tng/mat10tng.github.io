@@ -37,7 +37,7 @@ the plan format that's been working here: each task small enough to review in on
 
 eighteen tasks in a day sounds like going fast. but it was slow in all the places that matter — spec amendments before touching governed files, code review at every commit, tests before merge. the speed was the output of that discipline, not the thing that competed with it.
 
-## take with you
+## Technical Insight
 
 a complex plan doesn't need fewer gates to move quickly. it needs gates at the right granularity — small enough that each one is fast, consistent enough that they don't get skipped. the overhead of amendment + review + test per task was real. so was finishing eighteen tasks in a day with 228 tests passing and nothing obviously broken.
 

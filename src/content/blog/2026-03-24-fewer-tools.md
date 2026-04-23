@@ -25,7 +25,7 @@ each surviving tool does one thing, has a name that says what it does, and doesn
 
 ## the principle
 
-the instinct when something doesn't work is to add. add a fallback, add a retry, add another option. but agents don't need options — they need clarity. more tools means more ambiguity about which one to use. fewer tools with distinct purposes means fewer wrong choices.
+the tendency when something doesn't work is to add. add a fallback, add a retry, add another option. but agents don't need options — they need clarity. more tools means more ambiguity about which one to use. fewer tools with distinct purposes means fewer wrong choices.
 
 the same pattern showed up later with rules. the first version of the operating rules was a long document. the agent followed maybe 60% of it. I shortened it, made each rule one sentence, removed the ones that overlapped. compliance went up without any other change.
 

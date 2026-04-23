@@ -25,11 +25,11 @@ the number I track is simple: what percentage of work sessions pulled something 
 
 that number made the whole system real. without it, "the notes are useful" is just a feeling. with the number, it either goes up or it doesn't — and when it doesn't, that's a signal to look at what's broken.
 
-## if you want to try this
+## implementation
 
-you don't need my specific setup. the core idea is:
-1. **write down what happened** after each meaningful work session
-2. **make the system read it back** before starting the next one
-3. **measure reuse** — are previous notes actually being used, or just sitting there?
+This approach does not require a specific toolchain. The core mechanism is:
+1. **log what occurred** after each meaningful work session
+2. **enforce a read-back** before starting the subsequent session
+3. **measure reuse** — verify that previous logs are actively informing the work.
 
-the tooling can be as simple as a markdown file that gets loaded at the start of each conversation. what matters is the habit of capture and the feedback loop of measurement.
+The implementation can be as simple as a markdown file that is loaded at the start of each conversation. What matters is the consistent record of work and the feedback loop of measurement.

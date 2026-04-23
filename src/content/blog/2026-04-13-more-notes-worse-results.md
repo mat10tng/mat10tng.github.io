@@ -18,7 +18,7 @@ the system was doing exactly what I told it to — surface everything related. b
 
 ## the fix I tried that also didn't work
 
-my first instinct was better search. if the system is surfacing irrelevant notes, make the search smarter. I spent time improving how notes were categorized and tagged, adding types, tweaking relevance scoring.
+my initial approach was better search. if the system is surfacing irrelevant notes, make the search smarter. I spent time improving how notes were categorized and tagged, adding types, tweaking relevance scoring.
 
 this helped — the reuse rate went from 45% to about 54%. but it didn't solve the core problem. the notes themselves were the issue. raw session summaries are verbose, full of context that only matters in the moment, and they pile up fast. better search on bad data is still bad data.
 
@@ -32,4 +32,4 @@ the jump from 54% to 62% came from automated compaction. and it only worked beca
 
 capture without curation makes things worse, not better. it's the same problem as an inbox you never clean — eventually you stop looking at it entirely because the cost of sorting through it exceeds the value of what you might find.
 
-the habit of writing things down was necessary. but it was only the first step. the system didn't start compounding until I added the step of throwing things away.
+The practice of documenting work was necessary. but it was only the first step. the system didn't start compounding until I added the step of selective archiving.

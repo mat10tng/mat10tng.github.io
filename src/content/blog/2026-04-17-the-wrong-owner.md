@@ -11,7 +11,7 @@ two examples from the same day.
 
 ## the agent that kept breaking the canvas
 
-the canvas agent had a persistent habit. it would create duplicate page IDs. it would create orphan nodes — pages with no parent, floating loose in the canvas with nowhere to go. we'd spent sessions trying to fix this on the agent's side.
+the canvas agent had a recurring failure pattern. it would create duplicate page IDs. it would create orphan nodes — pages with no parent, floating loose in the canvas with nowhere to go. we'd spent sessions trying to fix this on the agent's side.
 
 clear instructions. examples of correct output. the full inventory of existing pages injected into context so the agent couldn't "forget" what already existed.
 
@@ -47,7 +47,7 @@ but orphan nodes? canvas stayed clean. the backend handled it. the fix was real.
 
 that's how you can tell. the failure that motivated the fix stops. everything else — the stuff you didn't fix — keeps showing up just as reliably.
 
-## take with you
+## Technical Insight
 
 when something keeps failing, before trying to make the failing part better: ask whether that part should own the responsibility at all.
 

@@ -21,7 +21,7 @@ there's a real difference between fixing a problem and fixing the process that p
 | twice | notice it, maybe note it |
 | three or more times | stop fixing instances. change the process. |
 
-the threshold of three isn't magic — it's just the point where the cost of a process change is clearly lower than the cost of fixing the same thing again and again.
+the threshold of three isn't arbitrary — it's just the point where the cost of a process change is clearly lower than the cost of fixing the same thing again and again.
 
 ## real examples
 

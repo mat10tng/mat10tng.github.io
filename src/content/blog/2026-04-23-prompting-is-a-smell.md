@@ -13,7 +13,7 @@ If you have to prompt an AI perfectly every time to get a good result, your syst
 
 ## The Prompting Trap
 
-When an AI fails, our first instinct is to "fix the prompt." We add more instructions. We add "be concise" or "think step-by-step." 
+When an AI fails, our initial approach is to "fix the prompt." We add more instructions. We add "be concise" or "think step-by-step." 
 
 The prompt gets longer. The context window gets crowded. The AI gets distracted by its own instructions. Eventually, the instructions contradict each other, and the model drifts. This is "Prompt Debt," and most teams are drowning in it.
 

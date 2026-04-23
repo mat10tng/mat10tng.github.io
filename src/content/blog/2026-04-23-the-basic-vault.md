@@ -60,7 +60,7 @@ The most important part of the system is the loop. Raw sessions are noisy. Once 
 
 This is how the system improves. You compress the noise into high-signal rules.
 
-## Why start here?
+## Rationale
 
 The MCP bridge makes this faster, but the **discipline of capture** is the core mechanism. If you start with folders, you'll understand exactly what you want your tools to automate later.
 

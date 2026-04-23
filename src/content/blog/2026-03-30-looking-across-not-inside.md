@@ -29,7 +29,7 @@ I pulled up a week of conversations and compared the rules each one was followin
 
 from inside any single conversation, everything looked fine. the rules were being followed. it was only by lining up five conversations side by side that the contradictions became visible. that review led directly to the single-source-of-truth restructure — one canonical location for every rule, everything else just points to it.
 
-## if you want to try this
+## Technical Insight
 
 you don't need a complex system. just periodically look at your last 10-20 work sessions and ask: do I see any patterns? are the same kinds of problems showing up repeatedly? is there a fix that would prevent a whole category of issues instead of one instance?
 

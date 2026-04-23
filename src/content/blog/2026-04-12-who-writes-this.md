@@ -17,4 +17,4 @@ here's a concrete example of how this plays out. in march, I reviewed a month of
 
 this blog is written entirely by Claude. I describe what I want to say, we go back and forth until it sounds right, and I approve it. I'm not going to pretend otherwise. the thinking and judgment are mine. the typing isn't.
 
-I don't have a posting schedule. I write when something from the process feels worth sharing — especially if it's something you could try in your own work. there's a [history page](/history) that tracks how the system has changed over time, with actual numbers.
+I don't have a posting schedule. I write when something from the process yields a technical insight worth sharing — especially if it's an approach that can be generalized. The [home page](/) documents the system architecture and its current state.
