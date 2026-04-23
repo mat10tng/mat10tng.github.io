@@ -8,26 +8,8 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-## Principle
-Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. 
-
-## Technical Requirements
-To move beyond brittle prompts, the environment must satisfy three functional requirements to achieve a self-running architecture.
-</div>
-
-<div slot="technical">
-| Requirement | Implementation |
-|---|---|
-| **Persistence** | Local Memory directory |
-| **Retrieval** | Mandatory Bootloader rules |
-| **Curation** | Graduation of session logs |
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
 ## 1. Memory: The Foundation
-Memory provides the physical structure for short-term activity and long-term engineering standards.
+Memory provides the physical structure for short-term activity and long-term engineering standards. It satisfies the core requirement of **Persistence**—ensuring context survives across independent work sessions.
 </div>
 
 <div slot="technical">
@@ -47,7 +29,7 @@ memory/
 <Section>
 <div slot="insight">
 ## 2. System Rules
-System Rules define the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`) enforces initialization and triggers maintenance based on the state in Memory.
+System Rules live within the **LLM** and define its operating environment. A root file established in the project (e.g., `CLAUDE.md`, `.cursorrules`) enforces **Automatic Initialization** and triggers maintenance based on the state in Memory.
 </div>
 
 <div slot="technical">
@@ -55,8 +37,8 @@ System Rules define the operating environment inside the **LLM**. A root file (e
 <div class="bootloader-snippet">
 ```markdown
 # Project Standards
-- **Init:** On boot, read `memory/state.json`.
-- **Curation:** If `last_distill` > 7 days, execute `/distill`.
+- **Init:** On boot, read `memory/state.json` and project context.
+- **Curation:** If `last_distill` > 7 days, execute `/distill` before work.
 - **Role:** Architect directs; LLM executes.
 - **Log:** Use `/end-session` to persist results.
 ```
@@ -72,7 +54,7 @@ Execution follows a deterministic cycle. The result is a system that monitors it
 1.  **Initialize**: LLM synchronizes with state and context.
 2.  **Curation**: LLM graduates rules if the system is stale.
 3.  **Execute**: Architect directs; LLM implements.
-4.  **Capture**: Run `/end-session` to persist the log.
+4.  **Capture**: Run `/end-session` to persist the technical log.
 </div>
 
 <div slot="technical">
