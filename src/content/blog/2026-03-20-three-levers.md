@@ -5,28 +5,26 @@ pubDate: 2026-03-20
 loop: "work"
 ---
 
-early on, the AI agent kept doing the wrong thing. creating duplicate pages. using the wrong tool. extracting too much from a conversation, or too little. my initial approach was always to look at the code — maybe there's a bug in the agent logic.
+When an AI agent deviates from expected behavior—creating duplicates, using incorrect tools, or extracting imprecise data—the resolution rarely lies in the agent's core code. Diagnosis follows a pattern involving three primary levers.
 
-wrong approach. after enough rounds of debugging, I realized the fix was never in the agent code itself. it was always one of three things.
+## The Three Levers
 
-## the three levers
+**1. The Prompt** (Instruction) — If the agent is capable of an action but fails to execute it, the instruction set is insufficient. If it performs a prohibited action, an explicit constraint is required. Models often fail to infer intent; mandatory rules ("you MUST") are more effective than stylistic suggestions ("it would be nice if").
 
-**1. the prompt** — what you're telling the agent to do. if the agent CAN do something but doesn't, you need an explicit instruction. if it does something wrong, you need an explicit prohibition. the key insight: agents don't infer intent from context the way you'd hope. you have to be specific. "you MUST do X" works. "it would be nice if you did X" doesn't.
+**2. The Tools** (Capability) — Redundant or overlapping tools cause structural ambiguity. If two tools perform similar functions, the model is forced to guess, leading to inconsistent choices. Reliability is achieved by reducing the toolset to a collection of clear, distinct, and uniquely named functions.
 
-**2. the tools** — what the agent has available. we had 7 tools with overlapping purposes. the agent kept picking the wrong one because several of them sounded like they did the same thing. my initial approach was to write better descriptions. wrong fix — the real problem was structural ambiguity. we removed 3 tools entirely. four tools, each with a distinct name and clear purpose. confusion dropped immediately. ([the full story](/blog/2026-03-24-fewer-tools))
+**3. The Constraints** (System Environment) — System limits can prevent task completion. An agent with a small iteration budget may exhaust its resources on content generation, leaving no room for validation or connection. Automation of deterministic tasks (like metadata updates) removes this overhead.
 
-**3. the constraints** — what the system allows. the agent had a 10-iteration budget per conversation. it would spend 8 iterations creating content and only have 2 left for connecting things together. the graph was always incomplete — not because the agent was bad, but because the system didn't give it room to finish. we raised the budget, then went further and automated the connections entirely.
+## Diagnostic Order
 
-## the decision tree
+When behavior issues occur, investigate in this sequence:
 
-when something goes wrong, I check in this order:
+1.  **Instruction Check**: Does the prompt contain a mandatory rule for this case?
+2.  **Tool Check**: Are the available tools distinct and unambiguous?
+3.  **System Check**: Is the environment (budgets, automation) preventing success?
 
-1. **does the prompt tell it what to do?** → add a mandatory rule or prohibition
-2. **are the tools clear and distinct?** → reduce overlap, rename for clarity
-3. **is the system preventing success?** → check limits, automate what the agent shouldn't have to do manually
+Most agent behavior issues trace back to one of these three levers. Diagnosis typically occurs in minutes once the search is localized to these structural areas.
 
-I haven't found a fourth lever. every agent behavior issue I've hit in months of daily work traces back to one of these three. the diagnosis usually takes under 5 minutes once you know where to look.
+## Core Principle
 
-## the deeper principle
-
-don't make the agent do work the system can do automatically. if the agent keeps running out of budget connecting things, automate the connections. if the agent keeps picking the wrong tool, you have too many tools. the agent's job is judgment and generation — everything else should be handled by the system around it.
+Avoid delegating tasks to an agent that a system can perform automatically. An agent's primary utility is judgment and generation; everything else—bookkeeping, connections, validation—should be handled by the surrounding architecture.

@@ -5,19 +5,19 @@ pubDate: 2026-04-24
 loop: "improve"
 ---
 
-After implementing a local vault, the primary source of friction is the manual transfer of data. You must manually ask the model to read files and manually save summaries.
+Manual data transfer is the primary source of friction in a local vault setup. Requesting the model to read files and manually save session summaries creates unnecessary overhead.
 
-The Model Context Protocol (MCP) provides a standard for automating these interactions, allowing the model to interact with your local file system directly.
+The Model Context Protocol (MCP) provides a standard for automating these interactions, enabling direct communication between the model and the local file system.
 
 ## The Simple Bridge
 
-This implementation uses a minimal Node.js script to expose two tools to the model:
-1. `read_lessons`: Autonomously retrieves standards from your vault.
-2. `save_session`: Records the technical outcome of a session directly to the correct project directory.
+Automation is achieved through a minimal Node.js script that exposes two tools:
+1. `read_lessons`: Autonomously retrieves standards from the vault.
+2. `save_session`: Records session outcomes directly to the correct project directory.
 
 ### 1. Implementation
 
-Initialize a new project:
+Initialize the project:
 ```bash
 mkdir simple-bridge
 cd simple-bridge
@@ -27,7 +27,7 @@ npm install @modelcontextprotocol/sdk
 
 ### 2. Logic
 
-Create `index.js`. This server enables direct file system interaction:
+Create `index.js` to enable direct file system interaction:
 
 ```javascript
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
@@ -101,7 +101,7 @@ await server.connect(transport);
 
 ### 3. Configuration
 
-Add the server to your `claude_desktop_config.json`:
+Registration of the server occurs in the `claude_desktop_config.json`:
 
 ```json
 {
@@ -116,8 +116,4 @@ Add the server to your `claude_desktop_config.json`:
 
 ## The Outcome
 
-The model can now maintain the system autonomously. When a task is complete, you simply state:
-
-> "Save a session log for project-x."
-
-The model executes the tool, determines the correct directory, and writes the log. You have removed the manual overhead of context management.
+The Model can now maintain the system autonomously. A command like "Save a session log for project-x" triggers the execution of the tool, determining the correct directory and writing the log without further human intervention. This shift eliminates the manual overhead of context management.

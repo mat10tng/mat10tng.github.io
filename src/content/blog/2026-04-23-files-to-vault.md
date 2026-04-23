@@ -5,13 +5,11 @@ pubDate: 2026-04-23
 loop: "work"
 ---
 
-The baseline implementation of a knowledge system doesn't require a server or a database. It requires a disciplined file structure and a way to force the AI to interact with it.
-
-Here is the functional setup for a local vault.
+The baseline implementation of a knowledge system requires a disciplined file structure and a method for enforcing interaction. Neither a server nor a database is required for this phase.
 
 ## 1. The Structure
 
-Organize your vault into two primary layers: **Global** (standards for all work) and **Projects** (context for specific tasks).
+Organization involves two primary layers: **Global** (standards for all work) and **Projects** (context for specific tasks).
 
 Each project requires two directories:
 - **`sessions/`**: Stores raw logs of what occurred, what was decided, and what failed.
@@ -29,7 +27,7 @@ Each project requires two directories:
 
 ## 2. The Bootloader (CLAUDE.md)
 
-Automation starts with the project configuration. In your `CLAUDE.md`, define the system's operating environment:
+Project configuration is the starting point for automation. Defining the system's operating environment in `CLAUDE.md` ensures the model initializes correctly:
 
 ```markdown
 # The Knowledge System
@@ -38,26 +36,20 @@ Automation starts with the project configuration. In your `CLAUDE.md`, define th
 - **Context:** Always read `~/vault/global/lessons/` and `~/vault/project-x/lessons/` before starting work.
 ```
 
-By defining these paths, you ensure the model initializes with the necessary context every time a session starts.
+## 3. Retrieval (/apply-from-vault)
 
-## 3. The Retrieval Skill (/apply-from-vault)
+Synchronization with current standards is achieved through a direct command to refresh context:
 
-To ensure the model is synchronized with your latest standards, use a direct command to trigger a context refresh:
+**"Run /apply-from-vault: Read all lessons in my vault directories and update operating logic."**
 
-**"Run /apply-from-vault: Read all lessons in my vault directories and update your operating logic."**
-
-This forces the model to fetch and internalize the documentation it previously generated.
+This forces the retrieval of previously documented logic, ensuring continuity between sessions.
 
 ## 4. Maintenance (Distillation)
 
-Raw session logs contain high noise. To maintain system performance, you must periodically compress these logs.
-
-1. Review the recent session notes.
-2. Extract the high-signal logic.
-3. Save these as permanent rules in the `lessons/` directory.
+System performance depends on periodically compressing high-noise session logs into high-signal rules within the `lessons/` directory.
 
 ## Rationale
 
-The MCP bridge makes this faster, but the **discipline of capture** is the core mechanism. If you start with folders, you'll understand exactly what you want your tools to automate later.
+The **discipline of capture** is the core mechanism of the system. Starting with a file-based vault ensures that the logic for future automation is clearly defined through manual practice.
 
-Initial setup: Create the folders, write the `CLAUDE.md` rule, and stop losing what you learn between sessions.
+Initial setup involves creating the directory structure and establishing the `CLAUDE.md` rule to prevent context loss.

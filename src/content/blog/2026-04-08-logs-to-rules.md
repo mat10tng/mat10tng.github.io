@@ -5,23 +5,23 @@ pubDate: 2026-04-08
 loop: "improve"
 ---
 
-Standards do not emerge in a vacuum. They begin as specific patches for recurring problems. The mechanism for improving a system is to identify when a local fix has universal utility.
+Standards begin as patches for specific project problems. The mechanism for continuous system improvement is the identification and graduation of local fixes into universal utility.
 
 ## The Graduation Mechanism
 
-When something fails during a session, the process follows a linear path toward becoming a standard:
+When technical friction occurs during a session, the process follows a linear path:
 
-1.  **Detection**: A recurring technical friction point is identified (e.g., agents selecting ambiguous tools).
-2.  **Local Fix**: A project-specific rule is implemented to handle the immediate instance.
-3.  **Cross-Context Utility**: The same fix is found to solve similar problems in unrelated projects.
-4.  **Graduation**: The logic is moved from the project directory to the global standards directory.
+1.  **Detection**: Identification of a recurring issue (e.g., model selecting ambiguous tools).
+2.  **Local Fix**: Implementation of a project-specific rule to address the instance.
+3.  **Pattern Recognition**: Observation of the same issue in unrelated projects.
+4.  **Graduation**: Relocating the logic from the project directory to the global standards directory.
 
 ## Rationale
 
-Right now, the system maintains approximately 80 global rules. Very few were written upfront. Most are the result of observing patterns of reuse across multiple projects.
+Global rules are rarely authored upfront. They are the result of observing patterns of reuse across multiple contexts. 
 
-If a piece of logic is referenced frequently across different contexts, it is a signal of high utility. By moving it to the global layer, you ensure that every future session inherits that lesson automatically.
+A high frequency of reference across different projects is the primary signal for graduation. Moving logic to the global layer ensures that every future session inherits that standard automatically, reducing the overhead of repetitive instruction.
 
 ## Technical Insight
 
-Do not attempt to predict which standards will be universal. Record logic where it occurs. Let the pattern of reuse dictate which rules graduate to the global level.
+Do not attempt to predict which standards will be universal. Record logic where it occurs. The pattern of reuse determines which rules graduate to the global level.
