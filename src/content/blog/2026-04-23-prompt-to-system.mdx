@@ -1,6 +1,6 @@
 ---
-title: "prompt -> vault"
-description: "establishing the foundational structural boundaries for persistent AI context."
+title: "prompt -> system"
+description: "establishing structural boundaries and a foundational file-based context system."
 pubDate: 2026-04-23
 loop: "improve"
 ---
@@ -9,10 +9,10 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## Principle
-Prompting is a fallback. Reliability comes from the **system** surrounding the model. 
+Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model.
 
 ## The Setup
-A persistent vault requires a disciplined file structure. This removes reliance on model memory and adjective-heavy instructions.
+A system requires a structured environment. This removes reliance on model memory and ensures context persists across independent work sessions.
 </div>
 
 <div slot="technical">
@@ -46,11 +46,11 @@ Define the system's operating environment in a project root file (e.g., `CLAUDE.
 <Section>
 <div slot="insight">
 ## Context Synchronization
-A context refresh skill ensures the model synchronizes with the project's current state and previously documented logic before beginning work.
+A context refresh skill ensures the model synchronizes with the system's current state and previously documented logic before beginning work.
 </div>
 
 <div slot="technical">
-**Command:** `/sync` (or `/apply-from-vault`)
+**Command:** `/sync`
 **Logic:** "Read structure, latest session logs, and distilled lessons. Verify constraints. Do not proceed until verified."
 </div>
 </Section>
@@ -58,6 +58,6 @@ A context refresh skill ensures the model synchronizes with the project's curren
 <Section>
 <div slot="insight">
 ## Result
-The architecture handles the complexity. Prompts remain short because the model inherits its environment from the vault automatically.
+The shift from a prompt to a system. The model inherits its environment from the vault automatically, reducing the overhead of manual instruction.
 </div>
 </Section>

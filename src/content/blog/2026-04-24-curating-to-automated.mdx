@@ -1,6 +1,6 @@
 ---
-title: "manual -> automated"
-description: "connecting vaults to models via MCP."
+title: "self-curating -> automated"
+description: "automating context management by connecting the knowledge base via MCP."
 pubDate: 2026-04-24
 loop: "improve"
 ---
@@ -9,16 +9,16 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## Principle
-Remove the friction of manual context transfer by enabling direct model interaction with the file system.
+Automation removes the human bookkeeping required to maintain a self-curating system. The Model Context Protocol (MCP) enables direct, autonomous model interaction with the file system.
 
-## Toolset
+## Automation Toolset
 - **`read_lessons`**: Retrieves standards autonomously.
 - **`save_session`**: Records outcomes directly to project directories.
 </div>
 
 <div slot="technical">
 ```bash
-# Setup
+# Setup simple-bridge
 mkdir simple-bridge
 cd simple-bridge
 npm init -y
@@ -29,8 +29,8 @@ npm install @modelcontextprotocol/sdk
 
 <Section>
 <div slot="insight">
-## Bridge Logic
-Expose file system tools via `StdioServerTransport` for local, low-latency execution.
+## Bridge Implementation
+The bridge script exposes the file system to the model, allowing it to perform its own retrieval and logging without manual prompting.
 </div>
 
 <div slot="technical">
@@ -51,21 +51,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
 <Section>
 <div slot="insight">
-## Outcome
-Autonomous context management. A command like "Save a session log" writes directly to the vault without human bookkeeping.
-</div>
-
-<div slot="technical">
-```json
-// Example Configuration
-{
-  "mcpServers": {
-    "bridge": {
-      "command": "node",
-      "args": ["/path/to/simple-bridge/index.js"]
-    }
-  }
-}
-```
+## Result
+The shift from a manual to an automated system. The model maintains the architecture autonomously, ensuring the vault is updated and lessons are applied without human intervention.
 </div>
 </Section>
