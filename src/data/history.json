@@ -1,17 +1,30 @@
 {
   "current": {
-    "total_notes": 1429,
-    "compounding": 88,
-    "success_30d": 88,
-    "top_cited": ["knowledge-first architecture", "controlling agent behavior", "multi-session isolation"],
-    "total_rules": 80,
-    "sessions_tracked": 48
+    "total_notes": 1886,
+    "compounding": 92,
+    "success_30d": 90,
+    "top_cited": ["responsibility transfer", "agent-prompt-pair", "visual-first auditing"],
+    "total_rules": 86,
+    "sessions_tracked": 52
   },
   "evolutions": [
     {
       "id": "now",
-      "date": "2026-04-12",
+      "date": "2026-04-23",
       "label": "now",
+      "notes": 1886,
+      "rules": 86,
+      "reuse": 92,
+      "success": 90,
+      "steps": ["work", "capture", "review", "improve", "measure"],
+      "branch": { "from": 3, "label": "measure" },
+      "rules_added": ["responsibility-transfer", "agent-prompt-pair", "bad-vs-good-examples"],
+      "insight": "moved from prompt-engineering to structural-engineering. focus shifted to transferring responsibility away from the agent for deterministic tasks (IDs, bookkeeping)."
+    },
+    {
+      "id": "2026-04-12",
+      "date": "2026-04-12",
+      "label": "week 5",
       "notes": 1429,
       "rules": 80,
       "reuse": 88,
