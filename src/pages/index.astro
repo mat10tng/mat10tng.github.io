@@ -45,6 +45,46 @@ import historyData from '../data/history.json';
 			}
 			.layer-desc a { color: #2563eb; text-decoration: none; font-weight: 500; }
 			.layer-desc a:hover { text-decoration: underline; }
+
+			.path-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 1.5rem;
+				margin-top: 1rem;
+			}
+			.path-card {
+				text-decoration: none;
+				padding: 1.5rem;
+				border: 1px solid #eee;
+				border-radius: 8px;
+				transition: all 0.2s;
+				display: block;
+			}
+			.path-card:hover {
+				border-color: #2563eb;
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+			}
+			.path-step {
+				font-size: 0.7rem;
+				font-weight: 700;
+				color: #2563eb;
+				margin-bottom: 0.5rem;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+			}
+			.path-title {
+				font-size: 1.1rem;
+				font-weight: 600;
+				color: #333;
+				margin-bottom: 0.5rem;
+			}
+			.path-desc {
+				font-size: 0.88rem;
+				color: #666;
+				line-height: 1.5;
+				margin: 0;
+			}
 		</style>
 	</head>
 	<body>
@@ -144,6 +184,33 @@ import historyData from '../data/history.json';
 					<p class="layer-desc" style="margin-top: 2rem;">
 						Explore: <a href="/blog">Journal (Work & Insights)</a> · <a href="/history">Timeline (System Evolution)</a>
 					</p>
+				</div>
+
+				<!-- START HERE -->
+				<div class="layer">
+					<div class="layer-label">Start Here: The Path</div>
+					<div class="path-grid">
+						<a href="/blog/2026-04-23-prompting-is-a-smell" class="path-card">
+							<div class="path-step">01</div>
+							<div class="path-title">The Mindset Shift</div>
+							<p class="path-desc">Why you need systems, not better adjectives.</p>
+						</a>
+						<a href="/blog/2026-04-23-the-basic-vault" class="path-card">
+							<div class="path-step">02</div>
+							<div class="path-title">The Foundation</div>
+							<p class="path-desc">Set up your vault with zero code.</p>
+						</a>
+						<a href="/blog/2026-04-08-rules-that-graduate" class="path-card">
+							<div class="path-step">03</div>
+							<div class="path-title">The Loop</div>
+							<p class="path-desc">How to turn daily work into permanent rules.</p>
+						</a>
+						<a href="/blog/2026-04-24-your-first-mcp" class="path-card">
+							<div class="path-step">04</div>
+							<div class="path-title">The Automation</div>
+							<p class="path-desc">Your first step into the Model Context Protocol.</p>
+						</a>
+					</div>
 				</div>
 			</section>
 		</main>
