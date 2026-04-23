@@ -9,34 +9,38 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-**ELI5:** Instead of trying to write the perfect prompt every time, we build a simple folder system (Memory) that the AI reads before it starts working. This way, the AI "remembers" your rules and previous work automatically.
+## Abstract
+Reliability in AI engineering is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. A static system degrades; an effective architecture must autonomously identify and graduate project lessons into permanent standards.
 
-## The Goal
-Moving from brittle, adjective-heavy instructions to a persistent **system** that surrounds the model. 
-
-## Requirements
-To move beyond manual prompts, the system needs:
-1. **Memory**: Context must survive across different chats.
-2. **Focus**: The model must prioritize your local rules over its general training.
-3. **Growth**: The system must learn from fixes and turn them into permanent rules.
+## Technical Requirements
+The environment must satisfy three functional requirements to enable autonomous performance:
+1. **Persistence**: Context must survive across independent work sessions.
+2. **Retrieval**: The model must prioritize local project rules over general training.
+3. **Growth**: The system must automatically identify and remember lessons from previous work.
 </div>
 
 <div slot="technical">
-| Need | Solution |
+| Requirement | Implementation |
 |---|---|
-| **Memory** | Local folders |
-| **Focus** | Mandatory System Rules |
-| **Growth** | Graduation of logs |
+| **Persistence** | Local Memory directory |
+| **Retrieval** | Mandatory System Rules |
+| **Growth** | Graduation of session logs |
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 1. Memory: The Foundation
-Memory provides the folders for storing short-term activity and long-term rules. This ensures context survives even if you start a fresh chat.
+## 1. Memory Structure
+The foundation is a structured directory hierarchy. This ensures the model has a deterministic location to store and retrieve project-specific history and global rules.
 </div>
 
 <div slot="technical">
+**Linux / macOS / Windows**
+```bash
+# Initial Scaffolding
+mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
+```
+
 **Folder Structure**
 ```text
 memory/
@@ -45,52 +49,41 @@ memory/
 │   └── lessons/ (universal)
 └── project-x/
     ├── sessions/ (activity logs)
-    └── lessons/ (local standards)
-```
-
-**Setup (Bash)**
-```bash
-mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
+    └── lessons/ (local rules)
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 2. The Skills
-Skills are simple instructions that teach the model how to use its Memory.
+## 2. Functional Skills
+Skills are reusable prompt instructions that define the model's interaction with Memory.
 
-### Capture (`/end-session`)
-Summarizes the work and saves it to the right folder.
-
-### Curation (`/distill`)
-The "learning" part. The model looks at recent logs and creates permanent rules in the `lessons/` folder.
+**Capture**: Summarizes the technical decisions of the current session.
+**Curation**: Identifies recurring patterns and graduates them to permanent standards.
 </div>
 
 <div slot="technical">
-**Skill: `/init-project`**
-> "Scaffold the Memory structure for a new project: `memory/name/{sessions,lessons}`."
-
 **Skill: `/end-session`**
-> "Summarize technical decisions. Save to `memory/project-x/sessions/[date]-[goal].md`."
+> "Summarize the technical decisions of this session. Save the result as a new markdown file in `memory/project-x/sessions/[date]-[goal].md`."
 
 **Skill: `/distill`**
-> "Identify 3 recurring patterns from recent logs. Move to `global/lessons/`. Update `memory/state.json`."
+> "Identify 3 recurring patterns from recent logs. Move them to `global/lessons/`. Update the `last_distill` date in `memory/state.json`."
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
 ## 3. System Rules
-These rules live inside the **LLM** (via `CLAUDE.md` or `.cursorrules`). They force the model to initialize itself and follow your maintenance schedule automatically.
+System Rules live within the LLM (via `CLAUDE.md`, `.cursorrules`). They enforce **Automatic Initialization** and the maintenance schedule.
 </div>
 
 <div slot="technical">
-**System Rules (e.g. `CLAUDE.md`)**
+**Project Configuration**
 ```markdown
 # Project Standards
 - **Init:** On boot, read `memory/state.json`.
-- **Curation:** If `last_distill` > 7 days, execute `/distill`.
+- **Curation:** If `last_distill` > 7 days, execute `/distill` before work.
 - **Role:** Architect directs; LLM executes.
 - **Log:** Use `/end-session` to persist results.
 - **Skills:** [/init-project, /end-session, /distill]
@@ -100,10 +93,12 @@ These rules live inside the **LLM** (via `CLAUDE.md` or `.cursorrules`). They fo
 
 <Section>
 <div slot="insight">
-## The Daily Loop
-1. **Boot**: The model reads your state and context automatically.
-2. **Learn**: If the system is stale, the model graduations rules first.
-3. **Work**: You provide goals; the model implements them within your boundaries.
-4. **Save**: You run `/end-session` to save the learning.
+## The Daily Workflow
+The result is an evolving system that starts with context. The LLM inherits its environment automatically, and the architecture absorbs new standards through a verified pattern of reuse.
+
+1. **Boot**: LLM reads root state and context.
+2. **Curation**: LLM graduates rules if stale.
+3. **Execute**: Architect directs; LLM implements.
+4. **Capture**: Run `/end-session` to persist the log.
 </div>
 </Section>

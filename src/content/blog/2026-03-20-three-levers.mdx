@@ -9,24 +9,17 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-**ELI5:** When an AI makes a mistake, it's usually because of one of three things: the instructions are unclear, it has too many confusing tools, or the system limits are too tight. Check them in that order to fix the problem fast.
+## Abstract
+Agent deviation is rarely a code bug. Diagnosis localizes to three structural levers: Instructions, Capability, and Environment. Investigate in that order to resolve behavioral issues.
 
-## Principle
-When a model goes off track, it's rarely a "code bug." It's usually a structural issue in one of three areas.
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
 ## 1. The Instructions (Prompt)
-The instructions are either too vague or missing a "MUST DO" rule. 
-**Fix**: Add clear, mandatory rules in your system rules file.
+If the model is capable but fails to execute, the instruction set is insufficient. **Fix**: Explicit, mandatory rules in System Rules.
 </div>
 
 <div slot="technical">
 ```markdown
 - **Rule:** You MUST verify the build.
-- **Rule:** Do NOT use old library versions.
+- **Rule:** Do NOT use library X.
 ```
 </div>
 </Section>
@@ -34,21 +27,19 @@ The instructions are either too vague or missing a "MUST DO" rule.
 <Section>
 <div slot="insight">
 ## 2. The Tools (Capability)
-The model is confused by too many tools that do the same thing.
-**Fix**: Merge tools and give them unique, simple names.
+Structural ambiguity caused by redundant tools leads to inconsistent choices. **Fix**: Consolidate into uniquely named functions.
 </div>
 
 <div slot="technical">
-- Combine `update_file` and `patch_file`.
-- Use specific names like `search_memory`.
+- Merge overlapping MCP tools.
+- Use precise, functional names.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
 ## 3. The Limits (Environment)
-The system is stopping the model before it can finish (e.g., timeouts or token limits).
-**Fix**: Raise your system limits in your config.
+System limits (timeouts, iteration budgets) prevent task completion. **Fix**: Raise limits or automate bookkeeping.
 </div>
 
 <div slot="technical">
@@ -56,12 +47,5 @@ The system is stopping the model before it can finish (e.g., timeouts or token l
 MAX_ITERATIONS=15
 TIMEOUT_MS=30000
 ```
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## Fix Order
-1. Check **Instructions** → 2. Check **Tooling** → 3. Check **Limits**.
 </div>
 </Section>

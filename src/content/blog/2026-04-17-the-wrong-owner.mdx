@@ -9,42 +9,35 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-**ELI5:** AI is great at writing but bad at counting things exactly. If the AI keeps making mistakes with numbers or page IDs, stop asking it to "try harder." Instead, write a simple script that handles the counting for it.
+## Abstract
+Probabilistic models are unreliable for deterministic tasks like counting, bookkeeping, or ID management. Reliability is achieved by transferring these responsibilities to the surrounding system logic.
 
-## Principle
-Fix "hallucinations" by taking the job away from the AI and giving it to a simple bit of code.
+## Task Ownership
+When a task fails, verify if it should be delegated to the LLM.
 </div>
 
 <div slot="technical">
-| Task | Best Performer |
+| Task | Correct Owner |
 |---|---|
-| **Counting & Math** | Code / Database |
-| **Enforcing Rules** | Scripts / CI |
-| **Brainstorming** | AI Model |
+| **Bookkeeping** | Database / Code |
+| **Enforcement** | CI / Validation Scripts |
+| **Synthesis** | AI Model |
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Example: Unique IDs
-Instead of telling the model to "please don't duplicate IDs," give it a tool that checks for duplicates automatically.
+## Implementation: ID Validation
+Instead of instructing a model to "be careful" with identifiers, implement a hard check in the interface tool.
 </div>
 
 <div slot="technical">
 ```javascript
-// Simple ID Check
-function checkDuplicate(id, list) {
-    if (list.includes(id)) {
-        throw Error("Duplicate ID found!");
+function validateId(id, set) {
+    if (set.has(id)) {
+        throw Error("Deterministic Error: Duplicate ID");
     }
 }
 ```
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## Result
-The system becomes more stable because the AI doesn't have to worry about bookkeeping. It can focus on the creative work.
 </div>
 </Section>

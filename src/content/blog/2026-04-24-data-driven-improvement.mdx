@@ -9,14 +9,18 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-**ELI5:** Now that we have a memory system, we use automation (MCP) so we don't have to manually tell the AI to save or read files. We also track numbers to make sure the system is actually getting better over time.
+## Abstract
+Automation removes manual bookkeeping. By persisting system metadata in a root `state.json` file, the architecture can autonomously trigger maintenance tasks—such as distillation and health checks—without direct intervention from the Architect.
 
-## Principle
-Automation removes the boring bookkeeping. By saving system info in a `state.json` file, the architecture can trigger its own maintenance—like cleaning up old logs and updating rules—without you asking.
+## Core Metrics
+Measurement provides the data necessary to verify that architectural changes actually improve model performance:
+- **Reuse Rate**: Frequency of sessions utilizing distilled lessons.
+- **Success Rate**: Frequency of tasks completed without technical regression.
+- **Rule Count**: Growth of distilled engineering standards in Memory.
 </div>
 
 <div slot="technical">
-**System State (`memory/state.json`)**
+**Global State (`memory/state.json`)**
 ```json
 {
   "last_distill_date": "2026-04-17",
@@ -29,8 +33,8 @@ Automation removes the boring bookkeeping. By saving system info in a `state.jso
 
 <Section>
 <div slot="insight">
-## Automatic Maintenance
-The Interface (MCP) tools check the state file to decide when to run. If the system is getting "stale," the model handles the cleanup before starting new project work.
+## Autonomous Maintenance
+Interface (MCP) tools use the root state data to determine operational schedules. If state criteria are met, the model executes curation logic before accepting project goals.
 </div>
 
 <div slot="technical">
@@ -49,11 +53,11 @@ if (daysSince(state.last_distill) > 7) {
 <Section>
 <div slot="insight">
 ## The Automated Loop
-The result is a system that maintains itself. It uses its own data to get smarter, ensuring engineering standards grow without you having to manage folders manually.
+The result is a self-maintaining system. It uses its own data to evolve, ensuring that engineering standards compound over time without manual context management.
 
-1.  **Boot**: The model reads your state and rules.
-2.  **Fix**: The model cleans itself up if needed.
-3.  **Work**: You build, and the model follows the latest rules.
-4.  **Save**: The model saves its own logs automatically.
+1.  **Boot**: LLM reads root state and project rules.
+2.  **Maintenance**: LLM runs global curation autonomously.
+3.  **Execute**: Technical work proceeds with fresh standards.
+4.  **Persist**: Session data and updated state are saved to Memory.
 </div>
 </Section>

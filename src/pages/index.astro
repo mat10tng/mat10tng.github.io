@@ -12,24 +12,25 @@ import historyData from '../data/history.json';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			.hero {
-				max-width: 900px;
-				margin: 0 auto;
-				padding: 2rem 1rem;
+				margin-bottom: 4rem;
 			}
-			.hero h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+			.hero h1 { font-size: 1.75rem; margin-bottom: 1rem; }
 			.hero .intro {
-				color: #666; font-size: 1rem; line-height: 1.6; margin-bottom: 3rem;
+				color: var(--gray-dark); font-size: 1.1rem; line-height: 1.6;
+                font-style: italic;
 			}
 			.layer { margin-bottom: 4rem; }
 			.layer-label {
+				font-family: var(--font-sans);
 				font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-				letter-spacing: 0.12em; color: #999; margin-bottom: 1.5rem;
+				letter-spacing: 0.1em; color: var(--gray); margin-bottom: 1.5rem;
+                border-bottom: 1px solid var(--gray-light);
+                padding-bottom: 0.5rem;
 			}
 			.diagram-wrap { 
 				overflow-x: auto; 
-				margin-bottom: 2rem;
+				margin: 2rem 0;
 				background: #fff;
-				border-radius: 8px;
 			}
 			.diagram-wrap svg { 
 				display: block; 
@@ -38,18 +39,18 @@ import historyData from '../data/history.json';
 				height: auto; 
 				margin: 0 auto;
 			}
-			.diagram-wrap svg text { font-family: system-ui, -apple-system, sans-serif; }
+			.diagram-wrap svg text { font-family: var(--font-sans); }
 			.layer-desc {
-				font-size: 0.95rem; color: #444; line-height: 1.6; max-width: 720px;
+				font-size: 1rem; color: var(--black); line-height: 1.7; max-width: 720px;
 				margin-top: 1rem;
 			}
-			.layer-desc a { color: #2563eb; text-decoration: none; font-weight: 500; }
-			.layer-desc a:hover { text-decoration: underline; }
+			.layer-desc a { color: var(--accent); text-decoration: underline; }
 
+            /* Technical Link List */
 			.path-grid {
 				display: flex;
 				flex-direction: column;
-				gap: 1.25rem;
+				gap: 1.5rem;
 				margin-top: 1.5rem;
 			}
 			.path-link {
@@ -59,9 +60,9 @@ import historyData from '../data/history.json';
 				gap: 1rem;
 			}
 			.path-step {
-				font-size: 0.75rem;
+				font-size: 0.85rem;
 				font-weight: 700;
-				color: #999;
+				color: var(--gray);
 				font-family: ui-monospace, monospace;
 				width: 2rem;
 			}
@@ -70,41 +71,26 @@ import historyData from '../data/history.json';
 				flex-direction: column;
 			}
 			.path-title {
-				font-size: 1.05rem;
-				font-weight: 600;
-				color: #2563eb;
+				font-size: 1.1rem;
+				font-weight: 700;
+				color: var(--accent);
+                text-decoration: underline;
 			}
 			.path-link:hover .path-title {
-				text-decoration: underline;
+				color: var(--black);
 			}
 			.path-desc {
 				font-size: 0.95rem;
-				color: #666;
+				color: var(--gray-dark);
 				line-height: 1.5;
-				margin: 0.15rem 0 0 0;
+				margin: 0.25rem 0 0 0;
 			}
-            
-            /* Workflow grid style */
-            .workflow-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 1rem;
-                margin-top: 1rem;
-            }
-            .workflow-link {
-                text-decoration: none;
-                padding: 0.75rem;
-                border: 1px solid #eee;
-                border-radius: 6px;
-                font-size: 0.85rem;
-                color: #555;
-                text-align: center;
-                transition: all 0.2s;
-            }
-            .workflow-link:hover {
-                border-color: #2563eb;
-                color: #2563eb;
-                background: #f8fbff;
+
+            /* Workflow SVG styles */
+            .workflow-svg-link:hover {
+                fill: var(--accent) !important;
+                font-weight: 700;
+                cursor: pointer;
             }
 		</style>
 	</head>
@@ -112,12 +98,11 @@ import historyData from '../data/history.json';
 		<Header />
 		<main>
 			<section class="hero">
-				<h1>How I work with AI assistants</h1>
+				<h1>Working with AI assistants</h1>
 				<p class="intro">
-					A system for persistent learning through structural context and automated engineering standards.
+					Notes on persistent memory, architectural boundaries, and automated engineering standards.
 				</p>
 
-				<!-- THE ARCHITECTURE -->
 				<div class="layer">
 					<div class="layer-label">System Architecture</div>
 					<div class="diagram-wrap">
@@ -134,78 +119,54 @@ import historyData from '../data/history.json';
 							<polygon points="476,60 480,68 484,60" fill="#bbb"/>
 
 							<!-- Memory -->
-							<rect x="4" y="68" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
-							<text x="82" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">Memory</text>
-							<text x="82" y="105" text-anchor="middle" font-size="9" fill="#888">persistent knowledge</text>
+							<rect x="4" y="68" width="156" height="106" rx="4" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+							<text x="82" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#2563eb">Memory</text>
 							
-							<!-- project structure -->
-							<rect x="14" y="115" width="64" height="20" rx="3" fill="none" stroke="#ddd" stroke-width="1"/>
-							<text x="46" y="128" text-anchor="middle" font-size="9" fill="#777">project A</text>
-							<rect x="86" y="115" width="64" height="20" rx="3" fill="none" stroke="#ddd" stroke-width="1"/>
-							<text x="118" y="128" text-anchor="middle" font-size="9" fill="#777">project B</text>
-							<rect x="42" y="142" width="80" height="20" rx="3" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 1"/>
-							<text x="82" y="155" text-anchor="middle" font-size="9" font-weight="600" fill="#2563eb">global rules</text>
-							
-							<!-- graduation arrow -->
-							<line x1="46" y1="135" x2="62" y2="142" stroke="#ccc" stroke-width="0.8"/>
-							<line x1="118" y1="135" x2="102" y2="142" stroke="#ccc" stroke-width="0.8"/>
+							<!-- folder representation -->
+							<rect x="14" y="105" width="60" height="18" rx="2" fill="none" stroke="#ddd" stroke-width="1"/>
+							<text x="44" y="117" text-anchor="middle" font-size="8" fill="#777">/sessions</text>
+							<rect x="82" y="105" width="60" height="18" rx="2" fill="none" stroke="#ddd" stroke-width="1"/>
+							<text x="112" y="117" text-anchor="middle" font-size="8" fill="#777">/lessons</text>
+							<rect x="42" y="128" width="80" height="18" rx="2" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 1"/>
+							<text x="82" y="140" text-anchor="middle" font-size="8" font-weight="600" fill="#2563eb">global rules</text>
 
 							<!-- Interface -->
-							<rect x="202" y="68" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-							<text x="280" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">Interface</text>
-							<text x="280" y="105" text-anchor="middle" font-size="9" fill="#888">rules & context</text>
+							<rect x="202" y="68" width="156" height="106" rx="4" fill="none" stroke="#333" stroke-width="1.2"/>
+							<text x="280" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#333">Interface</text>
 							
-							<text x="220" y="125" font-size="10" fill="#666">search</text>
-							<text x="220" y="140" font-size="10" fill="#666">capture</text>
-							<text x="220" y="155" font-size="10" fill="#666">brief</text>
-							<text x="300" y="125" font-size="10" fill="#666">measure</text>
-							<text x="300" y="140" font-size="10" fill="#666">compact</text>
-							<text x="300" y="155" font-size="10" fill="#666">archive</text>
+							<text x="220" y="115" font-size="9" fill="#666">search</text>
+							<text x="220" y="130" font-size="9" fill="#666">capture</text>
+							<text x="300" y="115" font-size="9" fill="#666">measure</text>
+							<text x="300" y="130" font-size="9" fill="#666">compact</text>
 
 							<!-- LLM -->
-							<rect x="400" y="68" width="156" height="116" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-							<text x="478" y="88" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
-							<text x="478" y="101" text-anchor="middle" font-size="9" fill="#888">execution unit</text>
+							<rect x="400" y="68" width="156" height="126" rx="4" fill="none" stroke="#333" stroke-width="1.2"/>
+							<text x="478" y="88" text-anchor="middle" font-size="13" font-weight="700" fill="#333">LLM</text>
                             
                             <!-- System Rules inside LLM -->
-                            <a href="/blog/2026-04-23-prompt-to-self-curating#2-system-rules">
-							    <rect x="410" y="110" width="136" height="18" rx="3" fill="#f8f9fa" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="2 1"/>
-							    <text x="478" y="122" text-anchor="middle" font-size="8.5" font-weight="600" fill="#2563eb">System Rules</text>
+                            <a href="/blog/2026-04-23-prompt-to-self-curating#3-system-rules">
+							    <rect x="410" y="100" width="136" height="18" rx="2" fill="#f9fafb" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="2 1"/>
+							    <text x="478" y="112" text-anchor="middle" font-size="8.5" font-weight="600" fill="#2563eb">System Rules</text>
                             </a>
 							
                             <!-- Workflow links inside LLM -->
-                            <a href="/blog/2026-04-25-brainstorm"><text x="418" y="142" font-size="9.5" fill="#666" class="workflow-svg-link">brainstorm</text></a>
-							<a href="/blog/2026-04-27-debug"><text x="418" y="154" font-size="9.5" fill="#666" class="workflow-svg-link">debug</text></a>
-							<a href="/blog/2026-04-29-review"><text x="418" y="166" font-size="9.5" fill="#666" class="workflow-svg-link">review</text></a>
-							<a href="/blog/2026-04-26-implement"><text x="500" y="142" font-size="9.5" fill="#666" class="workflow-svg-link">implement</text></a>
-							<a href="/blog/2026-04-28-test"><text x="500" y="154" font-size="9.5" fill="#666" class="workflow-svg-link">test</text></a>
-							<a href="/blog/2026-04-30-deploy"><text x="500" y="166" font-size="9.5" fill="#666" class="workflow-svg-link">deploy</text></a>
+                            <a href="/blog/2026-04-25-brainstorm"><text x="418" y="132" font-size="9.5" fill="#666" class="workflow-svg-link">brainstorm</text></a>
+							<a href="/blog/2026-04-27-debug"><text x="418" y="145" font-size="9.5" fill="#666" class="workflow-svg-link">debug</text></a>
+							<a href="/blog/2026-04-29-review"><text x="418" y="158" font-size="9.5" fill="#666" class="workflow-svg-link">review</text></a>
+							<a href="/blog/2026-04-26-implement"><text x="500" y="132" font-size="9.5" fill="#666" class="workflow-svg-link">implement</text></a>
+							<a href="/blog/2026-04-28-test"><text x="500" y="145" font-size="9.5" fill="#666" class="workflow-svg-link">test</text></a>
+							<a href="/blog/2026-04-30-deploy"><text x="500" y="158" font-size="9.5" fill="#666" class="workflow-svg-link">deploy</text></a>
 
-							<!-- arrows: Memory ↔ Interface -->
-							<line x1="160" y1="110" x2="202" y2="110" stroke="#bbb" stroke-width="1.5"/>
-							<polygon points="198,107 206,110 198,113" fill="#bbb"/>
-							<line x1="202" y1="130" x2="160" y2="130" stroke="#bbb" stroke-width="1.5"/>
-							<polygon points="164,127 156,130 164,133" fill="#bbb"/>
+							<!-- arrows -->
+							<line x1="160" y1="110" x2="202" y2="110" stroke="#bbb" stroke-width="1.2"/>
+							<line x1="358" y1="110" x2="400" y2="110" stroke="#bbb" stroke-width="1.2"/>
+							<line x1="280" y1="48" x2="280" y2="110" stroke="#bbb" stroke-width="1.2"/>
+							<polygon points="276,108 280,116 284,108" fill="#bbb"/>
 
-							<!-- arrows: Interface ↔ LLM -->
-							<line x1="358" y1="110" x2="400" y2="110" stroke="#bbb" stroke-width="1.5"/>
-							<polygon points="396,107 404,110 396,113" fill="#bbb"/>
-							<line x1="400" y1="130" x2="358" y2="130" stroke="#bbb" stroke-width="1.5"/>
-							<polygon points="362,127 354,130 362,133" fill="#bbb"/>
-
-							<!-- arrow labels -->
-							<text x="181" y="105" text-anchor="middle" font-size="8" font-weight="500" fill="#999">recall</text>
-							<text x="181" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#999">store</text>
-							<text x="379" y="105" text-anchor="middle" font-size="8" font-weight="500" fill="#999">context</text>
-							<text x="379" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#999">results</text>
-
-							<!-- feedback loop -->
-							<text x="280" y="195" text-anchor="middle" font-size="10" font-weight="500" fill="#888">↻ improvements cycle back into Memory</text>
-
-							<!-- bottom stats -->
-							<text x="82" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">{historyData.current.total_notes}+ notes</text>
-							<text x="280" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">automated maintenance</text>
-							<text x="478" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">human-architected</text>
+							<!-- labels -->
+							<text x="181" y="105" text-anchor="middle" font-size="8" fill="#999">recall</text>
+							<text x="379" y="105" text-anchor="middle" font-size="8" fill="#999">context</text>
+							<text x="280" y="205" text-anchor="middle" font-size="9" font-style="italic" fill="#888">↻ improvements cycle back into Memory</text>
 						</svg>
 					</div>
 					<p class="layer-desc">
@@ -213,18 +174,14 @@ import historyData from '../data/history.json';
 					</p>
 				</div>
 
-				<!-- START HERE -->
 				<div class="layer">
-					<div class="layer-header" style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem;">
-						<div class="layer-label" style="margin-bottom: 0;">Implementation Path</div>
-						<div style="font-size: 0.7rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em;">Overview: Memory → Interface → LLM</div>
-					</div>
+					<div class="layer-label">Implementation Path</div>
 					<div class="path-grid">
 						<a href="/blog/2026-04-23-prompt-to-self-curating" class="path-link">
 							<div class="path-step">01</div>
 							<div class="path-content">
 								<div class="path-title">prompt -> persistent memory</div>
-								<p class="path-desc">How to build a system that remembers work and curates lessons automatically.</p>
+								<p class="path-desc">Defining foundational boundaries and a self-curating local context system.</p>
 							</div>
 						</a>
 						<a href="/blog/2026-04-24-data-driven-improvement" class="path-link">
@@ -237,35 +194,6 @@ import historyData from '../data/history.json';
 					</div>
 				</div>
 
-				<!-- THE CYCLE -->
-				<div class="layer">
-					<div class="layer-label">The Collaboration Cycle</div>
-					<div class="path-grid">
-						<div class="path-link">
-							<div class="path-step">01</div>
-							<div class="path-content">
-								<div class="path-title" style="color: #333;">Automatic Initialization</div>
-								<p class="path-desc">On boot, the model reads Memory to synchronize with current technical standards.</p>
-							</div>
-						</div>
-						<div class="path-link">
-							<div class="path-step">02</div>
-							<div class="path-content">
-								<div class="path-title" style="color: #333;">Direct Execution</div>
-								<p class="path-desc">The Architect directs goals; the LLM implements logic within system boundaries.</p>
-							</div>
-						</div>
-						<div class="path-link">
-							<div class="path-step">03</div>
-							<div class="path-content">
-								<div class="path-title" style="color: #333;">Persist Learning</div>
-								<p class="path-desc">At completion, the session is logged and new logic is distilled into permanent rules.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- CORE CONCEPTS -->
 				<div class="layer">
 					<div class="layer-label">Core Concepts</div>
 					<div class="path-grid">
@@ -290,10 +218,3 @@ import historyData from '../data/history.json';
 		<Footer />
 	</body>
 </html>
-<style is:global>
-    .workflow-svg-link:hover {
-        fill: #2563eb !important;
-        font-weight: 700;
-        cursor: pointer;
-    }
-</style>
