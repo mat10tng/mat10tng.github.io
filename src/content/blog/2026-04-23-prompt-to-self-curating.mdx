@@ -1,7 +1,7 @@
 ---
 id: "step-01-prompt-to-self-curating"
-title: "prompt -> persistent memory"
-description: "establishing structural boundaries and a self-improving context system."
+title: "Never repeat a prompt: building project-agnostic memory"
+description: "stop writing the same instructions. how to build a system that inherits context automatically."
 pubDate: 2026-04-23
 loop: "improve"
 ---
@@ -10,20 +10,20 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## Abstract
-Reliability in AI engineering is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. A static system degrades; an effective architecture must autonomously identify and graduate project lessons into permanent standards.
+Reliability in AI engineering comes from a persistent **system** that surrounds the model, not the adjectives inside the prompt. A static system degrades; an effective architecture must autonomously identify and graduate lessons into permanent standards.
 
-## Technical Requirements
-The environment must satisfy three functional requirements to enable autonomous performance:
-1. **Persistence**: Context must survive across independent work sessions.
-2. **Retrieval**: The model must prioritize local project rules over general training.
-3. **Growth**: The system must automatically identify and remember lessons from previous work.
+## Requirements
+To move beyond manual prompts, the environment needs:
+1. **Persistence**: Context must survive across different chats.
+2. **Focus**: The model must prioritize local project rules over its general training.
+3. **Growth**: The system must automatically learn from fixes and turn them into permanent rules.
 </div>
 
 <div slot="technical">
-| Requirement | Implementation |
+| Need | Solution |
 |---|---|
 | **Persistence** | Local Memory directory |
-| **Retrieval** | Mandatory System Rules |
+| **Focus** | Mandatory System Rules |
 | **Growth** | Graduation of session logs |
 </div>
 </Section>
@@ -31,7 +31,9 @@ The environment must satisfy three functional requirements to enable autonomous 
 <Section>
 <div slot="insight">
 ## 1. Memory Structure
-The foundation is a structured directory hierarchy. This ensures the model has a deterministic location to store and retrieve project-specific history and global rules.
+The foundation is a structured directory hierarchy. This ensures the model has a deterministic location to store and retrieve project-specific history and global rules. 
+
+You should never have to prompt the AI with your project's basic stack or file paths more than once.
 </div>
 
 <div slot="technical">
@@ -46,10 +48,10 @@ mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
 memory/
 ├── state.json (metadata)
 ├── global/
-│   └── lessons/ (universal)
+│   └── lessons/ (universal standards)
 └── project-x/
     ├── sessions/ (activity logs)
-    └── lessons/ (local rules)
+    └── lessons/ (local standards)
 ```
 </div>
 </Section>
@@ -60,7 +62,7 @@ memory/
 Skills are reusable prompt instructions that define the model's interaction with Memory.
 
 **Capture**: Summarizes the technical decisions of the current session.
-**Curation**: Identifies recurring patterns and graduates them to permanent standards.
+**Self-Curation**: Identifies recurring patterns and graduates them to permanent standards.
 </div>
 
 <div slot="technical">
@@ -75,7 +77,7 @@ Skills are reusable prompt instructions that define the model's interaction with
 <Section>
 <div slot="insight">
 ## 3. System Rules
-System Rules live within the LLM (via `CLAUDE.md`, `.cursorrules`). They enforce **Automatic Initialization** and the maintenance schedule.
+System Rules define the operating environment inside the LLM (via `CLAUDE.md`, `.cursorrules`). They enforce **Automatic Initialization** and the maintenance schedule.
 </div>
 
 <div slot="technical">
@@ -97,8 +99,8 @@ System Rules live within the LLM (via `CLAUDE.md`, `.cursorrules`). They enforce
 The result is an evolving system that starts with context. The LLM inherits its environment automatically, and the architecture absorbs new standards through a verified pattern of reuse.
 
 1. **Boot**: LLM reads root state and context.
-2. **Curation**: LLM graduates rules if stale.
-3. **Execute**: Architect directs; LLM implements.
-4. **Capture**: Run `/end-session` to persist the log.
+2. **Learn**: LLM graduates rules if stale.
+3. **Work**: LLM implements goals within your boundaries.
+4. **Save**: LLM persists the learning.
 </div>
 </Section>
