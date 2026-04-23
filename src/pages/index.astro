@@ -83,6 +83,29 @@ import historyData from '../data/history.json';
 				line-height: 1.5;
 				margin: 0.15rem 0 0 0;
 			}
+            
+            /* Workflow grid style */
+            .workflow-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            .workflow-link {
+                text-decoration: none;
+                padding: 0.75rem;
+                border: 1px solid #eee;
+                border-radius: 6px;
+                font-size: 0.85rem;
+                color: #555;
+                text-align: center;
+                transition: all 0.2s;
+            }
+            .workflow-link:hover {
+                border-color: #2563eb;
+                color: #2563eb;
+                background: #f8fbff;
+            }
 		</style>
 	</head>
 	<body>
@@ -145,15 +168,18 @@ import historyData from '../data/history.json';
 							<text x="478" y="101" text-anchor="middle" font-size="9" fill="#888">execution unit</text>
                             
                             <!-- System Rules inside LLM -->
-							<rect x="410" y="110" width="136" height="18" rx="3" fill="#f8f9fa" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="2 1"/>
-							<text x="478" y="122" text-anchor="middle" font-size="8.5" font-weight="600" fill="#2563eb">System Rules</text>
+                            <a href="/blog/2026-04-23-prompt-to-self-curating#2-system-rules">
+							    <rect x="410" y="110" width="136" height="18" rx="3" fill="#f8f9fa" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="2 1"/>
+							    <text x="478" y="122" text-anchor="middle" font-size="8.5" font-weight="600" fill="#2563eb">System Rules</text>
+                            </a>
 							
-							<text x="418" y="142" font-size="9.5" fill="#666">brainstorm</text>
-							<text x="418" y="154" font-size="9.5" fill="#666">debug</text>
-							<text x="418" y="166" font-size="9.5" fill="#666">review</text>
-							<text x="500" y="142" font-size="9.5" fill="#666">implement</text>
-							<text x="500" y="154" font-size="9.5" fill="#666">test</text>
-							<text x="500" y="166" font-size="9.5" fill="#666">deploy</text>
+                            <!-- Workflow links inside LLM -->
+                            <a href="/blog/2026-04-25-brainstorm"><text x="418" y="142" font-size="9.5" fill="#666" class="workflow-svg-link">brainstorm</text></a>
+							<a href="/blog/2026-04-27-debug"><text x="418" y="154" font-size="9.5" fill="#666" class="workflow-svg-link">debug</text></a>
+							<a href="/blog/2026-04-29-review"><text x="418" y="166" font-size="9.5" fill="#666" class="workflow-svg-link">review</text></a>
+							<a href="/blog/2026-04-26-implement"><text x="500" y="142" font-size="9.5" fill="#666" class="workflow-svg-link">implement</text></a>
+							<a href="/blog/2026-04-28-test"><text x="500" y="154" font-size="9.5" fill="#666" class="workflow-svg-link">test</text></a>
+							<a href="/blog/2026-04-30-deploy"><text x="500" y="166" font-size="9.5" fill="#666" class="workflow-svg-link">deploy</text></a>
 
 							<!-- arrows: Memory ↔ Interface -->
 							<line x1="160" y1="110" x2="202" y2="110" stroke="#bbb" stroke-width="1.5"/>
@@ -197,15 +223,15 @@ import historyData from '../data/history.json';
 						<a href="/blog/2026-04-23-prompt-to-self-curating" class="path-link">
 							<div class="path-step">01</div>
 							<div class="path-content">
-								<div class="path-title">prompt -> self-curating system</div>
-								<p class="path-desc">Defining foundational boundaries and a self-curating local context system.</p>
+								<div class="path-title">prompt -> persistent memory</div>
+								<p class="path-desc">How to build a system that remembers work and curates lessons automatically.</p>
 							</div>
 						</a>
 						<a href="/blog/2026-04-24-data-driven-improvement" class="path-link">
 							<div class="path-step">02</div>
 							<div class="path-content">
-								<div class="path-title">[draft] self-curating + measurement = data driven improvement</div>
-								<p class="path-desc">Automating evolution and measuring technical success via MCP.</p>
+								<div class="path-title">[draft] manual -> automated data</div>
+								<p class="path-desc">Using MCP to measure success and scale the self-improving loop.</p>
 							</div>
 						</a>
 					</div>
@@ -264,3 +290,10 @@ import historyData from '../data/history.json';
 		<Footer />
 	</body>
 </html>
+<style is:global>
+    .workflow-svg-link:hover {
+        fill: #2563eb !important;
+        font-weight: 700;
+        cursor: pointer;
+    }
+</style>

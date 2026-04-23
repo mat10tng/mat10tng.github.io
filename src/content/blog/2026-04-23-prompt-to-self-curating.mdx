@@ -1,7 +1,7 @@
 ---
 id: "step-01-prompt-to-self-curating"
-title: "prompt -> self-curating system"
-description: "establishing structural boundaries and a self-curating context system."
+title: "prompt -> persistent memory"
+description: "establishing structural boundaries and a self-improving context system."
 pubDate: 2026-04-23
 loop: "improve"
 ---
@@ -16,7 +16,7 @@ Prompting is a fallback. Reliability is achieved by moving from adjective-heavy 
 To move beyond brittle prompts, the environment must satisfy three functional requirements:
 1. **Persistence**: Context must survive across independent work sessions.
 2. **Retrieval**: The model must prioritize local project data over its general training.
-3. **Curation**: The system must graduate project fixes into permanent standards.
+3. **Self-Curation**: The system must automatically identify and remember lessons from your work.
 </div>
 
 <div slot="technical">
@@ -31,7 +31,7 @@ To move beyond brittle prompts, the environment must satisfy three functional re
 <Section>
 <div slot="insight">
 ## 1. Memory: The Foundation
-Memory provides the physical structure for short-term activity and long-term engineering standards. Satisfying the requirement of **Persistence** requires a strict directory hierarchy.
+Memory provides the physical structure for short-term activity and long-term engineering standards. It satisfies the requirement of **Persistence** via a strict directory hierarchy.
 </div>
 
 <div slot="technical">
@@ -58,19 +58,16 @@ mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
 ## 2. The Skills
 Before the system can run, the model must be taught how to interact with Memory. These "skills" are reusable prompt instructions.
 
-### Initialize (`/init-project`)
-Ensures a project is correctly scaffolded within Memory.
-
 ### Capture (`/end-session`)
-Forces the model to summarize the current session and write it to the correct project directory.
+Summarizes the current session and writes it to the correct project directory.
 
-### Curation (`/distill`)
-Automates graduation by identifying recurring patterns in recent logs.
+### Self-Curation (`/distill`)
+**Self-curation** is the core of the system. It is the process of identifying recurring engineering patterns in raw session logs and promoting them to permanent rules in the `lessons/` directory.
 </div>
 
 <div slot="technical">
 **Skill: `/init-project`**
-> "Create the following directory structure if it doesn't exist: `memory/project-name/sessions/` and `memory/project-name/lessons/`. Initialize `memory/state.json` with current date."
+> "Scaffold the Memory structure for a new project: `memory/name/{sessions,lessons}`."
 
 **Skill: `/end-session`**
 > "Summarize technical decisions. Save to `memory/project-x/sessions/[date]-[goal].md`."
@@ -93,7 +90,7 @@ System Rules define the operating environment inside the **LLM**. A root file (e
 - **Init:** On boot, read `memory/state.json`.
 - **Curation:** If `last_distill` > 7 days, execute `/distill`.
 - **Role:** Architect directs; LLM executes.
-- **Rules:** Use `/end-session` to persist results.
+- **Log:** Use `/end-session` to persist results.
 - **Skills:** [/init-project, /end-session, /distill]
 ```
 </div>
@@ -102,7 +99,8 @@ System Rules define the operating environment inside the **LLM**. A root file (e
 <Section>
 <div slot="insight">
 ## The Daily Workflow
-Execution follows a deterministic cycle:
+The result is an evolving system that starts with context. The LLM inherits its environment automatically, and the architecture absorbs new standards through a verified pattern of reuse.
+
 1. **Boot**: LLM reads root state and context.
 2. **Curation**: LLM graduates rules if stale.
 3. **Execute**: Architect directs; LLM implements.
