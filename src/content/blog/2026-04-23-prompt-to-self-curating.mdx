@@ -10,9 +10,9 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## The Answer
-**You can eliminate repetitive prompting and force your technical knowledge to compound across your entire portfolio by establishing a persistent, project-agnostic memory system.**
+**You can eliminate repetitive prompting and force your technical knowledge to compound across your entire portfolio by establishing an autonomous, project-agnostic memory system.**
 
-Reliability comes from an architecture where every session belongs to a specific project. By using a unified folder structure, you ensure that local fixes in one project can graduate into global standards for all future work.
+Reliability comes from an architecture that performs maintenance by default. By defining structural rules once, you ensure that every session—on any project—initializes, curates, and persists its own engineering standards without manual intervention.
 </div>
 </Section>
 
@@ -34,7 +34,7 @@ memory/
     └── lessons/ (project fixes)
 ```
 
-**Scaffold (Bash)**
+**Setup (Linux / macOS)**
 ```bash
 mkdir -p memory/global/lessons
 ```
@@ -43,66 +43,58 @@ mkdir -p memory/global/lessons
 
 <Section>
 <div slot="insight">
-## 2. The Foundation Skill (/init-project)
-Every session must belong to a project. The `/init-project` skill is the first mandatory action for any new codebase, ensuring it is correctly registered within your Memory system.
+## 2. System Rules: The Auto-Run Logic
+The system is directed by **System Rules** (e.g. `CLAUDE.md`, `.cursorrules`). These are not just instructions; they are the execution logic that forces the model to maintain the architecture autonomously.
 </div>
 
 <div slot="technical">
-**Skill: `/init-project`**
-> "Scaffold the memory structure for this new project: `memory/[project-name]/sessions/` and `memory/[project-name]/lessons/`. Initialize `memory/state.json` if this is the first project."
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## 3. The Operational Skills
-Once initialized, the system uses two skills to capture and graduate logic.
-
-**Capture**: Persists session-specific technical decisions.
-**Graduation**: Identifies rules with portfolio-wide utility.
-</div>
-
-<div slot="technical">
-**Skill: `/end-session`**
-> "Summarize the technical decisions of this session. Save to `memory/[project-name]/sessions/[date]-[goal].md`."
-
-**Skill: `/distill`**
-> "Review logs from `[project-name]`. Identify rules that should graduate to `global/lessons/` to benefit the entire portfolio."
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## 4. System Rules
-System Rules live inside the LLM. They enforce **Automatic Initialization**—forcing the model to identify the current project and synchronize with its specific Memory before work begins.
-</div>
-
-<div slot="technical">
-**Project System Rules**
+**Mandatory Bootloader Logic**
 ```markdown
 # Project Standards
-- **Init:** On boot, identify current project and read `memory/[project-name]/`.
-- **Curation:** If `last_distill` > 7 days, execute `/distill`.
-- **Role:** Architect directs; LLM executes.
-- **Skills:** [/init-project, /end-session, /distill]
+- **Initialization:** On boot, identify current project. If `memory/[project-name]` does not exist, run `/init-project` immediately.
+- **Maintenance:** Check `memory/state.json`. If `last_distill` > 7 days, execute `/distill` before accepting goals.
+- **Persistence:** On session completion, autonomously execute `/end-session`.
+- **Role:** Architect directs; LLM executes and maintains.
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## The Daily Workflow
-Execution follows a deterministic cycle:
-1. **Boot**: LLM reads root state and context.
-2. **Curation**: LLM graduates rules if stale.
+## 3. Autonomous Skills
+The model uses three core skills to maintain the loop without being prompted.
+
+**Initialize**: Scaffolds the environment for new projects.
+**Capture**: Persists technical outcomes at the end of work.
+**Graduation**: Identifies rules with portfolio-wide utility.
+</div>
+
+<div slot="technical">
+**Skill: `/init-project`**
+> "Scaffold the memory structure: `memory/[project-name]/sessions/` and `memory/[project-name]/lessons/`."
+
+**Skill: `/end-session`**
+> "Summarize technical decisions. Save to `memory/[project-name]/sessions/[date]-[goal].md`."
+
+**Skill: `/distill`**
+> "Review logs. Identify rules to graduate to `global/lessons/`. Update `memory/state.json`."
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## The System-Led Workflow
+Execution follows a deterministic, autonomous cycle:
+1. **Boot**: LLM scaffolds or synchronizes project context.
+2. **Curation**: LLM graduates rules if the global state is stale.
 3. **Execute**: Architect directs; LLM implements.
-4. **Capture**: Run `/end-session` to persist the log.
+4. **Persist**: LLM logs the session automatically before exit.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
 ## Result
-A self-curating portfolio. The LLM inherits its environment automatically, and your engineering standards grow across every project you touch.
+A self-curating portfolio. The LLM inherits its environment and maintains its own infrastructure automatically, ensuring your engineering standards grow across every project you touch.
 </div>
 </Section>
