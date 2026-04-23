@@ -1,0 +1,74 @@
+<div style="margin: 2rem 0; padding: 2rem; background: #fff; border: 1px solid #eee; border-radius: 8px;">
+    <div style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #999; margin-bottom: 1.5rem; text-align: center;">System Architecture Overview</div>
+    <svg viewBox="0 0 560 230" width="100%" style="display: block; max-width: 600px; margin: 0 auto;">
+        <!-- human -->
+        <rect x="415" y="2" width="140" height="40" rx="20" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4 2"/>
+        <text x="485" y="26" text-anchor="middle" font-size="13" font-weight="500" fill="#333">operator</text>
+
+        <!-- arrow: human → worker -->
+        <line x1="485" y1="42" x2="485" y2="62" stroke="#bbb" stroke-width="1.5"/>
+        <polygon points="481,60 485,68 489,60" fill="#bbb"/>
+
+        <!-- the vault -->
+        <rect x="4" y="68" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
+        <text x="82" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">the vault</text>
+        <text x="82" y="105" text-anchor="middle" font-size="9" fill="#888">persistent knowledge</text>
+        
+        <!-- project structure -->
+        <rect x="14" y="115" width="64" height="20" rx="3" fill="none" stroke="#ddd" stroke-width="1"/>
+        <text x="46" y="128" text-anchor="middle" font-size="9" fill="#777">project A</text>
+        <rect x="86" y="115" width="64" height="20" rx="3" fill="none" stroke="#ddd" stroke-width="1"/>
+        <text x="118" y="128" text-anchor="middle" font-size="9" fill="#777">project B</text>
+        <rect x="42" y="142" width="80" height="20" rx="3" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 1"/>
+        <text x="82" y="155" text-anchor="middle" font-size="9" font-weight="600" fill="#2563eb">global rules</text>
+        
+        <!-- graduation arrow -->
+        <line x1="46" y1="135" x2="62" y2="142" stroke="#ccc" stroke-width="0.8"/>
+        <line x1="118" y1="135" x2="102" y2="142" stroke="#ccc" stroke-width="0.8"/>
+
+        <!-- the bridge -->
+        <rect x="202" y="68" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
+        <text x="280" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the bridge</text>
+        <text x="280" y="105" text-anchor="middle" font-size="9" fill="#888">rules & context</text>
+        
+        <text x="220" y="125" font-size="10" fill="#666">search</text>
+        <text x="220" y="140" font-size="10" fill="#666">capture</text>
+        <text x="220" y="155" font-size="10" fill="#666">brief</text>
+        <text x="300" y="125" font-size="10" fill="#666">measure</text>
+        <text x="300" y="140" font-size="10" fill="#666">compact</text>
+        <text x="300" y="155" font-size="10" fill="#666">archive</text>
+
+        <!-- the worker -->
+        <rect x="400" y="68" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
+        <text x="478" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the worker</text>
+        <text x="478" y="105" text-anchor="middle" font-size="9" fill="#888">execution (Claude)</text>
+        
+        <text x="418" y="125" font-size="10" fill="#666">brainstorm</text>
+        <text x="418" y="140" font-size="10" fill="#666">debug</text>
+        <text x="418" y="155" font-size="10" fill="#666">review</text>
+        <text x="500" y="125" font-size="10" fill="#666">implement</text>
+        <text x="500" y="140" font-size="10" fill="#666">test</text>
+        <text x="500" y="155" font-size="10" fill="#666">deploy</text>
+
+        <!-- arrows: vault ↔ bridge -->
+        <line x1="160" y1="110" x2="202" y2="110" stroke="#bbb" stroke-width="1.5"/>
+        <polygon points="198,107 206,110 198,113" fill="#bbb"/>
+        <line x1="202" y1="130" x2="160" y2="130" stroke="#bbb" stroke-width="1.5"/>
+        <polygon points="164,127 156,130 164,133" fill="#bbb"/>
+
+        <!-- arrows: bridge ↔ worker -->
+        <line x1="358" y1="110" x2="400" y2="110" stroke="#bbb" stroke-width="1.5"/>
+        <polygon points="396,107 404,110 396,113" fill="#bbb"/>
+        <line x1="400" y1="130" x2="358" y2="130" stroke="#bbb" stroke-width="1.5"/>
+        <polygon points="362,127 354,130 362,133" fill="#bbb"/>
+
+        <!-- arrow labels -->
+        <text x="181" y="105" text-anchor="middle" font-size="8" font-weight="500" fill="#999">recall</text>
+        <text x="181" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#999">store</text>
+        <text x="379" y="105" text-anchor="middle" font-size="8" font-weight="500" fill="#999">context</text>
+        <text x="379" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#999">results</text>
+
+        <!-- feedback loop -->
+        <text x="280" y="195" text-anchor="middle" font-size="10" font-weight="500" fill="#888">↻ improvements cycle back into the vault</text>
+    </svg>
+</div>
