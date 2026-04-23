@@ -1,6 +1,6 @@
 ---
 title: "logs -> rules"
-description: "the logic for graduating project-specific fixes into permanent engineering standards."
+description: "graduating project-specific fixes into engineering standards."
 pubDate: 2026-04-08
 loop: "improve"
 ---
@@ -8,51 +8,40 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-Standards begin as patches for specific project problems. The mechanism for continuous system improvement is the identification and graduation of local fixes into universal utility.
+## Principle
+Standards are patches for specific project problems that prove to have universal utility.
 
-## The Graduation Mechanism
-
-When technical friction occurs during a session, the process follows a linear path:
-
-1.  **Detection**: Identification of a recurring issue (e.g., model selecting ambiguous tools).
-2.  **Local Fix**: Implementation of a project-specific rule.
-3.  **Pattern Recognition**: Observation of the same issue in unrelated projects.
-4.  **Graduation**: Relocating the logic to global standards.
+## Graduation Path
+1. **Detection**: Identify recurring friction.
+2. **Local Fix**: Implement project-level rule.
+3. **Pattern**: Observe fix solving issues in unrelated projects.
+4. **Graduation**: Move to global standards.
 </div>
 
 <div slot="technical">
-| Phase | Action |
+| Step | Action |
 |---|---|
-| **Detection** | Log the friction in a session file. |
-| **Local Fix** | Add a rule to the project `lessons/`. |
-| **Graduation** | Move file to `global/lessons/`. |
+| **Capture** | Log friction in session file. |
+| **Fix** | Add rule to project `lessons/`. |
+| **Move** | Relocate to `global/lessons/`. |
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Implementation: The Distillation Skill
-
-To automate this graduation, use a "Distillation" skill at the end of every week or major project milestone.
+## Distillation Skill
+Automate graduation via periodic review of session logs.
 </div>
 
 <div slot="technical">
 **Command:** `/distill`
-**Logic:**
-> "Review all session logs from the last 7 days. Identify 3 recurring technical logic patterns that should be generalized. Format these as project-agnostic rules and move them to the `global/lessons/` directory. Update our project bootloader to reflect these new standards."
+**Logic:** "Review last 7 days of logs. Identify 3 recurring patterns. Move to `global/lessons/`. Update project bootloader."
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Rationale
-
-Global rules are rarely authored upfront. They are the result of observing patterns of reuse across multiple contexts. 
-
-A high frequency of reference across different projects is the primary signal for graduation. Moving logic to the global layer ensures that every future session inherits that standard automatically, reducing the overhead of repetitive instruction.
-
-## Technical Insight
-
-Do not attempt to predict which standards will be universal. Record logic where it occurs. The pattern of reuse determines which rules graduate to the global level.
+## Result
+A self-curating system where high-utility logic inherits automatically, reducing instruction overhead.
 </div>
 </Section>

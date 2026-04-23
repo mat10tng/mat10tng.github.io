@@ -1,6 +1,6 @@
 ---
 title: "transferring responsibility"
-description: "moving logic from probabilistic AI to deterministic code. the fix for hallucinations."
+description: "fixing hallucinations via deterministic code."
 pubDate: 2026-04-17
 loop: "capture"
 ---
@@ -8,45 +8,32 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-A recurring pattern in system failure: when a component consistently fails a task, the problem is often an incorrect assignment of responsibility. 
+## Principle
+Reliability is achieved by removing probabilistic tasks from the AI and transferring them to deterministic code.
 
-Reliability is often achieved by removing the task from the AI entirely and transferring it to a deterministic part of the system.
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## The Primary Question
-
-When a system fails, the question is not "How can the agent do this better?" but "Should the agent be doing this at all?"
-
-Deterministic tasks require 100% precision. Humans and AI are both probabilistic at enforcement. Structural logic should be encoded, not prompted.
+## The Logic
+When a task fails, ask: "Should the model be doing this at all?"
 </div>
 
 <div slot="technical">
-| Failure Type | Correct Owner |
+| Task | Correct Owner |
 |---|---|
-| **Bookkeeping** | System/DB |
+| **Bookkeeping** | Code/Database |
 | **Enforcement** | CI/Scripts |
-| **Logic Branches** | Code |
-| **Context Synthesis** | Agent |
+| **Synthesis** | AI Model |
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Implementation Example
-
-Consider the creation of duplicate IDs in a document graph. Instead of instructing the agent to "be careful," implement a backend validation.
+## Example: ID Uniqueness
+Instead of instructing the model to "be careful" with IDs, implement a validation function.
 </div>
 
 <div slot="technical">
 ```javascript
-// Deterministic Validation Logic
-function validateIdUniqueness(newId, existingIds) {
-    if (existingIds.has(newId)) {
-        throw new Error(`Duplicate ID detected: ${newId}`);
-    }
+function validateId(id, set) {
+    if (set.has(id)) throw Error("Duplicate");
 }
 ```
 </div>
@@ -54,12 +41,7 @@ function validateIdUniqueness(newId, existingIds) {
 
 <Section>
 <div slot="insight">
-## Verification
-
-Success is measured by the cessation of the specific failure pattern. If a backend service handles the logic, the agent can no longer "forget" to execute it. The system becomes simpler and more reliable than one that relies on continuous prompting.
-
-## Technical Insight
-
-When a component keeps failing, before attempting optimization, verify whether that component should own the responsibility. Transferring the job is more effective than refining the instruction.
+## Result
+Transferring the job is more effective than refining the instruction.
 </div>
 </Section>

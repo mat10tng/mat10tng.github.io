@@ -1,6 +1,6 @@
 ---
 title: "the three levers"
-description: "a diagnostic framework for debugging agent behavior. find the root cause in minutes."
+description: "a diagnostic framework for agent behavior."
 pubDate: 2026-03-20
 loop: "work"
 ---
@@ -8,59 +8,56 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-When an AI agent deviates from expected behavior—creating duplicates, using incorrect tools, or extracting imprecise data—the resolution rarely lies in the agent's core code. Diagnosis follows a pattern involving three primary levers.
+## Principle
+Agent deviation is rarely a code bug. Diagnosis localizes to three structural levers.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## The Three Levers
-
-**1. The Prompt** (Instruction) — If the agent is capable of an action but fails to execute it, the instruction set is insufficient. If it performs a prohibited action, an explicit constraint is required. Models often fail to infer intent; mandatory rules ("you MUST") are more effective than stylistic suggestions ("it would be nice if").
+## 1. The Prompt (Instruction)
+Insufficient instruction or lack of explicit prohibition. 
+**Fix**: Mandatory rules in bootloader.
 </div>
 
 <div slot="technical">
-**Diagnostic Fix:**
-Append an explicit requirement to the project `CLAUDE.md`.
 ```markdown
-- **Rule:** Do NOT use library X. 
-- **Rule:** You MUST verify the build before reporting completion.
+- **Rule:** You MUST verify build.
+- **Rule:** Do NOT use library X.
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-**2. The Tools** (Capability) — Redundant or overlapping tools cause structural ambiguity. If two tools perform similar functions, the model is forced to guess, leading to inconsistent choices. Reliability is achieved by reducing the toolset to a collection of clear, distinct, and uniquely named functions.
+## 2. The Tools (Capability)
+Structural ambiguity caused by redundant or overlapping tools.
+**Fix**: Distinct, uniquely named functions.
 </div>
 
 <div slot="technical">
-**Diagnostic Fix:**
-Audit the MCP tool definitions.
-- Merge `update_file` and `patch_file`.
-- Ensure each tool has a distinct, functional name.
+- Merge overlapping tools.
+- Rename for precision.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-**3. The Constraints** (System Environment) — System limits can prevent task completion. An agent with a small iteration budget may exhaust its resources on content generation, leaving no room for validation or connection. Automation of deterministic tasks (like metadata updates) removes this overhead.
+## 3. The Constraints (Environment)
+System limits preventing completion (e.g., small iteration budgets).
+**Fix**: Automate bookkeeping; raise budgets.
 </div>
 
 <div slot="technical">
-**Diagnostic Fix:**
-Check system limits in `.env` or bridge config.
 ```env
 MAX_ITERATIONS=15
-TIMEOUT_MS=30000
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Core Principle
-
-Avoid delegating tasks to an agent that a system can perform automatically. An agent's primary utility is judgment and generation; everything else—bookkeeping, connections, validation—should be handled by the surrounding architecture.
+## Order
+1. Instruction → 2. Tooling → 3. System Limits.
 </div>
 </Section>

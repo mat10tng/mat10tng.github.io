@@ -1,6 +1,6 @@
 ---
 title: "prompt -> a system"
-description: "moving from adjective-based instruction to structural engineering. how to build boundaries that model intelligence."
+description: "structural engineering over adjective-based instruction."
 pubDate: 2026-04-23
 loop: "improve"
 ---
@@ -8,61 +8,45 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-The common approach to AI development is "prompt engineering": finding the exact combination of words to guide a model toward a specific output. 
+## Principle
+Prompting is a fallback. Reliability comes from the **system** surrounding the model. 
 
-Prompting is a fallback. 
-
-If a workflow requires perfect instructions every time to succeed, the process is brittle. Reliability in AI engineering comes from the **system** surrounding the model, not the adjectives inside the prompt.
-
-## The Prompting Limitation
-
-When an AI fails, the standard response is to add more instructions. Terms like "be concise," "think step-by-step," or "follow convention X" are appended to the prompt.
-
-This creates "Prompt Debt." The context window fills with competing instructions. The model eventually drifts because it is being asked to carry too much weight: it must simultaneously act as the architect, the developer, and the validator without any external structure.
+## The Problem
+"Prompt Debt": Context window saturation caused by appending competing instructions (e.g., "be concise," "follow X") when a model fails.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Implementation: The First Step
-
-Systemic reliability starts by defining the AI's relationship to your project. Defining a baseline in a project root file forces the model to acknowledge the boundaries of the system.
-
-### 1. The Bootloader (`CLAUDE.md`, `.cursorrules`)
-This file is read by the model at the start of every session. It establishes the architect/worker relationship and forces retrieval over memory.
+## Implementation: Bootloader
+Establish boundaries in a project root file (e.g., `CLAUDE.md`, `.cursorrules`) to enforce retrieval over memory.
 </div>
 
 <div slot="technical">
 ```markdown
 # Project Standards
-- **Role:** Human Architect directs the logic; Worker executes the code.
-- **Rules:** Before writing any code, state the files to change and the technical approach. Wait for confirmation.
-- **Knowledge:** Do not rely on memory for project decisions. Always search the local file system for existing logic before implementing.
+- **Role:** Human Architect directs; Worker executes.
+- **Rules:** State approach before code. Wait for confirmation.
+- **Knowledge:** Search local file system before implementing.
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-### 2. The Context Skill
-A context refresh skill ensures the model synchronizes with the project's current state before beginning technical work.
+## The Sync Skill
+Force a context refresh to synchronize the model with active technical constraints.
 </div>
 
 <div slot="technical">
 **Command:** `/sync`
-**Logic:**
-> "Review the current project structure, read the latest session log, and update your understanding of our active technical constraints. Do not proceed until you have verified our current architectural direction."
+**Logic:** "Review structure, read latest logs, verify constraints. Do not proceed until verified."
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Evidence of Structure
-
-A mature system can manage thousands of notes and global rules with minimal prompting. 
-
-Prompts remain short because the **Architecture** handles the complexity. The model doesn't need to "remember" style preferences if the system loads them from a vault. Standards are maintained not by effort, but by the enforcement mechanisms of the bridge.
-
-The goal is to build an environment that makes the AI more capable than it is in isolation. This is the shift from writing messages to building architectures.
+## Result
+Short prompts, complex execution. The architecture handles the weight, allowing the model to focus on generation.
 </div>
 </Section>

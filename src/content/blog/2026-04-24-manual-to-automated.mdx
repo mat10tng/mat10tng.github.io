@@ -1,6 +1,6 @@
 ---
 title: "manual -> automated"
-description: "connecting your knowledge base directly to a model using a basic Model Context Protocol (MCP) server."
+description: "connecting vaults to models via MCP."
 pubDate: 2026-04-24
 loop: "improve"
 ---
@@ -8,26 +8,17 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-Manual data transfer is the primary source of friction in a local vault setup. Requesting the model to read files and manually save session summaries creates unnecessary overhead.
+## Principle
+Remove the friction of manual context transfer by enabling direct model interaction with the file system.
 
-The Model Context Protocol (MCP) provides a standard for automating these interactions, enabling direct communication between the model and the local file system.
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## The Simple Bridge
-
-Automation is achieved through a minimal Node.js script that exposes two tools:
-1. `read_lessons`: Autonomously retrieves standards from the vault.
-2. `save_session`: Records session outcomes directly to the correct project directory.
-
-### 1. Implementation
-The implementation requires the MCP SDK to handle standard input/output communication with the AI model.
+## Toolset
+- **`read_lessons`**: Retrieves standards autonomously.
+- **`save_session`**: Records outcomes directly to project directories.
 </div>
 
 <div slot="technical">
 ```bash
+# Setup
 mkdir simple-bridge
 cd simple-bridge
 npm init -y
@@ -38,32 +29,13 @@ npm install @modelcontextprotocol/sdk
 
 <Section>
 <div slot="insight">
-### 2. Logic
-The server logic maps model tool calls to local file system operations. It uses `StdioServerTransport` for low-latency, local execution.
+## Bridge Logic
+Expose file system tools via `StdioServerTransport` for local, low-latency execution.
 </div>
 
 <div slot="technical">
 ```javascript
-// index.js
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import fs from "fs/promises";
-import path from "path";
-import os from "os";
-
-const VAULT_PATH = path.join(os.homedir(), "vault");
-const server = new Server({ name: "bridge", version: "1.0.0" }, { capabilities: { tools: {} } });
-
-server.setRequestHandler(ListToolsRequestSchema, async () => ({
-  tools: [
-    { name: "read_lessons", description: "Read global standards" },
-    { name: "save_session", description: "Log session", inputSchema: { 
-        type: "object", properties: { project: { type: "string" }, content: { type: "string" } } 
-    }}
-  ]
-}));
-
+// index.js (Simplified)
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   if (request.params.name === "save_session") {
     const { project, content } = request.params.arguments;
@@ -72,24 +44,20 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     await fs.writeFile(path.join(dir, `${Date.now()}.md`), content);
     return { content: [{ type: "text", text: "Logged." }] };
   }
-  // ... rest of tool handlers
 });
-
-const transport = new StdioServerTransport();
-await server.connect(transport);
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-### 3. Configuration
-Registering the server in the model's global configuration file allows it to load the tools at the start of every session.
+## Outcome
+Autonomous context management. A command like "Save a session log" writes directly to the vault without human bookkeeping.
 </div>
 
 <div slot="technical">
 ```json
-// example configuration
+// Example Configuration
 {
   "mcpServers": {
     "bridge": {
@@ -99,13 +67,5 @@ Registering the server in the model's global configuration file allows it to loa
   }
 }
 ```
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## The Outcome
-
-The Model can now maintain the system autonomously. A command like "Save a session log for project-x" triggers the execution of the tool, determining the correct directory and writing the log without further human intervention. This shift eliminates the manual overhead of context management.
 </div>
 </Section>
