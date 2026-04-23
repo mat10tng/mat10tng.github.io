@@ -25,8 +25,8 @@ Automation removes the human bookkeeping required to maintain a self-curating sy
 ## The Automated Workflow
 How to use the system when the Interface (MCP) is active:
 
-1.  **Initialize**: The model automatically executes `read_lessons` via MCP tools at startup.
-2.  **Execute**: Technical work proceeds. The LLM has direct access to standards without manual prompting.
+1.  **Initialize**: The model automatically executes `read_lessons` via MCP tools at startup—no manual prompting required.
+2.  **Execute**: Technical work proceeds. The LLM has direct access to standards.
 3.  **Persist**: On task completion, the model calls `save_session` autonomously.
 </div>
 
@@ -34,18 +34,18 @@ How to use the system when the Interface (MCP) is active:
 **Example Interaction:**
 > Architect: "Build the auth login flow."
 >
-> LLM: *Calls `read_lessons`*
+> LLM: *Autonomously calls `read_lessons`*
 > LLM: *Implements flow*
-> LLM: *Calls `save_session`*
+> LLM: *Autonomously calls `save_session`*
 >
-> LLM: "Done. Session logged to Memory."
+> LLM: "Done. Flow implemented and logged to Memory."
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
 ## Self-Running Automation (MCP)
-The Model Context Protocol (MCP) enables the system to become autonomous. The manual skills from Step 01 are converted into deterministic tools.
+The Model Context Protocol (MCP) enables the system to become autonomous. The manual initialization rule from Step 01 is converted into a deterministic tool call.
 </div>
 
 <div slot="technical">
