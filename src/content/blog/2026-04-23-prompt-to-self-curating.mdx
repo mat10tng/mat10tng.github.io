@@ -9,7 +9,7 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## Principle
-Prompting is a fallback. Reliability comes from a persistent **system** that surrounds the model. A static system degrades; an effective architecture must self-curate through use.
+Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. A static system degrades; an effective architecture must self-curate through use.
 
 ## The Memory Structure
 1. **Sessions**: Short-term logs of activity (what was tried, what failed).
@@ -18,7 +18,7 @@ Prompting is a fallback. Reliability comes from a persistent **system** that sur
 
 <div slot="technical">
 ```text
-[root]/memory/
+memory/
 ├── global/
 │   └── lessons/
 └── project-x/
@@ -35,6 +35,8 @@ The Bootloader defines the environment inside the **LLM**. A root file establish
 </div>
 
 <div slot="technical">
+**Bootloader (Project Root)**
+<div class="bootloader-snippet">
 ```markdown
 # Project Standards
 - **Role:** Architect directs; LLM executes.
@@ -42,6 +44,7 @@ The Bootloader defines the environment inside the **LLM**. A root file establish
 - **Log:** Record outcome to `sessions/`.
 - **Distill:** Propose rules for `lessons/`.
 ```
+</div>
 </div>
 </Section>
 
@@ -67,3 +70,4 @@ The system improves by identifying local fixes with universal utility:
 A self-curating system. The LLM inherits its environment automatically, and the architecture absorbs new standards through a verified pattern of reuse.
 </div>
 </Section>
+

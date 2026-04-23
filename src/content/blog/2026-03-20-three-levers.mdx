@@ -1,6 +1,6 @@
 ---
 title: "the three levers"
-description: "a diagnostic framework for agent behavior."
+description: "a diagnostic framework for debugging agent behavior."
 pubDate: 2026-03-20
 loop: "work"
 ---
@@ -17,10 +17,11 @@ Agent deviation is rarely a code bug. Diagnosis localizes to three structural le
 <div slot="insight">
 ## 1. The Prompt (Instruction)
 Insufficient instruction or lack of explicit prohibition. 
-**Fix**: Mandatory rules in bootloader.
 </div>
 
 <div slot="technical">
+**Diagnostic Fix:**
+Establish mandatory rules in project bootloader (e.g. `CLAUDE.md`).
 ```markdown
 - **Rule:** You MUST verify build.
 - **Rule:** Do NOT use library X.
@@ -32,10 +33,10 @@ Insufficient instruction or lack of explicit prohibition.
 <div slot="insight">
 ## 2. The Tools (Capability)
 Structural ambiguity caused by redundant or overlapping tools.
-**Fix**: Distinct, uniquely named functions.
 </div>
 
 <div slot="technical">
+**Diagnostic Fix:**
 - Merge overlapping tools.
 - Rename for precision.
 </div>
@@ -45,10 +46,11 @@ Structural ambiguity caused by redundant or overlapping tools.
 <div slot="insight">
 ## 3. The Constraints (Environment)
 System limits preventing completion (e.g., small iteration budgets).
-**Fix**: Automate bookkeeping; raise budgets.
 </div>
 
 <div slot="technical">
+**Diagnostic Fix:**
+Automate bookkeeping and raise system budgets in `.env`.
 ```env
 MAX_ITERATIONS=15
 ```
@@ -58,6 +60,7 @@ MAX_ITERATIONS=15
 <Section>
 <div slot="insight">
 ## Order
-1. Instruction → 2. Tooling → 3. System Limits.
+Diagnosis localizes to structural areas in this sequence:
+1. **Instruction** → 2. **Tooling** → 3. **System Limits**.
 </div>
 </Section>

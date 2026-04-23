@@ -9,7 +9,7 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## Principle
-Reliability is achieved by removing probabilistic tasks from the AI and transferring them to deterministic code.
+Reliability is achieved by removing probabilistic tasks from the LLM and transferring them to deterministic code.
 
 ## The Logic
 When a task fails, ask: "Should the model be doing this at all?"
@@ -20,20 +20,20 @@ When a task fails, ask: "Should the model be doing this at all?"
 |---|---|
 | **Bookkeeping** | Code/Database |
 | **Enforcement** | CI/Scripts |
-| **Synthesis** | AI Model |
+| **Synthesis** | LLM |
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Example: ID Uniqueness
-Instead of instructing the model to "be careful" with IDs, implement a validation function.
+## Implementation: Uniqueness
+Instead of instructing the model to "be careful" with identifiers, implement a validation function in the interface.
 </div>
 
 <div slot="technical">
 ```javascript
 function validateId(id, set) {
-    if (set.has(id)) throw Error("Duplicate");
+    if (set.has(id)) throw Error("Duplicate identifier detected");
 }
 ```
 </div>
@@ -42,6 +42,6 @@ function validateId(id, set) {
 <Section>
 <div slot="insight">
 ## Result
-Transferring the job is more effective than refining the instruction.
+Transferring the job to the surrounding system is more effective than refining the prompt instruction.
 </div>
 </Section>

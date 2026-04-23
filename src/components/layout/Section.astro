@@ -13,40 +13,41 @@
     .section-container {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
+        gap: 2rem;
+        margin-bottom: 4rem;
         align-items: start;
         border-top: 1px solid #f0f0f0;
-        padding-top: 1.5rem;
+        padding-top: 2rem;
     }
 
     @media (min-width: 1000px) {
         .section-container {
-            grid-template-columns: 1fr 400px;
-            gap: 3rem;
-            max-width: 1000px;
-            margin: 0 auto 2rem;
+            grid-template-columns: 1fr 440px;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto 4rem;
         }
     }
 
-    .insight :global(h2), .insight :global(h3) {
+    /* Inherit global heading styles, just remove top margin for first element */
+    .insight :global(h2:first-child), 
+    .insight :global(h3:first-child) {
         margin-top: 0;
-        font-size: 1.1rem;
-    }
-
-    .insight :global(p) {
-        margin: 0.5rem 0;
-        font-size: 0.95rem;
     }
 
     .technical {
         position: sticky;
-        top: 1rem;
+        top: 2rem;
     }
 
     .technical :global(pre) {
         margin: 0 !important;
-        font-size: 0.85rem !important;
-        padding: 1rem !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .technical :global(table) {
+        margin: 0 !important;
+        border: 1px solid #eee;
+        background: #fff;
     }
 </style>

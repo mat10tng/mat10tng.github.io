@@ -23,12 +23,14 @@ Automation removes the human bookkeeping required to maintain a self-curating sy
 <Section>
 <div slot="insight">
 ## Automation via MCP
-The Model Context Protocol (MCP) enables direct, autonomous LLM interaction with the Memory, removing the friction of manual context transfer.
+The Model Context Protocol (MCP) enables direct, autonomous LLM interaction with Memory, removing the friction of manual context transfer.
 </div>
 
 <div slot="technical">
 ```javascript
 // index.js (Simplified)
+const MEMORY_PATH = "[root]/memory";
+
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   if (request.params.name === "save_session") {
     const { project, content } = request.params.arguments;

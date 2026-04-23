@@ -17,7 +17,7 @@
 		0 16px 32px rgba(var(--gray), 33%);
 }
 body {
-	font-family: var(--font-atkinson);
+	font-family: var(--font-atkinson), system-ui, -apple-system, sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -26,12 +26,12 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	font-size: 16px; /* Standardized base */
+	line-height: 1.6;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	width: 100%;
+	max-width: 1200px;
 	margin: auto;
 	padding: 3em 1em;
 }
@@ -44,21 +44,22 @@ h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+	font-weight: 700;
 }
 h1 {
-	font-size: 3.052em;
+	font-size: 2.25rem;
 }
 h2 {
-	font-size: 2.441em;
+	font-size: 1.75rem;
 }
 h3 {
-	font-size: 1.953em;
+	font-size: 1.5rem;
 }
 h4 {
-	font-size: 1.563em;
+	font-size: 1.25rem;
 }
 h5 {
-	font-size: 1.25em;
+	font-size: 1.1rem;
 }
 strong,
 b {
@@ -66,22 +67,24 @@ b {
 }
 a {
 	color: var(--accent);
+	text-decoration: none;
 }
 a:hover {
 	color: var(--accent);
+	text-decoration: underline;
 }
 p {
-	margin-bottom: 1em;
+	margin-bottom: 1.25em;
 }
 .prose p {
-	margin-bottom: 2em;
+	margin-bottom: 1.25em;
 }
 textarea {
 	width: 100%;
-	font-size: 16px;
+	font-size: 1rem;
 }
 input {
-	font-size: 16px;
+	font-size: 1rem;
 }
 img {
 	max-width: 100%;
@@ -92,6 +95,8 @@ code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	font-size: 0.9em;
 }
 pre {
 	padding: 1.5em;
@@ -100,6 +105,7 @@ pre {
 	word-wrap: break-word;
 	overflow-x: hidden;
 	max-width: 100%;
+	font-size: 0.9rem;
 }
 pre > code {
 	all: unset;
@@ -107,28 +113,37 @@ pre > code {
 	word-wrap: break-word;
 }
 table {
-	table-layout: fixed;
+	width: 100%;
 	border-collapse: collapse;
+	margin-bottom: 1.5rem;
 }
 th, td {
-	padding: 0.4em 0.6em;
+	padding: 0.75em 1em;
 	border-bottom: 1px solid rgb(var(--gray-light));
 	text-align: left;
 	word-wrap: break-word;
+	font-size: 0.95rem;
+}
+th {
+	font-weight: 700;
+	color: rgb(var(--black));
 }
 blockquote {
 	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
+	padding: 0.5rem 0 0.5rem 1.5rem;
+	margin: 1.5rem 0;
+	font-size: 1.1rem;
+	font-style: italic;
+	color: #555;
 }
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
+	margin: 2rem 0;
 }
 @media (max-width: 720px) {
 	body {
-		font-size: 18px;
+		font-size: 16px;
 	}
 	main {
 		padding: 1em;
@@ -143,12 +158,14 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
 	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+.bootloader-snippet {
+	border: 1px solid var(--accent);
+	border-radius: 8px;
+	overflow: hidden;
 }
