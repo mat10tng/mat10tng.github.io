@@ -9,8 +9,29 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
+## Principle
+Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. 
+
+## Technical Requirements
+To move beyond brittle prompts, the environment must satisfy three functional requirements:
+1. **Persistence**: Context must survive across independent work sessions.
+2. **Retrieval**: The model must prioritize local project data over its general training.
+3. **Curation**: The system must graduate project fixes into permanent standards.
+</div>
+
+<div slot="technical">
+| Requirement | Implementation |
+|---|---|
+| **Persistence** | Local Memory directory |
+| **Retrieval** | Mandatory System Rules |
+| **Curation** | Graduation of session logs |
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
 ## 1. Memory: The Foundation
-The primary technical requirement is **Persistence**. Memory provides the physical structure for short-term activity and long-term engineering standards.
+Memory provides the physical structure for short-term activity and long-term engineering standards. Satisfying the requirement of **Persistence** requires a strict directory hierarchy.
 </div>
 
 <div slot="technical">
@@ -29,11 +50,6 @@ memory/
 ```bash
 mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
 ```
-
-**Windows (PowerShell)**
-```powershell
-mkdir memory/global/lessons, memory/project-x/sessions, memory/project-x/lessons
-```
 </div>
 </Section>
 
@@ -42,19 +58,25 @@ mkdir memory/global/lessons, memory/project-x/sessions, memory/project-x/lessons
 ## 2. The Skills
 Before the system can run, the model must be taught how to interact with Memory. These "skills" are reusable prompt instructions.
 
+### Initialize (`/init-project`)
+Ensures a project is correctly scaffolded within Memory.
+
 ### Capture (`/end-session`)
 Forces the model to summarize the current session and write it to the correct project directory.
 
 ### Curation (`/distill`)
-Automates graduation by identifying recurring patterns in recent logs and promoting them to global standards.
+Automates graduation by identifying recurring patterns in recent logs.
 </div>
 
 <div slot="technical">
+**Skill: `/init-project`**
+> "Create the following directory structure if it doesn't exist: `memory/project-name/sessions/` and `memory/project-name/lessons/`. Initialize `memory/state.json` with current date."
+
 **Skill: `/end-session`**
-> "Summarize the technical decisions of this session. Save the result as a new markdown file in `memory/project-x/sessions/[date]-[goal].md`."
+> "Summarize technical decisions. Save to `memory/project-x/sessions/[date]-[goal].md`."
 
 **Skill: `/distill`**
-> "Identify 3 recurring patterns from recent logs. Move them to `global/lessons/`. Update the `last_distill` date in `memory/state.json`."
+> "Identify 3 recurring patterns from recent logs. Move to `global/lessons/`. Update `memory/state.json`."
 </div>
 </Section>
 
@@ -69,10 +91,10 @@ System Rules define the operating environment inside the **LLM**. A root file (e
 ```markdown
 # Project Standards
 - **Init:** On boot, read `memory/state.json`.
-- **Curation:** If `last_distill` > 7 days, execute `/distill` before work.
+- **Curation:** If `last_distill` > 7 days, execute `/distill`.
 - **Role:** Architect directs; LLM executes.
 - **Rules:** Use `/end-session` to persist results.
-- **Skills:** [/end-session, /distill]
+- **Skills:** [/init-project, /end-session, /distill]
 ```
 </div>
 </Section>

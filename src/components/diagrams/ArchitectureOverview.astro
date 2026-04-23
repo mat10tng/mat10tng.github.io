@@ -21,15 +21,22 @@ import historyData from '../../data/history.json';
 
         {step === 1 && (
             <g>
-                <!-- Memory -->
+                <!-- Memory with folder structure -->
                 <rect x="4" y="110" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
-                <text x="82" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">Memory</text>
-                <text x="82" y="145" text-anchor="middle" font-size="8" fill="#888">Storage & History</text>
+                <text x="82" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">Memory</text>
+                
+                <!-- folder representation -->
+                <rect x="14" y="135" width="60" height="15" rx="2" fill="none" stroke="#2563eb" stroke-width="0.5" stroke-dasharray="2 1"/>
+                <text x="44" y="145" text-anchor="middle" font-size="7" fill="#2563eb">/sessions</text>
+                <rect x="82" y="135" width="60" height="15" rx="2" fill="none" stroke="#2563eb" stroke-width="0.5" stroke-dasharray="2 1"/>
+                <text x="112" y="145" text-anchor="middle" font-size="7" fill="#2563eb">/lessons</text>
+                <rect x="38" y="155" width="80" height="15" rx="2" fill="none" stroke="#2563eb" stroke-width="0.5" stroke-dasharray="2 1"/>
+                <text x="78" y="165" text-anchor="middle" font-size="7" fill="#2563eb">state.json</text>
                 
                 <!-- LLM -->
                 <rect x="400" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
                 <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
-                <text x="478" y="145" text-anchor="middle" font-size="8" fill="#888">Reasoning & Execution</text>
+                <text x="478" y="145" text-anchor="middle" font-size="8" fill="#888">Reasoning unit</text>
                 
                 <rect x="410" y="152" width="136" height="16" rx="2" fill="#f8f9fa" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="2 1"/>
                 <text x="478" y="163" text-anchor="middle" font-size="8" font-weight="600" fill="#2563eb">System Rules</text>
