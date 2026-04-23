@@ -1,7 +1,7 @@
 ---
 id: "responsibility-transfer-logic"
 title: "[draft] transferring responsibility"
-description: "fixing hallucinations via deterministic code."
+description: "fixing hallucinations by using code for math and counting."
 pubDate: 2026-04-17
 loop: "capture"
 ---
@@ -9,32 +9,34 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-## Principle
-Reliability is achieved by removing probabilistic tasks from the LLM and transferring them to deterministic code.
+**ELI5:** AI is great at writing but bad at counting things exactly. If the AI keeps making mistakes with numbers or page IDs, stop asking it to "try harder." Instead, write a simple script that handles the counting for it.
 
-## The Logic
-When a task fails, ask: "Should the model be doing this at all?"
+## Principle
+Fix "hallucinations" by taking the job away from the AI and giving it to a simple bit of code.
 </div>
 
 <div slot="technical">
-| Task | Correct Owner |
+| Task | Best Performer |
 |---|---|
-| **Bookkeeping** | Code/Database |
-| **Enforcement** | CI/Scripts |
-| **Synthesis** | LLM |
+| **Counting & Math** | Code / Database |
+| **Enforcing Rules** | Scripts / CI |
+| **Brainstorming** | AI Model |
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Implementation: Uniqueness
-Instead of instructing the model to "be careful" with identifiers, implement a validation function in the interface.
+## Example: Unique IDs
+Instead of telling the model to "please don't duplicate IDs," give it a tool that checks for duplicates automatically.
 </div>
 
 <div slot="technical">
 ```javascript
-function validateId(id, set) {
-    if (set.has(id)) throw Error("Duplicate identifier detected");
+// Simple ID Check
+function checkDuplicate(id, list) {
+    if (list.includes(id)) {
+        throw Error("Duplicate ID found!");
+    }
 }
 ```
 </div>
@@ -43,6 +45,6 @@ function validateId(id, set) {
 <Section>
 <div slot="insight">
 ## Result
-Transferring the job to the surrounding system is more effective than refining the prompt instruction.
+The system becomes more stable because the AI doesn't have to worry about bookkeeping. It can focus on the creative work.
 </div>
 </Section>

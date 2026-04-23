@@ -1,7 +1,7 @@
 ---
 id: "step-02-data-driven-improvement"
 title: "[draft] manual -> automated data"
-description: "automating evolution and measuring technical success via MCP."
+description: "automating evolution and measuring success via MCP."
 pubDate: 2026-04-24
 loop: "measure"
 ---
@@ -9,12 +9,14 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
+**ELI5:** Now that we have a memory system, we use automation (MCP) so we don't have to manually tell the AI to save or read files. We also track numbers to make sure the system is actually getting better over time.
+
 ## Principle
-Automation removes human bookkeeping. By persisting metadata in a root `state.json`, the architecture can autonomously trigger maintenance tasks like distillation and health checks across the entire Memory.
+Automation removes the boring bookkeeping. By saving system info in a `state.json` file, the architecture can trigger its own maintenance—like cleaning up old logs and updating rules—without you asking.
 </div>
 
 <div slot="technical">
-**Global State (`memory/state.json`):**
+**System State (`memory/state.json`)**
 ```json
 {
   "last_distill_date": "2026-04-17",
@@ -27,12 +29,12 @@ Automation removes human bookkeeping. By persisting metadata in a root `state.js
 
 <Section>
 <div slot="insight">
-## Autonomous Maintenance
-The Interface (MCP) tools use the root state data to decide when to run. If the state is stale, the model executes curation logic before accepting new project work.
+## Automatic Maintenance
+The Interface (MCP) tools check the state file to decide when to run. If the system is getting "stale," the model handles the cleanup before starting new project work.
 </div>
 
 <div slot="technical">
-**Interface Tool Logic:**
+**Automation Logic:**
 ```javascript
 // Check inside a tool call
 const state = await fs.readFile("memory/state.json");
@@ -46,12 +48,12 @@ if (daysSince(state.last_distill) > 7) {
 
 <Section>
 <div slot="insight">
-## The Automated Workflow
-The result is a system that maintains itself based on its highest-level internal state, ensuring engineering standards compound without manual intervention.
+## The Automated Loop
+The result is a system that maintains itself. It uses its own data to get smarter, ensuring engineering standards grow without you having to manage folders manually.
 
-1.  **Boot**: LLM reads root state and project system rules.
-2.  **Maintenance**: LLM runs global curation autonomously.
-3.  **Execute**: Technical work proceeds with fresh standards.
-4.  **Persist**: Session data and updated state are saved to Memory.
+1.  **Boot**: The model reads your state and rules.
+2.  **Fix**: The model cleans itself up if needed.
+3.  **Work**: You build, and the model follows the latest rules.
+4.  **Save**: The model saves its own logs automatically.
 </div>
 </Section>

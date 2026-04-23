@@ -9,36 +9,38 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-## Principle
-Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. 
+**ELI5:** Instead of trying to write the perfect prompt every time, we build a simple folder system (Memory) that the AI reads before it starts working. This way, the AI "remembers" your rules and previous work automatically.
 
-## Technical Requirements
-To move beyond brittle prompts, the environment must satisfy three functional requirements:
-1. **Persistence**: Context must survive across independent work sessions.
-2. **Retrieval**: The model must prioritize local project data over its general training.
-3. **Self-Curation**: The system must automatically identify and remember lessons from your work.
+## The Goal
+Moving from brittle, adjective-heavy instructions to a persistent **system** that surrounds the model. 
+
+## Requirements
+To move beyond manual prompts, the system needs:
+1. **Memory**: Context must survive across different chats.
+2. **Focus**: The model must prioritize your local rules over its general training.
+3. **Growth**: The system must learn from fixes and turn them into permanent rules.
 </div>
 
 <div slot="technical">
-| Requirement | Implementation |
+| Need | Solution |
 |---|---|
-| **Persistence** | Local Memory directory |
-| **Retrieval** | Mandatory System Rules |
-| **Curation** | Graduation of session logs |
+| **Memory** | Local folders |
+| **Focus** | Mandatory System Rules |
+| **Growth** | Graduation of logs |
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
 ## 1. Memory: The Foundation
-Memory provides the physical structure for short-term activity and long-term engineering standards. It satisfies the requirement of **Persistence** via a strict directory hierarchy.
+Memory provides the folders for storing short-term activity and long-term rules. This ensures context survives even if you start a fresh chat.
 </div>
 
 <div slot="technical">
 **Folder Structure**
 ```text
 memory/
-├── state.json (global metadata)
+├── state.json (metadata)
 ├── global/
 │   └── lessons/ (universal)
 └── project-x/
@@ -46,7 +48,7 @@ memory/
     └── lessons/ (local standards)
 ```
 
-**Linux / macOS**
+**Setup (Bash)**
 ```bash
 mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
 ```
@@ -56,13 +58,13 @@ mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
 <Section>
 <div slot="insight">
 ## 2. The Skills
-Before the system can run, the model must be taught how to interact with Memory. These "skills" are reusable prompt instructions.
+Skills are simple instructions that teach the model how to use its Memory.
 
 ### Capture (`/end-session`)
-Summarizes the current session and writes it to the correct project directory.
+Summarizes the work and saves it to the right folder.
 
-### Self-Curation (`/distill`)
-**Self-curation** is the core of the system. It is the process of identifying recurring engineering patterns in raw session logs and promoting them to permanent rules in the `lessons/` directory.
+### Curation (`/distill`)
+The "learning" part. The model looks at recent logs and creates permanent rules in the `lessons/` folder.
 </div>
 
 <div slot="technical">
@@ -80,11 +82,11 @@ Summarizes the current session and writes it to the correct project directory.
 <Section>
 <div slot="insight">
 ## 3. System Rules
-System Rules define the operating environment inside the **LLM**. A root file (e.g. `CLAUDE.md`, `.cursorrules`) establishes the Architect/LLM relationship and enforces the maintenance schedule.
+These rules live inside the **LLM** (via `CLAUDE.md` or `.cursorrules`). They force the model to initialize itself and follow your maintenance schedule automatically.
 </div>
 
 <div slot="technical">
-**Project Root Configuration**
+**System Rules (e.g. `CLAUDE.md`)**
 ```markdown
 # Project Standards
 - **Init:** On boot, read `memory/state.json`.
@@ -98,12 +100,10 @@ System Rules define the operating environment inside the **LLM**. A root file (e
 
 <Section>
 <div slot="insight">
-## The Daily Workflow
-The result is an evolving system that starts with context. The LLM inherits its environment automatically, and the architecture absorbs new standards through a verified pattern of reuse.
-
-1. **Boot**: LLM reads root state and context.
-2. **Curation**: LLM graduates rules if stale.
-3. **Execute**: Architect directs; LLM implements.
-4. **Capture**: Run `/end-session` to persist the log.
+## The Daily Loop
+1. **Boot**: The model reads your state and context automatically.
+2. **Learn**: If the system is stale, the model graduations rules first.
+3. **Work**: You provide goals; the model implements them within your boundaries.
+4. **Save**: You run `/end-session` to save the learning.
 </div>
 </Section>
