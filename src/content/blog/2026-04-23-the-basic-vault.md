@@ -1,5 +1,5 @@
 ---
-title: "the basic brain"
+title: "the basic vault"
 description: "you don't need a server to start. how to build the system with just folders and a few rules."
 pubDate: 2026-04-23
 loop: "work"
@@ -13,7 +13,7 @@ Here is the "beginner edition" of the system.
 
 ## 1. The Structure
 
-The "Brain" is just a directory on your computer. It has two main layers: **Global** (rules that apply to everything) and **Projects** (knowledge specific to what you're building right now).
+The "Vault" is just a directory on your computer. It has two main layers: **Global** (rules that apply to everything) and **Projects** (knowledge specific to what you're building right now).
 
 Inside each project, you need two folders:
 
@@ -21,7 +21,7 @@ Inside each project, you need two folders:
 - **`lessons/`**: This is where you distill sessions. If a bug keeps appearing, or a specific workflow works perfectly, it gets moved here as a permanent lesson.
 
 ```text
-~/brain/
+~/vault/
 ├── global/
 │   ├── lessons/ (rules for all coding)
 │   └── sessions/
@@ -35,19 +35,19 @@ Inside each project, you need two folders:
 To make this automatic, you have to tell Claude that this system exists. In your project's `CLAUDE.md` (the file Claude reads at the start of every session), add a section like this:
 
 ```markdown
-# The Brain System
-- **Capture:** After every significant change or at the end of the session, summarize the work into `~/brain/project-x/sessions/[date]-[time]-[goal].md`.
+# The Knowledge System
+- **Capture:** After every significant change or at the end of the session, summarize the work into `~/vault/project-x/sessions/[date]-[time]-[goal].md`.
 - **Content:** Include: what we tried, why it worked/failed, and any new rules we discovered.
-- **Context:** Always check `~/brain/global/lessons/` and `~/brain/project-x/lessons/` before starting new work.
+- **Context:** Always check `~/vault/global/lessons/` and `~/vault/project-x/lessons/` before starting new work.
 ```
 
 Now, Claude knows where to save the learning. You don't have to remember to do it; it's part of its "job description."
 
-## 3. The Skill (/apply-from-brain)
+## 3. The Skill (/apply-from-vault)
 
 You can create a "skill" (or just a shortcut in your head) to force a context refresh. When you start a new chat, run a command like this:
 
-**"Run /apply-from-brain: Read all lessons in my brain folders and update your operating instructions accordingly."**
+**"Run /apply-from-vault: Read all lessons in my vault folders and update your operating instructions accordingly."**
 
 Because you've defined those paths in `CLAUDE.md`, Claude will go and fetch your hard-won lessons from previous days. It will "remember" the bugs you fixed last week because it's reading the documentation you forced it to write.
 
@@ -62,6 +62,6 @@ This is how the system improves. You compress the noise into high-signal rules.
 
 ## Why start here?
 
-The MCP bridge makes this faster, but the **discipline of capture** is the real magic. If you start with files, you'll understand exactly what you want your tools to automate later.
+The MCP bridge makes this faster, but the **discipline of capture** is the real magic. If you start with folders, you'll understand exactly what you want your tools to automate later.
 
 Start today. Create the folders, write the `CLAUDE.md` rule, and stop losing what you learn between sessions.

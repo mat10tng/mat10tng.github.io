@@ -12,7 +12,7 @@
       "id": "phase-2",
       "date": "2026-03-18",
       "label": "phase 2",
-      "title": "added the brain",
+      "title": "added the knowledge base",
       "description": "started capturing sessions in an Obsidian vault. just writing things down — no rules, no search, no automation.",
       "insight": "the habit of capture was the foundation for everything else"
     },
@@ -22,15 +22,15 @@
       "label": "phase 3",
       "title": "built the bridge",
       "description": "KB server connected the vault to Claude sessions. search, brief, capture, measure — all through tools. knowledge started flowing both directions.",
-      "insight": "the brain is useless if the worker can't reach it"
+      "insight": "the knowledge base is useless if the worker can't reach it"
     },
     {
       "id": "phase-4",
       "date": "2026-04-02",
       "label": "phase 4",
-      "title": "the brain learned to improve itself",
-      "description": "meta-brain: the system proposes changes to itself, runs experiments, measures impact, keeps or reverts. scheduled tasks handle daily triage, weekly health, monthly deep cleans.",
-      "insight": "a system that can reshape itself compounds faster than one that waits for human intervention"
+      "title": "system self-improvement",
+      "description": "the system proposes changes to itself, runs experiments, measures impact, keeps or reverts. scheduled tasks handle daily triage, weekly health, monthly deep cleans.",
+      "insight": "a system that can improve itself compounds faster than one that waits for human intervention"
     }
   ]
 }

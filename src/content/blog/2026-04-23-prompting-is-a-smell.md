@@ -33,7 +33,7 @@ When the system fails, I ask: **Where is the structural gap?**
 
 This isn't theory. I currently work with a system that manages over **1,800 notes** and **80+ global rules**. 
 
-My "prompts" are actually very short. Why? Because the **Architecture** does the heavy lifting. The model doesn't have to "remember" how I like my CSS structured—the system loads that rule from the Brain automatically. It doesn't have to "try not to duplicate IDs"—the Bridge enforces that via the filesystem.
+My "prompts" are actually very short. Why? Because the **Architecture** does the heavy lifting. The model doesn't have to "remember" how I like my CSS structured—the system loads that rule from the Knowledge Base automatically. It doesn't have to "try not to duplicate IDs"—the Bridge enforces that via the filesystem.
 
 We have moved from **Adjective Engineering** to **System Engineering.**
 
