@@ -32,13 +32,13 @@ A system requires two distinct layers of memory to function:
 <Section>
 <div slot="insight">
 ## Implementation: Bootloader
-Define the system's operating environment in a project root file (e.g., `CLAUDE.md`, `.cursorrules`). This enforces retrieval over memory and establishes the architect/LLM relationship.
+The Bootloader defines the environment inside the **LLM**. Placing a root file (e.g., `CLAUDE.md`, `.cursorrules`) establishes the architect/LLM relationship and forces retrieval over model memory.
 </div>
 
 <div slot="technical">
 ```markdown
 # Project Standards
-- **Role:** Human Architect directs; LLM executes.
+- **Role:** Architect directs; LLM executes.
 - **Recall:** Always search `~/memory/` for existing logic before work.
 - **Log:** After each task, record the technical outcome to `sessions/`.
 - **Distill:** If a new reusable rule is identified, propose it for `lessons/`.
@@ -67,7 +67,7 @@ A context refresh skill ensures the LLM synchronizes with the system's current s
 </div>
 
 <div slot="technical">
-**Command:** `/sync`
+**Command:** `/sync` (or `/apply-from-vault`)
 **Logic:** "Read structure, latest session logs, and distilled lessons. Verify constraints. Do not proceed until verified."
 </div>
 </Section>

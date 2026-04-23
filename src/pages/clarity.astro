@@ -16,12 +16,13 @@ import { SITE_TITLE } from '../consts';
 				padding: 3rem 1rem;
 				text-align: center;
 			}
-			h1 { font-size: 2rem; margin-bottom: 1rem; }
-			p { color: #666; line-height: 1.6; }
+			h1 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+			p { color: #444; line-height: 1.7; font-size: 1.1rem; margin-bottom: 3rem; }
 			.badge {
 				display: inline-block;
 				padding: 0.25rem 0.75rem;
-				background: #eee;
+				background: #2563eb;
+				color: #fff;
 				border-radius: 20px;
 				font-size: 0.75rem;
 				font-weight: 700;
@@ -29,17 +30,52 @@ import { SITE_TITLE } from '../consts';
 				letter-spacing: 0.05em;
 				margin-bottom: 2rem;
 			}
+			.post-list {
+				text-align: left;
+				margin-top: 4rem;
+				border-top: 1px solid #eee;
+				padding-top: 3rem;
+			}
+			.post-item {
+				margin-bottom: 2.5rem;
+				text-decoration: none;
+				display: block;
+			}
+			.post-title {
+				font-size: 1.25rem;
+				font-weight: 700;
+				color: #2563eb;
+				margin-bottom: 0.5rem;
+			}
+			.post-item:hover .post-title {
+				text-decoration: underline;
+			}
+			.post-desc {
+				color: #666;
+				line-height: 1.5;
+			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<div class="badge">Coming Soon</div>
+			<div class="badge">Project Spotlight</div>
 			<h1>Clarity Project</h1>
 			<p>
-				A new standard for transparent, high-performance AI engineering. 
-				Redefining how humans and models build together through structural clarity and persistent context.
+				Turning natural conversation into actionable process architecture. 
+				Clarity uses a stateful AI agent to synthesize live process maps, bridging the gap between discovery and delivery.
 			</p>
+
+			<div class="post-list">
+				<a href="/blog/2026-04-22-live-synthesis" class="post-item">
+					<div class="post-title">discovery -> live synthesis</div>
+					<div class="post-desc">Bridging the gap between conversation and process architecture through real-time Mermaid synthesis.</div>
+				</a>
+				<a href="/blog/2026-04-23-balancing-intuition" class="post-item">
+					<div class="post-title">hallucination -> explicit confidence</div>
+					<div class="post-desc">How Precise vs Autocomplete modes preserve human authority in AI-assisted discovery.</div>
+				</a>
+			</div>
 		</main>
 		<Footer />
 	</body>
