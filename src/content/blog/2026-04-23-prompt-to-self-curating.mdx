@@ -10,66 +10,78 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## The Answer
-**You can eliminate repetitive prompting by establishing a persistent memory system.** 
+**You can eliminate repetitive prompting and force your technical knowledge to compound across your entire portfolio by establishing a persistent, project-agnostic memory system.**
 
-Reliability comes from an architecture that surrounds the model, not the adjectives inside the prompt. By moving constraints from your chat box to a structured file system, you ensure every session inherits the correct technical context automatically.
+Reliability comes from an architecture where every session belongs to a specific project. By using a unified folder structure, you ensure that local fixes in one project can graduate into global standards for all future work.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 1. Functional Requirements
-To move beyond brittle prompts, the environment must satisfy three logic gates:
-1. **Persistence**: Context must survive across independent work sessions.
-2. **Retrieval**: The model must prioritize local rules over its general training.
-3. **Growth**: The system must automatically turn session fixes into permanent standards.
+## 1. Portfolio Architecture
+Compounding requires a strict directory hierarchy. This ensures the model has a deterministic location to store and retrieve history for any project in your portfolio.
 </div>
 
 <div slot="technical">
-| Requirement | Implementation |
-|---|---|
-| **Persistence** | Local Memory directory |
-| **Retrieval** | Mandatory System Rules |
-| **Growth** | Graduation of session logs |
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## 2. Memory Structure
-The foundation is a deterministic location for project history. This ensures you never have to prompt the model with your basic stack or file paths more than once.
-</div>
-
-<div slot="technical">
-**Folder Structure**
+**Unified Memory Structure**
 ```text
 memory/
-├── state.json (metadata)
+├── state.json (global health)
 ├── global/
-│   └── lessons/ (universal)
+│   └── lessons/ (portfolio standards)
 └── project-x/
-    ├── sessions/ (logs)
-    └── lessons/ (local)
+    ├── sessions/ (daily logs)
+    └── lessons/ (project fixes)
 ```
 
 **Scaffold (Bash)**
 ```bash
-mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
+mkdir -p memory/global/lessons
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 3. System Rules
-System Rules live inside the LLM (via `CLAUDE.md` or `.cursorrules`). They enforce **Automatic Initialization**—forcing the model to synchronize with Memory before accepting goals.
+## 2. The Foundation Skill (/init-project)
+Every session must belong to a project. The `/init-project` skill is the first mandatory action for any new codebase, ensuring it is correctly registered within your Memory system.
 </div>
 
 <div slot="technical">
-**System Rules**
+**Skill: `/init-project`**
+> "Scaffold the memory structure for this new project: `memory/[project-name]/sessions/` and `memory/[project-name]/lessons/`. Initialize `memory/state.json` if this is the first project."
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 3. The Operational Skills
+Once initialized, the system uses two skills to capture and graduate logic.
+
+**Capture**: Persists session-specific technical decisions.
+**Graduation**: Identifies rules with portfolio-wide utility.
+</div>
+
+<div slot="technical">
+**Skill: `/end-session`**
+> "Summarize the technical decisions of this session. Save to `memory/[project-name]/sessions/[date]-[goal].md`."
+
+**Skill: `/distill`**
+> "Review logs from `[project-name]`. Identify rules that should graduate to `global/lessons/` to benefit the entire portfolio."
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 4. System Rules
+System Rules live inside the LLM. They enforce **Automatic Initialization**—forcing the model to identify the current project and synchronize with its specific Memory before work begins.
+</div>
+
+<div slot="technical">
+**Project System Rules**
 ```markdown
 # Project Standards
-- **Init:** On boot, read `memory/state.json`.
+- **Init:** On boot, identify current project and read `memory/[project-name]/`.
 - **Curation:** If `last_distill` > 7 days, execute `/distill`.
 - **Role:** Architect directs; LLM executes.
 - **Skills:** [/init-project, /end-session, /distill]
@@ -79,18 +91,7 @@ System Rules live inside the LLM (via `CLAUDE.md` or `.cursorrules`). They enfor
 
 <Section>
 <div slot="insight">
-## 4. Operational Skills
-Skills are the "How-To" for the model. 
-
-**Capture**: Summarizes the session outcomes.
-**Curation**: Identifies recurring patterns and promotes them to permanent standards.
-</div>
-
-<div slot="technical">
-**Skill: `/end-session`**
-> "Summarize technical decisions. Save to `memory/project-x/sessions/[date]-[goal].md`."
-
-**Skill: `/distill`**
-> "Identify 3 recurring patterns from recent logs. Move to `global/lessons/`. Update `memory/state.json`."
+## Result
+A self-curating portfolio. The LLM inherits its environment automatically, and your engineering standards grow across every project you touch.
 </div>
 </Section>
