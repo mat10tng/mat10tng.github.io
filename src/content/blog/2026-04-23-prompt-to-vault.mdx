@@ -1,0 +1,63 @@
+---
+title: "prompt -> vault"
+description: "establishing the foundational structural boundaries for persistent AI context."
+pubDate: 2026-04-23
+loop: "improve"
+---
+import Section from '../../components/layout/Section.astro';
+
+<Section>
+<div slot="insight">
+## Principle
+Prompting is a fallback. Reliability comes from the **system** surrounding the model. 
+
+## The Setup
+A persistent vault requires a disciplined file structure. This removes reliance on model memory and adjective-heavy instructions.
+</div>
+
+<div slot="technical">
+```text
+~/vault/
+├── global/
+│   └── lessons/
+└── project-x/
+    ├── sessions/
+    └── lessons/
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Implementation: Bootloader
+Define the system's operating environment in a project root file (e.g., `CLAUDE.md`, `.cursorrules`). This enforces retrieval over memory and establishes the architect/worker relationship.
+</div>
+
+<div slot="technical">
+```markdown
+# Project Standards
+- **Role:** Human Architect directs; Worker executes.
+- **Log:** Record outcome to `~/vault/project-x/sessions/[date]-[goal].md`.
+- **Knowledge:** Search local file system before implementing.
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Context Synchronization
+A context refresh skill ensures the model synchronizes with the project's current state and previously documented logic before beginning work.
+</div>
+
+<div slot="technical">
+**Command:** `/sync` (or `/apply-from-vault`)
+**Logic:** "Read structure, latest session logs, and distilled lessons. Verify constraints. Do not proceed until verified."
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Result
+The architecture handles the complexity. Prompts remain short because the model inherits its environment from the vault automatically.
+</div>
+</Section>

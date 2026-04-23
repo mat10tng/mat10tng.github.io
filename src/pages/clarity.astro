@@ -1,0 +1,46 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Clarity Project — ${SITE_TITLE}`} description="The future of transparent AI collaboration." />
+		<style>
+			main {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 3rem 1rem;
+				text-align: center;
+			}
+			h1 { font-size: 2rem; margin-bottom: 1rem; }
+			p { color: #666; line-height: 1.6; }
+			.badge {
+				display: inline-block;
+				padding: 0.25rem 0.75rem;
+				background: #eee;
+				border-radius: 20px;
+				font-size: 0.75rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-bottom: 2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="badge">Coming Soon</div>
+			<h1>Clarity Project</h1>
+			<p>
+				A new standard for transparent, high-performance AI engineering. 
+				Redefining how humans and models build together through structural clarity and persistent context.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
