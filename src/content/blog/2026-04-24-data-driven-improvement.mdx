@@ -31,7 +31,7 @@ The Interface (MCP) tools use the root state data to decide when to run. If the 
 </div>
 
 <div slot="technical">
-**Bridge Tool Logic:**
+**Interface Tool Logic:**
 ```javascript
 // Check inside a tool call
 const state = await fs.readFile("memory/state.json");
@@ -46,7 +46,7 @@ if (daysSince(state.last_distill) > 7) {
 <Section>
 <div slot="insight">
 ## The Automated Workflow
-1.  **Boot**: LLM reads root `state.json`.
+1.  **Boot**: LLM reads root `state.json` and project **System Rules**.
 2.  **Maintenance**: If state criteria are met, LLM runs global curation autonomously.
 3.  **Execute**: Technical work proceeds with fresh standards.
 4.  **Persist**: Session data and updated root state are saved to Memory.
@@ -56,6 +56,6 @@ if (daysSince(state.last_distill) > 7) {
 <Section>
 <div slot="insight">
 ## Result
-A data-driven, self-running architecture. The system maintains itself based on its highest-level internal state, ensuring that engineering standards compound without manual Architect intervention.
+A data-driven, self-running architecture. The system maintains itself based on its own internal state, ensuring that engineering standards compound without manual Architect intervention.
 </div>
 </Section>
