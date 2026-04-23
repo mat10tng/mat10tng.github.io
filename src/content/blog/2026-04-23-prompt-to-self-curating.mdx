@@ -1,6 +1,6 @@
 ---
 title: "prompt -> self-curating system"
-description: "moving from adjective-based instruction to a persistent, evolving memory architecture."
+description: "establishing structural boundaries and a self-curating context system."
 pubDate: 2026-04-23
 loop: "improve"
 ---
@@ -39,7 +39,7 @@ memory/
 <Section>
 <div slot="insight">
 ## 2. The Bootloader
-The Bootloader defines the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`, `.cursorrules`) enforces retrieval and establishes the architect/worker relationship.
+The Bootloader defines the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`, `.cursorrules`) establishes the architect/LLM relationship and provides the model with its "save" and "distill" skills.
 </div>
 
 <div slot="technical">
@@ -49,8 +49,8 @@ The Bootloader defines the operating environment inside the **LLM**. A root file
 # Project Standards
 - **Role:** Architect directs; LLM executes.
 - **Recall:** Search `memory/` for logic.
-- **Log:** Record outcome to `sessions/`.
-- **Distill:** Propose rules for `lessons/`.
+- **Rules:** Use `/end-session` to log work.
+- **Skills:** [/end-session, /distill]
 ```
 </div>
 </div>
@@ -58,16 +58,26 @@ The Bootloader defines the operating environment inside the **LLM**. A root file
 
 <Section>
 <div slot="insight">
-## 3. The Graduation Loop
+## 3. The Session Skill (/end-session)
+A manual system requires an explicit trigger to persist learning. The `/end-session` skill forces the model to summarize the current session and write it to the correct project directory.
+</div>
+
+<div slot="technical">
+**Command:** `/end-session`
+**Logic:** 
+> "Summarize the technical decisions and outcomes of this session. Save the result as a new markdown file in `memory/project-x/sessions/[date]-[goal].md`."
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 4. The Graduation Loop
 The system improves by identifying local fixes with universal utility and promoting them to permanent standards.
 </div>
 
 <div slot="technical">
-| Step | Action |
-|---|---|
-| **Detection** | Identify recurring friction. |
-| **Local Fix** | Add a rule to `lessons/`. |
-| **Graduation** | Move to `global/lessons/`. |
+**Distillation Skill (/distill):**
+> "Review last 7 days of logs. Identify 3 recurring patterns. Move to `global/lessons/`. Update project bootloader."
 </div>
 </Section>
 
@@ -75,10 +85,5 @@ The system improves by identifying local fixes with universal utility and promot
 <div slot="insight">
 ## Result
 A self-curating system. The LLM inherits its environment automatically, and the architecture absorbs new standards through a verified pattern of reuse.
-</div>
-
-<div slot="technical">
-**Distillation Skill:**
-> "Review last 7 days of logs. Identify 3 recurring patterns. Move to `global/lessons/`. Update project bootloader."
 </div>
 </Section>
