@@ -29,7 +29,19 @@
         }
     }
 
-    /* Inherit global heading styles, just remove top margin for first element */
+    /* Force consistent heading sizes within the insight column */
+    .insight :global(h2) {
+        font-size: 1.5rem !important;
+        margin-bottom: 1rem;
+        color: rgb(var(--black));
+        font-weight: 700;
+    }
+    
+    .insight :global(h3) {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.75rem;
+    }
+
     .insight :global(h2:first-child), 
     .insight :global(h3:first-child) {
         margin-top: 0;

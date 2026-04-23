@@ -9,29 +9,37 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## Principle
-Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. A static system degrades; an effective architecture must self-curate through use.
+Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. 
 
-## The Memory Structure
-1. **Sessions**: Short-term logs of activity (what was tried, what failed).
-2. **Lessons**: Long-term engineering standards (distilled logic).
+## The Requirement
+A system requires a structured environment for context to persist across independent work sessions. This is implemented as a **Memory** directory on the local file system.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 1. Memory Structure
+Memory is divided into two distinct layers:
+- **Sessions**: Short-term logs of activity (what was tried, what failed).
+- **Lessons**: Long-term engineering standards (distilled logic).
 </div>
 
 <div slot="technical">
 ```text
 memory/
 ├── global/
-│   └── lessons/
+│   └── lessons/ (universal)
 └── project-x/
-    ├── sessions/
-    └── lessons/
+    ├── sessions/ (logs)
+    └── lessons/ (local rules)
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Implementation: Bootloader
-The Bootloader defines the environment inside the **LLM**. A root file established in the project (e.g., `CLAUDE.md`, `.cursorrules`) enforces retrieval and defines roles.
+## 2. The Bootloader
+The Bootloader defines the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`, `.cursorrules`) enforces retrieval and establishes the architect/worker relationship.
 </div>
 
 <div slot="technical">
@@ -50,17 +58,16 @@ The Bootloader defines the environment inside the **LLM**. A root file establish
 
 <Section>
 <div slot="insight">
-## Graduation Path
-The system improves by identifying local fixes with universal utility:
-1. **Detection**: Identify recurring friction.
-2. **Local Fix**: Add a rule to project `lessons/`.
-3. **Pattern**: Observe fix solving issues in unrelated projects.
-4. **Graduation**: Move logic to `global/lessons/`.
+## 3. The Graduation Loop
+The system improves by identifying local fixes with universal utility and promoting them to permanent standards.
 </div>
 
 <div slot="technical">
-**Distillation Skill:**
-> "Review last 7 days of logs. Identify 3 recurring patterns. Move to `global/lessons/`. Update project bootloader."
+| Step | Action |
+|---|---|
+| **Detection** | Identify recurring friction. |
+| **Local Fix** | Add a rule to `lessons/`. |
+| **Graduation** | Move to `global/lessons/`. |
 </div>
 </Section>
 
@@ -69,5 +76,9 @@ The system improves by identifying local fixes with universal utility:
 ## Result
 A self-curating system. The LLM inherits its environment automatically, and the architecture absorbs new standards through a verified pattern of reuse.
 </div>
-</Section>
 
+<div slot="technical">
+**Distillation Skill:**
+> "Review last 7 days of logs. Identify 3 recurring patterns. Move to `global/lessons/`. Update project bootloader."
+</div>
+</Section>
