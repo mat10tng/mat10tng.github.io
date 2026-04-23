@@ -5,11 +5,11 @@ pubDate: 2026-04-23
 loop: "improve"
 ---
 
-The world is currently obsessed with "prompt engineering." There are libraries of "golden prompts," magic incantations, and people spending hours trying to find the exact combination of adjectives that will stop a model from hallucinating a variable name.
+The world is currently obsessed with "prompt engineering." There are libraries of "golden prompts," extensive instruction lists, and people spending hours trying to find the exact combination of words that will stop a model from hallucinating a variable name.
 
 I think prompting is a smell. 
 
-If you have to prompt an AI perfectly every time to get a good result, your system is fragile. If your success depends on your ability to be a "whisperer," you haven't built a workflow; you've built a superstition.
+If you have to prompt an AI perfectly every time to get a good result, your system is fragile. If your success depends on your ability to be a "prompt tuner," you haven't built a workflow; you've built a brittle process.
 
 ## The Prompting Trap
 
@@ -47,4 +47,4 @@ If you are a developer feeling the "AI Fatigue," stop looking for better prompts
 
 The goal isn't to talk to the AI better. The goal is to build a system that makes the AI smarter than it actually is. 
 
-We aren't whisperers. We are architects. It’s time we started building like it.
+We aren't prompt tuners. We are architects. It’s time we started building like it.

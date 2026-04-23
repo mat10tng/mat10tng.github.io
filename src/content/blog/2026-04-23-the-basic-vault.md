@@ -62,6 +62,6 @@ This is how the system improves. You compress the noise into high-signal rules.
 
 ## Why start here?
 
-The MCP bridge makes this faster, but the **discipline of capture** is the real magic. If you start with folders, you'll understand exactly what you want your tools to automate later.
+The MCP bridge makes this faster, but the **discipline of capture** is the core mechanism. If you start with folders, you'll understand exactly what you want your tools to automate later.
 
-Start today. Create the folders, write the `CLAUDE.md` rule, and stop losing what you learn between sessions.
+Initial setup: Create the folders, write the `CLAUDE.md` rule, and stop losing what you learn between sessions.
