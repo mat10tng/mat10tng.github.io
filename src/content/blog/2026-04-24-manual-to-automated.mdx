@@ -4,11 +4,18 @@ description: "connecting your knowledge base directly to Claude using a basic Mo
 pubDate: 2026-04-24
 loop: "improve"
 ---
+import Section from '../../components/layout/Section.astro';
 
+<Section>
+<div slot="insight">
 Manual data transfer is the primary source of friction in a local vault setup. Requesting the model to read files and manually save session summaries creates unnecessary overhead.
 
 The Model Context Protocol (MCP) provides a standard for automating these interactions, enabling direct communication between the model and the local file system.
+</div>
+</Section>
 
+<Section>
+<div slot="insight">
 ## The Simple Bridge
 
 Automation is achieved through a minimal Node.js script that exposes two tools:
@@ -16,20 +23,28 @@ Automation is achieved through a minimal Node.js script that exposes two tools:
 2. `save_session`: Records session outcomes directly to the correct project directory.
 
 ### 1. Implementation
+The implementation requires the MCP SDK to handle standard input/output communication with the AI model.
+</div>
 
-Initialize the project:
+<div slot="technical">
 ```bash
 mkdir simple-bridge
 cd simple-bridge
 npm init -y
 npm install @modelcontextprotocol/sdk
 ```
+</div>
+</Section>
 
+<Section>
+<div slot="insight">
 ### 2. Logic
+The server logic maps model tool calls to local file system operations. It uses `StdioServerTransport` for low-latency, local execution.
+</div>
 
-Create `index.js` to enable direct file system interaction:
-
+<div slot="technical">
 ```javascript
+// index.js
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
@@ -38,82 +53,59 @@ import path from "path";
 import os from "os";
 
 const VAULT_PATH = path.join(os.homedir(), "vault");
-
-const server = new Server({ 
-  name: "simple-bridge", 
-  version: "1.0.0" 
-}, { 
-  capabilities: { tools: {} } 
-});
+const server = new Server({ name: "bridge", version: "1.0.0" }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
-    {
-      name: "read_lessons",
-      description: "Read all global lessons from the vault",
-      inputSchema: { type: "object", properties: {} }
-    },
-    {
-      name: "save_session",
-      description: "Save a session summary to the vault",
-      inputSchema: {
-        type: "object",
-        properties: {
-          project: { type: "string" },
-          content: { type: "string" }
-        },
-        required: ["project", "content"]
-      }
-    }
+    { name: "read_lessons", description: "Read global standards" },
+    { name: "save_session", description: "Log session", inputSchema: { 
+        type: "object", properties: { project: { type: "string" }, content: { type: "string" } } 
+    }}
   ]
 }));
 
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  if (request.params.name === "read_lessons") {
-    const lessonsDir = path.join(VAULT_PATH, "global/lessons");
-    const files = await fs.readdir(lessonsDir);
-    let content = "";
-    for (const file of files) {
-      if (file.endsWith(".md")) {
-        const body = await fs.readFile(path.join(lessonsDir, file), "utf-8");
-        content += `\n--- ${file} ---\n${body}\n`;
-      }
-    }
-    return { content: [{ type: "text", text: content }] };
-  }
-
   if (request.params.name === "save_session") {
     const { project, content } = request.params.arguments;
     const dir = path.join(VAULT_PATH, project, "sessions");
     await fs.mkdir(dir, { recursive: true });
-    
-    const filename = `${new Date().toISOString().replace(/[:.]/g, "-")}.md`;
-    await fs.writeFile(path.join(dir, filename), content);
-    return { content: [{ type: "text", text: `Saved to ${filename}` }] };
+    await fs.writeFile(path.join(dir, `${Date.now()}.md`), content);
+    return { content: [{ type: "text", text: "Logged." }] };
   }
-
-  throw new Error("Tool not found");
+  // ... rest of tool handlers
 });
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
 ```
+</div>
+</Section>
 
+<Section>
+<div slot="insight">
 ### 3. Configuration
+Registering the server in the model's global configuration file allows it to load the tools at the start of every session.
+</div>
 
-Registration of the server occurs in the `claude_desktop_config.json`:
-
+<div slot="technical">
 ```json
+// claude_desktop_config.json
 {
   "mcpServers": {
-    "simple-bridge": {
+    "bridge": {
       "command": "node",
-      "args": ["/absolute/path/to/your/simple-bridge/index.js"]
+      "args": ["/path/to/simple-bridge/index.js"]
     }
   }
 }
 ```
+</div>
+</Section>
 
+<Section>
+<div slot="insight">
 ## The Outcome
 
 The Model can now maintain the system autonomously. A command like "Save a session log for project-x" triggers the execution of the tool, determining the correct directory and writing the log without further human intervention. This shift eliminates the manual overhead of context management.
+</div>
+</Section>

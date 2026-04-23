@@ -1,0 +1,46 @@
+---
+---
+<div class="section-container">
+    <div class="insight">
+        <slot name="insight" />
+    </div>
+    <div class="technical">
+        <slot name="technical" />
+    </div>
+</div>
+
+<style>
+    .section-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 4rem;
+        align-items: start;
+    }
+
+    @media (min-width: 1100px) {
+        .section-container {
+            grid-template-columns: 1fr 480px;
+            gap: 5rem;
+            max-width: 1200px;
+            margin-left: calc(50% - 600px);
+            width: 1200px;
+        }
+    }
+
+    .technical {
+        position: sticky;
+        top: 2rem;
+    }
+
+    /* Target nested code blocks and tables in the technical column */
+    .technical :global(pre) {
+        margin: 0 !important;
+        background: #1a1b26 !important; /* Slightly darker for contrast */
+    }
+
+    .technical :global(table) {
+        margin: 0 !important;
+        font-size: 0.85rem;
+    }
+</style>

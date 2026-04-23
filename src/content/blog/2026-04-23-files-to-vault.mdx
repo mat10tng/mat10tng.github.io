@@ -4,46 +4,67 @@ description: "how to build a zero-code knowledge system using your local file sy
 pubDate: 2026-04-23
 loop: "work"
 ---
+import Section from '../../components/layout/Section.astro';
 
+<Section>
+<div slot="insight">
 The baseline implementation of a knowledge system requires a disciplined file structure and a method for enforcing interaction. Neither a server nor a database is required for this phase.
 
 ## 1. The Structure
 
 Organization involves two primary layers: **Global** (standards for all work) and **Projects** (context for specific tasks).
+</div>
 
+<div slot="technical">
 Each project requires two directories:
-- **`sessions/`**: Stores raw logs of what occurred, what was decided, and what failed.
-- **`lessons/`**: Stores distilled, reusable logic extracted from sessions.
+- **`sessions/`**: Stores raw logs.
+- **`lessons/`**: Stores distilled logic.
 
 ```text
 ~/vault/
 ├── global/
-│   ├── lessons/ (global standards)
+│   ├── lessons/
 │   └── sessions/
 └── project-x/
-    ├── sessions/ (daily session logs)
-    └── lessons/ (project-specific logic)
+    ├── sessions/
+    └── lessons/
 ```
+</div>
+</Section>
 
+<Section>
+<div slot="insight">
 ## 2. The Bootloader (CLAUDE.md)
 
-Project configuration is the starting point for automation. Defining the system's operating environment in `CLAUDE.md` ensures the model initializes correctly:
+Project configuration is the starting point for automation. Defining the system's operating environment in `CLAUDE.md` ensures the model initializes correctly with the correct logging and context rules.
+</div>
 
+<div slot="technical">
 ```markdown
 # The Knowledge System
 - **Log:** After every significant change, record the technical outcome to `~/vault/project-x/sessions/[date]-[goal].md`.
 - **Content:** Include: attempted approach, technical result, and any new logic discovered.
 - **Context:** Always read `~/vault/global/lessons/` and `~/vault/project-x/lessons/` before starting work.
 ```
+</div>
+</Section>
 
+<Section>
+<div slot="insight">
 ## 3. Retrieval (/apply-from-vault)
 
-Synchronization with current standards is achieved through a direct command to refresh context:
+Synchronization with current standards is achieved through a direct command to refresh context. This forces the retrieval of previously documented logic, ensuring continuity between sessions.
+</div>
 
-**"Run /apply-from-vault: Read all lessons in my vault directories and update operating logic."**
+<div slot="technical">
+**Command:** `/apply-from-vault`
+**Logic:**
+> "Read all lessons in my vault directories and update operating logic."
+</div>
+</Section>
 
-This forces the retrieval of previously documented logic, ensuring continuity between sessions.
-
+<Section>
+<div slot="insight">
 ## 4. Maintenance (Distillation)
 
 System performance depends on periodically compressing high-noise session logs into high-signal rules within the `lessons/` directory.
@@ -53,3 +74,5 @@ System performance depends on periodically compressing high-noise session logs i
 The **discipline of capture** is the core mechanism of the system. Starting with a file-based vault ensures that the logic for future automation is clearly defined through manual practice.
 
 Initial setup involves creating the directory structure and establishing the `CLAUDE.md` rule to prevent context loss.
+</div>
+</Section>
