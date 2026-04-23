@@ -11,37 +11,38 @@ import Section from '../../components/layout/Section.astro';
 ## Principle
 Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. 
 
-## The Requirement
-A system requires a structured environment for context to persist across independent work sessions. This is implemented as a **Memory** directory on the local file system.
+## Technical Requirements
+To move beyond brittle prompts, the environment must satisfy three functional requirements:
+1. **Persistence**: Context must survive across independent work sessions.
+2. **Retrieval**: The model must prioritize local project data over its general training.
+3. **Curation**: The system must graduate project fixes into permanent standards.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 1. Memory Structure
-Memory is divided into two distinct layers:
-- **Sessions**: Short-term logs of activity (what was tried, what failed).
-- **Lessons**: Long-term engineering standards (distilled logic).
-- **System State**: The `state.json` file lives at the root to track global health and maintenance schedules.
+## Memory: The Foundation
+The primary requirement—Persistence—is implemented as a **Memory** directory. This provides the physical structure for short-term activity and long-term logic.
 </div>
 
 <div slot="technical">
+**Folder Structure**
 ```text
 memory/
-├── state.json (system-wide state)
+├── state.json (global metadata)
 ├── global/
-│   └── lessons/
+│   └── lessons/ (universal)
 └── project-x/
-    ├── sessions/
-    └── lessons/
+    ├── sessions/ (activity logs)
+    └── lessons/ (local standards)
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 2. System Rules
-System Rules define the operating environment inside the **LLM**. A root file established in the project (e.g., `CLAUDE.md`, `.cursorrules`) enforces **Automatic Initialization** and **Self-Curation** based on the global state in Memory.
+## System Rules
+System Rules define the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`, `.cursorrules`) enforces **Automatic Initialization** and triggers maintenance based on the state in Memory.
 </div>
 
 <div slot="technical">
@@ -60,24 +61,27 @@ System Rules define the operating environment inside the **LLM**. A root file es
 
 <Section>
 <div slot="insight">
-## 3. The Daily Workflow
-The system maintains itself. Curation is not a manual choice; it is triggered automatically by the global state data.
+## The Daily Workflow
+Execution follows a deterministic cycle triggered by the Memory state:
 
-1.  **Initialize**: On boot, the LLM reads the root state and project context.
-2.  **Curation**: If the system is stale, the LLM graduates rules immediately.
-3.  **Execute**: Architect directs goals; LLM implements.
-4.  **Capture**: Before closing, run `/end-session`.
+1.  **Initialize**: LLM synchronizes with root state and context.
+2.  **Curation**: LLM graduates rules if the system is stale.
+3.  **Execute**: Architect directs; LLM implements.
+4.  **Capture**: Run `/end-session` to persist the technical log.
 </div>
 
 <div slot="technical">
-**The `/distill` Logic**
-> "Identify 3 recurring patterns from recent logs. Move to `global/lessons/`. Update `last_distill` date in `memory/state.json`."
+**The `/end-session` Skill**
+> "Summarize technical decisions. Save to `memory/project-x/sessions/[date]-[goal].md`."
+
+**The Graduation Skill (/distill)**
+> "Identify recurring patterns. Move to `global/lessons/`. Update `memory/state.json`."
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
 ## Result
-A self-running architecture. The system monitors its own health from the highest level, ensuring standards never stagnate across any project.
+A self-running architecture. The system monitors its own health from the highest level, ensuring standards never stagnate.
 </div>
 </Section>
