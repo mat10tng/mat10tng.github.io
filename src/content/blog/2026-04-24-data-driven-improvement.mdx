@@ -10,9 +10,9 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## The Answer
-**Stop performing manual system maintenance.** 
+**Automating context management via the Model Context Protocol (MCP) ensures that your engineering standards compound over time without manual intervention.**
 
-Automating context management via the Model Context Protocol (MCP) removes the manual labor of bookkeeping. By persisting system metadata in a root `state.json` file, you enable your architecture to evolve autonomously based on real-time success metrics.
+By persisting system metadata in a root `state.json` file, you enable your architecture to evolve autonomously based on real-time success metrics, removing the manual labor of bookkeeping.
 </div>
 </Section>
 
@@ -45,7 +45,7 @@ Instead of manual commands, the Interface (MCP) uses state data to determine ope
 </div>
 
 <div slot="technical">
-**Bridge Tool Logic:**
+**Interface Tool Logic:**
 ```javascript
 // Check inside a tool call
 const state = await fs.readFile("memory/state.json");
@@ -59,9 +59,7 @@ if (daysSince(state.last_distill) > 7) {
 
 <Section>
 <div slot="insight">
-## 3. The Automated Loop
-The result is a self-maintaining system. It uses its own data to get smarter, ensuring that engineering standards compound over time without manual intervention.
-
+## The Automated Workflow
 1. **Boot**: Model reads global state.
 2. **Maintenance**: Model triggers curation if stale.
 3. **Execute**: Model works with fresh standards.
