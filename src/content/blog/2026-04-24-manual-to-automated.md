@@ -1,31 +1,23 @@
 ---
-title: "your first mcp server"
-description: "you've built the basic vault. now let's automate it so Claude can read and write to it directly."
+title: "manual -> automated"
+description: "connecting your knowledge base directly to Claude using a basic Model Context Protocol (MCP) server."
 pubDate: 2026-04-24
 loop: "improve"
 ---
 
-If you followed [the basic vault](/blog/2026-04-23-the-basic-vault) guide, you now have a working system. You have folders for `sessions` and `lessons`, and a `CLAUDE.md` file that tells the AI to use them.
+After implementing a local vault, the primary source of friction is the manual transfer of data. You must manually ask the model to read files and manually save summaries.
 
-But there is still friction. You have to manually ask Claude to "read the lessons folder." You have to ask it to "save this chat as a new file." 
-
-The next step in the evolution of your system is **automation**. We want to give Claude the ability to read and write to your vault natively. For that, we need to build a tiny MCP (Model Context Protocol) server.
-
-If you have a couple of years of programming experience, you can build this in about 15 minutes.
-
-## What is MCP?
-
-MCP is a standard way for AI assistants (like Claude Desktop or Cursor) to talk to local tools. Instead of Claude guessing how to save a file, you give it a specific tool called `save_session`.
+The Model Context Protocol (MCP) provides a standard for automating these interactions, allowing the model to interact with your local file system directly.
 
 ## The Simple Bridge
 
-We are going to write a tiny Node.js script that exposes two tools to Claude:
-1. `read_lessons`: Reads all markdown files in your `~/vault/global/lessons/` directory.
-2. `save_session`: Takes a summary string and saves it to a specific project folder.
+This implementation uses a minimal Node.js script to expose two tools to the model:
+1. `read_lessons`: Autonomously retrieves standards from your vault.
+2. `save_session`: Records the technical outcome of a session directly to the correct project directory.
 
-### 1. The Setup
+### 1. Implementation
 
-Create a new directory for your server:
+Initialize a new project:
 ```bash
 mkdir simple-bridge
 cd simple-bridge
@@ -33,9 +25,9 @@ npm init -y
 npm install @modelcontextprotocol/sdk
 ```
 
-### 2. The Code
+### 2. Logic
 
-Create `index.js`. This is the entire server:
+Create `index.js`. This server enables direct file system interaction:
 
 ```javascript
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
@@ -107,9 +99,9 @@ const transport = new StdioServerTransport();
 await server.connect(transport);
 ```
 
-### 3. Connecting it to Claude
+### 3. Configuration
 
-If you are using Claude Desktop, open your `claude_desktop_config.json` and add your new server:
+Add the server to your `claude_desktop_config.json`:
 
 ```json
 {
@@ -122,10 +114,10 @@ If you are using Claude Desktop, open your `claude_desktop_config.json` and add 
 }
 ```
 
-## The Result
+## The Outcome
 
-Now, you don't have to manually prompt Claude. You can just say:
+The model can now maintain the system autonomously. When a task is complete, you simply state:
 
-> "We finished the auth setup. Save a session note for the login-system project."
+> "Save a session log for project-x."
 
-Claude will autonomously call `save_session`, and write it directly to your file system. You have just built **The Bridge**.
+The model executes the tool, determines the correct directory, and writes the log. You have removed the manual overhead of context management.
