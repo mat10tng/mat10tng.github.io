@@ -10,12 +10,15 @@ import ArchitectureOverview from '../components/diagrams/ArchitectureOverview.as
 type Props = CollectionEntry<'blog'>['data'] & { id: string };
 
 const { title, description, pubDate, updatedDate, heroImage, id } = Astro.props;
-const isImplementationPath = [
-	'2026-04-23-prompting-is-a-smell', 
-	'2026-04-23-the-basic-vault', 
-	'2026-04-08-rules-that-graduate', 
-	'2026-04-24-your-first-mcp'
-].includes(id);
+
+const implementationSteps: Record<string, number> = {
+	'2026-04-23-prompt-to-system': 1,
+	'2026-04-23-files-to-vault': 2,
+	'2026-04-08-logs-to-rules': 3,
+	'2026-04-24-manual-to-automated': 4
+};
+
+const currentStep = implementationSteps[id];
 ---
 
 <html lang="en">
@@ -84,7 +87,7 @@ const isImplementationPath = [
 						<h1>{title}</h1>
 						<hr />
 					</div>
-					{isImplementationPath && <ArchitectureOverview />}
+					{currentStep && <ArchitectureOverview step={currentStep} />}
 					<slot />
 				</div>
 			</article>
