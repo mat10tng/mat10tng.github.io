@@ -9,11 +9,11 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## Principle
-Automation removes human bookkeeping. By persisting system metadata in `state.json`, the architecture can autonomously trigger maintenance tasks like distillation and health checks.
+Automation removes human bookkeeping. By persisting system metadata in a root `state.json`, the architecture can autonomously trigger maintenance tasks like distillation and health checks across the entire Memory.
 </div>
 
 <div slot="technical">
-**State Data (`state.json`):**
+**Global State (`memory/state.json`):**
 ```json
 {
   "last_distill_date": "2026-04-17",
@@ -27,14 +27,14 @@ Automation removes human bookkeeping. By persisting system metadata in `state.js
 <Section>
 <div slot="insight">
 ## Autonomous Maintenance
-The Interface (MCP) tools use the state data to decide when to run. If the `last_distill_date` is too old, the model executes the curation logic before accepting new work from the Architect.
+The Interface (MCP) tools use the root state data to decide when to run. If the `last_distill_date` in `state.json` is too old, the model executes the curation logic before accepting new project work.
 </div>
 
 <div slot="technical">
 **Bridge Tool Logic:**
 ```javascript
-// Example check inside a tool call
-const state = await readState();
+// Check inside a tool call
+const state = await fs.readFile("memory/state.json");
 if (daysSince(state.last_distill) > 7) {
     await runDistillation();
     await updateState({ last_distill: now() });
@@ -46,16 +46,16 @@ if (daysSince(state.last_distill) > 7) {
 <Section>
 <div slot="insight">
 ## The Automated Workflow
-1.  **Boot**: LLM reads `state.json`.
-2.  **Maintenance**: If state criteria are met, LLM runs curation/cleanup autonomously.
+1.  **Boot**: LLM reads root `state.json`.
+2.  **Maintenance**: If state criteria are met, LLM runs global curation autonomously.
 3.  **Execute**: Technical work proceeds with fresh standards.
-4.  **Persist**: Session and new state metadata are saved to Memory.
+4.  **Persist**: Session data and updated root state are saved to Memory.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
 ## Result
-A data-driven, self-running architecture. The system maintains itself based on its own internal state, ensuring that engineering standards compound without manual Architect intervention.
+A data-driven, self-running architecture. The system maintains itself based on its highest-level internal state, ensuring that engineering standards compound without manual Architect intervention.
 </div>
 </Section>

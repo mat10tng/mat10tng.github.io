@@ -22,18 +22,18 @@ A system requires a structured environment for context to persist across indepen
 Memory is divided into two distinct layers:
 - **Sessions**: Short-term logs of activity (what was tried, what failed).
 - **Lessons**: Long-term engineering standards (distilled logic).
-- **State**: Persistent system metadata (e.g. `last_distill_date`).
+- **System State**: The `state.json` file lives at the root to track global health and maintenance schedules.
 </div>
 
 <div slot="technical">
 ```text
 memory/
+├── state.json (system-wide state)
 ├── global/
 │   └── lessons/
 └── project-x/
     ├── sessions/
-    ├── lessons/
-    └── state.json (system tracking)
+    └── lessons/
 ```
 </div>
 </Section>
@@ -41,7 +41,7 @@ memory/
 <Section>
 <div slot="insight">
 ## 2. The Bootloader
-The Bootloader defines the operating environment inside the **LLM**. It enforces **Automatic Initialization** and **Self-Curation** based on the current state in Memory.
+The Bootloader defines the operating environment inside the **LLM**. It enforces **Automatic Initialization** and **Self-Curation** based on the global state in Memory.
 </div>
 
 <div slot="technical">
@@ -49,7 +49,7 @@ The Bootloader defines the operating environment inside the **LLM**. It enforces
 <div class="bootloader-snippet">
 ```markdown
 # Project Standards
-- **Init:** On boot, read `memory/` and `state.json`.
+- **Init:** On boot, read `memory/state.json` and project context.
 - **Curation:** If `last_distill` > 7 days, execute `/distill` before work.
 - **Role:** Architect directs; LLM executes.
 - **Log:** Use `/end-session` to persist results.
@@ -61,9 +61,9 @@ The Bootloader defines the operating environment inside the **LLM**. It enforces
 <Section>
 <div slot="insight">
 ## 3. The Daily Workflow
-The system maintains itself. Curation is not a manual choice; it is triggered automatically by the project's state data.
+The system maintains itself. Curation is not a manual choice; it is triggered automatically by the global state data.
 
-1.  **Initialize**: On boot, the LLM reads state and context.
+1.  **Initialize**: On boot, the LLM reads the root state and project context.
 2.  **Curation**: If the system is stale, the LLM graduates rules immediately.
 3.  **Execute**: Architect directs goals; LLM implements.
 4.  **Capture**: Before closing, run `/end-session`.
@@ -71,13 +71,13 @@ The system maintains itself. Curation is not a manual choice; it is triggered au
 
 <div slot="technical">
 **The `/distill` Logic**
-> "Identify 3 recurring patterns from recent logs. Move to `global/lessons/`. Update `last_distill` date in `state.json`."
+> "Identify 3 recurring patterns from recent logs. Move to `global/lessons/`. Update `last_distill` date in `memory/state.json`."
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
 ## Result
-A self-running architecture. The system monitors its own health and enforces its own maintenance schedule, ensuring standards never stagnate.
+A self-running architecture. The system monitors its own health from the highest level, ensuring standards never stagnate across any project.
 </div>
 </Section>
