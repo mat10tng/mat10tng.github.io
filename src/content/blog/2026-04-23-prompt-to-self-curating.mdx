@@ -39,7 +39,7 @@ memory/
 <Section>
 <div slot="insight">
 ## 2. The Bootloader
-The Bootloader defines the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`, `.cursorrules`) establishes the architect/LLM relationship and provides the model with its "save" and "distill" skills.
+The Bootloader defines the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`, `.cursorrules`) establishes the architect/LLM relationship and providing the model with its "save" and "distill" skills.
 </div>
 
 <div slot="technical">
@@ -58,14 +58,20 @@ The Bootloader defines the operating environment inside the **LLM**. A root file
 
 <Section>
 <div slot="insight">
-## 3. The Session Skill (/end-session)
-A manual system requires an explicit trigger to persist learning. The `/end-session` skill forces the model to summarize the current session and write it to the correct project directory.
+## 3. The Daily Workflow
+How to use the system in a standard work session:
+
+1.  **Sync**: Start the session by running `/sync`. The LLM reads the vault and bootloader rules.
+2.  **Architect**: Provide the technical goal. The LLM implements it using the existing lessons.
+3.  **Capture**: Before closing, run `/end-session`. The LLM summarizes and saves the log.
 </div>
 
 <div slot="technical">
-**Command:** `/end-session`
-**Logic:** 
-> "Summarize the technical decisions and outcomes of this session. Save the result as a new markdown file in `memory/project-x/sessions/[date]-[goal].md`."
+**Step 01: The `/sync` Skill**
+> "Review current structure and lessons. Do not proceed until verified."
+
+**Step 03: The `/end-session` Skill**
+> "Summarize the technical decisions of this session. Save result to `memory/project-x/sessions/[date]-[goal].md`."
 </div>
 </Section>
 

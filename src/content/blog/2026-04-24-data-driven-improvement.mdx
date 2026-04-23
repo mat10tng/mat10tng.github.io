@@ -22,8 +22,30 @@ Automation removes the human bookkeeping required to maintain a self-curating sy
 
 <Section>
 <div slot="insight">
+## The Automated Workflow
+How to use the system when the Interface (MCP) is active:
+
+1.  **Initialize**: The model automatically executes `read_lessons` via MCP tools at startup.
+2.  **Execute**: Technical work proceeds. The LLM has direct access to standards without manual prompting.
+3.  **Persist**: On task completion, the model calls `save_session` autonomously.
+</div>
+
+<div slot="technical">
+**Example Interaction:**
+> Architect: "Build the auth login flow."
+>
+> LLM: *Calls `read_lessons`*
+> LLM: *Implements flow*
+> LLM: *Calls `save_session`*
+>
+> LLM: "Done. Session logged to Memory."
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
 ## Self-Running Automation (MCP)
-The Model Context Protocol (MCP) enables the system to become autonomous. Instead of manual skills, the LLM uses specific tools to interact with Memory directly.
+The Model Context Protocol (MCP) enables the system to become autonomous. The manual skills from Step 01 are converted into deterministic tools.
 </div>
 
 <div slot="technical">
@@ -36,29 +58,8 @@ The Model Context Protocol (MCP) enables the system to become autonomous. Instea
 
 <Section>
 <div slot="insight">
-## Implementation: Automated Logging
-The `/end-session` skill is converted into a deterministic tool call. The model handles the file path and formatting without Architect intervention.
-</div>
-
-<div slot="technical">
-```javascript
-// index.js (Simplified)
-server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  if (request.params.name === "save_session") {
-    const { project, content } = request.params.arguments;
-    const filename = `${new Date().toISOString()}.md`;
-    await fs.writeFile(path.join(MEMORY_PATH, project, "sessions", filename), content);
-    return { content: [{ type: "text", text: "Session persisted." }] };
-  }
-});
-```
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
 ## Scheduled Distillation
-To make the system "self-running," the curation logic is scheduled. A background task or "Cron Skill" triggers a review of the last 24 hours of logs to identify new standards.
+To make the system "self-running," the curation logic is scheduled. A background task triggers a review of logs to identify new standards.
 </div>
 
 <div slot="technical">
