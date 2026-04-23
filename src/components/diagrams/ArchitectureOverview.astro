@@ -6,8 +6,7 @@ import historyData from '../../data/history.json';
 <div style="margin: 2rem 0; padding: 2rem; background: #fff; border: 1px solid #eee; border-radius: 8px;">
     <div style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #999; margin-bottom: 1.5rem; text-align: center;">
         {step === 1 && "Step 01: prompt -> system"}
-        {step === 2 && "Step 02: system -> self-curating"}
-        {step === 3 && "Step 03: self-curating -> automated"}
+        {step === 2 && "Step 02: system -> automated"}
         {step === 0 && "System Architecture Overview"}
     </div>
     
@@ -21,24 +20,7 @@ import historyData from '../../data/history.json';
         </a>
 
         {step === 1 && (
-            <!-- STEP 1: Just Human + LLM + Bootloader -->
-            <g>
-                <rect x="202" y="110" width="156" height="85" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-                <text x="280" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
-                
-                <!-- bootloader inside LLM -->
-                <rect x="212" y="140" width="136" height="16" rx="2" fill="#f8f9fa" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="2 1"/>
-                <text x="280" y="151" text-anchor="middle" font-size="8" font-weight="600" fill="#2563eb">Bootloader Rules</text>
-
-                <text x="280" y="165" text-anchor="middle" font-size="9" fill="#888">execution unit</text>
-                
-                <line x1="280" y1="48" x2="280" y2="110" stroke="#bbb" stroke-width="1.5"/>
-                <polygon points="276,108 280,116 284,108" fill="#bbb"/>
-            </g>
-        )}
-
-        {step === 2 && (
-            <!-- STEP 2: Adding Memory (Manual interaction) -->
+            <!-- STEP 1: Just Human + LLM + Bootloader + Memory -->
             <g>
                 <!-- Memory -->
                 <rect x="4" y="110" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
@@ -49,15 +31,22 @@ import historyData from '../../data/history.json';
                 <rect x="400" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
                 <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
                 
+                <!-- bootloader inside LLM -->
+                <rect x="410" y="140" width="136" height="16" rx="2" fill="#f8f9fa" stroke="#2563eb" stroke-width="0.8" stroke-dasharray="2 1"/>
+                <text x="478" y="151" text-anchor="middle" font-size="8" font-weight="600" fill="#2563eb">Bootloader Rules</text>
+
                 <!-- manual paths via human -->
                 <path d="M 205 22 L 82 22 L 82 110" fill="none" stroke="#ddd" stroke-width="1.2" stroke-dasharray="2 2"/>
                 <path d="M 355 22 L 478 22 L 478 110" fill="none" stroke="#ddd" stroke-width="1.2" stroke-dasharray="2 2"/>
                 <text x="280" y="60" text-anchor="middle" font-size="9" fill="#aaa">manual sync</text>
+                
+                <!-- human link -->
+                <line x1="280" y1="48" x2="280" y2="110" stroke="#bbb" stroke-width="1.5" stroke-dasharray="4 2"/>
             </g>
         )}
 
-        {step === 3 && (
-            <!-- STEP 3 / FINAL: The Interface (MCP) -->
+        {(step === 2 || step === 0) && (
+            <!-- STEP 2 / FINAL: The Interface (MCP) -->
             <g>
                 <!-- Memory -->
                 <rect x="4" y="110" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
@@ -77,31 +66,6 @@ import historyData from '../../data/history.json';
                 <line x1="358" y1="140" x2="400" y2="140" stroke="#bbb" stroke-width="1.5"/>
                 <text x="181" y="135" text-anchor="middle" font-size="8" fill="#999">auto</text>
                 <text x="379" y="135" text-anchor="middle" font-size="8" fill="#999">auto</text>
-                
-                <!-- human link -->
-                <line x1="280" y1="48" x2="280" y2="110" stroke="#bbb" stroke-width="1.5"/>
-                <polygon points="276,108 280,116 284,108" fill="#bbb"/>
-            </g>
-        )}
-
-        {step === 0 && (
-            <!-- DEFAULT / FULL VIEW -->
-            <g>
-                <!-- Memory -->
-                <rect x="4" y="110" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
-                <text x="82" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">Memory</text>
-                
-                <!-- Interface -->
-                <rect x="202" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-                <text x="280" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">Interface</text>
-
-                <!-- LLM -->
-                <rect x="400" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-                <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
-
-                <!-- automated arrows -->
-                <line x1="160" y1="140" x2="202" y2="140" stroke="#bbb" stroke-width="1.5"/>
-                <line x1="358" y1="140" x2="400" y2="140" stroke="#bbb" stroke-width="1.5"/>
                 
                 <!-- human link -->
                 <line x1="280" y1="48" x2="280" y2="110" stroke="#bbb" stroke-width="1.5"/>
