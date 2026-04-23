@@ -9,59 +9,69 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## 1. Memory: The Foundation
-Memory provides the physical structure for short-term activity and long-term engineering standards. It satisfies the core requirement of **Persistence**—ensuring context survives across independent work sessions.
+The primary technical requirement is **Persistence**. Memory provides the physical structure for short-term activity and long-term engineering standards.
 </div>
 
 <div slot="technical">
-**Folder Structure**
-```text
-memory/
-├── state.json (metadata)
-├── global/
-│   └── lessons/ (universal)
-└── project-x/
-    ├── sessions/ (logs)
-    └── lessons/ (local)
+**Linux / macOS**
+```bash
+mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
+```
+
+**Windows (PowerShell)**
+```powershell
+mkdir memory/global/lessons, memory/project-x/sessions, memory/project-x/lessons
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 2. System Rules
-System Rules live within the **LLM** and define its operating environment. A root file established in the project (e.g., `CLAUDE.md`, `.cursorrules`) enforces **Automatic Initialization** and triggers maintenance based on the state in Memory.
+## 2. The Skills
+Before the system can run, the model must be taught how to interact with Memory. These "skills" are reusable prompt instructions.
+
+### Capture (`/end-session`)
+Forces the model to summarize the current session and write it to the correct project directory.
+
+### Curation (`/distill`)
+Automates graduation by identifying recurring patterns in recent logs and promoting them to global standards.
 </div>
 
 <div slot="technical">
-**System Rules (e.g. `CLAUDE.md`)**
-<div class="bootloader-snippet">
+**Skill: `/end-session`**
+> "Summarize the technical decisions of this session. Save the result as a new markdown file in `memory/project-x/sessions/[date]-[goal].md`."
+
+**Skill: `/distill`**
+> "Identify 3 recurring patterns from recent logs. Move them to `global/lessons/`. Update the `last_distill` date in `memory/state.json`."
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 3. System Rules
+System Rules define the operating environment inside the **LLM**. A root file (e.g. `CLAUDE.md`, `.cursorrules`) establishes the Architect/LLM relationship and enforces the maintenance schedule.
+</div>
+
+<div slot="technical">
+**Project Root Configuration**
 ```markdown
 # Project Standards
-- **Init:** On boot, read `memory/state.json` and project context.
+- **Init:** On boot, read `memory/state.json`.
 - **Curation:** If `last_distill` > 7 days, execute `/distill` before work.
 - **Role:** Architect directs; LLM executes.
-- **Log:** Use `/end-session` to persist results.
+- **Rules:** Use `/end-session` to persist results.
+- **Skills:** [/end-session, /distill]
 ```
-</div>
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 3. The Daily Workflow
-Execution follows a deterministic cycle. The result is a system that monitors its own health, ensuring standards never stagnate.
-
-1.  **Initialize**: LLM synchronizes with state and context.
-2.  **Curation**: LLM graduates rules if the system is stale.
-3.  **Execute**: Architect directs; LLM implements.
-4.  **Capture**: Run `/end-session` to persist the technical log.
-</div>
-
-<div slot="technical">
-**The `/end-session` Skill**
-> "Summarize technical decisions. Save to `memory/project-x/sessions/[date]-[goal].md`."
-
-**The Graduation Skill (/distill)**
-> "Identify recurring patterns. Move to `global/lessons/`. Update `memory/state.json`."
+## The Daily Workflow
+Execution follows a deterministic cycle:
+1. **Boot**: LLM reads root state and context.
+2. **Curation**: LLM graduates rules if stale.
+3. **Execute**: Architect directs; LLM implements.
+4. **Capture**: Run `/end-session` to persist the log.
 </div>
 </Section>
