@@ -1,6 +1,6 @@
 ---
-title: "the wrong owner"
-description: "giving the agent more context didn't fix the problem. moving the responsibility did."
+title: "transferring responsibility"
+description: "moving logic from probabilistic AI to deterministic code. the fix for hallucinations."
 pubDate: 2026-04-17
 loop: "capture"
 ---

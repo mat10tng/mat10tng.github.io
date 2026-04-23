@@ -1,6 +1,6 @@
 ---
-title: "three levers"
-description: "when an AI agent misbehaves, it's always one of three things. here's how to diagnose it."
+title: "the three levers"
+description: "a diagnostic framework for debugging agent behavior. find the root cause in minutes."
 pubDate: 2026-03-20
 loop: "work"
 ---
