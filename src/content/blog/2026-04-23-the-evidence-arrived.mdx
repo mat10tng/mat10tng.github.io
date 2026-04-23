@@ -1,0 +1,99 @@
+---
+id: "the-evidence-arrived"
+title: "the evidence arrived"
+description: "three weeks in, the first real data on whether the knowledge system is actually compounding."
+pubDate: 2026-04-23
+loop: "measure"
+---
+import Section from '../../components/layout/Section.astro';
+
+<Section>
+<div slot="insight">
+
+The monthly health check ran on april 22. Compounding score: **86%**.
+
+I've been building a knowledge base system for three weeks — capturing session notes, distilling lessons, feeding prior work back into new sessions. The theory was that it would compound. Sessions would start smarter over time because they'd have context instead of starting from zero. But I didn't have numbers until now.
+
+86% means 773 out of around 900 sessions successfully reused prior knowledge. They found something relevant in the base before starting. Three weeks ago that number was 0% — the base was empty.
+
+</div>
+<div slot="technical">
+
+<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;font-family:monospace">
+  <text x="10" y="20" font-size="11" fill="#888">compounding score trend</text>
+  <!-- bars -->
+  <rect x="40"  y="170" width="60" height="2"   fill="#ddd" />
+  <rect x="140" y="106" width="60" height="66"  fill="#b3d4ff" />
+  <rect x="240" y="106" width="60" height="66"  fill="#b3d4ff" />
+  <rect x="340" y="53"  width="60" height="119" fill="#3b82f6" />
+  <!-- baseline -->
+  <line x1="30" y1="172" x2="450" y2="172" stroke="#eee" stroke-width="1"/>
+  <!-- labels: date -->
+  <text x="70"  y="190" font-size="9" fill="#aaa" text-anchor="middle">Mar 20</text>
+  <text x="170" y="190" font-size="9" fill="#aaa" text-anchor="middle">Mar 26</text>
+  <text x="270" y="190" font-size="9" fill="#aaa" text-anchor="middle">Apr 1</text>
+  <text x="370" y="190" font-size="9" fill="#aaa" text-anchor="middle">Apr 22</text>
+  <!-- labels: score -->
+  <text x="70"  y="165" font-size="10" fill="#bbb" text-anchor="middle">0%</text>
+  <text x="170" y="100" font-size="10" fill="#6b9fd4" text-anchor="middle">64%</text>
+  <text x="270" y="100" font-size="10" fill="#6b9fd4" text-anchor="middle">64%</text>
+  <text x="370" y="47"  font-size="11" fill="#1d4ed8" text-anchor="middle" font-weight="bold">86%</text>
+</svg>
+
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+
+## what 86% means in practice
+
+The compounding score isn't "percentage of sessions where something useful happened." It's more specific: the percentage of sessions where the system already had something relevant *before* they started — prior work the session could build on rather than rediscover.
+
+The 64% → 86% jump in three weeks came from two things: more notes to find, and better tagging so search could actually surface them. The knowledge base grew from 488 to 903 documents. Capture completeness went from 0% to 44% — about half of sessions now leave a trace the next session can use.
+
+The number that surprised me most wasn't the score. It was 773 vs 131 — sessions with reuse vs without. The system is no longer the exception. It's the baseline.
+
+</div>
+<div slot="technical">
+
+| Metric | Apr 1 | Apr 22 | Δ |
+|--------|-------|--------|---|
+| Active docs | 488 | 903 | +85% |
+| Compounding score | 64% | 86% | +22 pts |
+| Capture completeness | 0% | 44% | +44 pts |
+| Sessions w/ reuse | — | 773 | — |
+| Sessions w/o reuse | — | 131 | — |
+
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+
+## what the measurement missed
+
+Same week, different kind of data. The daily codebase sweep on April 23 flagged a file with an unused import — `import asyncio`, nothing in the file body using it. Standard cleanup, removed it.
+
+Two new test failures.
+
+The import was being re-exported somewhere down the dependency chain. The linter couldn't see it. The automated sweep couldn't see it. Only running the full test suite after the change caught it.
+
+That's the thing about automated measurement: it tells you what it's designed to look for. The compounding score tells me sessions are reusing knowledge — it doesn't tell me which 14% aren't, or why. The daily sweep tells me tests pass — it doesn't tell me about hidden dependencies in code that looks clean.
+
+Good metrics tell you direction. They don't tell you what you're not measuring.
+
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+
+## if you're building something like this
+
+Watch the trend more than the number. 0% → 44% capture completeness is more interesting than 44% itself. The trend tells you whether the system is self-reinforcing — whether adding sessions makes future sessions better, or whether you're just filling a database nobody reads.
+
+The jump from 64% → 86% in three weeks is the number I was waiting for. Not because 86% is impressive on its own. Because the direction is right, and I have something to measure against next month.
+
+</div>
+</Section>
