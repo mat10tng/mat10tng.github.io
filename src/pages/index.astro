@@ -12,31 +12,38 @@ import historyData from '../data/history.json';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			.hero {
-				max-width: 800px;
+				max-width: 900px;
 				margin: 0 auto;
 				padding: 2rem 1rem;
 			}
-			.hero h1 { font-size: 1.2rem; margin-bottom: 0.25rem; }
+			.hero h1 { font-size: 1.4rem; margin-bottom: 0.5rem; }
 			.hero .intro {
-				color: #666; font-size: 0.9rem; line-height: 1.6; margin-bottom: 2.5rem;
+				color: #666; font-size: 1rem; line-height: 1.6; margin-bottom: 3rem;
 			}
-			.layer { margin-bottom: 3rem; }
+			.layer { margin-bottom: 4rem; }
 			.layer-label {
-				font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-				letter-spacing: 0.1em; color: #999; margin-bottom: 1rem;
+				font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+				letter-spacing: 0.12em; color: #999; margin-bottom: 1.5rem;
 			}
-			.diagram-wrap { overflow-x: auto; margin-bottom: 0.75rem; }
-			.diagram-wrap svg { display: block; max-width: 100%; height: auto; }
+			.diagram-wrap { 
+				overflow-x: auto; 
+				margin-bottom: 2rem;
+				background: #fff;
+				border-radius: 8px;
+			}
+			.diagram-wrap svg { 
+				display: block; 
+				width: 100%; 
+				max-width: 800px; 
+				height: auto; 
+				margin: 0 auto;
+			}
 			.diagram-wrap svg text { font-family: system-ui, -apple-system, sans-serif; }
-			.diagram-wrap svg a { cursor: pointer; }
-			.diagram-wrap svg a text { fill: #333; }
-			.diagram-wrap svg a:hover text { fill: #2563eb; }
-			.diagram-wrap svg a rect { transition: stroke 150ms; }
-			.diagram-wrap svg a:hover rect { stroke: #2563eb; }
 			.layer-desc {
-				font-size: 0.88rem; color: #555; line-height: 1.6; max-width: 640px;
+				font-size: 1rem; color: #444; line-height: 1.7; max-width: 720px;
+				margin-top: 1rem;
 			}
-			.layer-desc a { color: #2563eb; text-decoration: none; }
+			.layer-desc a { color: #2563eb; text-decoration: none; font-weight: 500; }
 			.layer-desc a:hover { text-decoration: underline; }
 		</style>
 	</head>
@@ -44,99 +51,97 @@ import historyData from '../data/history.json';
 		<Header />
 		<main>
 			<section class="hero">
-				<h1>how I work with AI</h1>
+				<h1>How I work with AI</h1>
 				<p class="intro">
-					I build software with Claude every day. over time I built a system around the work —
-					four parts that talk to each other. this site documents how that system works and evolves.
+					I build software with Claude every day. Over time, I built a system around the work — 
+					four parts that coordinate to maintain context and improve standards.
 				</p>
 
 				<!-- THE ARCHITECTURE -->
 				<div class="layer">
-					<div class="layer-label">the architecture</div>
+					<div class="layer-label">System Architecture</div>
 					<div class="diagram-wrap">
-						<svg viewBox="0 0 560 230" width="560">
+						<svg viewBox="0 0 560 230" width="800">
 							<!-- human -->
-							<rect x="420" y="2" width="130" height="36" rx="18" fill="none" stroke="#333" stroke-width="1.2" stroke-dasharray="4 2"/>
-							<text x="485" y="24" text-anchor="middle" font-size="11" fill="#333">me — I direct</text>
+							<rect x="415" y="2" width="140" height="40" rx="20" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4 2"/>
+							<text x="485" y="26" text-anchor="middle" font-size="13" font-weight="500" fill="#333">me — I direct</text>
 
 							<!-- arrow: human → worker -->
-							<line x1="485" y1="42" x2="485" y2="62" stroke="#bbb" stroke-width="1"/>
-							<polygon points="482,60 485,66 488,60" fill="#bbb"/>
+							<line x1="485" y1="42" x2="485" y2="62" stroke="#bbb" stroke-width="1.5"/>
+							<polygon points="481,60 485,68 489,60" fill="#bbb"/>
 
 							<!-- the vault -->
-							<rect x="4" y="68" width="146" height="96" rx="8" fill="none" stroke="#2563eb" stroke-width="1.4"/>
-							<text x="77" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#2563eb">the vault</text>
-							<text x="77" y="101" text-anchor="middle" font-size="8" fill="#888">all knowledge lives here</text>
+							<rect x="4" y="68" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
+							<text x="82" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">the vault</text>
+							<text x="82" y="105" text-anchor="middle" font-size="9" fill="#888">persistent knowledge</text>
+							
 							<!-- project structure -->
-							<rect x="14" y="110" width="60" height="18" rx="3" fill="none" stroke="#ddd" stroke-width="0.6"/>
-							<text x="44" y="122" text-anchor="middle" font-size="7" fill="#aaa">project A</text>
-							<rect x="82" y="110" width="60" height="18" rx="3" fill="none" stroke="#ddd" stroke-width="0.6"/>
-							<text x="112" y="122" text-anchor="middle" font-size="7" fill="#aaa">project B</text>
-							<rect x="38" y="134" width="70" height="18" rx="3" fill="none" stroke="#2563eb" stroke-width="0.6" stroke-dasharray="2 1"/>
-							<text x="73" y="146" text-anchor="middle" font-size="7" fill="#2563eb">global rules</text>
+							<rect x="14" y="115" width="64" height="20" rx="3" fill="none" stroke="#ddd" stroke-width="1"/>
+							<text x="46" y="128" text-anchor="middle" font-size="9" fill="#777">project A</text>
+							<rect x="86" y="115" width="64" height="20" rx="3" fill="none" stroke="#ddd" stroke-width="1"/>
+							<text x="118" y="128" text-anchor="middle" font-size="9" fill="#777">project B</text>
+							<rect x="42" y="142" width="80" height="20" rx="3" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 1"/>
+							<text x="82" y="155" text-anchor="middle" font-size="9" font-weight="600" fill="#2563eb">global rules</text>
+							
 							<!-- graduation arrow -->
-							<line x1="44" y1="128" x2="55" y2="134" stroke="#ccc" stroke-width="0.5"/>
-							<line x1="112" y1="128" x2="90" y2="134" stroke="#ccc" stroke-width="0.5"/>
+							<line x1="46" y1="135" x2="62" y2="142" stroke="#ccc" stroke-width="0.8"/>
+							<line x1="118" y1="135" x2="102" y2="142" stroke="#ccc" stroke-width="0.8"/>
 
 							<!-- the bridge -->
-							<rect x="207" y="68" width="146" height="96" rx="8" fill="none" stroke="#333" stroke-width="1.2"/>
-							<text x="280" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#333">the bridge</text>
-							<text x="280" y="101" text-anchor="middle" font-size="8" fill="#888">reads, writes, enforces</text>
-							<text x="222" y="118" font-size="7.5" fill="#aaa">search</text>
-							<text x="222" y="130" font-size="7.5" fill="#aaa">capture</text>
-							<text x="222" y="142" font-size="7.5" fill="#aaa">brief</text>
-							<text x="295" y="118" font-size="7.5" fill="#aaa">measure</text>
-							<text x="295" y="130" font-size="7.5" fill="#aaa">compact</text>
-							<text x="295" y="142" font-size="7.5" fill="#aaa">archive</text>
-							<!-- scheduled indicator -->
-							<rect x="232" y="150" width="96" height="12" rx="2" fill="none" stroke="#ddd" stroke-width="0.5"/>
-							<text x="280" y="159" text-anchor="middle" font-size="6.5" fill="#999">+ scheduled tasks</text>
+							<rect x="202" y="68" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
+							<text x="280" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the bridge</text>
+							<text x="280" y="105" text-anchor="middle" font-size="9" fill="#888">rules & context</text>
+							
+							<text x="220" y="125" font-size="10" fill="#666">search</text>
+							<text x="220" y="140" font-size="10" fill="#666">capture</text>
+							<text x="220" y="155" font-size="10" fill="#666">brief</text>
+							<text x="300" y="125" font-size="10" fill="#666">measure</text>
+							<text x="300" y="140" font-size="10" fill="#666">compact</text>
+							<text x="300" y="155" font-size="10" fill="#666">archive</text>
 
 							<!-- the worker -->
-							<rect x="410" y="68" width="146" height="96" rx="8" fill="none" stroke="#333" stroke-width="1.2"/>
-							<text x="483" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#333">the worker</text>
-							<text x="483" y="101" text-anchor="middle" font-size="8" fill="#888">builds, fixes, ships</text>
-							<text x="425" y="118" font-size="7.5" fill="#aaa">brainstorm</text>
-							<text x="425" y="130" font-size="7.5" fill="#aaa">debug</text>
-							<text x="425" y="142" font-size="7.5" fill="#aaa">review</text>
-							<text x="505" y="118" font-size="7.5" fill="#aaa">implement</text>
-							<text x="505" y="130" font-size="7.5" fill="#aaa">test</text>
-							<text x="505" y="142" font-size="7.5" fill="#aaa">deploy</text>
+							<rect x="400" y="68" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
+							<text x="478" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the worker</text>
+							<text x="478" y="105" text-anchor="middle" font-size="9" fill="#888">execution (Claude)</text>
+							
+							<text x="418" y="125" font-size="10" fill="#666">brainstorm</text>
+							<text x="418" y="140" font-size="10" fill="#666">debug</text>
+							<text x="418" y="155" font-size="10" fill="#666">review</text>
+							<text x="500" y="125" font-size="10" fill="#666">implement</text>
+							<text x="500" y="140" font-size="10" fill="#666">test</text>
+							<text x="500" y="155" font-size="10" fill="#666">deploy</text>
 
 							<!-- arrows: vault ↔ bridge -->
-							<line x1="154" y1="106" x2="203" y2="106" stroke="#bbb" stroke-width="1"/>
-							<polygon points="201,103 207,106 201,109" fill="#bbb"/>
-							<line x1="203" y1="126" x2="154" y2="126" stroke="#bbb" stroke-width="1"/>
-							<polygon points="156,123 150,126 156,129" fill="#bbb"/>
+							<line x1="160" y1="110" x2="202" y2="110" stroke="#bbb" stroke-width="1.5"/>
+							<polygon points="198,107 206,110 198,113" fill="#bbb"/>
+							<line x1="202" y1="130" x2="160" y2="130" stroke="#bbb" stroke-width="1.5"/>
+							<polygon points="164,127 156,130 164,133" fill="#bbb"/>
 
 							<!-- arrows: bridge ↔ worker -->
-							<line x1="357" y1="106" x2="406" y2="106" stroke="#bbb" stroke-width="1"/>
-							<polygon points="404,103 410,106 404,109" fill="#bbb"/>
-							<line x1="406" y1="126" x2="357" y2="126" stroke="#bbb" stroke-width="1"/>
-							<polygon points="359,123 353,126 359,129" fill="#bbb"/>
+							<line x1="358" y1="110" x2="400" y2="110" stroke="#bbb" stroke-width="1.5"/>
+							<polygon points="396,107 404,110 396,113" fill="#bbb"/>
+							<line x1="400" y1="130" x2="358" y2="130" stroke="#bbb" stroke-width="1.5"/>
+							<polygon points="362,127 354,130 362,133" fill="#bbb"/>
 
 							<!-- arrow labels -->
-							<text x="178" y="100" text-anchor="middle" font-size="6.5" fill="#aaa">recall</text>
-							<text x="178" y="137" text-anchor="middle" font-size="6.5" fill="#aaa">store</text>
-							<text x="381" y="100" text-anchor="middle" font-size="6.5" fill="#aaa">context</text>
-							<text x="381" y="137" text-anchor="middle" font-size="6.5" fill="#aaa">results</text>
+							<text x="181" y="105" text-anchor="middle" font-size="8" font-weight="500" fill="#999">recall</text>
+							<text x="181" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#999">store</text>
+							<text x="379" y="105" text-anchor="middle" font-size="8" font-weight="500" fill="#999">context</text>
+							<text x="379" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#999">results</text>
 
-							<!-- feedback loop: bottom to top -->
-							<text x="280" y="188" text-anchor="middle" font-size="8" fill="#999">↻ improvements feed back into all three</text>
+							<!-- feedback loop -->
+							<text x="280" y="195" text-anchor="middle" font-size="10" font-weight="500" fill="#888">↻ improvements cycle back into the vault</text>
 
 							<!-- bottom stats -->
-							<text x="77" y="210" text-anchor="middle" font-size="7.5" fill="#999">{historyData.current.total_notes}+ notes</text>
-							<text x="77" y="222" text-anchor="middle" font-size="7.5" fill="#999">projects → global</text>
-							<text x="280" y="210" text-anchor="middle" font-size="7.5" fill="#999">enforces rules</text>
-							<text x="280" y="222" text-anchor="middle" font-size="7.5" fill="#999">runs between sessions</text>
-							<text x="483" y="210" text-anchor="middle" font-size="7.5" fill="#999">Claude · skills</text>
-							<text x="483" y="222" text-anchor="middle" font-size="7.5" fill="#999">directed by human</text>
+							<text x="82" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">{historyData.current.total_notes}+ notes</text>
+							<text x="280" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">automated maintenance</text>
+							<text x="478" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">human-directed</text>
 						</svg>
 					</div>
 					<p class="layer-desc">
 						A system for persistent learning. Claude uses the knowledge base to maintain project context and follow global standards. Between sessions, automated tasks handle maintenance, cleanup, and the distillation of new lessons.
 					</p>
-					<p class="layer-desc" style="margin-top: 1.5rem;">
+					<p class="layer-desc" style="margin-top: 2rem;">
 						Explore: <a href="/blog">Journal (Work & Insights)</a> · <a href="/history">Timeline (System Evolution)</a>
 					</p>
 				</div>
