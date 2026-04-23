@@ -1,7 +1,7 @@
 ---
 id: "step-02-data-driven-improvement"
-title: "[draft] manual -> automated data"
-description: "automating evolution and measuring success via MCP."
+title: "[draft] Automate the boring parts: scaling data-driven evolution"
+description: "remove manual system maintenance by automating context management via MCP."
 pubDate: 2026-04-24
 loop: "measure"
 ---
@@ -9,14 +9,21 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-## Abstract
-Automation removes manual bookkeeping. By persisting system metadata in a root `state.json` file, the architecture can autonomously trigger maintenance tasks—such as distillation and health checks—without direct intervention from the Architect.
+## The Answer
+**Stop performing manual system maintenance.** 
 
-## Core Metrics
-Measurement provides the data necessary to verify that architectural changes actually improve model performance:
-- **Reuse Rate**: Frequency of sessions utilizing distilled lessons.
+Automating context management via the Model Context Protocol (MCP) removes the manual labor of bookkeeping. By persisting system metadata in a root `state.json` file, you enable your architecture to evolve autonomously based on real-time success metrics.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 1. System Health Metrics
+Measurement provides the evidence needed to verify that architectural changes actually improve model performance.
+
+- **Reuse Rate**: How often the model utilizes distilled lessons.
 - **Success Rate**: Frequency of tasks completed without technical regression.
-- **Rule Count**: Growth of distilled engineering standards in Memory.
+- **Drift**: Measurable deviation from the established standards.
 </div>
 
 <div slot="technical">
@@ -33,12 +40,12 @@ Measurement provides the data necessary to verify that architectural changes act
 
 <Section>
 <div slot="insight">
-## Autonomous Maintenance
-Interface (MCP) tools use the root state data to determine operational schedules. If state criteria are met, the model executes curation logic before accepting project goals.
+## 2. Autonomous Triggers
+Instead of manual commands, the Interface (MCP) uses state data to determine operational schedules. If criteria are met, the model handles the cleanup *before* starting new work.
 </div>
 
 <div slot="technical">
-**Automation Logic:**
+**Bridge Tool Logic:**
 ```javascript
 // Check inside a tool call
 const state = await fs.readFile("memory/state.json");
@@ -52,12 +59,12 @@ if (daysSince(state.last_distill) > 7) {
 
 <Section>
 <div slot="insight">
-## The Automated Loop
-The result is a self-maintaining system. It uses its own data to evolve, ensuring that engineering standards compound over time without manual context management.
+## 3. The Automated Loop
+The result is a self-maintaining system. It uses its own data to get smarter, ensuring that engineering standards compound over time without manual intervention.
 
-1.  **Boot**: LLM reads root state and project rules.
-2.  **Maintenance**: LLM runs global curation autonomously.
-3.  **Execute**: Technical work proceeds with fresh standards.
-4.  **Persist**: Session data and updated state are saved to Memory.
+1. **Boot**: Model reads global state.
+2. **Maintenance**: Model triggers curation if stale.
+3. **Execute**: Model works with fresh standards.
+4. **Persist**: Model saves its own logs automatically.
 </div>
 </Section>
