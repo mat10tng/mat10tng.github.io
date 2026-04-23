@@ -12,8 +12,8 @@ import Section from '../../components/layout/Section.astro';
 Automation removes the human bookkeeping required to maintain a self-curating system. The Model Context Protocol (MCP) enables direct, autonomous LLM interaction with the Memory.
 
 ## Automation Toolset
-- **`read_lessons`**: Retrieves standards autonomously.
-- **`save_session`**: Records outcomes directly to project directories in Memory.
+- **`read_lessons`**: Retrieves standards autonomously from `memory/`.
+- **`save_session`**: Records outcomes directly to project directories in `memory/`.
 </div>
 
 <div slot="technical">
@@ -36,6 +36,8 @@ The interface script exposes the file system (Memory) to the LLM, allowing it to
 <div slot="technical">
 ```javascript
 // index.js (Simplified)
+const MEMORY_PATH = path.join(os.homedir(), "memory");
+
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   if (request.params.name === "save_session") {
     const { project, content } = request.params.arguments;
@@ -52,6 +54,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 <Section>
 <div slot="insight">
 ## Result
-The shift from a manual to an automated system. The LLM maintains the architecture autonomously, ensuring Memory is updated and lessons are applied without human intervention.
+The shift from a manual to an automated system. The model maintains the architecture autonomously, ensuring Memory is updated and lessons are applied without human intervention.
 </div>
 </Section>

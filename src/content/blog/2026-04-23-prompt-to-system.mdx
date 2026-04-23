@@ -11,18 +11,20 @@ import Section from '../../components/layout/Section.astro';
 ## Principle
 Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model.
 
-## The Setup
-A system requires a structured environment. This removes reliance on model memory and ensures context persists across independent work sessions.
+## The Memory Structure
+A system requires two distinct layers of memory to function:
+1. **Sessions**: Short-term logs of activity (what was tried, what failed).
+2. **Lessons**: Long-term engineering standards (distilled logic).
 </div>
 
 <div slot="technical">
 ```text
-~/vault/
+~/memory/
 ├── global/
-│   └── lessons/
+│   └── lessons/ (universal standards)
 └── project-x/
-    ├── sessions/
-    └── lessons/
+    ├── sessions/ (activity logs)
+    └── lessons/ (project-specific logic)
 ```
 </div>
 </Section>
@@ -37,9 +39,24 @@ Define the system's operating environment in a project root file (e.g., `CLAUDE.
 ```markdown
 # Project Standards
 - **Role:** Human Architect directs; LLM executes.
-- **Log:** Record outcome to `~/vault/project-x/sessions/[date]-[goal].md`.
-- **Knowledge:** Search local file system before implementing.
+- **Recall:** Always search `~/memory/` for existing logic before work.
+- **Log:** After each task, record the technical outcome to `sessions/`.
+- **Distill:** If a new reusable rule is identified, propose it for `lessons/`.
 ```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Creation of Lessons
+The system initializes with a simple rule: **Capture first, distill second.** 
+
+When the LLM identifies a recurring pattern or a permanent fix, it creates a new `.md` file in the `lessons/` directory. This turns a one-time conversation into a permanent system standard.
+</div>
+
+<div slot="technical">
+**Manual Creation Skill:**
+> "Review our last three changes. Propose a new entry for `project-x/lessons/` that would have prevented any friction we encountered today."
 </div>
 </Section>
 
@@ -50,14 +67,7 @@ A context refresh skill ensures the LLM synchronizes with the system's current s
 </div>
 
 <div slot="technical">
-**Command:** `/sync` (or `/apply-from-vault`)
+**Command:** `/sync`
 **Logic:** "Read structure, latest session logs, and distilled lessons. Verify constraints. Do not proceed until verified."
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## Result
-The shift from a prompt to a system. The LLM inherits its environment from the Memory automatically, reducing the overhead of manual instruction.
 </div>
 </Section>
