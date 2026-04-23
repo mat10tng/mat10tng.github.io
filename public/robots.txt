@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mat10tng.github.io/sitemap-index.xml
