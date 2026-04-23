@@ -1,0 +1,65 @@
+---
+title: "self-curating + measurement = data driven improvement"
+description: "automating evolution and measuring technical success via MCP."
+pubDate: 2026-04-24
+loop: "measure"
+---
+import Section from '../../components/layout/Section.astro';
+
+<Section>
+<div slot="insight">
+## Principle
+Automation removes the human bookkeeping required to maintain a self-curating system. Measurement provides the data necessary to verify that architectural changes actually improve performance.
+</div>
+
+<div slot="technical">
+**Key Metrics:**
+- **Reuse Rate**: % of sessions utilizing previous lessons.
+- **Success Rate**: % of tasks completed without regression.
+- **Rule Count**: Growth of distilled engineering standards.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Automation via MCP
+The Model Context Protocol (MCP) enables direct, autonomous LLM interaction with the Memory, removing the friction of manual context transfer.
+</div>
+
+<div slot="technical">
+```javascript
+// index.js (Simplified)
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  if (request.params.name === "save_session") {
+    const { project, content } = request.params.arguments;
+    const dir = path.join(MEMORY_PATH, project, "sessions");
+    await fs.mkdir(dir, { recursive: true });
+    await fs.writeFile(path.join(dir, `${Date.now()}.md`), content);
+    return { content: [{ type: "text", text: "Logged." }] };
+  }
+});
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Data-Driven Improvement
+By measuring the system, the Architect can identify which parts of the loop are failing. If reuse is low, the distillation process is too noisy. If regressions are high, the bootloader rules are too permissive.
+</div>
+
+<div slot="technical">
+| Metric | Signal | Action |
+|---|---|---|
+| **Low Reuse** | Noise | Tighten distillation. |
+| **High Regr.** | Permissive | Add explicit constraints. |
+| **Drift** | Memory Loss | Automate context load. |
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Result
+The shift from a manual to an automated, measurable system. The architecture evolves based on data, ensuring that engineering standards compound over time without human intervention.
+</div>
+</Section>

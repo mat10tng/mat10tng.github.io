@@ -1,0 +1,69 @@
+---
+title: "prompt -> self-curating system"
+description: "moving from adjective-based instruction to a persistent, evolving memory architecture."
+pubDate: 2026-04-23
+loop: "improve"
+---
+import Section from '../../components/layout/Section.astro';
+
+<Section>
+<div slot="insight">
+## Principle
+Prompting is a fallback. Reliability comes from a persistent **system** that surrounds the model. A static system degrades; an effective architecture must self-curate through use.
+
+## The Memory Structure
+1. **Sessions**: Short-term logs of activity (what was tried, what failed).
+2. **Lessons**: Long-term engineering standards (distilled logic).
+</div>
+
+<div slot="technical">
+```text
+[root]/memory/
+├── global/
+│   └── lessons/
+└── project-x/
+    ├── sessions/
+    └── lessons/
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Implementation: Bootloader
+The Bootloader defines the environment inside the **LLM**. A root file established in the project (e.g., `CLAUDE.md`, `.cursorrules`) enforces retrieval and defines roles.
+</div>
+
+<div slot="technical">
+```markdown
+# Project Standards
+- **Role:** Architect directs; LLM executes.
+- **Recall:** Search `memory/` for logic.
+- **Log:** Record outcome to `sessions/`.
+- **Distill:** Propose rules for `lessons/`.
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Graduation Path
+The system improves by identifying local fixes with universal utility:
+1. **Detection**: Identify recurring friction.
+2. **Local Fix**: Add a rule to project `lessons/`.
+3. **Pattern**: Observe fix solving issues in unrelated projects.
+4. **Graduation**: Move logic to `global/lessons/`.
+</div>
+
+<div slot="technical">
+**Distillation Skill:**
+> "Review last 7 days of logs. Identify 3 recurring patterns. Move to `global/lessons/`. Update project bootloader."
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Result
+A self-curating system. The LLM inherits its environment automatically, and the architecture absorbs new standards through a verified pattern of reuse.
+</div>
+</Section>
