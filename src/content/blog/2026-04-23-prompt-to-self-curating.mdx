@@ -1,4 +1,5 @@
 ---
+id: "step-01-prompt-to-self-curating"
 title: "prompt -> self-curating system"
 description: "establishing structural boundaries and a self-curating context system."
 pubDate: 2026-04-23
@@ -13,6 +14,17 @@ The primary technical requirement is **Persistence**. Memory provides the physic
 </div>
 
 <div slot="technical">
+**Folder Structure**
+```text
+memory/
+├── state.json (global metadata)
+├── global/
+│   └── lessons/ (universal)
+└── project-x/
+    ├── sessions/ (activity logs)
+    └── lessons/ (local standards)
+```
+
 **Linux / macOS**
 ```bash
 mkdir -p memory/global/lessons memory/project-x/{sessions,lessons}
