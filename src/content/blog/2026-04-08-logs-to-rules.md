@@ -16,6 +16,14 @@ When technical friction occurs during a session, the process follows a linear pa
 3.  **Pattern Recognition**: Observation of the same issue in unrelated projects.
 4.  **Graduation**: Relocating the logic from the project directory to the global standards directory.
 
+## Implementation: The Distillation Skill
+
+To automate this graduation, use a "Distillation" skill at the end of every week or major project milestone.
+
+**Command:** `/distill`
+**Logic:**
+> "Review all session logs from the last 7 days. Identify 3 recurring technical logic patterns that should be generalized. Format these as project-agnostic rules and move them to the `global/lessons/` directory. Update our project `CLAUDE.md` to reflect these new standards."
+
 ## Rationale
 
 Global rules are rarely authored upfront. They are the result of observing patterns of reuse across multiple contexts. 

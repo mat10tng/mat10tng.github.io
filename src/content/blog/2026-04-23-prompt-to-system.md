@@ -17,26 +17,31 @@ When an AI fails, the standard response is to add more instructions. Terms like 
 
 This creates "Prompt Debt." The context window fills with competing instructions. The model eventually drifts because it is being asked to carry too much weight: it must simultaneously act as the architect, the developer, and the validator without any external structure.
 
-## The System Engineering Approach
+## Implementation: The First Step
 
-Systemic reliability is achieved by addressing structural gaps instead of refining prompts.
+Systemic reliability starts by defining the AI's relationship to your project. Copy this baseline into a `CLAUDE.md` file in your project root.
 
-1.  **If the AI forgets a decision:** Implementation of a **Knowledge Base** ensures the system searches for context before every session.
-2.  **If the AI makes a logic error:** **Transferring responsibility** to a deterministic script or a backend service eliminates probabilistic failure.
-3.  **If performance degrades:** A **Distillation** process compresses recent history into permanent rules, preventing context saturation.
+### 1. The Bootloader (`CLAUDE.md`)
+This file is read by the model at the start of every session. It forces the model to acknowledge the boundaries of the system.
+
+```markdown
+# Project Standards
+- **Role:** Human Architect directs the logic; Worker executes the code.
+- **Rules:** Before writing any code, state the files to change and the technical approach. Wait for confirmation.
+- **Knowledge:** Do not rely on memory for project decisions. Always search the local file system for existing logic before implementing.
+```
+
+### 2. The Context Skill
+Create a "skill" (a reusable prompt instruction) to force the model to synchronize with your project's current state.
+
+**Command:** `/sync`
+**Logic:**
+> "Review the current project structure, read the latest session log, and update your understanding of our active technical constraints. Do not proceed until you have verified our current architectural direction."
 
 ## Evidence of Structure
 
 A mature system can manage thousands of notes and global rules with minimal prompting. 
 
 Prompts remain short because the **Architecture** handles the complexity. The model doesn't need to "remember" CSS preferences if the system loads them from a vault. Standards are maintained not by effort, but by the enforcement mechanisms of the bridge.
-
-## Implementation
-
-Moving from prompt-based work to system-based work involves:
-
-*   **Moving constraints to files:** Documenting deprecated libraries or style guides in a vault rather than a prompt.
-*   **Automating the bootloader:** Using a `CLAUDE.md` to force the model to load its own operating environment.
-*   **Capture and Distill:** Periodically identifying logic that should become a permanent rule.
 
 The goal is to build an environment that makes the AI more capable than it is in isolation. This is the shift from writing messages to building architectures.
