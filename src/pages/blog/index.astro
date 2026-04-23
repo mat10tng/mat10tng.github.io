@@ -5,22 +5,32 @@ import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
-const sessions = (await getCollection('sessions')).sort(
-	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+const sessions = (await getCollection('sessions')).map(s => ({
+	...s,
+	type: 'session',
+	date: s.data.date,
+	url: `/session/${s.id}/`
+}));
+
+const posts = (await getCollection('blog')).map(p => ({
+	...p,
+	type: 'post',
+	date: p.data.pubDate,
+	url: `/blog/${p.id}/`
+}));
+
+const allItems = [...sessions, ...posts].sort(
+	(a, b) => b.date.valueOf() - a.date.valueOf(),
 );
 
-const allPosts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
-const introPost = allPosts.find(p => p.id === '2026-04-12-who-writes-this');
-const posts = allPosts.filter(p => p.id !== '2026-04-12-who-writes-this');
+const introPost = allItems.find(p => p.id === '2026-04-12-who-writes-this');
+const feedItems = allItems.filter(p => p.id !== '2026-04-12-who-writes-this');
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Posts — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Journal — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			main {
 				max-width: 720px;
@@ -56,7 +66,7 @@ const posts = allPosts.filter(p => p.id !== '2026-04-12-who-writes-this');
 			.intro {
 				color: rgb(var(--gray));
 				font-size: 0.95rem;
-				margin-bottom: 2rem;
+				margin-bottom: 2.5rem;
 				line-height: 1.6;
 			}
 			.section-title {
@@ -69,73 +79,57 @@ const posts = allPosts.filter(p => p.id !== '2026-04-12-who-writes-this');
 				padding-bottom: 0.5rem;
 				border-bottom: 1px solid rgba(var(--gray), 0.2);
 			}
-			.session-list, .post-list {
+			.item-list {
 				list-style: none;
-				margin: 0 0 2.5rem;
+				margin: 0;
 				padding: 0;
 			}
-			.session-item {
-				margin-bottom: 1.25rem;
-				padding-bottom: 1.25rem;
+			.item {
+				margin-bottom: 2rem;
+				padding-bottom: 2rem;
 				border-bottom: 1px solid rgba(var(--gray), 0.1);
 			}
-			.session-item:last-child {
+			.item:last-child {
 				border-bottom: none;
 			}
-			.session-item a, .post-item a {
+			.item a {
 				text-decoration: none;
 				display: block;
 			}
-			.session-title {
-				font-size: 1rem;
+			.item-title {
+				font-size: 1.1rem;
 				font-weight: 600;
 				color: rgb(var(--black));
-				margin: 0 0 0.25rem;
+				margin: 0 0 0.35rem;
 				transition: color 0.2s;
 			}
-			.session-item a:hover .session-title,
-			.post-item a:hover .post-title {
+			.item a:hover .item-title {
 				color: rgb(var(--accent));
 			}
-			.session-desc {
-				font-size: 0.9rem;
+			.item-desc {
+				font-size: 0.95rem;
 				color: rgb(var(--gray-dark, #444));
 				line-height: 1.5;
-				margin: 0 0 0.35rem;
+				margin: 0 0 0.5rem;
 			}
-			.session-phases {
+			.item-meta {
 				display: flex;
-				gap: 0.5rem;
-				flex-wrap: wrap;
+				align-items: center;
+				gap: 0.75rem;
 			}
-			.phase-tag {
-				font-size: 0.7rem;
-				font-weight: 600;
+			.item-type {
+				font-size: 0.65rem;
+				font-weight: 700;
 				text-transform: uppercase;
 				letter-spacing: 0.05em;
 				color: rgb(var(--gray));
-				padding: 0.15rem 0.4rem;
-				border: 1px solid rgba(var(--gray), 0.2);
+				padding: 0.1rem 0.35rem;
+				border: 1px solid rgba(var(--gray), 0.3);
 				border-radius: 3px;
 			}
-			.session-date {
+			.item-date {
 				font-size: 0.8rem;
 				color: rgb(var(--gray));
-			}
-			.post-item {
-				margin-bottom: 0.75rem;
-			}
-			.post-title {
-				font-size: 1rem;
-				font-weight: 500;
-				color: rgb(var(--black));
-				margin: 0;
-				transition: color 0.2s;
-			}
-			.post-meta {
-				font-size: 0.8rem;
-				color: rgb(var(--gray));
-				margin: 0;
 			}
 		</style>
 	</head>
@@ -144,7 +138,7 @@ const posts = allPosts.filter(p => p.id !== '2026-04-12-who-writes-this');
 		<main>
 			{introPost && (
 				<div class="intro-post">
-					<a href={`/blog/${introPost.id}/`}>
+					<a href={introPost.url}>
 						<p class="intro-title">{introPost.data.title}</p>
 						<p class="intro-desc">{introPost.data.description}</p>
 					</a>
@@ -152,36 +146,19 @@ const posts = allPosts.filter(p => p.id !== '2026-04-12-who-writes-this');
 			)}
 
 			<p class="intro">
-				sessions walk through a complete work cycle — what happened, what was captured, what improved. standalone posts pull out a single idea.
+				A chronological stream of work sessions and architectural insights.
 			</p>
 
-			<div class="section-title">sessions</div>
-			<ul class="session-list">
-				{sessions.map(s => (
-					<li class="session-item">
-						<a href={`/session/${s.id}/`}>
-							<p class="session-title">{s.data.title}</p>
-							<p class="session-desc">{s.data.description}</p>
-							<div class="session-phases">
-								<span class="phase-tag">work</span>
-								<span class="phase-tag">capture</span>
-								<span class="phase-tag">review</span>
-								<span class="phase-tag">improve</span>
-								{s.data.measure && <span class="phase-tag">measure</span>}
+			<ul class="item-list">
+				{feedItems.map(item => (
+					<li class="item">
+						<a href={item.url}>
+							<p class="item-title">{item.data.title}</p>
+							<p class="item-desc">{item.data.description}</p>
+							<div class="item-meta">
+								<span class="item-type">{item.type}</span>
+								<span class="item-date">{item.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
 							</div>
-							<span class="session-date">{s.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
-						</a>
-					</li>
-				))}
-			</ul>
-
-			<div class="section-title">standalone posts</div>
-			<ul class="post-list">
-				{posts.map(post => (
-					<li class="post-item">
-						<a href={`/blog/${post.id}/`}>
-							<p class="post-title">{post.data.title}</p>
-							<p class="post-meta">{post.data.description}</p>
 						</a>
 					</li>
 				))}

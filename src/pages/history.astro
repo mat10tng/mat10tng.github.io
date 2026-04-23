@@ -10,15 +10,15 @@ import historyData from '../data/history.json';
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`History — ${SITE_TITLE}`} description="How the system evolved — data on the left, the system on the right." />
+		<BaseHead title={`Timeline — ${SITE_TITLE}`} description="How the system evolved — data on the left, the system on the right." />
 		<style>
 			.history-preamble {
 				max-width: 1000px;
 				margin: 2rem auto;
 				padding: 0 1rem;
 			}
-			.history-preamble h1 { margin-bottom: 0.25rem; }
-			.history-preamble p { color: var(--muted-color, #666); line-height: 1.6; }
+			.history-preamble h1 { margin-bottom: 0.25rem; font-size: 1.2rem; }
+			.history-preamble p { color: var(--muted-color, #666); font-size: 0.9rem; line-height: 1.6; }
 
 			.evolution {
 				max-width: 1000px;
@@ -103,8 +103,8 @@ import historyData from '../data/history.json';
 		<Header />
 		<main>
 			<section class="history-preamble">
-				<h1>history</h1>
-				<p>how the system evolved. data on the left, the system on the right.</p>
+				<h1>timeline</h1>
+				<p>The measurable evolution of the system.</p>
 			</section>
 
 			<section class="evolution">
