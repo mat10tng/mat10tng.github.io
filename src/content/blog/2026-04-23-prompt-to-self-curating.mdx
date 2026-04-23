@@ -12,37 +12,42 @@ import Section from '../../components/layout/Section.astro';
 Prompting is a fallback. Reliability is achieved by moving from adjective-heavy instructions to a persistent **system** that surrounds the model. 
 
 ## Technical Requirements
-To move beyond brittle prompts, the environment must satisfy three functional requirements:
-1. **Persistence**: Context must survive across independent work sessions.
-2. **Retrieval**: The model must prioritize local project data over its general training.
-3. **Curation**: The system must graduate project fixes into permanent standards.
+To move beyond brittle prompts, the environment must satisfy three functional requirements to achieve a self-running architecture.
+</div>
+
+<div slot="technical">
+| Requirement | Implementation |
+|---|---|
+| **Persistence** | Local Memory directory |
+| **Retrieval** | Mandatory Bootloader rules |
+| **Curation** | Graduation of session logs |
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Memory: The Foundation
-The primary requirement—Persistence—is implemented as a **Memory** directory. This provides the physical structure for short-term activity and long-term logic.
+## 1. Memory: The Foundation
+Memory provides the physical structure for short-term activity and long-term engineering standards.
 </div>
 
 <div slot="technical">
 **Folder Structure**
 ```text
 memory/
-├── state.json (global metadata)
+├── state.json (metadata)
 ├── global/
 │   └── lessons/ (universal)
 └── project-x/
-    ├── sessions/ (activity logs)
-    └── lessons/ (local standards)
+    ├── sessions/ (logs)
+    └── lessons/ (local)
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## System Rules
-System Rules define the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`, `.cursorrules`) enforces **Automatic Initialization** and triggers maintenance based on the state in Memory.
+## 2. System Rules
+System Rules define the operating environment inside the **LLM**. A root file (e.g., `CLAUDE.md`) enforces initialization and triggers maintenance based on the state in Memory.
 </div>
 
 <div slot="technical">
@@ -50,8 +55,8 @@ System Rules define the operating environment inside the **LLM**. A root file (e
 <div class="bootloader-snippet">
 ```markdown
 # Project Standards
-- **Init:** On boot, read `memory/state.json` and project context.
-- **Curation:** If `last_distill` > 7 days, execute `/distill` before work.
+- **Init:** On boot, read `memory/state.json`.
+- **Curation:** If `last_distill` > 7 days, execute `/distill`.
 - **Role:** Architect directs; LLM executes.
 - **Log:** Use `/end-session` to persist results.
 ```
@@ -61,13 +66,13 @@ System Rules define the operating environment inside the **LLM**. A root file (e
 
 <Section>
 <div slot="insight">
-## The Daily Workflow
-Execution follows a deterministic cycle triggered by the Memory state:
+## 3. The Daily Workflow
+Execution follows a deterministic cycle. The result is a system that monitors its own health, ensuring standards never stagnate.
 
-1.  **Initialize**: LLM synchronizes with root state and context.
+1.  **Initialize**: LLM synchronizes with state and context.
 2.  **Curation**: LLM graduates rules if the system is stale.
 3.  **Execute**: Architect directs; LLM implements.
-4.  **Capture**: Run `/end-session` to persist the technical log.
+4.  **Capture**: Run `/end-session` to persist the log.
 </div>
 
 <div slot="technical">
@@ -76,12 +81,5 @@ Execution follows a deterministic cycle triggered by the Memory state:
 
 **The Graduation Skill (/distill)**
 > "Identify recurring patterns. Move to `global/lessons/`. Update `memory/state.json`."
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## Result
-A self-running architecture. The system monitors its own health from the highest level, ensuring standards never stagnate.
 </div>
 </Section>

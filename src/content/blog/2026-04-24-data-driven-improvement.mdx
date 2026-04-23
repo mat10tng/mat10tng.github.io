@@ -9,7 +9,7 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## Principle
-Automation removes human bookkeeping. By persisting system metadata in a root `state.json`, the architecture can autonomously trigger maintenance tasks like distillation and health checks across the entire Memory.
+Automation removes human bookkeeping. By persisting metadata in a root `state.json`, the architecture can autonomously trigger maintenance tasks like distillation and health checks.
 </div>
 
 <div slot="technical">
@@ -27,7 +27,7 @@ Automation removes human bookkeeping. By persisting system metadata in a root `s
 <Section>
 <div slot="insight">
 ## Autonomous Maintenance
-The Interface (MCP) tools use the root state data to decide when to run. If the `last_distill_date` in `state.json` is too old, the model executes the curation logic before accepting new project work.
+The Interface (MCP) tools use the root state data to decide when to run. If the state is stale, the model executes curation logic before accepting new project work.
 </div>
 
 <div slot="technical">
@@ -46,16 +46,11 @@ if (daysSince(state.last_distill) > 7) {
 <Section>
 <div slot="insight">
 ## The Automated Workflow
-1.  **Boot**: LLM reads root `state.json` and project **System Rules**.
-2.  **Maintenance**: If state criteria are met, LLM runs global curation autonomously.
-3.  **Execute**: Technical work proceeds with fresh standards.
-4.  **Persist**: Session data and updated root state are saved to Memory.
-</div>
-</Section>
+The result is a system that maintains itself based on its highest-level internal state, ensuring engineering standards compound without manual intervention.
 
-<Section>
-<div slot="insight">
-## Result
-A data-driven, self-running architecture. The system maintains itself based on its own internal state, ensuring that engineering standards compound without manual Architect intervention.
+1.  **Boot**: LLM reads root state and project system rules.
+2.  **Maintenance**: LLM runs global curation autonomously.
+3.  **Execute**: Technical work proceeds with fresh standards.
+4.  **Persist**: Session data and updated state are saved to Memory.
 </div>
 </Section>
