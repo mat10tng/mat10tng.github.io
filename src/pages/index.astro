@@ -57,7 +57,6 @@ import historyData from '../data/history.json';
 				display: flex;
 				align-items: baseline;
 				gap: 1rem;
-				group;
 			}
 			.path-step {
 				font-size: 0.75rem;
@@ -92,7 +91,7 @@ import historyData from '../data/history.json';
 			<section class="hero">
 				<h1>How I work with AI</h1>
 				<p class="intro">
-					I build software with AI every day. Over time, I built a system around the work — 
+					I build software with AI assistants every day. Over time, I built a system around the work — 
 					four parts that coordinate to maintain context and improve standards.
 				</p>
 
@@ -101,20 +100,20 @@ import historyData from '../data/history.json';
 					<div class="layer-label">System Architecture</div>
 					<div class="diagram-wrap">
 						<svg viewBox="0 0 560 230" width="800">
-							<!-- human -->
+							<!-- Human Architect -->
 							<a href="https://www.linkedin.com/in/tuan-nguyen-it-ot/" target="_blank">
 								<rect x="405" y="2" width="150" height="40" rx="20" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4 2"/>
 								<text x="480" y="22" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Human Architect</text>
 								<text x="480" y="34" text-anchor="middle" font-size="8" fill="#888">decision maker</text>
 							</a>
 
-							<!-- arrow: human → worker -->
+							<!-- arrow: human → LLM -->
 							<line x1="485" y1="42" x2="485" y2="62" stroke="#bbb" stroke-width="1.5"/>
 							<polygon points="481,60 485,68 489,60" fill="#bbb"/>
 
-							<!-- the vault -->
+							<!-- Memory -->
 							<rect x="4" y="68" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
-							<text x="82" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">the vault</text>
+							<text x="82" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">Memory</text>
 							<text x="82" y="105" text-anchor="middle" font-size="9" fill="#888">persistent knowledge</text>
 							
 							<!-- project structure -->
@@ -129,9 +128,9 @@ import historyData from '../data/history.json';
 							<line x1="46" y1="135" x2="62" y2="142" stroke="#ccc" stroke-width="0.8"/>
 							<line x1="118" y1="135" x2="102" y2="142" stroke="#ccc" stroke-width="0.8"/>
 
-							<!-- the bridge -->
+							<!-- Interface -->
 							<rect x="202" y="68" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-							<text x="280" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the bridge</text>
+							<text x="280" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">Interface</text>
 							<text x="280" y="105" text-anchor="middle" font-size="9" fill="#888">rules & context</text>
 							
 							<text x="220" y="125" font-size="10" fill="#666">search</text>
@@ -141,10 +140,10 @@ import historyData from '../data/history.json';
 							<text x="300" y="140" font-size="10" fill="#666">compact</text>
 							<text x="300" y="155" font-size="10" fill="#666">archive</text>
 
-							<!-- the worker -->
+							<!-- LLM -->
 							<rect x="400" y="68" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-							<text x="478" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the worker</text>
-							<text x="478" y="105" text-anchor="middle" font-size="9" fill="#888">execution (Model)</text>
+							<text x="478" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
+							<text x="478" y="105" text-anchor="middle" font-size="9" fill="#888">execution</text>
 							
 							<text x="418" y="125" font-size="10" fill="#666">brainstorm</text>
 							<text x="418" y="140" font-size="10" fill="#666">debug</text>
@@ -153,13 +152,13 @@ import historyData from '../data/history.json';
 							<text x="500" y="140" font-size="10" fill="#666">test</text>
 							<text x="500" y="155" font-size="10" fill="#666">deploy</text>
 
-							<!-- arrows: vault ↔ bridge -->
+							<!-- arrows: Memory ↔ Interface -->
 							<line x1="160" y1="110" x2="202" y2="110" stroke="#bbb" stroke-width="1.5"/>
 							<polygon points="198,107 206,110 198,113" fill="#bbb"/>
 							<line x1="202" y1="130" x2="160" y2="130" stroke="#bbb" stroke-width="1.5"/>
 							<polygon points="164,127 156,130 164,133" fill="#bbb"/>
 
-							<!-- arrows: bridge ↔ worker -->
+							<!-- arrows: Interface ↔ LLM -->
 							<line x1="358" y1="110" x2="400" y2="110" stroke="#bbb" stroke-width="1.5"/>
 							<polygon points="396,107 404,110 396,113" fill="#bbb"/>
 							<line x1="400" y1="130" x2="358" y2="130" stroke="#bbb" stroke-width="1.5"/>
@@ -172,16 +171,16 @@ import historyData from '../data/history.json';
 							<text x="379" y="142" text-anchor="middle" font-size="8" font-weight="500" fill="#999">results</text>
 
 							<!-- feedback loop -->
-							<text x="280" y="195" text-anchor="middle" font-size="10" font-weight="500" fill="#888">↻ improvements cycle back into the vault</text>
+							<text x="280" y="195" text-anchor="middle" font-size="10" font-weight="500" fill="#888">↻ improvements cycle back into Memory</text>
 
 							<!-- bottom stats -->
 							<text x="82" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">{historyData.current.total_notes}+ notes</text>
 							<text x="280" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">automated maintenance</text>
-							<text x="478" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">human-directed</text>
+							<text x="478" y="215" text-anchor="middle" font-size="9" font-weight="600" fill="#999">human-architected</text>
 						</svg>
 					</div>
 					<p class="layer-desc">
-						A system for persistent learning. The model uses the knowledge base to maintain project context and follow global standards. Between sessions, automated tasks handle maintenance, cleanup, and the distillation of new lessons.
+						A system for persistent learning. The LLM uses the interface to maintain project context and follow global standards. Between sessions, automated tasks handle maintenance, cleanup, and the distillation of new lessons.
 					</p>
 				</div>
 
@@ -189,7 +188,7 @@ import historyData from '../data/history.json';
 				<div class="layer">
 					<div class="layer-header" style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem;">
 						<div class="layer-label" style="margin-bottom: 0;">Implementation Path</div>
-						<div style="font-size: 0.7rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em;">Vault → Bridge → Worker</div>
+						<div style="font-size: 0.7rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em;">Overview: Memory → Interface → LLM</div>
 					</div>
 					<div class="path-grid">
 						<a href="/blog/2026-04-23-prompt-to-system" class="path-link">
@@ -210,7 +209,7 @@ import historyData from '../data/history.json';
 							<div class="path-step">03</div>
 							<div class="path-content">
 								<div class="path-title">self-curating -> automated</div>
-								<p class="path-desc">Connecting your vault directly to an AI assistant via MCP.</p>
+								<p class="path-desc">Connecting your Memory directly to an AI assistant via MCP.</p>
 							</div>
 						</a>
 					</div>

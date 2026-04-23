@@ -1,0 +1,54 @@
+---
+title: "hallucination -> explicit confidence"
+description: "balancing AI intuition with human authority via Precise vs Autocomplete modes."
+pubDate: 2026-04-27
+loop: "improve"
+---
+import Section from '../../components/layout/Section.astro';
+
+<Section>
+<div slot="insight">
+## Principle
+AI is inherently prone to over-extrapolate. To be a reliable consultant, a system must distinguish between what has been confirmed and what has been inferred. "Surface what and when, never how to solve."
+
+## Confidence Modes
+- **Precise Mode:** Maps only explicitly stated facts. Unresolved gaps are logged to a discovery backlog.
+- **Autocomplete Mode:** Uses model priors to infer intermediate steps, marking them clearly for validation.
+</div>
+
+<div slot="technical">
+```json
+{
+  "session_config": {
+    "mode": "precise",
+    "model": "claude-haiku-4.5"
+  }
+}
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Implementation: Visual Proof
+The system prompt enforces styling rules based on node confidence. Verified facts receive a solid stroke, while suggested paths are rendered as dashed lines. This preserves the human architect's role as the final authority on process truth.
+</div>
+
+<div slot="technical">
+**Mermaid CSS classes:**
+```mermaid
+classDef verified stroke:#333,stroke-width:2px;
+classDef suggested stroke:#999,stroke-dasharray: 5 5;
+
+A[Verified Step]:::verified
+B[Inferred Step]:::suggested
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Result
+The shift from black-box generation to transparent reasoning. The human and AI collaborate through a shared visual language of confidence, ensuring the final process map is both complete and accurate.
+</div>
+</Section>

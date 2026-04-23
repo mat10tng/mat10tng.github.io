@@ -20,20 +20,29 @@ import historyData from '../../data/history.json';
         </a>
 
         {step === 1 && (
-            <!-- STEP 1: Adding the Vault (Manual interaction) -->
+            <!-- STEP 1: Just Human + LLM + Bootloader -->
             <g>
-                <!-- the vault -->
+                <rect x="202" y="110" width="156" height="80" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
+                <text x="280" y="135" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
+                <text x="280" y="150" text-anchor="middle" font-size="9" fill="#888">execution unit</text>
+                
+                <line x1="280" y1="42" x2="280" y2="110" stroke="#bbb" stroke-width="1.5"/>
+                <polygon points="276,108 280,116 284,108" fill="#bbb"/>
+                <text x="290" y="80" font-size="9" fill="#2563eb" font-weight="600">Bootloader Rules</text>
+            </g>
+        )}
+
+        {step === 2 && (
+            <!-- STEP 2: Adding Memory (Manual interaction) -->
+            <g>
+                <!-- Memory -->
                 <rect x="4" y="110" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
-                <text x="82" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">the vault</text>
+                <text x="82" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">Memory</text>
                 <text x="82" y="147" text-anchor="middle" font-size="9" fill="#888">file system</text>
                 
-                <!-- the worker -->
+                <!-- LLM -->
                 <rect x="400" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-                <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the worker</text>
-                
-                <!-- Bootloader link -->
-                <line x1="280" y1="42" x2="280" y2="110" stroke="#bbb" stroke-width="1" stroke-dasharray="4 2"/>
-                <text x="280" y="80" text-anchor="middle" font-size="9" fill="#2563eb" font-weight="600">Bootloader Rules</text>
+                <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
                 
                 <!-- manual paths via human -->
                 <path d="M 205 22 L 82 22 L 82 110" fill="none" stroke="#ddd" stroke-width="1.2" stroke-dasharray="2 2"/>
@@ -42,45 +51,52 @@ import historyData from '../../data/history.json';
             </g>
         )}
 
-        {step === 2 && (
-            <!-- STEP 2: Feedback Loop / Graduation -->
+        {step === 3 && (
+            <!-- STEP 3 / FINAL: The Interface (MCP) -->
             <g>
+                <!-- Memory -->
                 <rect x="4" y="110" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
-                <text x="82" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">the vault</text>
-                <rect x="400" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-                <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the worker</text>
+                <text x="82" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">Memory</text>
                 
-                <!-- loop -->
-                <path d="M 400 160 L 160 160" fill="none" stroke="#2563eb" stroke-width="1.5"/>
-                <polygon points="168,157 160,160 168,163" fill="#2563eb"/>
-                <text x="280" y="155" text-anchor="middle" font-size="9" fill="#2563eb" font-weight="600">log session</text>
-                
-                <path d="M 82 216 Q 280 250 478 216" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4 2"/>
-                <text x="280" y="215" text-anchor="middle" font-size="9" fill="#2563eb">graduate rules</text>
-            </g>
-        )}
-
-        {(step === 3 || step === 0) && (
-            <!-- STEP 3 / FINAL: The Bridge (MCP) -->
-            <g>
-                <!-- the vault -->
-                <rect x="4" y="110" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
-                <text x="82" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">the vault</text>
-                
-                <!-- the bridge -->
+                <!-- Interface -->
                 <rect x="202" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-                <text x="280" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the bridge</text>
+                <text x="280" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">Interface</text>
                 <text x="280" y="147" text-anchor="middle" font-size="9" fill="#888">MCP / Automation</text>
 
-                <!-- the worker -->
+                <!-- LLM -->
                 <rect x="400" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
-                <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">the worker</text>
+                <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
 
                 <!-- automated arrows -->
                 <line x1="160" y1="140" x2="202" y2="140" stroke="#bbb" stroke-width="1.5"/>
                 <line x1="358" y1="140" x2="400" y2="140" stroke="#bbb" stroke-width="1.5"/>
                 <text x="181" y="135" text-anchor="middle" font-size="8" fill="#999">auto</text>
                 <text x="379" y="135" text-anchor="middle" font-size="8" fill="#999">auto</text>
+                
+                <!-- human link -->
+                <line x1="280" y1="42" x2="280" y2="110" stroke="#bbb" stroke-width="1.5"/>
+                <polygon points="276,108 280,116 284,108" fill="#bbb"/>
+            </g>
+        )}
+
+        {step === 0 && (
+            <!-- DEFAULT / FULL VIEW -->
+            <g>
+                <!-- Memory -->
+                <rect x="4" y="110" width="156" height="106" rx="8" fill="none" stroke="#2563eb" stroke-width="2"/>
+                <text x="82" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">Memory</text>
+                
+                <!-- Interface -->
+                <rect x="202" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
+                <text x="280" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">Interface</text>
+
+                <!-- LLM -->
+                <rect x="400" y="110" width="156" height="106" rx="8" fill="none" stroke="#333" stroke-width="1.5"/>
+                <text x="478" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#333">LLM</text>
+
+                <!-- arrows -->
+                <line x1="160" y1="140" x2="202" y2="140" stroke="#bbb" stroke-width="1.5"/>
+                <line x1="358" y1="140" x2="400" y2="140" stroke="#bbb" stroke-width="1.5"/>
                 
                 <!-- human link -->
                 <line x1="280" y1="42" x2="280" y2="110" stroke="#bbb" stroke-width="1.5"/>

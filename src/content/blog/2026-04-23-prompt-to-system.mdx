@@ -30,13 +30,13 @@ A system requires a structured environment. This removes reliance on model memor
 <Section>
 <div slot="insight">
 ## Implementation: Bootloader
-Define the system's operating environment in a project root file (e.g., `CLAUDE.md`, `.cursorrules`). This enforces retrieval over memory and establishes the architect/worker relationship.
+Define the system's operating environment in a project root file (e.g., `CLAUDE.md`, `.cursorrules`). This enforces retrieval over memory and establishes the architect/LLM relationship.
 </div>
 
 <div slot="technical">
 ```markdown
 # Project Standards
-- **Role:** Human Architect directs; Worker executes.
+- **Role:** Human Architect directs; LLM executes.
 - **Log:** Record outcome to `~/vault/project-x/sessions/[date]-[goal].md`.
 - **Knowledge:** Search local file system before implementing.
 ```
@@ -46,11 +46,11 @@ Define the system's operating environment in a project root file (e.g., `CLAUDE.
 <Section>
 <div slot="insight">
 ## Context Synchronization
-A context refresh skill ensures the model synchronizes with the system's current state and previously documented logic before beginning work.
+A context refresh skill ensures the LLM synchronizes with the system's current state and previously documented logic before beginning work.
 </div>
 
 <div slot="technical">
-**Command:** `/sync`
+**Command:** `/sync` (or `/apply-from-vault`)
 **Logic:** "Read structure, latest session logs, and distilled lessons. Verify constraints. Do not proceed until verified."
 </div>
 </Section>
@@ -58,6 +58,6 @@ A context refresh skill ensures the model synchronizes with the system's current
 <Section>
 <div slot="insight">
 ## Result
-The shift from a prompt to a system. The model inherits its environment from the vault automatically, reducing the overhead of manual instruction.
+The shift from a prompt to a system. The LLM inherits its environment from the Memory automatically, reducing the overhead of manual instruction.
 </div>
 </Section>

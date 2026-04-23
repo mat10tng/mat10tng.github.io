@@ -1,0 +1,46 @@
+---
+title: "discovery -> live synthesis"
+description: "bridging the gap between conversation and process architecture."
+pubDate: 2026-04-25
+loop: "improve"
+---
+import Section from '../../components/layout/Section.astro';
+
+<Section>
+<div slot="insight">
+## Principle
+Traditional process discovery is lossy. There is a chronological gap between the interview and the artifact. The process map shouldn't be a post-interview summary; it should be a real-time participant in the room.
+
+## The Strategy
+By shifting from "taking notes" to "live synthesis," the conversation becomes the substrate for the process map. The AI agent acts as a live architect, continuously reflecting the discovered reality back to the participants.
+</div>
+
+<div slot="technical">
+```mermaid
+graph TD
+    A[Conversation] -->|Ingest| B(AI Architect)
+    B -->|State Update| C{Live Map}
+    C -->|Feedback| A
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Implementation: Real-time Streams
+Clarity utilizes Server-Sent Events (SSE) to maintain a stateful connection between the discovery agent and the visual canvas. As the agent extracts process knowledge, it updates a LangGraph state, which is immediately pushed to the Mermaid-rendered frontend.
+</div>
+
+<div slot="technical">
+**Endpoint:** `POST /api/discover`
+**Payload:** `{"user_input": "First we receive the invoice...", "zoom_level": 1}`
+**Response:** `data: {"mermaid_syntax": "graph TD; ...", "internal_thought": "..."}`
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Result
+The shift from artifact to participant. The "Clarity" comes not from a later report, but from the immediate visual alignment of all stakeholders during the session itself.
+</div>
+</Section>
