@@ -1,7 +1,7 @@
 ---
 id: "step-02-data-driven-improvement"
-title: "[draft] Automate the boring parts: scaling data-driven evolution"
-description: "remove manual system maintenance by automating context management via MCP."
+title: "[draft] automating maintenance, not judgment"
+description: "what i learned trying to make the knowledge system clean itself up."
 pubDate: 2026-04-24
 loop: "measure"
 ---
@@ -9,25 +9,28 @@ import Section from '../../components/layout/Section.astro';
 
 <Section>
 <div slot="insight">
-## The Answer
-**Automating context management via the Model Context Protocol (MCP) ensures that your engineering standards compound over time without manual intervention.**
 
-By persisting system metadata in a root `state.json` file, you enable your architecture to perform its own maintenance—including scaffolding new projects and logging outcomes—autonomously based on real-time success metrics.
+I had a knowledge system that worked, in theory. Every session captured a note. Every week the notes were supposed to compound into something more useful. The problem wasn't capture — capture was fine. The problem was everything that happens after.
+
+Notes drift. Some get duplicated. Some go stale. Some projects don't have a memory directory at all because the first session never ran the scaffolder. I'd notice the drift, run a manual cleanup, feel good for a week, forget, and find more drift.
+
+The system needed to maintain itself.
+
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 1. System Health Metrics
-Measurement provides the evidence needed to verify that architectural changes actually improve model performance.
 
-- **Reuse Rate**: How often the model utilizes distilled lessons.
-- **Success Rate**: Frequency of tasks completed without technical regression.
-- **Maintenance**: Auto-scaffolding and auto-distillation success rates.
+## one file at the root
+
+The fix was a single state file at the root of the memory tree. Every session boot reads it and decides what to do before it accepts a goal from me. Missing project directory? Scaffold it. Last distill more than seven days ago? Run the distill skill first. Health score below 0.85? Flag for review.
+
+It's not exotic. It's just that the state lives somewhere the model can find without me telling it.
+
 </div>
-
 <div slot="technical">
-**Global State (`memory/state.json`)**
+
 ```json
 {
   "last_distill_date": "2026-04-17",
@@ -35,45 +38,86 @@ Measurement provides the evidence needed to verify that architectural changes ac
   "system_health_score": 0.94
 }
 ```
+
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 2. Autonomous Maintenance
-The Interface (MCP) tools use state data to determine when to run. If a project directory is missing, or the state is stale, the model executes the maintenance logic before accepting architectural goals.
-</div>
 
+## the boot check
+
+The interesting bit isn't the file — it's that the model runs maintenance before it touches the goal. If I open a session about a feature and the project's memory dir doesn't exist, the scaffolder fires first. I don't notice. I just notice that things keep working.
+
+</div>
 <div slot="technical">
-**Bridge Tool Logic:**
+
 ```javascript
-// Auto-Init logic inside a tool call
 const projectPath = `memory/${currentProject}`;
 if (!await fs.exists(projectPath)) {
     await runAutoScaffold(currentProject);
 }
 
-// Auto-Distill logic
 if (daysSince(state.last_distill) > 7) {
     await runDistillation();
 }
 ```
+
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## The Automated Workflow
-1. **Boot**: Model reads global state and auto-initializes project if missing.
-2. **Maintenance**: Model triggers curation/cleanup autonomously.
-3. **Execute**: Model works with fresh standards.
-4. **Persist**: Model saves session logs and updated state automatically.
+
+## what 0.94 actually means
+
+The health score isn't a vibe. It's three numbers, weighted:
+
+- **reuse rate** (40%) — sessions that pulled relevant prior work before starting. Same metric that gives me the compounding score on the history page.
+- **task success** (40%) — sessions that finished without a regression. Pulled from the nightly sweep.
+- **capture completeness** (20%) — sessions that left a note behind for the next one to find.
+
+0.94 in mid-april means high reuse, mostly clean tasks, decent capture. The formula has one twist: if any one signal drops below its floor, the score drops faster than the weighted mean. I wanted a single number on the dashboard. I didn't want a single number that could lie.
+
+So the floor matters more than the mean.
+
+</div>
+<div slot="technical">
+
+| signal | weight | floor | apr 22 |
+|--------|--------|-------|--------|
+| reuse rate | 40% | 0.70 | 0.86 |
+| task success | 40% | 0.85 | 0.97 |
+| capture completeness | 20% | 0.30 | 0.44 |
+| **score** | — | — | **0.94** |
+
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## Result
-A data-driven, self-running architecture. The system maintains itself based on its highest-level internal state, ensuring that engineering standards compound without manual Architect intervention.
+
+## where i don't automate
+
+Auto-scaffold is fine. Auto-distill is fine. Auto-cleanup is where I stopped.
+
+The first version had a sweep that deleted "stale" notes — anything unread for thirty days. It worked until I lost a load-bearing note about a Postgres migration that I only ever needed once a quarter. The note looked unused. It was just rare.
+
+Same problem with auto-graduation: deciding which project lessons should become global rules. The system can flag candidates. It can't decide. A lesson from one project might be a universal pattern, or it might be specific to that codebase's history. That's a judgment call. I want to be the one making it.
+
+The rule I landed on: **automate execution, not judgment.** Anything mechanical — scaffolding a directory, running a distill, recomputing a score — the system does. Anything that decides what something means — graduation, deletion, prioritization — the system flags and waits.
+
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+
+## if you're building something like this
+
+Pick one piece of state and put it where the model will see it on every session start. Not a config file the model has to know to read — a file the bootloader is already reading. For me that's `state.json`. For a different setup it might be a row in a database, a header in a context file, anything already on the path.
+
+Then move one piece of maintenance behind it. Just one. Watch what happens. The thing that surprised me most wasn't that auto-distill saved me time — it was that I stopped noticing maintenance at all, which is exactly when I'd been screwing it up before.
+
 </div>
 </Section>
