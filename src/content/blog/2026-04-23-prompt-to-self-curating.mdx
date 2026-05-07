@@ -101,9 +101,9 @@ The loop is small:
 <Section>
 <div slot="insight">
 ## 4. Choose Your Path
-This does not work in a normal chat window.
+The memory only works if the notes are saved somewhere.
 
-The model needs somewhere to save files. Pick the path that matches how you use AI.
+In a local tool, the model can save them. In a web chat, you save them.
 </div>
 
 <div slot="technical">
@@ -120,16 +120,18 @@ The model needs somewhere to save files. Pick the path that matches how you use 
 7. Ask the model to create a file called `permission-test.md`.
 8. If the file appears, delete it and paste the setup prompt below.
 
-**Path B: web workspace**
+**Path B: web chat**
 
-1. Use a web AI workspace that has persistent files or projects, not a normal chat window.
-2. Create a dedicated project, workspace, or folder for the memory system.
-3. If the tool supports it, connect persistent storage such as GitHub, cloud documents, or file export.
-4. Ask the model to create a file called `permission-test.md` inside that workspace.
-5. Close and reopen the workspace. If the file is still there, paste the setup prompt below.
-6. If the file disappears, use the manual version: ask the model to generate the files, then download or copy them into your own memory folder after each session.
+1. Create a folder on your computer, cloud drive, or notes app called `memory`.
+2. Paste the setup prompt below.
+3. Tell the model you are using web/manual mode.
+4. The model should output exact filenames and markdown blocks.
+5. Save each block into the matching file.
+6. Paste `MEMORY_START_HERE.md` into the tool's project instructions if it has them.
+7. At the start of the next chat, paste or attach `MEMORY_START_HERE.md`, `memory/state.json`, and the relevant lesson files.
+8. At the end of each chat, ask for a new session note and save it in the path the model gives you.
 
-The test matters. It proves the model can write somewhere that lasts. If the file disappears when the chat ends, it is not memory yet. It is just chat.
+This version is more manual, but it still works. The model writes the notes. You keep them in the right place.
 </div>
 </Section>
 
@@ -138,38 +140,31 @@ The test matters. It proves the model can write somewhere that lasts. If the fil
 ## 5. The Full Setup Prompt
 If I were starting this from zero, I would not ask the model to "remember things better."
 
-I would paste this into a tool that can write files.
+I would paste this into the tool and pick the right mode.
 </div>
 
 <div slot="technical">
 ````text
-You are running in a tool that can create and edit files.
+You are helping me set up a memory folder for future AI sessions.
 
-First, check which kind of tool you are in:
+First, choose the right mode:
 
-- a local AI coding tool or terminal-based agent
-- a web AI workspace with files that stay after the chat closes
+- Local mode: you can create and edit files in a folder that will still exist after this session.
+- Web/manual mode: you cannot save files yourself, or the files may disappear when the chat closes.
 
-Before you begin, verify that you have:
+If you are in local mode, create and edit the files yourself.
+If you are in web/manual mode, do not pretend you created files. Output exact filenames and markdown blocks so I can save them myself.
 
-- access to the current project or workspace folder
-- permission to create and edit files
-- a way to keep those files after this chat ends
-- shell/terminal permission if this tool has a terminal
-- git access only if this folder is tracked with git
-
-If you cannot create files that stay after the chat ends, stop and tell me this tool is chat-only.
-If shell or git access is missing, continue with file edits and note what you could not verify.
-
-Use the file tools you have. Use shell or git only when available.
+If you are not sure which mode applies, ask me this one question:
+"Can I create files here that will still exist next session?"
 
 Your job is to set up a memory folder that works across projects.
 The system should let future LLM sessions read context, save what happened,
 turn repeated notes into clear lessons, and move lessons that apply to many projects into global lessons.
 
-Do the setup yourself. Do not stop at a plan unless something is genuinely blocked.
+Do not stop at a plan. Either create the files in local mode or output the files for me to save in web/manual mode.
 
-Create this memory structure at the workspace root:
+Set up this memory structure:
 
 memory/
 - state.json
@@ -182,10 +177,10 @@ memory/
 
 Use the current repository, folder, or workspace name as the first project name.
 
-Create or update the project bootloader file used by this coding tool.
-Use AGENTS.md, CLAUDE.md, .cursorrules, or the closest equivalent for the environment.
-If this web workspace has no startup rules file, create MEMORY_START_HERE.md with the same rules
-and tell me where to paste them in the tool's project instructions.
+Create or output a startup rules file called MEMORY_START_HERE.md.
+If the tool has project instructions, tell me to paste those rules there too.
+If this is a local coding tool that already uses AGENTS.md, CLAUDE.md, .cursorrules, or another bootloader file,
+create or update that file as well.
 
 The bootloader must include these rules:
 
@@ -232,6 +227,42 @@ Initialize memory/state.json with:
 - session_count
 
 Use these exact markdown templates when writing memory notes.
+
+WEB/MANUAL MODE OUTPUT RULES
+
+If you are in web/manual mode, output the setup as separate blocks using this format:
+
+FILE: MEMORY_START_HERE.md
+```markdown
+[full startup rules]
+```
+
+FILE: memory/state.json
+```json
+[initial state json]
+```
+
+FILE: memory/projects/[project-name]/README.md
+```markdown
+[short explanation of this project memory folder]
+```
+
+FILE: memory/projects/[project-name]/sessions/YYYY-MM-DD-first-setup.md
+```markdown
+[first session note]
+```
+
+FILE: memory/projects/[project-name]/lessons/how-to-use-memory.md
+```markdown
+[first project lesson]
+```
+
+After the file blocks, give me a short checklist:
+
+- which files to save
+- where to paste MEMORY_START_HERE.md if my web tool has project instructions
+- what files to paste or attach at the start of the next chat
+- what to ask you for at the end of the next chat
 
 SESSION NOTE TEMPLATE
 Path: memory/projects/[project-name]/sessions/YYYY-MM-DD-short-goal.md
@@ -331,7 +362,7 @@ projects_seen:
 [Cases where the project-local rule should override this.]
 ```
 
-After setup, run /init-project for the current repository.
+After setup, run or output /init-project for the current repository.
 Then write one short verification note showing:
 
 - which files you created or updated
@@ -346,6 +377,7 @@ Constraints:
 - Prefer concise lessons over long logs.
 - If a rule is not reusable, keep it project-local.
 - If a lesson changes behavior across all projects, put it in global lessons.
+- In web/manual mode, never say a file was saved until I confirm I saved it.
 ````
 </div>
 </Section>
