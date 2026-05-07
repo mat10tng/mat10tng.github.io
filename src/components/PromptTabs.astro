@@ -1,0 +1,369 @@
+---
+const localPrompt = `You are running in a local AI coding tool or terminal-based agent.
+
+Your job: create a simple memory folder that future AI sessions can read and update.
+
+Before you start, confirm you can:
+- create and edit files in this folder
+- run shell commands, if this tool supports them
+- use git only if this folder already uses git
+
+If you cannot create files here, stop and tell me to use the web/manual prompt instead.
+
+Use the current folder name as the project name.
+
+Create this structure:
+- memory/state.json
+- memory/global/lessons/
+- memory/projects/[project-name]/sessions/
+- memory/projects/[project-name]/lessons/
+
+Create or update the startup rules file for this tool:
+- AGENTS.md, CLAUDE.md, .cursorrules, or the closest equivalent
+
+The startup rules must say:
+- At the start of a session, identify the current project.
+- Before meaningful work, read memory/global/lessons/ and this project's lessons.
+- If memory/projects/[project-name]/ does not exist, create it.
+- At the end of a meaningful session, write a session note.
+- If the same lesson appears across projects, move it to memory/global/lessons/.
+- Keep startup context short. Keep raw session notes searchable.
+- The human sets goals. The AI keeps the memory files up to date.
+
+Create three reusable prompt snippets:
+
+/init-project
+- Detect the project name.
+- Create memory/projects/[project-name]/sessions/.
+- Create memory/projects/[project-name]/lessons/.
+- Add a short README for the project memory folder.
+
+/end-session
+- Summarize what changed.
+- Capture decisions, commands that worked, commands that failed, and lessons.
+- Save the note to memory/projects/[project-name]/sessions/YYYY-MM-DD-short-goal.md.
+- If a lesson is reusable, also save it to memory/projects/[project-name]/lessons/.
+- Update memory/state.json.
+
+/distill
+- Review recent session notes.
+- Merge repeated project lessons.
+- Move cross-project lessons to memory/global/lessons/.
+- Update memory/state.json.
+
+Use these note shapes:
+- Session note: frontmatter with type, project, date, goal, outcome. Sections: Goal, What Changed, Decisions, Commands, Lessons, Follow-Up.
+- Project lesson: frontmatter with type, scope, project, created_at, source_sessions. Sections: Rule, Why, How to Apply, Boundaries.
+- Global lesson: frontmatter with type, scope, created_at, promoted_from, projects_seen. Sections: Rule, Why This Became Global, How Future Sessions Should Use It, Exceptions.
+
+Initialize memory/state.json with:
+- created_at
+- last_distill_at
+- projects
+- global_lesson_count
+- session_count
+
+Then run /init-project for this folder.
+
+Finish by telling me:
+- which files you created or changed
+- which project name you used
+- how the next AI session should load memory
+- what to run at the end of a session`;
+
+const webPrompt = `You are in web/manual mode.
+
+You cannot save files for me. Do not say files were saved unless I confirm I saved them.
+
+Your job: output the exact files I should save so future AI chats can reuse memory.
+
+Ask me for the project name if you do not know it.
+
+Generate these files:
+- MEMORY_START_HERE.md
+- memory/state.json
+- memory/projects/[project-name]/README.md
+- memory/projects/[project-name]/sessions/YYYY-MM-DD-first-setup.md
+- memory/projects/[project-name]/lessons/how-to-use-memory.md
+
+For each file, use this format:
+
+FILE: path/to/file.md
+Then put the full file content in one fenced code block.
+
+MEMORY_START_HERE.md must tell future chats:
+- Read this file first.
+- Ask me to paste or attach memory/state.json.
+- Ask me to paste or attach relevant files from memory/global/lessons/.
+- Ask me to paste or attach relevant files from memory/projects/[project-name]/lessons/.
+- Before meaningful work, summarize what memory says.
+- At the end of meaningful work, output a new session note for me to save.
+- If a reusable lesson appears, output a project lesson for me to save.
+- If a lesson applies across projects, tell me it belongs in memory/global/lessons/.
+- Do not claim anything was saved until I confirm it.
+
+memory/state.json must include:
+- created_at
+- last_distill_at
+- projects
+- global_lesson_count
+- session_count
+
+The first session note must include:
+- frontmatter with type, project, date, goal, outcome
+- Goal
+- What Changed
+- Decisions
+- Commands
+- Lessons
+- Follow-Up
+
+The first project lesson must include:
+- frontmatter with type, scope, project, created_at
+- Rule
+- Why
+- How to Apply
+- Boundaries
+
+After the file blocks, give me a short checklist:
+- which files to save
+- where to paste MEMORY_START_HERE.md if my web tool has project instructions
+- what files to paste or attach at the start of the next chat
+- what to ask for at the end of the next chat`;
+---
+
+<div class="prompt-tabs" data-prompt-tabs>
+	<div class="prompt-tabs-header">
+		<div>
+			<p class="prompt-tabs-kicker">Choose one prompt</p>
+			<p class="prompt-tabs-copy">Pick the setup that matches how you use AI.</p>
+		</div>
+		<div class="prompt-tab-list" role="tablist" aria-label="Setup prompt type">
+			<button
+				type="button"
+				class="prompt-tab is-active"
+				id="local-prompt-tab"
+				role="tab"
+				aria-selected="true"
+				aria-controls="local-prompt-panel"
+				data-prompt-tab="local"
+			>
+				Local tool
+			</button>
+			<button
+				type="button"
+				class="prompt-tab"
+				id="web-prompt-tab"
+				role="tab"
+				aria-selected="false"
+				aria-controls="web-prompt-panel"
+				data-prompt-tab="web"
+			>
+				Web/manual
+			</button>
+		</div>
+	</div>
+
+	<section
+		class="prompt-panel is-active"
+		id="local-prompt-panel"
+		role="tabpanel"
+		aria-labelledby="local-prompt-tab"
+		data-prompt-panel="local"
+	>
+		<div class="prompt-panel-bar">
+			<p>Use this when the AI tool can create files in your folder.</p>
+			<button type="button" class="copy-prompt-button" data-copy-prompt>Copy local prompt</button>
+		</div>
+		<pre tabindex="0"><code>{localPrompt}</code></pre>
+	</section>
+
+	<section
+		class="prompt-panel"
+		id="web-prompt-panel"
+		role="tabpanel"
+		aria-labelledby="web-prompt-tab"
+		data-prompt-panel="web"
+		hidden
+	>
+		<div class="prompt-panel-bar">
+			<p>Use this when the AI is in a web chat and you will save the files yourself.</p>
+			<button type="button" class="copy-prompt-button" data-copy-prompt>Copy web prompt</button>
+		</div>
+		<pre tabindex="0"><code>{webPrompt}</code></pre>
+	</section>
+</div>
+
+<script is:inline>
+	(() => {
+		const copyText = async (text, button, codeBlock) => {
+			const originalLabel = button.textContent;
+
+			try {
+				await navigator.clipboard.writeText(text);
+				button.textContent = "Copied";
+			} catch {
+				const range = document.createRange();
+				range.selectNodeContents(codeBlock);
+				const selection = window.getSelection();
+				selection.removeAllRanges();
+				selection.addRange(range);
+				button.textContent = "Selected";
+			}
+
+			window.setTimeout(() => {
+				button.textContent = originalLabel;
+			}, 1800);
+		};
+
+		document.querySelectorAll("[data-prompt-tabs]").forEach((root) => {
+			const tabs = Array.from(root.querySelectorAll("[data-prompt-tab]"));
+			const panels = Array.from(root.querySelectorAll("[data-prompt-panel]"));
+
+			tabs.forEach((tab) => {
+				tab.addEventListener("click", () => {
+					const target = tab.getAttribute("data-prompt-tab");
+
+					tabs.forEach((item) => {
+						const isActive = item === tab;
+						item.classList.toggle("is-active", isActive);
+						item.setAttribute("aria-selected", String(isActive));
+					});
+
+					panels.forEach((panel) => {
+						const isActive = panel.getAttribute("data-prompt-panel") === target;
+						panel.classList.toggle("is-active", isActive);
+						panel.hidden = !isActive;
+					});
+				});
+			});
+
+			root.querySelectorAll("[data-copy-prompt]").forEach((button) => {
+				button.addEventListener("click", () => {
+					const panel = button.closest("[data-prompt-panel]");
+					const codeBlock = panel.querySelector("code");
+					copyText(codeBlock.textContent, button, codeBlock);
+				});
+			});
+		});
+	})();
+</script>
+
+<style>
+	.prompt-tabs {
+		max-width: 800px;
+		margin: 1rem auto 0;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		background: #fff;
+		overflow: hidden;
+	}
+
+	.prompt-tabs-header {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem;
+		border-bottom: 1px solid #e5e7eb;
+		background: #f9fafb;
+	}
+
+	.prompt-tabs-kicker,
+	.prompt-tabs-copy,
+	.prompt-panel-bar p {
+		margin: 0;
+	}
+
+	.prompt-tabs-kicker {
+		font-family: var(--font-sans);
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: var(--black);
+	}
+
+	.prompt-tabs-copy {
+		font-size: 0.9rem;
+		color: var(--gray-dark);
+	}
+
+	.prompt-tab-list {
+		display: inline-flex;
+		gap: 0.25rem;
+		padding: 0.25rem;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		background: #fff;
+	}
+
+	.prompt-tab,
+	.copy-prompt-button {
+		font-family: var(--font-sans);
+		border: 1px solid transparent;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+
+	.prompt-tab {
+		padding: 0.45rem 0.7rem;
+		background: transparent;
+		color: var(--gray-dark);
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+
+	.prompt-tab.is-active {
+		background: var(--accent);
+		color: #fff;
+	}
+
+	.prompt-panel-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem;
+		border-bottom: 1px solid #e5e7eb;
+	}
+
+	.prompt-panel-bar p {
+		font-size: 0.95rem;
+		color: var(--gray-dark);
+	}
+
+	.copy-prompt-button {
+		flex: 0 0 auto;
+		padding: 0.55rem 0.75rem;
+		background: var(--black);
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+
+	.copy-prompt-button:hover {
+		background: var(--accent);
+	}
+
+	.prompt-panel pre {
+		margin: 0;
+		border-radius: 0;
+		max-height: 32rem;
+	}
+
+	@media (max-width: 720px) {
+		.prompt-tabs-header,
+		.prompt-panel-bar {
+			align-items: stretch;
+			flex-direction: column;
+		}
+
+		.prompt-tab-list,
+		.copy-prompt-button {
+			width: 100%;
+		}
+
+		.prompt-tab {
+			flex: 1 1 0;
+		}
+	}
+</style>
