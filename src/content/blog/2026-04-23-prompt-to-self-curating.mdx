@@ -151,6 +151,37 @@ I would pick the path that matches my tool, copy that prompt, and paste it in.
 
 <Section>
 <div slot="insight">
+## 6. After Setup
+After the files exist, the system is not something you keep rebuilding.
+
+It becomes a small habit at the start and end of each AI session.
+</div>
+
+<div slot="technical">
+**If you use a local tool**
+
+1. Open the same project folder.
+2. Let the tool read the startup rules and memory files.
+3. Tell the model what you want to work on.
+4. At the end, ask it to run `/end-session`.
+5. The model saves what changed, what worked, and what should carry forward.
+6. Every so often, ask it to run `/distill` so repeated notes become cleaner lessons.
+
+**If you use web chat**
+
+1. Start a new chat.
+2. Paste or attach `MEMORY_START_HERE.md`, `memory/state.json`, and the relevant lesson files.
+3. Tell the model what you want to work on.
+4. At the end, ask it for a session note.
+5. Save that note into your `memory/projects/[project-name]/sessions/` folder.
+6. If the model gives you a reusable lesson, save it in the matching `lessons/` folder.
+
+The local version saves files for you. The web version asks you to save the files. The loop is the same either way: load memory, do the work, save what changed.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
 ## Result
 A memory folder the model can use without being reminded every time.
 </div>
