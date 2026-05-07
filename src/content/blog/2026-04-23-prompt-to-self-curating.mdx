@@ -94,6 +94,101 @@ Execution follows a deterministic, autonomous cycle:
 
 <Section>
 <div slot="insight">
+## 4. The Full Setup Prompt
+If I were starting this from zero, I would not ask the model to "remember things better."
+
+I would give it full access, then make the maintenance loop part of its job.
+</div>
+
+<div slot="technical">
+```text
+You have full access to this machine: filesystem, shell, git, and the current working directory.
+
+Your job is to set up a self-curating memory system that works across every project in this portfolio.
+The system should let future LLM sessions inherit context, capture what happened, distill durable lessons,
+and graduate useful rules from one project to the whole portfolio.
+
+Do the setup yourself. Do not stop at a plan unless something is genuinely blocked.
+
+Create this memory structure at the portfolio root:
+
+memory/
+- state.json
+- global/
+  - lessons/
+- projects/
+  - [project-name]/
+    - sessions/
+    - lessons/
+
+Use the current repository folder name as the first project name.
+
+Create or update the project bootloader file used by this coding tool.
+Use AGENTS.md, CLAUDE.md, .cursorrules, or the closest equivalent for the environment.
+
+The bootloader must include these rules:
+
+- On startup, identify the current project from the working directory.
+- If memory/projects/[project-name] does not exist, initialize it before doing project work.
+- Before starting non-trivial work, read global lessons and the current project's recent lessons.
+- During work, prefer existing lessons over repeated prompting.
+- At the end of every meaningful session, write a session note.
+- When the same lesson appears in multiple project notes, graduate it into memory/global/lessons/.
+- Once a week, review old session notes and distill them into smaller durable lessons.
+- Keep raw sessions searchable, but keep startup context small.
+- The human sets goals. The LLM maintains the memory system.
+
+Create three reusable commands or prompt snippets:
+
+1. /init-project
+   - Detect the project name.
+   - Create memory/projects/[project-name]/sessions/.
+   - Create memory/projects/[project-name]/lessons/.
+   - Add a short README explaining what belongs there.
+
+2. /end-session
+   - Summarize what changed.
+   - Capture decisions, bugs fixed, commands that worked, commands that failed, and lessons learned.
+   - Save the note to memory/projects/[project-name]/sessions/YYYY-MM-DD-[short-goal].md.
+   - If a lesson is reusable, also save it to memory/projects/[project-name]/lessons/.
+   - Update memory/state.json with last_session_at and session count.
+
+3. /distill
+   - Review recent session notes.
+   - Remove duplicate or overly specific notes.
+   - Merge repeated project lessons into clearer project lessons.
+   - Promote cross-project lessons to memory/global/lessons/.
+   - Update memory/state.json with last_distill_at.
+
+Initialize memory/state.json with:
+
+- created_at
+- last_distill_at
+- projects
+- global_lesson_count
+- session_count
+
+After setup, run /init-project for the current repository.
+Then write one short verification note showing:
+
+- which files you created or updated
+- which project name you detected
+- how a future session should load context
+- what command should be run at the end of a session
+
+Constraints:
+
+- Do not delete or rewrite existing project files unless required.
+- Do not store secrets, credentials, private transcripts, or customer data in memory.
+- Prefer concise lessons over long logs.
+- If a rule is not reusable, keep it project-local.
+- If a lesson changes behavior across all projects, put it in global lessons.
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
 ## Result
 A self-curating portfolio. The LLM inherits its environment and maintains its own infrastructure automatically, ensuring your engineering standards grow across every project you touch.
 </div>
