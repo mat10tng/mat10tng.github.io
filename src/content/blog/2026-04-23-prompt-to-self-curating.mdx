@@ -1,7 +1,7 @@
 ---
 id: "step-01-prompt-to-self-curating"
-title: "Never repeat a prompt: building project-agnostic memory"
-description: "eliminate repetitive prompting by establishing a persistent memory system."
+title: "Never repeat a prompt: make memory that carries over"
+description: "set up a memory folder so the LLM can reuse what it learned."
 pubDate: 2026-04-23
 loop: "improve"
 ---
@@ -10,25 +10,27 @@ import Section from '../../components/layout/Section.astro';
 <Section>
 <div slot="insight">
 ## The Answer
-**You can eliminate repetitive prompting and force your technical knowledge to compound across your entire portfolio by establishing an autonomous, project-agnostic memory system.**
+**Stop repeating the same context. Give the model a place to write things down, then make it check that place every time it starts.**
 
-Reliability comes from an architecture that performs maintenance by default. By defining structural rules once, you ensure that every session—on any project—initializes, curates, and persists its own engineering standards without manual intervention.
+[Want the setup? Jump to Choose Your Path.](#4-choose-your-path)
+
+That is the whole trick. The memory is not magic. It is a folder with session notes, lessons, and a small set of rules that tell the model when to read and write those files.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 1. Portfolio Architecture
-Compounding requires a strict directory hierarchy. This ensures the model has a deterministic location to store and retrieve history for any project in your portfolio.
+## 1. The Memory Folder
+Use one folder for the notes. Give every project a place inside it. Then the model always knows where to look.
 </div>
 
 <div slot="technical">
-**Unified Memory Structure**
+**Folder layout**
 ```text
 memory/
 ├── state.json (global health)
 ├── global/
-│   └── lessons/ (portfolio standards)
+│   └── lessons/ (shared rules)
 └── project-x/
     ├── sessions/ (daily logs)
     └── lessons/ (project fixes)
@@ -43,30 +45,34 @@ mkdir -p memory/global/lessons
 
 <Section>
 <div slot="insight">
-## 2. System Rules: The Auto-Run Logic
-The system is directed by **System Rules** (e.g. `CLAUDE.md`, `.cursorrules`). These are not just instructions; they are the execution logic that forces the model to maintain the architecture autonomously.
+## 2. Startup Rules
+Put the rules in the file your tool reads at startup: `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, or whatever your tool uses.
+
+The rules are simple: read memory before work, write memory after work.
 </div>
 
 <div slot="technical">
-**Mandatory Bootloader Logic**
+**Boot rules**
 ```markdown
-# Project Standards
-- **Initialization:** On boot, identify current project. If `memory/[project-name]` does not exist, run `/init-project` immediately.
-- **Maintenance:** Check `memory/state.json`. If `last_distill` > 7 days, execute `/distill` before accepting goals.
-- **Persistence:** On session completion, autonomously execute `/end-session`.
-- **Role:** Architect directs; LLM executes and maintains.
+# Memory Rules
+- On startup, find the current project.
+- If `memory/projects/[project-name]` does not exist, run `/init-project`.
+- Before big work, read global lessons and this project's lessons.
+- If `memory/state.json` says `last_distill` is older than 7 days, run `/distill`.
+- At the end of a real session, run `/end-session`.
+- The human picks the goal. The LLM keeps the notes up to date.
 ```
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 3. Autonomous Skills
-The model uses three core skills to maintain the loop without being prompted.
+## 3. Small Commands
+The model only needs three repeatable commands.
 
-**Initialize**: Scaffolds the environment for new projects.
-**Capture**: Persists technical outcomes at the end of work.
-**Graduation**: Identifies rules with portfolio-wide utility.
+**Initialize**: make the folders for a new project.
+**Capture**: save what happened at the end.
+**Distill**: turn repeated notes into cleaner lessons.
 </div>
 
 <div slot="technical">
@@ -77,27 +83,27 @@ The model uses three core skills to maintain the loop without being prompted.
 > "Summarize technical decisions. Save to `memory/[project-name]/sessions/[date]-[goal].md`."
 
 **Skill: `/distill`**
-> "Review logs. Identify rules to graduate to `global/lessons/`. Update `memory/state.json`."
+> "Review logs. Move repeated rules to `global/lessons/`. Update `memory/state.json`."
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## The System-Led Workflow
-Execution follows a deterministic, autonomous cycle:
-1. **Boot**: LLM scaffolds or synchronizes project context.
-2. **Curation**: LLM graduates rules if the global state is stale.
-3. **Execute**: Architect directs; LLM implements.
-4. **Persist**: LLM logs the session automatically before exit.
+## How It Runs
+The loop is small:
+1. **Boot**: check the memory folder.
+2. **Clean**: merge old notes when needed.
+3. **Work**: do the task.
+4. **Save**: write down what changed.
 </div>
 </Section>
 
 <Section>
 <div slot="insight">
-## 4. Before You Paste This
-One missing detail: this does not work in a normal chat window.
+## 4. Choose Your Path
+This does not work in a normal chat window.
 
-The model needs to be running in a local coding tool or terminal agent. Not because the idea is technical, but because the system has to create folders, write markdown files, and update its own rules. If it cannot touch files, it can only describe the system back to you.
+The model needs somewhere to save files. Pick the path that matches how you use AI.
 </div>
 
 <div slot="technical">
@@ -123,7 +129,7 @@ The model needs to be running in a local coding tool or terminal agent. Not beca
 5. Close and reopen the workspace. If the file is still there, paste the setup prompt below.
 6. If the file disappears, use the manual version: ask the model to generate the files, then download or copy them into your own memory folder after each session.
 
-The permission test matters. It proves the model can actually write somewhere durable before you trust it with the larger setup. If the workspace loses files when the chat ends, it is not a self-curating system yet. It is just a conversation.
+The test matters. It proves the model can write somewhere that lasts. If the file disappears when the chat ends, it is not memory yet. It is just chat.
 </div>
 </Section>
 
@@ -132,32 +138,38 @@ The permission test matters. It proves the model can actually write somewhere du
 ## 5. The Full Setup Prompt
 If I were starting this from zero, I would not ask the model to "remember things better."
 
-I would give it full access, then make the maintenance loop part of its job. The only catch: the model has to be running somewhere that can actually touch files. If it can only chat, it cannot build this.
+I would paste this into a tool that can write files.
 </div>
 
 <div slot="technical">
 ````text
-You are running in a local AI coding tool or terminal-based agent.
+You are running in a tool that can create and edit files.
+
+First, check which kind of tool you are in:
+
+- a local AI coding tool or terminal-based agent
+- a web AI workspace with files that stay after the chat closes
 
 Before you begin, verify that you have:
 
-- access to the current project folder
+- access to the current project or workspace folder
 - permission to create and edit files
-- permission to run shell/terminal commands
-- git access if this folder is tracked with git
+- a way to keep those files after this chat ends
+- shell/terminal permission if this tool has a terminal
+- git access only if this folder is tracked with git
 
-If any of those are missing, stop and tell me exactly what permission or local tool access is missing.
-Do not pretend to set up a local memory system from a chat-only environment.
+If you cannot create files that stay after the chat ends, stop and tell me this tool is chat-only.
+If shell or git access is missing, continue with file edits and note what you could not verify.
 
-You have full access to this machine: filesystem, shell, git, and the current working directory.
+Use the file tools you have. Use shell or git only when available.
 
-Your job is to set up a self-curating memory system that works across every project in this portfolio.
-The system should let future LLM sessions inherit context, capture what happened, distill durable lessons,
-and graduate useful rules from one project to the whole portfolio.
+Your job is to set up a memory folder that works across projects.
+The system should let future LLM sessions read context, save what happened,
+turn repeated notes into clear lessons, and move lessons that apply to many projects into global lessons.
 
 Do the setup yourself. Do not stop at a plan unless something is genuinely blocked.
 
-Create this memory structure at the portfolio root:
+Create this memory structure at the workspace root:
 
 memory/
 - state.json
@@ -168,10 +180,12 @@ memory/
     - sessions/
     - lessons/
 
-Use the current repository folder name as the first project name.
+Use the current repository, folder, or workspace name as the first project name.
 
 Create or update the project bootloader file used by this coding tool.
 Use AGENTS.md, CLAUDE.md, .cursorrules, or the closest equivalent for the environment.
+If this web workspace has no startup rules file, create MEMORY_START_HERE.md with the same rules
+and tell me where to paste them in the tool's project instructions.
 
 The bootloader must include these rules:
 
@@ -180,8 +194,8 @@ The bootloader must include these rules:
 - Before starting non-trivial work, read global lessons and the current project's recent lessons.
 - During work, prefer existing lessons over repeated prompting.
 - At the end of every meaningful session, write a session note.
-- When the same lesson appears in multiple project notes, graduate it into memory/global/lessons/.
-- Once a week, review old session notes and distill them into smaller durable lessons.
+- When the same lesson appears in multiple project notes, move it into memory/global/lessons/.
+- Once a week, review old session notes and turn repeated notes into smaller lessons.
 - Keep raw sessions searchable, but keep startup context small.
 - The human sets goals. The LLM maintains the memory system.
 
@@ -205,8 +219,8 @@ Create three reusable commands or prompt snippets:
    - Review recent session notes.
    - Remove duplicate or overly specific notes.
    - Merge repeated project lessons into clearer project lessons.
-   - Promote cross-project lessons to memory/global/lessons/.
-   - Use the project lesson and portfolio lesson templates below.
+   - Move lessons that apply to many projects into memory/global/lessons/.
+   - Use the project lesson and global lesson templates below.
    - Update memory/state.json with last_distill_at.
 
 Initialize memory/state.json with:
@@ -287,8 +301,8 @@ source_sessions:
 [When this rule does not apply.]
 ```
 
-PORTFOLIO LESSON TEMPLATE
-Path: memory/global/lessons/portfolio-rule.md
+GLOBAL LESSON TEMPLATE
+Path: memory/global/lessons/global-rule.md
 
 ```markdown
 ---
@@ -301,12 +315,12 @@ projects_seen:
   - [project-name]
 ---
 
-# [portfolio rule]
+# [global rule]
 
 ## Rule
 [The cross-project rule in one sentence.]
 
-## Why This Graduated
+## Why This Became Global
 [The repeated signal that made this bigger than one project.]
 
 ## How Future Sessions Should Use It
@@ -339,6 +353,6 @@ Constraints:
 <Section>
 <div slot="insight">
 ## Result
-A self-curating portfolio. The LLM inherits its environment and maintains its own infrastructure automatically, ensuring your engineering standards grow across every project you touch.
+A memory folder the model can use without being reminded every time.
 </div>
 </Section>
