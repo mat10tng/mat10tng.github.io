@@ -97,11 +97,23 @@ Execution follows a deterministic, autonomous cycle:
 ## 4. The Full Setup Prompt
 If I were starting this from zero, I would not ask the model to "remember things better."
 
-I would give it full access, then make the maintenance loop part of its job.
+I would give it full access, then make the maintenance loop part of its job. The only catch: the model has to be running somewhere that can actually touch files. If it can only chat, it cannot build this.
 </div>
 
 <div slot="technical">
-```text
+````text
+You are running in a local AI coding tool or terminal-based agent.
+
+Before you begin, verify that you have:
+
+- access to the current project folder
+- permission to create and edit files
+- permission to run shell/terminal commands
+- git access if this folder is tracked with git
+
+If any of those are missing, stop and tell me exactly what permission or local tool access is missing.
+Do not pretend to set up a local memory system from a chat-only environment.
+
 You have full access to this machine: filesystem, shell, git, and the current working directory.
 
 Your job is to set up a self-curating memory system that works across every project in this portfolio.
@@ -151,6 +163,7 @@ Create three reusable commands or prompt snippets:
    - Capture decisions, bugs fixed, commands that worked, commands that failed, and lessons learned.
    - Save the note to memory/projects/[project-name]/sessions/YYYY-MM-DD-[short-goal].md.
    - If a lesson is reusable, also save it to memory/projects/[project-name]/lessons/.
+   - Use the session note template below.
    - Update memory/state.json with last_session_at and session count.
 
 3. /distill
@@ -158,6 +171,7 @@ Create three reusable commands or prompt snippets:
    - Remove duplicate or overly specific notes.
    - Merge repeated project lessons into clearer project lessons.
    - Promote cross-project lessons to memory/global/lessons/.
+   - Use the project lesson and portfolio lesson templates below.
    - Update memory/state.json with last_distill_at.
 
 Initialize memory/state.json with:
@@ -168,35 +182,11 @@ Initialize memory/state.json with:
 - global_lesson_count
 - session_count
 
-After setup, run /init-project for the current repository.
-Then write one short verification note showing:
+Use these exact markdown templates when writing memory notes.
 
-- which files you created or updated
-- which project name you detected
-- how a future session should load context
-- what command should be run at the end of a session
+SESSION NOTE TEMPLATE
+Path: memory/projects/[project-name]/sessions/YYYY-MM-DD-short-goal.md
 
-Constraints:
-
-- Do not delete or rewrite existing project files unless required.
-- Do not store secrets, credentials, private transcripts, or customer data in memory.
-- Prefer concise lessons over long logs.
-- If a rule is not reusable, keep it project-local.
-- If a lesson changes behavior across all projects, put it in global lessons.
-```
-</div>
-</Section>
-
-<Section>
-<div slot="insight">
-## 5. The Markdown Files
-The prompt sets up the loop. The notes make the loop useful.
-
-I would keep the files boring on purpose. The point is not to write beautiful journals. The point is to leave a small, searchable artifact that a future session can actually reuse.
-</div>
-
-<div slot="technical">
-**Session note: `memory/projects/[project-name]/sessions/YYYY-MM-DD-short-goal.md`**
 ```markdown
 ---
 type: session
@@ -224,7 +214,7 @@ Worked:
 - `[command]`
 
 Failed:
-- `[command]` — [why it failed or what it taught us]
+- `[command]` - [why it failed or what it taught us]
 
 ## Lessons
 - [Specific lesson from this session.]
@@ -233,7 +223,9 @@ Failed:
 - [Optional next action.]
 ```
 
-**Project lesson: `memory/projects/[project-name]/lessons/short-lesson-title.md`**
+PROJECT LESSON TEMPLATE
+Path: memory/projects/[project-name]/lessons/short-lesson-title.md
+
 ```markdown
 ---
 type: lesson
@@ -260,7 +252,9 @@ source_sessions:
 [When this rule does not apply.]
 ```
 
-**Portfolio lesson: `memory/global/lessons/portfolio-rule.md`**
+PORTFOLIO LESSON TEMPLATE
+Path: memory/global/lessons/portfolio-rule.md
+
 ```markdown
 ---
 type: lesson
@@ -287,6 +281,23 @@ projects_seen:
 ## Exceptions
 [Cases where the project-local rule should override this.]
 ```
+
+After setup, run /init-project for the current repository.
+Then write one short verification note showing:
+
+- which files you created or updated
+- which project name you detected
+- how a future session should load context
+- what command should be run at the end of a session
+
+Constraints:
+
+- Do not delete or rewrite existing project files unless required.
+- Do not store secrets, credentials, private transcripts, or customer data in memory.
+- Prefer concise lessons over long logs.
+- If a rule is not reusable, keep it project-local.
+- If a lesson changes behavior across all projects, put it in global lessons.
+````
 </div>
 </Section>
 
