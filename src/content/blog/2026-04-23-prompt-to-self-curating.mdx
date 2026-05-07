@@ -189,6 +189,109 @@ Constraints:
 
 <Section>
 <div slot="insight">
+## 5. The Markdown Files
+The prompt sets up the loop. The notes make the loop useful.
+
+I would keep the files boring on purpose. The point is not to write beautiful journals. The point is to leave a small, searchable artifact that a future session can actually reuse.
+</div>
+
+<div slot="technical">
+**Session note: `memory/projects/[project-name]/sessions/YYYY-MM-DD-short-goal.md`**
+```markdown
+---
+type: session
+project: [project-name]
+date: YYYY-MM-DD
+goal: "[what we were trying to do]"
+outcome: success | struggled | failed | abandoned
+reusable: false
+---
+
+# [short goal]
+
+## Goal
+[One or two sentences describing the work.]
+
+## What Changed
+- [User-visible or system-visible change.]
+- [Important file, rule, command, or workflow touched.]
+
+## Decisions
+- [Decision made and why.]
+
+## Commands
+Worked:
+- `[command]`
+
+Failed:
+- `[command]` — [why it failed or what it taught us]
+
+## Lessons
+- [Specific lesson from this session.]
+
+## Follow-Up
+- [Optional next action.]
+```
+
+**Project lesson: `memory/projects/[project-name]/lessons/short-lesson-title.md`**
+```markdown
+---
+type: lesson
+scope: project
+project: [project-name]
+created_at: YYYY-MM-DD
+source_sessions:
+  - memory/projects/[project-name]/sessions/YYYY-MM-DD-short-goal.md
+---
+
+# [lesson title]
+
+## Rule
+[The reusable rule in one sentence.]
+
+## Why
+[The problem this prevents or the pattern it captures.]
+
+## How to Apply
+- [When to use it.]
+- [What to do differently next time.]
+
+## Boundaries
+[When this rule does not apply.]
+```
+
+**Portfolio lesson: `memory/global/lessons/portfolio-rule.md`**
+```markdown
+---
+type: lesson
+scope: global
+created_at: YYYY-MM-DD
+promoted_from:
+  - memory/projects/[project-name]/lessons/short-lesson-title.md
+projects_seen:
+  - [project-name]
+---
+
+# [portfolio rule]
+
+## Rule
+[The cross-project rule in one sentence.]
+
+## Why This Graduated
+[The repeated signal that made this bigger than one project.]
+
+## How Future Sessions Should Use It
+- [Startup behavior, review habit, or implementation constraint.]
+- [What the LLM should check before acting.]
+
+## Exceptions
+[Cases where the project-local rule should override this.]
+```
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
 ## Result
 A self-curating portfolio. The LLM inherits its environment and maintains its own infrastructure automatically, ensuring your engineering standards grow across every project you touch.
 </div>
