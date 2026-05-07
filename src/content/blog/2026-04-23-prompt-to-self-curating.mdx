@@ -94,7 +94,31 @@ Execution follows a deterministic, autonomous cycle:
 
 <Section>
 <div slot="insight">
-## 4. The Full Setup Prompt
+## 4. Before You Paste This
+One missing detail: this does not work in a normal chat window.
+
+The model needs to be running in a local coding tool or terminal agent. Not because the idea is technical, but because the system has to create folders, write markdown files, and update its own rules. If it cannot touch files, it can only describe the system back to you.
+</div>
+
+<div slot="technical">
+**Plain setup checklist**
+
+1. Download and install a local AI coding tool or terminal-based agent.
+2. Create or choose a folder where the memory system should live.
+3. Open that folder inside the tool.
+4. When the tool asks for permissions, allow file access for that folder.
+5. If it asks for terminal or shell permission, allow it.
+6. If you want the changes tracked, sign in to git or GitHub inside the tool.
+7. Ask the model to create a file called `permission-test.md`.
+8. If the file appears, delete it and paste the setup prompt below.
+
+The permission test matters. It proves the model can actually write to the folder before you trust it with the larger setup.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 5. The Full Setup Prompt
 If I were starting this from zero, I would not ask the model to "remember things better."
 
 I would give it full access, then make the maintenance loop part of its job. The only catch: the model has to be running somewhere that can actually touch files. If it can only chat, it cannot build this.
