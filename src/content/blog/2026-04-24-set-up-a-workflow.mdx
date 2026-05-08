@@ -1,0 +1,149 @@
+---
+id: "step-02-set-up-a-workflow"
+title: "Set up a workflow"
+description: "connect the memory folder to a repeatable way of working."
+pubDate: 2026-04-24
+loop: "work"
+---
+import Section from '../../components/layout/Section.astro';
+import WorkflowPromptTabs from '../../components/WorkflowPromptTabs.astro';
+
+<Section>
+<div slot="insight">
+## The Answer
+**The memory folder is the library. The workflow is how the right notes get used.**
+
+[Want the setup? Jump to Choose Your Path.](#3-choose-your-path)
+
+The last post made the library: a place for session notes, lessons, and project history to live.
+
+That helps, but it is not the whole system yet.
+
+If every session still depends on you remembering which files to open, what to paste, what to ask for, and what to save afterward, the library exists but the work is still manual.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 1. The Library Problem
+Before memory, every chat starts from a blank state.
+
+You do the research again. You explain the background again. You write the same notes again. Then the chat ends, and the next one knows none of it.
+
+Memory fixes that by giving the work a place to live.
+
+But a library still has friction. If you have to get on your bike, ride there, find the book, ride home, read it, then remember to return your new notes later, you technically have a library. You also have a chore.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 2. What the Workflow Adds
+The workflow removes the chore.
+
+It says: before work starts, bring the right notes to the table. During work, pick the right mode. Before saying done, check the result. Afterward, save what changed.
+</div>
+
+<div slot="technical">
+**The basic loop**
+
+| Moment | What happens |
+|---|---|
+| Start | Load memory and choose the work mode |
+| Work | Brainstorm, implement, debug, review, or save |
+| Check | Verify the result before calling it done |
+| Save | Write the session note and reusable lessons |
+
+Superpowers is one way to add these habits to a local coding tool. It gives the model named workflows for planning, debugging, testing, review, and implementation.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 3. Choose Your Path
+There are two honest versions of this setup.
+
+If you use a local tool, the tool can install Superpowers and save files for you.
+
+If you use a web chat, you cannot install the local plugin. The workflow still works, but you are the person who saves the markdown files in the right place.
+</div>
+
+<div slot="technical">
+**Path A: local tool**
+
+1. Install a local AI coding tool that supports plugins or project files.
+2. Open the project folder inside that tool.
+3. Install Superpowers for that tool.
+4. Give the tool permission to read and write files in the project folder.
+5. If the tool asks for terminal permission, allow it for this folder.
+6. Ask it to create a small test file, then delete it.
+7. Paste the local workflow prompt below.
+
+**Common Superpowers install paths**
+
+- Claude Code: `/plugin install superpowers@claude-plugins-official`
+- Codex App: open Plugins in the sidebar, find Superpowers in Coding, click `+`
+- Codex CLI: run `/plugins`, search for Superpowers, choose Install Plugin
+- Cursor: run `/add-plugin superpowers` in Agent chat, or search for Superpowers in the plugin marketplace
+
+Install paths change, so check the [Superpowers README](https://github.com/obra/superpowers) or the [Claude plugin page](https://claude.com/plugins/superpowers) if your tool looks different.
+
+**Path B: web chat**
+
+1. Keep using your memory folder from the last post.
+2. Paste the web/manual workflow prompt below.
+3. Let the model generate the markdown files.
+4. Save each file exactly where the model tells you.
+5. At the start of the next chat, paste or attach `MEMORY_START_HERE.md`, `WORKFLOW_START_HERE.md`, and the relevant memory files.
+6. At the end of each chat, ask for the session note and save it.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 4. Copy the Setup Prompt
+The prompt should do the whole setup job.
+
+It should check whether memory exists, help with Superpowers if the local tool supports it, add the workflow files, and explain how the next session starts.
+</div>
+
+<div slot="technical">
+<WorkflowPromptTabs />
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## 5. After Setup
+After this, the workflow is small.
+</div>
+
+<div slot="technical">
+**If you use a local tool**
+
+1. Open the same project folder.
+2. Let the tool read memory and workflow files.
+3. Say what you want to do.
+4. Let the workflow pick the mode.
+5. Check the result.
+6. Ask it to save the session note.
+
+**If you use web chat**
+
+1. Start a new chat.
+2. Paste or attach the memory and workflow files.
+3. Say what you want to do.
+4. Let the chat follow the workflow.
+5. Check the result.
+6. Save the session note the model gives you.
+</div>
+</Section>
+
+<Section>
+<div slot="insight">
+## Result
+The library now has a front desk.
+
+You are still choosing the work. The system just knows how to fetch the right notes before it starts, and how to put better notes back when it is done.
+</div>
+</Section>

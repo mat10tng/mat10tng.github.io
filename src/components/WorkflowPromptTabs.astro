@@ -1,0 +1,381 @@
+---
+const localPrompt = `You are running in a local AI coding tool or terminal-based agent.
+
+Goal: connect a simple workflow to my memory system.
+
+The memory folder is the library. The workflow is the borrowing desk: before work, bring the right notes to the table. After work, put the new notes back.
+
+First check:
+- Can you create and edit files in this folder?
+- Can you run shell commands if this tool supports them?
+- Does a memory/ folder already exist?
+- Is Superpowers installed or available in this tool?
+
+If memory/ does not exist, create the basic memory structure first:
+- memory/state.json
+- memory/global/lessons/
+- memory/projects/[project-name]/sessions/
+- memory/projects/[project-name]/lessons/
+- memory/projects/[project-name]/workflows/
+
+If Superpowers is not installed, help me install it:
+- Claude Code: ask me to run /plugin install superpowers@claude-plugins-official
+- Codex App: ask me to open Plugins in the sidebar, find Superpowers in Coding, click +, and follow the prompts
+- Codex CLI: ask me to run /plugins, search for Superpowers, and choose Install Plugin
+- Cursor: ask me to run /add-plugin superpowers in Agent chat, or search for Superpowers in the plugin marketplace
+- If this tool does not support plugins, continue with the manual workflow rules below
+
+If the tool needs me to click, approve, or restart, stop and tell me exactly what to do. Continue only after I confirm it is done.
+
+Create or update these files:
+- WORKFLOW_START_HERE.md
+- memory/projects/[project-name]/workflows/basic-workflow.md
+- memory/projects/[project-name]/lessons/how-to-use-the-workflow.md
+
+Also update the startup rules file for this tool:
+- AGENTS.md, CLAUDE.md, .cursorrules, or the closest equivalent
+
+WORKFLOW_START_HERE.md should include:
+- Read MEMORY_START_HERE.md first if it exists
+- Identify the current project
+- Load memory/global/lessons/
+- Load memory/projects/[project-name]/lessons/
+- Load memory/projects/[project-name]/workflows/basic-workflow.md
+- Before meaningful work, choose one mode: brainstorm, implement, debug, review, or save
+- Use Superpowers skills when available
+- If Superpowers is not available, follow the manual workflow in basic-workflow.md
+- Before saying work is done, check the result
+- At the end of a meaningful session, write a session note
+- Save reusable lessons in the right lessons folder
+
+basic-workflow.md should use this shape:
+- Title: Basic workflow
+- Purpose: stop starting from a blank state
+- Start: load memory and choose the work mode
+- Work: follow the mode instead of guessing
+- Check: verify the result before saying it is done
+- Save: write the session note and reusable lessons
+- Modes:
+  - brainstorm: clarify the goal before making changes
+  - implement: make the approved change
+  - debug: find the cause before trying fixes
+  - review: look for risks, bugs, and missing checks
+  - save: capture what should carry forward
+
+how-to-use-the-workflow.md should use this shape:
+- Rule
+- Why
+- How to apply
+- Boundaries
+
+When setup is done, tell me:
+- which files you created or changed
+- whether Superpowers is installed, unavailable, or waiting for my action
+- how the next session should start
+- what I should ask for at the end of a session`;
+
+const webPrompt = `You are in web/manual mode.
+
+You cannot install plugins for me. You cannot save files for me. Do not say files were saved unless I confirm I saved them.
+
+Goal: help me use a simple workflow with my memory system.
+
+The memory folder is the library. The workflow is the borrowing desk: before work, bring the right notes to the table. After work, put the new notes back.
+
+Ask me for the project name if you do not know it.
+
+Generate the exact files I should save:
+- WORKFLOW_START_HERE.md
+- memory/projects/[project-name]/workflows/basic-workflow.md
+- memory/projects/[project-name]/lessons/how-to-use-the-workflow.md
+- memory/projects/[project-name]/sessions/YYYY-MM-DD-workflow-setup.md
+
+For each file, use this format:
+
+FILE: path/to/file.md
+Then put the full file content in one markdown code block.
+
+WORKFLOW_START_HERE.md must tell future chats:
+- Read MEMORY_START_HERE.md first if I paste or attach it
+- Ask me for memory/state.json
+- Ask me for relevant files from memory/global/lessons/
+- Ask me for relevant files from memory/projects/[project-name]/lessons/
+- Ask me for memory/projects/[project-name]/workflows/basic-workflow.md
+- Before meaningful work, choose one mode: brainstorm, implement, debug, review, or save
+- Follow the manual workflow because web chat cannot install local plugins
+- Before saying work is done, ask how I want to check it
+- At the end, output a session note for me to save
+- If a reusable lesson appears, output the lesson file for me to save
+- Do not claim anything was saved until I confirm it
+
+basic-workflow.md should use this shape:
+- Title: Basic workflow
+- Purpose: stop starting from a blank state
+- Start: load memory and choose the work mode
+- Work: follow the mode instead of guessing
+- Check: verify the result before saying it is done
+- Save: write the session note and reusable lessons
+- Modes:
+  - brainstorm: clarify the goal before making changes
+  - implement: make the approved change
+  - debug: find the cause before trying fixes
+  - review: look for risks, bugs, and missing checks
+  - save: capture what should carry forward
+
+how-to-use-the-workflow.md should use this shape:
+- Rule
+- Why
+- How to apply
+- Boundaries
+
+The workflow setup session note should include:
+- frontmatter with type, project, date, goal, outcome
+- Goal
+- What Changed
+- Files To Save
+- How To Start Next Time
+- Lessons
+- Follow-Up
+
+After the file blocks, give me a short checklist:
+- which files to save
+- where to paste WORKFLOW_START_HERE.md if my web tool has project instructions
+- what files to paste or attach at the start of the next chat
+- what to ask for at the end of the next chat`;
+---
+
+<div class="prompt-tabs" data-prompt-tabs>
+	<div class="prompt-tabs-header">
+		<div>
+			<p class="prompt-tabs-kicker">Choose one prompt</p>
+			<p class="prompt-tabs-copy">Pick the workflow setup that matches how you use AI.</p>
+		</div>
+		<div class="prompt-tab-list" role="tablist" aria-label="Workflow setup prompt type">
+			<button
+				type="button"
+				class="prompt-tab is-active"
+				id="workflow-local-prompt-tab"
+				role="tab"
+				aria-selected="true"
+				aria-controls="workflow-local-prompt-panel"
+				data-prompt-tab="local"
+			>
+				Local tool
+			</button>
+			<button
+				type="button"
+				class="prompt-tab"
+				id="workflow-web-prompt-tab"
+				role="tab"
+				aria-selected="false"
+				aria-controls="workflow-web-prompt-panel"
+				data-prompt-tab="web"
+			>
+				Web/manual
+			</button>
+		</div>
+	</div>
+
+	<section
+		class="prompt-panel is-active"
+		id="workflow-local-prompt-panel"
+		role="tabpanel"
+		aria-labelledby="workflow-local-prompt-tab"
+		data-prompt-panel="local"
+	>
+		<div class="prompt-panel-bar">
+			<p>Use this when the AI tool can edit files in your folder.</p>
+			<button type="button" class="copy-prompt-button" data-copy-prompt>Copy local prompt</button>
+		</div>
+		<pre tabindex="0"><code>{localPrompt}</code></pre>
+	</section>
+
+	<section
+		class="prompt-panel"
+		id="workflow-web-prompt-panel"
+		role="tabpanel"
+		aria-labelledby="workflow-web-prompt-tab"
+		data-prompt-panel="web"
+		hidden
+	>
+		<div class="prompt-panel-bar">
+			<p>Use this when you will save the files yourself.</p>
+			<button type="button" class="copy-prompt-button" data-copy-prompt>Copy web prompt</button>
+		</div>
+		<pre tabindex="0"><code>{webPrompt}</code></pre>
+	</section>
+</div>
+
+<script is:inline>
+	(() => {
+		const copyText = async (text, button, codeBlock) => {
+			const originalLabel = button.textContent;
+
+			try {
+				await navigator.clipboard.writeText(text);
+				button.textContent = "Copied";
+			} catch {
+				const range = document.createRange();
+				range.selectNodeContents(codeBlock);
+				const selection = window.getSelection();
+				selection.removeAllRanges();
+				selection.addRange(range);
+				button.textContent = "Selected";
+			}
+
+			window.setTimeout(() => {
+				button.textContent = originalLabel;
+			}, 1800);
+		};
+
+		document.querySelectorAll("[data-prompt-tabs]").forEach((root) => {
+			const tabs = Array.from(root.querySelectorAll("[data-prompt-tab]"));
+			const panels = Array.from(root.querySelectorAll("[data-prompt-panel]"));
+
+			tabs.forEach((tab) => {
+				tab.addEventListener("click", () => {
+					const target = tab.getAttribute("data-prompt-tab");
+
+					tabs.forEach((item) => {
+						const isActive = item === tab;
+						item.classList.toggle("is-active", isActive);
+						item.setAttribute("aria-selected", String(isActive));
+					});
+
+					panels.forEach((panel) => {
+						const isActive = panel.getAttribute("data-prompt-panel") === target;
+						panel.classList.toggle("is-active", isActive);
+						panel.hidden = !isActive;
+					});
+				});
+			});
+
+			root.querySelectorAll("[data-copy-prompt]").forEach((button) => {
+				button.addEventListener("click", () => {
+					const panel = button.closest("[data-prompt-panel]");
+					const codeBlock = panel.querySelector("code");
+					copyText(codeBlock.textContent, button, codeBlock);
+				});
+			});
+		});
+	})();
+</script>
+
+<style>
+	.prompt-tabs {
+		max-width: 800px;
+		margin: 1rem auto 0;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		background: #fff;
+		overflow: hidden;
+	}
+
+	.prompt-tabs-header {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem;
+		border-bottom: 1px solid #e5e7eb;
+		background: #f9fafb;
+	}
+
+	.prompt-tabs-kicker,
+	.prompt-tabs-copy,
+	.prompt-panel-bar p {
+		margin: 0;
+	}
+
+	.prompt-tabs-kicker {
+		font-family: var(--font-sans);
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: var(--black);
+	}
+
+	.prompt-tabs-copy {
+		font-size: 0.9rem;
+		color: var(--gray-dark);
+	}
+
+	.prompt-tab-list {
+		display: inline-flex;
+		gap: 0.25rem;
+		padding: 0.25rem;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		background: #fff;
+	}
+
+	.prompt-tab,
+	.copy-prompt-button {
+		font-family: var(--font-sans);
+		border: 1px solid transparent;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+
+	.prompt-tab {
+		padding: 0.45rem 0.7rem;
+		background: transparent;
+		color: var(--gray-dark);
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+
+	.prompt-tab.is-active {
+		background: var(--accent);
+		color: #fff;
+	}
+
+	.prompt-panel-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem;
+		border-bottom: 1px solid #e5e7eb;
+	}
+
+	.prompt-panel-bar p {
+		font-size: 0.95rem;
+		color: var(--gray-dark);
+	}
+
+	.copy-prompt-button {
+		flex: 0 0 auto;
+		padding: 0.55rem 0.75rem;
+		background: var(--black);
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+
+	.copy-prompt-button:hover {
+		background: var(--accent);
+	}
+
+	.prompt-panel pre {
+		margin: 0;
+		border-radius: 0;
+		max-height: 32rem;
+	}
+
+	@media (max-width: 720px) {
+		.prompt-tabs-header,
+		.prompt-panel-bar {
+			align-items: stretch;
+			flex-direction: column;
+		}
+
+		.prompt-tab-list,
+		.copy-prompt-button {
+			width: 100%;
+		}
+
+		.prompt-tab {
+			flex: 1 1 0;
+		}
+	}
+</style>
